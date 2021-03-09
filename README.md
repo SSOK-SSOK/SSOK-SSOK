@@ -4,6 +4,8 @@
 
 쏙쏙 (ssok ssok)
 
+<br/>
+
 ## 팀 소개 (Position)
 
 ### Back-end
@@ -18,7 +20,11 @@
 
 강채원, 이승아
 
+<br/>
+
 ## 프로젝트 소개
+
+<br/>
 
 ## 기술스택
 
@@ -33,6 +39,8 @@ JavaScript, HTML, CSS, React, Redux, Node.js (Sass)
 ### AI
 
 Google API, YOLO
+
+<br/>
 
 ## 기능 정의서
 
