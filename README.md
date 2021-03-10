@@ -59,3 +59,9 @@ Google API, YOLO
 - **[Frontend](https://drive.google.com/file/d/1r4TwL8FZPtXl6Qu_URC9X5fPLwS4ewhY/view?usp=sharing)**
 - **[Backend](https://drive.google.com/file/d/1Lu1NI_9eoSqKUJLGmqbckmLPx6H8yEfh/view?usp=sharing)**
 - **[Git](https://drive.google.com/file/d/1JF-gLLxCqfaKGRXeTzfED7pqIz8puCCE/view?usp=sharing)**
+
+<br/>
+
+![ERD_0310](images/ERD_0310.png)
+
+<br/>
