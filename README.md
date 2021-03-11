@@ -74,14 +74,11 @@
 
 ![image-20210310231243445](images/image-20210310231243445.png)
 
+
+
 ## 캐릭터
 
 > 아이들이 좋아할 수 있는 캐릭터를 직접 제작했습니다.
 
-![쏙1](README_images/쏙1.jpg)
+![mascot](README_images/mascot.jpg)
 
-![image-20210310202124535](README_images/image-20210310202124535.png)
-
-![](README_images/image-20210310202145246.png)
-
-![쏙3](README_images/쏙3.jpg)![쏙2](README_images/쏙2.jpg)
