@@ -72,5 +72,9 @@
 
 > 아이들이 좋아할 수 있는 캐릭터를 직접 제작했습니다.
 
-![mascot](images/mascot.jpg)
+![mascot1](images/mascot.jpg)
+
+![mascot2](images/mascot2.jpg)
+
+
 
