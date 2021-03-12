@@ -12,7 +12,7 @@
 
 김성진, 이유진
 
-### Font-end
+### Front-end
 
 강채원, 이승아, 김효진
 
@@ -49,7 +49,7 @@
   - Spring Boot
   - JPA
   - MySQL
-- **Font-end**
+- **Front-end**
   - JavaScript
   - HTML / CSS
   - React
