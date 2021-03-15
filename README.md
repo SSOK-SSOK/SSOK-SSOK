@@ -68,7 +68,7 @@
 
 
 
-![architecture](README_images/A201아키텍쳐.jpg)
+![architecture](images/architecture.jpg)
 
 
 
