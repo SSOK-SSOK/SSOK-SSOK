@@ -56,6 +56,8 @@
   - Redux
   - Node.js 
 - **AI**
+  - Python (3.8.5) 
+  - Django (3.1.7)
   - Google API
   - [YOLO](https://pjreddie.com/darknet/yolo/)
   - [COCO Dataset](https://cocodataset.org/#home)
