@@ -1,6 +1,6 @@
 # README
 
-## 프로젝트 명
+## 서비스 명
 
 쏙쏙 (ssok ssok)
 
@@ -64,11 +64,23 @@
 
 <br/>
 
+## System Architecture
+
+
+
+![architecture](README_images/A201아키텍쳐.jpg)
+
+
+
+
+
 ## ERD
 
 ![ERD_0315](images/ERD_0315.png)
 
 <br/>
+
+
 
 ## 캐릭터
 
