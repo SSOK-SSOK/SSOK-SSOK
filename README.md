@@ -1,10 +1,4 @@
-# README
-
-## 서비스 명
-
-쏙쏙 (ssok ssok)
-
-<br/>
+# SSOK SSOK
 
 ## 팀 소개 (Position)
 
@@ -24,7 +18,7 @@
 
 ### ✨ 프로젝트 소개
 
-> 언어중추가 가장 활발히 발달하여 모국어 뿐만 아니라 제2외국어 역시 빠르게 습득 가능한 만 6, 7세의 아동들을 대상으로 어휘 게임을 사용하여 다양한 언어를 가르치기 위해 설계된 응용 프로그램입니다. 
+> 언어중추가 가장 활발히 발달하여 모국어 뿐만 아니라 제2외국어 역시 빠르게 습득 가능한 만 6, 7세의 아동들을 대상으로 어휘 게임을 사용하여 다양한 언어를 가르치기 위해 설계된 응용 프로그램.
 
 - 대상: 유치원, 초등학생
 - 목적: 외국어 단어 학습
@@ -46,21 +40,14 @@
 ### 🔨 기술 스택
 
 - **Back-end**
-  - Spring Boot
-  - JPA
-  - MySQL
+
+  ![기술스택-1]($images/기술스택-1.png)
 - **Front-end**
-  - JavaScript
-  - HTML / CSS
-  - React
-  - Redux
-  - Node.js 
+
+  ![기술스택-2]($images/기술스택-2-1615897610945.png)
 - **AI**
-  - Python (3.8.5) 
-  - Django (3.1.7)
-  - Google API
-  - [YOLO](https://pjreddie.com/darknet/yolo/)
-  - [COCO Dataset](https://cocodataset.org/#home)
+
+  ![기술스택-3]($images/기술스택-3.png)
 
 <br/>
 
@@ -83,8 +70,6 @@
 
 
 ## 캐릭터
-
-> 아이들이 좋아할 수 있는 캐릭터를 직접 제작했습니다.
 
 ![mascot1](images/mascot.jpg)
 
