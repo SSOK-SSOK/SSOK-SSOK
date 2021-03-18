@@ -47,9 +47,10 @@
 
 <br/>
 
-### 시퀀스 다이어그램
+### 🎞 시퀀스 다이어그램
 
-![sequence diagram.jpg](images/sequence diagram.jpg){: width="500" height="500"}
+![sequence diagram.jpg](images/sequence diagram.jpg)
+<br/>
 > 수정 예정
 
 <br/>
