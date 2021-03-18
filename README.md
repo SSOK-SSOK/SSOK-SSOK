@@ -1,21 +1,5 @@
 # SSOK SSOK
 
-## 팀 소개 (Position)
-
-### Back-end
-
-김성진, 이유진
-
-### Front-end
-
-강채원, 김효진, 이승아
-
-### AI
-
-강채원, 이승아
-
-<br/>
-
 ### ✨ 프로젝트 소개
 
 > 언어중추가 가장 활발히 발달하여 모국어 뿐만 아니라 제2외국어 역시 빠르게 습득 가능한 만 6, 7세의 아동들을 대상으로 어휘 게임을 사용하여 다양한 언어를 가르치기 위해 설계된 응용 프로그램.
@@ -51,29 +35,33 @@
 
 <br/>
 
-## System Architecture
+### :gear: System Architecture
 
+![architecture](images/architecture.png)
 
+<br/>
 
-![architecture](images/architecture.jpg)
-
-
-
-
-
-## ERD
+### 🧱 ERD
 
 ![ERD_0315](images/ERD_0315.png)
 
 <br/>
 
-
-
-## 캐릭터
+### 💙 캐릭터
 
 ![mascot1](images/mascot.jpg)
 
 ![mascot2](images/mascot2.jpg)
 
+<br/>
 
+### 👬 SSOK SSOK 개발진
+
+| ROLE                    | NAME           |
+| :---------------------- | -------------- |
+| Captain & Frontend & AI | :crown: 강채원 |
+| Backend                 | 👦 김성진       |
+| Frontend                | 👧 김효진       |
+| Frontend & AI           | 👧 이승아       |
+| Backend                 | 👧 이유진       |
 
