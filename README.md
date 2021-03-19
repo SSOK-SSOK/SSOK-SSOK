@@ -54,6 +54,8 @@
 
 ![sequence diagram2](images/SequenceDiagram-ImageCardGame.jpg)
 
+- 시퀀스 다이어그램 수정 예정
+
 <br/>
 
 ### 💙 캐릭터
