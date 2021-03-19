@@ -49,9 +49,10 @@
 
 ### 🎞 시퀀스 다이어그램
 
-![sequence diagram.jpg](images/sequence diagram.jpg)
+![sequence diagram1](images/SequenceDiagram-Oauth.jpg)
 <br/>
-> 수정 예정
+
+![sequence diagram2](images/SequenceDiagram-ImageCardGame.jpg)
 
 <br/>
 
