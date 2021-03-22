@@ -1,6 +1,13 @@
-# How to use YOLO & COCO Dataset
+# Smart Camera 기능 개발 기록
 
-> COCO데이터셋과 YOLO 모델로 Object Detection을 구현하는 방법을 설명합니다.
+> '쏙쏙'의 스마트카메라 기능 개발 진행상황을 기록합니다. 
+
+### :hammer: 사용 기술
+
+- YOLO
+- COCO Dataset
+- Python 3.7.7
+- OpenCV 4.5.1
 
 <br/>
 
