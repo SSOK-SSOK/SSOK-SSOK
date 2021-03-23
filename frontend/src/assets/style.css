@@ -1,0 +1,16 @@
+.bg {
+  background-color: #040431;
+}
+
+.font-color {
+  color: white;
+}
+
+.toolbar {
+  height: 200px;
+}
+
+.bg-img {
+  background-image: url("../assets/images/unknown.png");
+  background-size: 100% 100%;
+}
