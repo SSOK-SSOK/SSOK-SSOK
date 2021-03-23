@@ -1,6 +1,9 @@
-package com.ssafy.ssokauth.domain.user;
+package com.ssafy.ssokauth.domain;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Getter

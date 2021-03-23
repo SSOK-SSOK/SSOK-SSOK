@@ -1,9 +1,10 @@
-package com.ssafy.ssokauth.service.user;
+package com.ssafy.ssokauth.config;
 
-import com.ssafy.ssokauth.domain.user.User;
-import com.ssafy.ssokauth.domain.user.UserRepository;
+import com.ssafy.ssokauth.domain.User;
+import com.ssafy.ssokauth.domain.UserRepository;
 import com.ssafy.ssokauth.dto.OAuthAttributes;
 import com.ssafy.ssokauth.dto.SessionUser;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -16,15 +17,11 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
 
+@RequiredArgsConstructor
 @Service
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
     private final UserRepository userRepository;
     private final HttpSession httpSession;
-
-    public CustomOAuth2UserService(UserRepository userRepository, HttpSession httpSession) {
-        this.userRepository = userRepository;
-        this.httpSession = httpSession;
-    }
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
@@ -39,6 +36,8 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                 of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
 
         User user = saveOrUpdate(attributes);
+        // 로그인 성공 시 세션에 SessionUser를 저장하도록 구성했습니다.
+        System.out.println(user.getEmail() + " " + user.getName() + " " + user.getRoleKey() + " " + user.getRole() + " " + user.getId());
         httpSession.setAttribute("user", new SessionUser(user));
 
         return new DefaultOAuth2User(
