@@ -9,3 +9,8 @@
 .toolbar {
   height: 200px;
 }
+
+.bg-img {
+  background-image: url("../assets/images/unknown.png");
+  background-size: 100% 100%;
+}
