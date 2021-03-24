@@ -22,7 +22,6 @@
           재밌게 배워보아요!
         </h1>
         <v-btn class="google" @click="google">Google</v-btn>
-        <!-- <v-btn class="naver" @click.prevent="naver">Naver</v-btn> -->
         <v-btn class="logout" @click="logout">Logout</v-btn>
       </div>
     </v-row>
@@ -31,42 +30,40 @@
 </template>
 
 <script>
-import axios from 'axios';
 import { mapActions } from 'vuex';
-import { GOOGLE_AUTH_URL } from '@/config/index.js';
+import { GOOGLE_AUTH_URL, ACCESS_TOKEN } from '@/config/index.js';
 
 export default {
   name: "WelcomePage",
+  mounted () {
+
+    console.log("마운티드")
+    this.getToken()
+  },
   methods: {
     ... mapActions(['logout']),
     moveToMainPage: function () {
       this.$router.push({ name: "MainPage" });
     },
     google() {
-      axios.get(`${GOOGLE_AUTH_URL}`)
-      .then((res) => {
-        console.log(res)
-        function getUrlParameter(name) {
-          name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-          var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
-          var results = regex.exec(window.location.search);
+      window.location.href = GOOGLE_AUTH_URL
+    },
+    getUrlParameter(name) {
+      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+      var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+      var results = regex.exec(window.location.search);
 
-          return results === null
-            ? ""
-            : decodeURIComponent(results[1].replace(/\+/g, " "));
-        }
+      return results === null
+        ? ""
+        : decodeURIComponent(results[1].replace(/\+/g, " "));
+    },
+    getToken: function () {
+      const token = this.getUrlParameter("token");
+      console.log(token);
 
-        const token = getUrlParameter("token");
-        console.log(token);
-
-        if (token) {
-          localStorage.setItem(ACCESS_TOKEN, token);
-          this.$router.push({ name: "MainPage" });
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+      if (token) {
+        localStorage.setItem(ACCESS_TOKEN, token);
+      }
     }
     
   },

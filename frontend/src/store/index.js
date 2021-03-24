@@ -39,9 +39,4 @@ export default new Vuex.Store({
       commit(LOGOUT);
     },
   },
-  // getters: {
-  //   isAuthenticated: (state) => {
-  //     return state.currentUser.toString().includes("name");
-  //   },
-  // },
 });
