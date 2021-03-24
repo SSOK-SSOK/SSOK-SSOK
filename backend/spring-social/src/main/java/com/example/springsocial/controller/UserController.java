@@ -11,11 +11,10 @@ import com.example.springsocial.repository.UserRepository;
 import com.example.springsocial.security.CurrentUser;
 import com.example.springsocial.security.UserPrincipal;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import springfox.documentation.annotations.ApiIgnore;
 
+@ApiIgnore
 @RestController
-@Api(value="회원 관리")
 public class UserController {
 
     @Autowired
@@ -23,7 +22,6 @@ public class UserController {
 
     @GetMapping("/user/me")
     @PreAuthorize("hasRole('USER')")
-    @ApiOperation(value = "유저 조회")
     public User getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
         return userRepository.findById(userPrincipal.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));

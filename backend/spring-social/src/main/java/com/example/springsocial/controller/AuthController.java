@@ -12,6 +12,7 @@ import com.example.springsocial.security.TokenProvider;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import springfox.documentation.annotations.ApiIgnore;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,9 +27,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 
+@ApiIgnore
 @RestController
 @RequestMapping("/auth")
-@Api(value = "로그인")
 public class AuthController {
 
     @Autowired
@@ -44,7 +45,6 @@ public class AuthController {
     private TokenProvider tokenProvider;
 
     @PostMapping("/login")
-    @ApiOperation(value = "회원 로그인")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
@@ -61,7 +61,6 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    @ApiOperation(value = "회원 가입")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
         if(userRepository.existsByEmail(signUpRequest.getEmail())) {
             throw new BadRequestException("Email address already in use.");
