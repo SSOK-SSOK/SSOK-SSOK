@@ -53,7 +53,7 @@ export default {
 
   },
   methods: {
-    ... mapActions(['google, logout']),
+    ... mapActions(['logout']),
     moveToMainPage: function () {
       this.$router.push({ name: "MainPage" });
     },

@@ -1,7 +1,4 @@
-import axios from "axios";
-import { API_BASE_URL, ACCESS_TOKEN } from "@/config/index.js";
-
-const SERVER_URL = "http://localhost:8080";
+import { ACCESS_TOKEN } from "@/config/index.js";
 
 // function getCurrentUser() {
 //   if (!localStorage.getItem(ACCESS_TOKEN)) {
@@ -9,6 +6,7 @@ const SERVER_URL = "http://localhost:8080";
 //   }
 // }
 
+//OAUTH2REDIRECTHANDLER
 function oauth() {
   function getUrlParameter(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");

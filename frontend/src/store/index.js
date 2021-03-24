@@ -1,10 +1,10 @@
-import axios from "axios";
 import Vue from "vue";
 import Vuex from "vuex";
-import axios from "axios";
-// import { findByToken, googleLogin } from "@/api/account.js";
-import { ACCESS_TOKEN } from "@/config/index.js";
-import { API_BASE_URL } from "../config";
+import { API_BASE_URL, ACCESS_TOKEN } from "@/config/index.js";
+import { createInstance } from "@/api/index.js";
+
+const instance = createInstance();
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -24,7 +24,7 @@ export default new Vuex.Store({
   },
   actions: {
     fetchUser({ commit }) {
-      axios
+      instance
         .get(`${API_BASE_URL}/user/me`)
         .then((res) => {
           commit(SET_USER, res);
@@ -39,9 +39,9 @@ export default new Vuex.Store({
       commit(LOGOUT);
     },
   },
-  getters: {
-    isAuthenticated: (state) => {
-      return state.currentUser.toString().includes("name");
-    },
-  },
+  // getters: {
+  //   isAuthenticated: (state) => {
+  //     return state.currentUser.toString().includes("name");
+  //   },
+  // },
 });
