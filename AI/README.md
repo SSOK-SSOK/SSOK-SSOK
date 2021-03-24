@@ -176,4 +176,38 @@ $ python setup.py build_ext --inplace
 $ pip install .
 ```
 
-(학습 파라미터, 학습 과정 추가 예정)
+```bash
+# 학습
+$ python flow 
+--model ./cfg/tiny-yolo-salee.cfg # 기본 cfg에서 따로 복사하여 사용합니다.
+--labels ./labels.txt 
+--trainer adam 
+--dataset ../data/COCO/train2017/ 
+--annotation ../data/COCO/annotations/Annotations/ 
+--train 
+--summary ./logs 
+--batch 5 
+--epoch 100 
+--save 1000 
+--keep 5 
+--lr 1e-04 
+--gpu 0.5 
+--load -1 # --load 를 없애면 처음부터 학습시작, --load -1는 이어서 학습합니다. 
+```
+
+```bash
+# 테스트
+python flow 
+--imgdir ../data/testset/ 
+--model ./cfg/tiny-yolo-salee.cfg 
+--load -1 
+--batch 1 
+--threshold 0.03 # threshold를 조절하여 객체 탐지의 민감도를 조절할 수 있습니다. 
+```
+
+<br/>
+
+### 05. 학습 진행 상황
+
+- 160,000 : 정확도 매우 50%...? 너무 낮음...
+- learning rate를 줄여서 계속 학습을 진행할 예정
