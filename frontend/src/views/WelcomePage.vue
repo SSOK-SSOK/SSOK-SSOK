@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+// import { mapActions } from 'vuex';
 import { GOOGLE_AUTH_URL, ACCESS_TOKEN } from '@/config/index.js';
 
 export default {
@@ -39,9 +39,9 @@ export default {
 
     console.log("마운티드")
     this.getToken()
+    this.$store.dispatch("fetchUser")
   },
   methods: {
-    ... mapActions(['logout']),
     moveToMainPage: function () {
       this.$router.push({ name: "MainPage" });
     },
@@ -64,6 +64,9 @@ export default {
       if (token) {
         localStorage.setItem(ACCESS_TOKEN, token);
       }
+    },
+    logout () {
+      this.$store.dispatch("logout")
     }
     
   },

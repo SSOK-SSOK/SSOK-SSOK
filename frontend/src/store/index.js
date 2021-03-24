@@ -24,15 +24,18 @@ export default new Vuex.Store({
   },
   actions: {
     fetchUser({ commit }) {
-      instance
-        .get(`${API_BASE_URL}/user/me`)
-        .then((res) => {
-          commit(SET_USER, res);
-        })
-        .catch((err) => {
-          console.log("currentUser 없음");
-          console.log(err);
-        });
+      console.log("펫치");
+      if (localStorage.getItem(ACCESS_TOKEN)) {
+        instance
+          .get("/user/me")
+          .then((res) => {
+            commit(SET_USER, res);
+          })
+          .catch((err) => {
+            console.log("currentUser 없음");
+            console.log(err);
+          });
+      }
     },
     logout({ commit }) {
       localStorage.removeItem(ACCESS_TOKEN);
