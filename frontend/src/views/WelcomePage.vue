@@ -22,7 +22,9 @@
             <br>
             재밌게 배워보아요!
           </h1>
-          <v-btn @click.prevent="google"></v-btn>
+          <v-btn class="google" @click.prevent="google">Google</v-btn>
+          <!-- <v-btn class="naver" @click.prevent="naver">Naver</v-btn> -->
+          <v-btn class="logout" @click="logout">Logout</v-btn>
         </div>
       </v-row>
     </v-container>
@@ -30,6 +32,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex;'
+import { GOOGLE_AUTH_URL } from '@/config/index.js';
 
 export default {
   name: "WelcomePage",
@@ -49,10 +53,16 @@ export default {
 
   },
   methods: {
+    ... mapActions(['google, logout']),
     moveToMainPage: function () {
       this.$router.push({ name: "MainPage" });
     },
- 
+    google() {
+      window.location.href = GOOGLE_AUTH_URL;
+    },
+    // naver() {
+    //   window.location.href = NAVER_AUTH_URL;      
+    // }
   },
 };
 </script>
