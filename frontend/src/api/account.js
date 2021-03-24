@@ -19,6 +19,7 @@ function oauth() {
   }
 
   const token = getUrlParameter("token");
+  console.log(token);
   if (token) {
     localStorage.setItem(ACCESS_TOKEN, token);
     this.$router.push({ name: "MainPage" });

@@ -21,7 +21,7 @@
           <br>
           재밌게 배워보아요!
         </h1>
-        <v-btn class="google" @click.prevent="google">Google</v-btn>
+        <v-btn class="google" @click="google">Google</v-btn>
         <!-- <v-btn class="naver" @click.prevent="naver">Naver</v-btn> -->
         <v-btn class="logout" @click="logout">Logout</v-btn>
       </div>
@@ -31,7 +31,8 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex;'
+import axios from 'axios';
+import { mapActions } from 'vuex';
 import { GOOGLE_AUTH_URL } from '@/config/index.js';
 
 export default {
@@ -42,8 +43,31 @@ export default {
       this.$router.push({ name: "MainPage" });
     },
     google() {
-      window.location.href = GOOGLE_AUTH_URL;
-    },
+      axios.get(`${GOOGLE_AUTH_URL}`)
+      .then((res) => {
+        console.log(res)
+        function getUrlParameter(name) {
+          name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+          var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+          var results = regex.exec(window.location.search);
+
+          return results === null
+            ? ""
+            : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+
+        const token = getUrlParameter("token");
+        console.log(token);
+
+        if (token) {
+          localStorage.setItem(ACCESS_TOKEN, token);
+          this.$router.push({ name: "MainPage" });
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    }
     
   },
 };

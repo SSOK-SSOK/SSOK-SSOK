@@ -24,4 +24,12 @@ function createInstance() {
   return instance;
 }
 
-export { createInstance };
+function createGoogleInstance() {
+  const googleInstance = axios.create({
+    baseURL: GOOGLE_AUTH_URL,
+    headers: customHeaders(),
+  });
+  return instance;
+}
+
+export { createInstance, createGoogleInstance };
