@@ -1941,6 +1941,13 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.11.0.tgz#d61f46d83b2519250e2784daf5b09479a8b41c59"
   integrity sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==
 
+axios@^0.21.1:
+  version "0.21.1"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
+  integrity sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
+  dependencies:
+    follow-redirects "^1.10.0"
+
 babel-eslint@^10.1.0:
   version "10.1.0"
   resolved "https://registry.yarnpkg.com/babel-eslint/-/babel-eslint-10.1.0.tgz#6968e568a910b78fb3779cdd8b6ac2f479943232"
@@ -4052,7 +4059,7 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
 
-follow-redirects@^1.0.0:
+follow-redirects@^1.0.0, follow-redirects@^1.10.0:
   version "1.13.3"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.13.3.tgz#e5598ad50174c1bc4e872301e82ac2cd97f90267"
   integrity sha512-DUgl6+HDzB0iEptNQEXLx/KhTmDb8tZUHSeLqpnjpknR70H0nC2t9N73BK6fN4hOvJ84pKlIQVQ4k5FFlBedKA==
@@ -8460,6 +8467,21 @@ vue-eslint-parser@^7.0.0:
     espree "^6.2.1"
     esquery "^1.4.0"
     lodash "^4.17.15"
+
+vue-google-login@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/vue-google-login/-/vue-google-login-2.0.5.tgz#228267444a4a7cfa175b345fe146042d1c3e74ac"
+  integrity sha512-C+N8l+otSOiTDQic35bV8Qt/mq9KWGDX35utbZjcD37hGwMXGabW7GetB3cF56r2LfsSiGAnWwPGK2T2V1gZdA==
+
+vue-google-oauth2@^1.5.8:
+  version "1.5.8"
+  resolved "https://registry.yarnpkg.com/vue-google-oauth2/-/vue-google-oauth2-1.5.8.tgz#9ed963aaafc1e80a276c195499024f369b02d5c8"
+  integrity sha512-mATpPrLjzjAoUwgFC2feEZEhyoFyItPQSdEgX3m+rHI17sXLEdKzcMLmk+8B1obu4J/YVuVRR9A1afs+4VEk0Q==
+
+vue-google-signin-button-directive@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/vue-google-signin-button-directive/-/vue-google-signin-button-directive-1.0.3.tgz#5d4fb188e85be05596647cb3d719bda457c7f21d"
+  integrity sha512-S2gG+Zu+E+B/IoyXfbz/AixVrvZhnXU+G83bTtzhUAO9RaMg597G3XUpZOHHdgWBc/Szys/kHSbPXlONjR4wjQ==
 
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"
