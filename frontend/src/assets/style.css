@@ -14,3 +14,8 @@
   background-image: url("../assets/images/unknown.png");
   background-size: 100% 100%;
 }
+
+.header {
+  font-size: 4.5rem;
+  color: white;
+}
