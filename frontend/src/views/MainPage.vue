@@ -15,7 +15,7 @@ export default {
       this.$router.push({ name: "SmartCamera" });
     },
     back: function () {
-      this.$router.push({ name: "WelcomPage" });
+      this.$router.push({ name: "WelcomePage" });
     },
   },
 };
