@@ -23,13 +23,6 @@
             재밌게 배워보아요!
           </h1>
           <v-btn @click.prevent="google"></v-btn>
-          <!-- <v-btn class="google_login_btn">
-            <GoogleLogin
-              :params="params"
-              :onSuccess="GoogleLoginSuccess"
-              :renderParams="renderParams"
-            />
-          </v-btn> -->
         </div>
       </v-row>
     </v-container>
@@ -37,79 +30,29 @@
 </template>
 
 <script>
-// import { mapActions } from 'vuex';
-// import GoogleLogin from 'vue-google-login';
-// import GoogleLoginBtn from 'vue-google-signin-button-directive';
-import { GOOGLE_AUTH_URL } from '@/config/index.js';
+
 export default {
   name: "WelcomePage",
   directives: {
-    // GoogleLoginBtn,
   },
   data: function () {
     return {
-      // title: 'error',
-      // content: '로그인 실패!',
-      // alert: false,
-      // loading: false,
-      // email: '',
-      // pass: '',
-      // params: {
-      //   client_id: '943641916006-me9dbk59g6gkdiha6oke6cjl2g6fjkap.apps.googleusercontent.com',
-      // },
-      // //Google Ui 사용하여 Login 버튼 만드는 것
-      // renderParams: {
-      //   width: 250,
-      //   height: 50,
-      //   longtitude: true,
-      // }
     }
   },
   components: {
-    // GoogleLogin,
   },
-  //currentUser가 없으면, 가져오기
   created() {
-    let currentUser = localStorage.getItem("currentUser");
-    if (!currentUser || currentUser === {}) {
-      this.$store.dispatch("fetchUser");
-    }
+
   },
   //로그인 여부 판단하기
   computed: {
-    isAuthenticated() {
-      return this.$store.getters.isAuthenticated;
-    }
+
   },
   methods: {
-    // ...mapActions(['googleOauth']),
     moveToMainPage: function () {
       this.$router.push({ name: "MainPage" });
     },
-    google: function () {
-      window.location.href = GOOGLE_AUTH_URL;  
-    }
-    // // 구글로그인
-    // async GoogleLoginSuccess(googleUser) {
-    //   this.loading = true;
-    //   const profile = googleUser.getBasicProfile();
-    //   const result = await this.googleOauth({
-    //     email: googleUser.getBasicProfile().getEmail(),
-    //     pass: null,
-    //     image: profile.getImageUrl(),
-    //     token: googleUser.getAuthResponse().id_token,
-    //     name: profile.getName(),
-    //   });
-    //   this.loading = false;
-    //   if (!result) {
-    //     this.title = 'error';
-    //     this.content = '로그인 실패!';
-    //     this.alert = true;
-    //   } else {
-    //     this.email = '';
-    //     this.pass = '';
-    //   }
-    // },
+ 
   },
 };
 </script>
