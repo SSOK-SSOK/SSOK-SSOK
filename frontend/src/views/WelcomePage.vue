@@ -17,6 +17,7 @@
     <v-row fluid fill-height align="center" class="mx-7" style="min-height: 85vh;">
       <div style="width: auto;">
         <h1 class="font-color display-3">
+          {{ userName }}
           다양한 언어를
           <br>
           재밌게 배워보아요!
@@ -30,16 +31,16 @@
 </template>
 
 <script>
-// import { mapActions } from 'vuex';
 import { GOOGLE_AUTH_URL, ACCESS_TOKEN } from '@/config/index.js';
-
+import { mapState } from 'vuex';
 export default {
   name: "WelcomePage",
   mounted () {
-
     console.log("마운티드")
     this.getToken()
-    this.$store.dispatch("fetchUser")
+  },
+  computed: {
+    ...mapState(['userName'])
   },
   methods: {
     moveToMainPage: function () {
@@ -57,18 +58,25 @@ export default {
         ? ""
         : decodeURIComponent(results[1].replace(/\+/g, " "));
     },
-    getToken: function () {
-      const token = this.getUrlParameter("token");
-      console.log(token);
-
-      if (token) {
-        localStorage.setItem(ACCESS_TOKEN, token);
+    getUser () {
+      if (localStorage.getItem(ACCESS_TOKEN)) {
+        this.$store.dispatch("UserStore/fetchUser")
+        this.$router
+          .push({ name: "WelcomePage" })
+          .catch(()=>{})
       }
     },
+    getToken() {
+      const token = this.getUrlParameter("token");
+      console.log(token);
+      if (token) {
+        localStorage.setItem(ACCESS_TOKEN, token)
+      }
+      this.getUser()
+    },
     logout () {
-      this.$store.dispatch("logout")
+      this.$store.dispatch("UserStore/logout")
     }
-    
   },
 };
 </script>
