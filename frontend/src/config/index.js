@@ -1,6 +1,6 @@
-const API_BASE_URL = "http://localhost:8080";
+const API_BASE_URL = "https://j4a201.p.ssafy.io:8080/";
 const ACCESS_TOKEN = "accessToken";
-const OAUTH2_REDIRECT_URI = "http://localhost:8081";
+const OAUTH2_REDIRECT_URI = "https://j4a201.p.ssafy.io:8081/";
 const GOOGLE_AUTH_URL =
   API_BASE_URL + "/oauth2/authorize/google?redirect_uri=" + OAUTH2_REDIRECT_URI;
 
