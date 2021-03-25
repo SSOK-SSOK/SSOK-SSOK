@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://j4a201.p.ssafy.io:8080";
+const API_BASE_URL = "https://j4a201.p.ssafy.io:8080";
 const ACCESS_TOKEN = "accessToken";
 const OAUTH2_REDIRECT_URI = "https://j4a201.p.ssafy.io";
 const GOOGLE_AUTH_URL =
