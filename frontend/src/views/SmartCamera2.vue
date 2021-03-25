@@ -1,9 +1,8 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <h2 class="white--text">Current Camera</h2>
-        <code v-if="device">{{ device.label }}</code>
+  <v-container pa-0 fluid>
+    <NavBar />
+    <v-row class="mt-10"> 
+      <v-col xl="6" lg="6" md="6" sm="12" xs="12">
         <div class="border">
           <vue-web-cam
             ref="webcam"
@@ -16,44 +15,48 @@
             @camera-change="onCameraChange"
           />
         </div>
+        <v-row justify="center" class="my-6">
+          <h2 class="white--text">Current Camera</h2>
+        </v-row>
 
-        <div class="row">
-          <div class="col-md-12">
-            <select v-model="camera">
-              <option>-- Select Device --</option>
-              <option
-                v-for="device in devices"
-                :key="device.deviceId"
-                :value="device.deviceId"
-              >
-                <p class="white--text">{{ device.label }}</p>
-              </option>
-            </select>
-          </div>
-          <div class="col-md-12">
-            <v-btn depressed @click="onCapture">Capture Photo</v-btn>
-            <v-btn depressed @click="onStop">Stop Camera</v-btn>
-            <v-btn depressed @click="onStart">Start Camera</v-btn>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <h2 class="white--text">Captured Image</h2>
+        <v-row justify="center">
+          <v-btn fab large class="mx-5" @click="onCapture"><v-icon>mdi-camera-iris</v-icon></v-btn>
+          <v-btn fab large class="mx-5"  @click="onStop"><v-icon>mdi-camera-off</v-icon></v-btn>
+          <v-btn fab large class="mx-5"  @click="onStart"><v-icon>mdi-camera</v-icon></v-btn>
+          <!-- </v-col> -->
+        </v-row>
+        <!-- <v-row justify="center">
+          <select v-model="camera" color="white">
+            <option>-- Select Device --</option>
+            <option
+              v-for="device in devices"
+              :key="device.deviceId"
+              :value="device.deviceId"
+            >
+              <p class="white--text">{{ device.label }}</p>
+            </option>
+          </select>
+        </v-row> -->
+      </v-col>
+      <v-col xl="6" lg="6" md="6" sm="12" xs="12">
         <figure class="figure">
           <img :src="img" class="img-responsive" />
+          <!-- <h2 class="white--text">Captured Image</h2> -->
         </figure>
-      </div>
-    </div>
-  </div>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
 import { WebCam } from "vue-web-cam";
+import NavBar from '@/components/NavBar.vue'
 
 export default {
   name: "SmartCamera2",
   components: {
     "vue-web-cam": WebCam,
+    NavBar,
   },
   data: () => ({
     img: null,

@@ -92,7 +92,7 @@ export default {
     },
   methods: {
     moveToSC: function () {
-      this.$router.push({ name: "SmartCamera" });
+      this.$router.push({ name: "SmartCamera2" });
     },
     back: function () {
       this.$router.push({ name: "WelcomePage" });
