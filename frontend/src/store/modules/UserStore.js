@@ -20,13 +20,18 @@ const UserStore = {
     },
   },
   actions: {
+    
     fetchUser({ commit }) {
+      const agent = new https.Agent({
+        rejectUnauthorized: false,
+      });
       axios({
         url: API_BASE_URL + "/user/me",
         method: "GET",
         headers: {
           Authorization: "Bearer " + localStorage.getItem(ACCESS_TOKEN),
         },
+        httpsAgent: agent,
       })
         .then((res) => {
           commit("SET_USER", res);
