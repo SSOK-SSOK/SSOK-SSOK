@@ -67,7 +67,15 @@ $ sudo mysql -u root -p
 $ create user '아이디'@'%' identified by '비밀번호';
 
 # Workbench Connection 설정
-![DB 설정](https://user-images.githubusercontent.com/53414240/112458892-a0fab200-8da0-11eb-8028-8749e520cb14.PNG)
+Connection Name: 원하는 이름
+Connection Method: Stanard TCP/IP over SSH
+SSH Hostname: j4a201.p.ssafy.io
+SSH Username: ubuntu
+SSH Key File: .pem 파일 등록
+MySQL Hostname: 0.0.0.0
+MySQL Server Port: 3306
+Username: 모든 IP로 접속가능한 계정 ex) '아이디'
+Test Connection 클릭
 
 # Workbench DB 생성
 
