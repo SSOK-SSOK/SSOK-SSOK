@@ -2,7 +2,7 @@
 
 > 아래 번호 순서대로 클릭하고 `4` 번에서 `.pem` 키를 등록합니다.
 
-![image-20210323134814508](./images/deploy1.png)
+![image-20210323134814508](../images/deploy1.png)
 
 ✔ `login as :` 가 뜨면 `ubuntu`를 입력한다.
 
@@ -255,4 +255,4 @@ $ sudo service nginx start
 
 #### 성공!
 
-![image-20210323213700897](images/image-20210323213700897.png)
+![image-20210323213700897](../images/image-20210323213700897.png)
