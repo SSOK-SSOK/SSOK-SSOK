@@ -124,6 +124,19 @@ server {
         location / {
             try_files $uri $uri/ /index.html;
         }
+        
+        ### backend reverse proxy 설정 추가 ###
+        location /api {
+            proxy_pass http://localhost:8080;
+            proxy_http_version 1.1;
+            proxy_set_header Connection "";
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header X-Forwarded-Host $host;
+            proxy_set_header X-Forwarded-Port $server_port;
+        }
 ```
 
 ```bash
@@ -192,6 +205,19 @@ server {
                 # First attempt to serve request as file, then
                 # as directory, then fall back to displaying a 404.
                 #proxy_pass http://$host$request_uri;
+        }
+        
+        ### backend reverse proxy 설정 추가 ###
+        location /api {
+            proxy_pass http://localhost:8080;
+            proxy_http_version 1.1;
+            proxy_set_header Connection "";
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header X-Forwarded-Host $host;
+            proxy_set_header X-Forwarded-Port $server_port;
         }
 
         ssl_certificate /etc/letsencrypt/live/j4a201.p.ssafy.io/fullchain.pem; # managed by Certbot
