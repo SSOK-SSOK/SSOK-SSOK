@@ -67,11 +67,36 @@
 
 
 
-### 🎀 0325 Design Update
+------------------------------------------
+
+### 🎀 0326 Update
+
+> [시연 영상]
+>
+> AI https://drive.google.com/file/d/19ztCuFpTg2vm2ExBn5hJbbfeHST9K3jR/view?usp=sharing
+>
+> Google Login https://drive.google.com/file/d/1YfCTC95dKExwJTu3XA5ixrBm-j4SmXrE/view?usp=sharing
+>
+> Smart Camera https://drive.google.com/file/d/1C31vIa_x3wapMiQrOHls4S41nxP2u4sH/view?usp=sharing
+
+#### 배포 완료 & 디자인 적용
 
 ![image-20210325213404350](images/image-20210325213404350.png)
 
 ![image-20210325213519802](images/image-20210325213519802.png)
 
+
+
+#### 스마트 카메라 게임을 위한 웹캠 연결 
+
 ![image-20210325213737430](images/image-20210325213737430.png)
 
+
+
+#### Google 로그인 구현
+
+![image-20210326104550478](images/image-20210326104550478.png)
+
+### 🚗향후 계획
+
+![image-20210326105357378](images/image-20210326105357378.png)
