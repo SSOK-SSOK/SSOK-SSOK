@@ -1,7 +1,7 @@
 <template>
   <v-container pa-0 fluid>
     <NavBar />
-    <v-row class="mt-10"> 
+    <v-row class="mt-10">
       <v-col xl="6" lg="6" md="6" sm="12" xs="12">
         <div class="border">
           <vue-web-cam
@@ -20,9 +20,15 @@
         </v-row>
 
         <v-row justify="center">
-          <v-btn fab large class="mx-5" @click="onCapture"><v-icon>mdi-camera-iris</v-icon></v-btn>
-          <v-btn fab large class="mx-5"  @click="onStop"><v-icon>mdi-camera-off</v-icon></v-btn>
-          <v-btn fab large class="mx-5"  @click="onStart"><v-icon>mdi-camera</v-icon></v-btn>
+          <v-btn fab large class="mx-5" @click="onCapture"
+            ><v-icon>mdi-camera-iris</v-icon></v-btn
+          >
+          <v-btn fab large class="mx-5" @click="onStop"
+            ><v-icon>mdi-camera-off</v-icon></v-btn
+          >
+          <v-btn fab large class="mx-5" @click="onStart"
+            ><v-icon>mdi-camera</v-icon></v-btn
+          >
           <!-- </v-col> -->
         </v-row>
         <!-- <v-row justify="center">
@@ -50,7 +56,8 @@
 
 <script>
 import { WebCam } from "vue-web-cam";
-import NavBar from '@/components/NavBar.vue'
+import NavBar from "@/components/NavBar.vue";
+import axios from "axios";
 
 export default {
   name: "SmartCamera2",
@@ -85,6 +92,15 @@ export default {
   methods: {
     onCapture() {
       this.img = this.$refs.webcam.capture();
+      console.log(this.img);
+      axios
+        .post("http://127.0.0.1:8000/ai/detection/", { image: this.img })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     onStarted(stream) {
       console.log("On Started Event", stream);
