@@ -23,7 +23,7 @@ const UserStore = {
     
     fetchUser({ commit }) {
       axios({
-        url: API_BASE_URL + "/user/me",
+        url: "https://j4a201.p.ssafy.io/api" + "/user/me",
         method: "GET",
         headers: {
           Authorization: "Bearer " + localStorage.getItem(ACCESS_TOKEN),
