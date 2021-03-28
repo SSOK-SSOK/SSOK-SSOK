@@ -1,36 +1,32 @@
 <template>
-  <div class="mt-3 mb-7">
-    <v-app-bar
-      color="#040431"
-      :elevation="0"
-      max-height="80"
-    >
-      <v-btn icon class="ml-2" @click="moveToMP">
-        <v-avatar tile size="70" >
-          <img src="@/assets/images/out-icon.png" alt="out-icon">
+  <div class="mt-5">
+    <v-app-bar color="#040431" :elevation="0" max-height="80">
+      <v-btn icon class="ml-5" @click="moveToMP">
+        <v-avatar tile size="4rem">
+          <img src="@/assets/images/out-icon.png" alt="out-icon" />
         </v-avatar>
       </v-btn>
-      
+
       <v-spacer></v-spacer>
-      <v-avatar size="70" class="mr-2">
-        <img src="@/assets/images/welcome-icon.png" alt="welcome-icon">
-      </v-avatar>
-      <p class="header">Animals</p>
+      <div class="d-flex align-center">
+        <v-avatar size="4rem" class="mr-2 d-md-flex d-none">
+          <img src="@/assets/images/welcome-icon.png" alt="welcome-icon" />
+        </v-avatar>
+        <p class="header mr-5 mb-0">Animals</p>
+      </div>
     </v-app-bar>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'NavBar',
+  name: "NavBar",
   methods: {
     moveToMP: function () {
       this.$router.push({ name: "MainPage" });
     },
-  }
-}
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

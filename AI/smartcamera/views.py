@@ -12,6 +12,7 @@ import base64
 from PIL import Image
 from io import BytesIO
 
+# base64코드를 변환하여 jpg로 저장합니다.
 def convert_base64_to_img(data):
     prefix = 'data:image/jpeg;base64,'
     cut = data[len(prefix):]

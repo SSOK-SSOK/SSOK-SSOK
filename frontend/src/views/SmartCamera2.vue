@@ -1,55 +1,45 @@
 <template>
-  <v-container pa-0 fluid>
+  <v-container fluid>
     <NavBar />
-    <v-row class="mt-10">
-      <v-col xl="6" lg="6" md="6" sm="12" xs="12">
-        <div class="border">
-          <vue-web-cam
-            ref="webcam"
-            :device-id="deviceId"
-            width="100%"
-            @started="onStarted"
-            @stopped="onStopped"
-            @error="onError"
-            @cameras="onCameras"
-            @camera-change="onCameraChange"
-          />
-        </div>
-        <v-row justify="center" class="my-6">
-          <h2 class="white--text">Current Camera</h2>
-        </v-row>
-
-        <v-row justify="center">
-          <v-btn fab large class="mx-5" @click="onCapture"
-            ><v-icon>mdi-camera-iris</v-icon></v-btn
-          >
-          <v-btn fab large class="mx-5" @click="onStop"
-            ><v-icon>mdi-camera-off</v-icon></v-btn
-          >
-          <v-btn fab large class="mx-5" @click="onStart"
-            ><v-icon>mdi-camera</v-icon></v-btn
-          >
-          <!-- </v-col> -->
-        </v-row>
-        <!-- <v-row justify="center">
-          <select v-model="camera" color="white">
-            <option>-- Select Device --</option>
-            <option
-              v-for="device in devices"
-              :key="device.deviceId"
-              :value="device.deviceId"
+    <h1 class="font-color text-center mt-10">{{ question }}을 보여주세요😉</h1>
+    <v-row class="mt-5">
+      <div class="col-md-6 col-xs-12">
+        <vue-web-cam
+          height="60%"
+          width="100%"
+          ref="webcam"
+          :device-id="deviceId"
+          @started="onStarted"
+          @stopped="onStopped"
+          @error="onError"
+          @cameras="onCameras"
+          @camera-change="onCameraChange"
+        />
+        <div class="mt-5 d-flex justify-between">
+          <div class="mx-auto">
+            <v-btn fab large class="mx-5" @click="onCapture"
+              ><v-icon>mdi-camera-iris</v-icon></v-btn
             >
-              <p class="white--text">{{ device.label }}</p>
-            </option>
-          </select>
-        </v-row> -->
-      </v-col>
-      <v-col xl="6" lg="6" md="6" sm="12" xs="12">
-        <figure class="figure">
-          <img :src="img" class="img-responsive" />
-          <!-- <h2 class="white--text">Captured Image</h2> -->
+            <v-btn fab large class="mx-5" @click="onStop"
+              ><v-icon>mdi-camera-off</v-icon></v-btn
+            >
+            <v-btn fab large class="mx-5" @click="onStart"
+              ><v-icon>mdi-camera</v-icon></v-btn
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-xs-12">
+        <figure class="mx-auto">
+          <img :src="img" width="73%" class="d-flex mx-auto" />
         </figure>
-      </v-col>
+        <span v-if="img">
+          <h3 class="font-color text-center mt-3">
+            잠시 기다려주세요! 정답여부를 알려줄게요
+          </h3>
+        </span>
+      </div>
     </v-row>
   </v-container>
 </template>
@@ -70,6 +60,7 @@ export default {
     camera: null,
     deviceId: null,
     devices: [],
+    question: "Cup",
   }),
   computed: {
     device: function () {
