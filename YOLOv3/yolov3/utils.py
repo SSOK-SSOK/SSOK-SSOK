@@ -18,7 +18,6 @@ import tensorflow as tf
 from yolov3.configs import *
 from yolov3.yolov4 import *
 from tensorflow.python.saved_model import tag_constants
-from tools.Detection_to_XML import *
 
 
 def load_yolo_weights(model, weights_file):
@@ -194,7 +193,7 @@ def draw_bbox(image, bboxes, CLASSES=YOLO_COCO_CLASSES, show_label=True, show_co
             cv2.putText(image, label, (x1, y1-4), cv2.FONT_HERSHEY_COMPLEX_SMALL,
                         fontScale, Text_colors, bbox_thick, lineType=cv2.LINE_AA)
 
-    return image
+    return image, score, NUM_CLASS[class_ind]
 
 
 def bboxes_iou(boxes1, boxes2):
@@ -329,10 +328,13 @@ def detect_image(Yolo, image_path, output_path, input_size=416, show=False, CLAS
         pred_bbox, original_image, input_size, score_threshold)
     bboxes = nms(bboxes, iou_threshold, method='nms')
 
-    image = draw_bbox(original_image, bboxes, CLASSES=CLASSES,
-                      rectangle_colors=rectangle_colors)
-    CreateXMLfile("XML_Detections", str(int(time.time())),
-                  original_image, bboxes, read_class_names(CLASSES))
+    image, score, category = draw_bbox(original_image, bboxes, CLASSES=CLASSES, rectangle_colors=rectangle_colors)
+    
+    score = str(int(score*100))
+
+    with open('../AI/images/score.txt', 'w') as f:
+        f.write(score + " " + category)
+
 
     if output_path != '':
         cv2.imwrite(output_path, image)
@@ -534,7 +536,7 @@ def detect_video(Yolo, video_path, output_path, input_size=416, show=False, CLAS
 
         image = cv2.putText(image, "Time: {:.1f}FPS".format(
             fps), (0, 30), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), 2)
-        # CreateXMLfile("XML_Detections", str(int(time.time())), original_image, bboxes, read_class_names(CLASSES))
+        
 
         print("Time: {:.2f}ms, Detection FPS: {:.1f}, total FPS: {:.1f}".format(
             ms, fps, fps2))
@@ -605,7 +607,7 @@ def detect_realtime(Yolo, output_path, input_size=416, show=False, CLASSES=YOLO_
 
         frame = draw_bbox(original_frame, bboxes, CLASSES=CLASSES,
                           rectangle_colors=rectangle_colors)
-        # CreateXMLfile("XML_Detections", str(int(time.time())), original_frame, bboxes, read_class_names(CLASSES))
+        
         image = cv2.putText(frame, "Time: {:.1f}FPS".format(fps), (0, 30),
                             cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), 2)
 
