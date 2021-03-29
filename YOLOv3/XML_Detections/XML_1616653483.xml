@@ -1,0 +1,26 @@
+<annotation>
+  <folder>XML_Detections</folder>
+  <filename>XML_1616653483.png</filename>
+  <path>C:\Users\&#51060;&#49849;&#50500;\Desktop\TensorFlow-2.x-YOLOv3\XML_Detections\XML_1616653483.jpg</path>
+  <source>
+    <database>Unknown</database>
+  </source>
+  <size>
+    <width>571</width>
+    <height>600</height>
+    <depth>3</depth>
+  </size>
+  <segmented>0</segmented>
+  <object>
+    <name>apple</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>44</xmin>
+      <ymin>114</ymin>
+      <xmax>505</xmax>
+      <ymax>599</ymax>
+    </bndbox>
+  </object>
+</annotation>

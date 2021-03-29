@@ -1,0 +1,32 @@
+@font-face {
+    font-family: 'CookieRunOTF-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+  font-family: 'CookieRunOTF-Bold';
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  #app {
+    background: none !important;
+    color: white !important;
+  }
+}
+
+.toolbar {
+  height: 200px;
+}
+
+.header {
+  font-size: 4.5rem;
+  color: white;
+}
+
+.mainpage-icon {
+  color: white;
+  size: "90";
+}
