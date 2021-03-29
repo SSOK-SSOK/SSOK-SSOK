@@ -1,0 +1,7 @@
+98,person
+79,book
+66,book
+62,book
+48,book
+47,book
+33,cup

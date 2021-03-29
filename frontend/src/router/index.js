@@ -4,6 +4,8 @@ import MainPage from "@/views/MainPage.vue";
 import SmartCamera from "@/views/SmartCamera.vue";
 import SmartCamera2 from "@/views/SmartCamera2.vue";
 import WelcomePage from "@/views/WelcomePage.vue";
+import CardGame from "@/views/CardGame.vue";
+import PlayGame from "@/views/PlayGame.vue";
 
 Vue.use(VueRouter);
 
@@ -27,6 +29,16 @@ const routes = [
     path: "/smartcamera2",
     name: "SmartCamera2",
     component: SmartCamera2,
+  },
+  {
+    path: "/card",
+    name: "CardGame",
+    component: CardGame,
+  },
+  {
+    path: "/game",
+    name: "PlayGame",
+    component: PlayGame,
   },
 ];
 
