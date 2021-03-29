@@ -1,5 +1,0 @@
-spring:
-  datasource:
-    url: jdbc:mysql://j4a201.p.ssafy.io:3306/ssokcard?serverTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8
-    username: ssokauth
-    password: 's#s%o#k%1q2w3e4r%s#s%o#k'
