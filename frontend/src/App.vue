@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-main class="bg">
+    <v-main>
       <div id="stars"></div>
       <div id="stars2"></div>
       <div id="stars3"></div>
