@@ -1,12 +1,13 @@
-@font-face {
-    font-family: 'CookieRunOTF-Bold';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+// @font-face {
+//   font-family: "CookieRunOTF-Bold";
+//   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff")
+//     format("woff");
+//   font-weight: normal;
+//   font-style: normal;
+// }
 
 body {
-  font-family: 'CookieRunOTF-Bold';
+  // font-family: "CookieRunOTF-Bold", sans-serif;
   overflow: hidden;
   height: 100%;
   width: 100%;
@@ -14,19 +15,32 @@ body {
   #app {
     background: none !important;
     color: white !important;
+    div {
+      .v-main {
+        div {
+        }
+      }
+    }
   }
 }
 
-.toolbar {
-  height: 200px;
-}
+// header {
+//   height: 30vh;
+// }
 
-.header {
-  font-size: 4.5rem;
-  color: white;
-}
+// .toolbar {
+//   height: 200px;
+// }
+// .v-toolbar__content {
+//   height: 30vh;
+// }
 
-.mainpage-icon {
-  color: white;
-  size: "90";
-}
+// .header {
+//   font-size: 4.5rem;
+//   color: white;
+// }
+
+// .mainpage-icon {
+//   color: white;
+//   size: "90";
+// }
