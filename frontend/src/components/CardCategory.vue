@@ -2,6 +2,7 @@
   <v-layout align-center justify-center>
     <v-card flat width="1400" style="background-color: transparent;">
       <v-container>
+        <!------------ 국기 아이콘 리스트 ------------->
         <v-row class="my-10 mx-15 px-10">
           <v-col v-for="(flag, name) in flags" :key="name" align="center">
             <v-btn icon width="140" height="140">
@@ -11,38 +12,39 @@
             </v-btn>
           </v-col>
         </v-row>
+        <!--------------- 카드 리스트 ---------------->
         <v-row
-          v-for="m in 2"
-          :key="m"
+          class="mx-10"
+          v-for="(card, idx) in cards"
+          :key="idx"
         >
           <v-col
-            v-for="n in 3"
-            :key="n"
+            v-for="(cap, idx2) in card"
+            :key="idx2"
           >
             <v-card
               color="white"
               rounded="xl"
             >
-              <v-list-item three-line>
-                <v-list-item-content>
-                  <v-list-item-title class="headline mb-1">
-                    Animals
-                  </v-list-item-title>
-                  <v-list-item-subtitle>동물 15cards</v-list-item-subtitle>
-                </v-list-item-content>
+              <v-card-title class="display-3 font-weight-bold" style="color: #5254ac">
+                {{ cap.name }}
+              </v-card-title>
 
-                <v-list-item-avatar
-                  tile
-                  size="80"
-                  color="grey"
-                ></v-list-item-avatar>
-              </v-list-item>
+              <v-card-text class="d-flex justify-space-between">
+                <p class="display-1 font-weight-bold" style="color: #5254ac">{{ cap.sub }}</p>
+                <v-spacer></v-spacer>
+                <p class="title">15cards</p>
+              </v-card-text>
 
               <v-card-actions>
                 <v-btn
-                  outlined
                   rounded
-                  color="warning"
+                  elevation="0"
+                  color="#f1ca21"
+                  large
+                  width="50%"
+                  class="ml-4"
+                  @click="startGame"
                 >
                   게임하기
                 </v-btn>
@@ -70,8 +72,25 @@ export default {
         { name: "es", icon: "es.png"},
         { name: "vn", icon: "vn.png"}
       ],
+      cards: [
+        [
+          { name: "Animals", sub: "동물"},
+          { name: "Clothes", sub: "옷"},
+          { name: "Fruits", sub: "과일"}
+        ],
+        [
+          { name: "Animals", sub: "동물"},
+          { name: "Clothes", sub: "옷"},
+          { name: "Fruits", sub: "과일"}
+        ]
+      ]
     }
   },
+  methods: {
+    startGame: function () {
+      this.$router.push({ name: "PlayGame" });
+    }
+  }
 }
 </script>
 

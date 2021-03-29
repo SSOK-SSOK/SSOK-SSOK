@@ -29,7 +29,7 @@ export default {
   methods: {
     back: function () {
       this.$router.push({ name: "MainPage" });
-    },
+    }
   }
 }
 </script>
