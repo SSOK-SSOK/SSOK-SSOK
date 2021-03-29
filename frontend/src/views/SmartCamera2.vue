@@ -14,6 +14,7 @@
           @error="onError"
           @cameras="onCameras"
           @camera-change="onCameraChange"
+          style="position: relative; z-index: 100"
         />
         <div class="mt-5 d-flex justify-between">
           <div class="mx-auto">
@@ -32,7 +33,12 @@
 
       <div class="col-md-6 col-xs-12">
         <figure class="mx-auto">
-          <img :src="img" width="73%" class="d-flex mx-auto" />
+          <img
+            :src="img"
+            width="73%"
+            class="d-flex mx-auto"
+            style="position: relative; z-index: 100"
+          />
         </figure>
         <span v-if="img">
           <h3 class="font-color text-center mt-3">
