@@ -1,17 +1,16 @@
 <template>
   <v-container fluid fill-height>
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
     <nav>
       <div class="logo">
-        <!-- <v-avatar size="75"> 
-          <img src="@/assets/images/welcome-icon.png" alt="welcome-icon">
-        </v-avatar> -->
         <img class="avatar" src="@/assets/images/welcome-icon.png" alt="welcome-icon">
         <p>SSOK SSOK</p>
       </div>
       <div>
         <div class="glow" @click="moveToMainPage"></div>
       </div>
-      <!-- <v-btn class="mr-2" icon @click="moveToMainPage"><v-icon color="white" size="75">mdi-google-controller</v-icon></v-btn> -->
     </nav>
 
     <v-row fluid fill-height align="center" class="mx-7" style="min-height: 85vh;">
@@ -33,6 +32,7 @@
 <script>
 import { GOOGLE_AUTH_URL, ACCESS_TOKEN } from '@/config/index.js';
 import { mapState } from 'vuex';
+import "@/style/star.sass";
 import "@/style/auth-button.scss";
 import "@/style/light-button.scss";
 export default {
@@ -118,9 +118,6 @@ export default {
         font-size: 5vh;
         margin: 0 0 0 0.5vw
       }
-    }
-    div{
-
     }
   }
   .row{

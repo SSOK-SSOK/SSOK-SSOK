@@ -17,7 +17,7 @@
         >
       </div>
       <div>
-        <v-img style="width: 75%" src="@/assets/images/char1.png"></v-img>
+        <img src="@/assets/images/purple-note.png" alt="purple-note-mascot"></img>
       </div>
     </v-col>
 
@@ -109,3 +109,51 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.container{
+  .col{
+    div{
+      p{
+
+      }
+    }
+    div{
+      .v-btn{
+        .v-btn__content{
+          .v-icon{
+
+          }
+        }
+      }
+    }
+    div{
+      .v-btn{
+        .v-btn__content{
+          .v-icon{
+
+          }
+        }
+      }
+    }
+    div{
+      img{
+
+        width: 85%;
+      }
+    }
+  }
+  .col{
+    .row{
+      .container{
+        .row{
+          .header{
+
+          }
+        }
+      }
+    }
+
+  }
+}
+</style>
