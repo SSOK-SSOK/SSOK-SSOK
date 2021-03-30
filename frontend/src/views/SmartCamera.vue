@@ -34,14 +34,14 @@
       <div class="col-md-6 col-xs-12">
         <figure class="mx-auto">
           <img
-            :src="img"
+            :src="detected_img"
             width="73%"
             class="d-flex mx-auto"
             style="position: relative; z-index: 100"
           />
         </figure>
-        <span v-if="img">
-          <h3 class="font-color text-center mt-3">
+        <span v-if="detected_img">
+          <h3 class="text-center mt-3" style="color: white">
             잠시 기다려주세요! 정답여부를 알려줄게요
           </h3>
         </span>
@@ -62,7 +62,7 @@ export default {
     NavBar,
   },
   data: () => ({
-    img: null,
+    detected_img: null,
     camera: null,
     deviceId: null,
     devices: [],
@@ -88,9 +88,9 @@ export default {
   },
   methods: {
     onCapture() {
-      this.img = this.$refs.webcam.capture();
+      const img = this.$refs.webcam.capture();
       axios
-        .post("http://127.0.0.1:8000/ai/detection/", { image: this.img })
+        .post("http://127.0.0.1:8000/ai/detection/", { image: img })
         .then((res) => {
           console.log(res);
         })
