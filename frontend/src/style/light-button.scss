@@ -8,6 +8,7 @@ div {
     background: #c0ffe4;
     box-shadow: 1px 1px 0 #1d8758, 0 0 20px 5px #c0ffe4, inset 2px 2px 0 #d3ffec;
     animation: glow 2s infinite ease;
+    cursor: pointer;
 
     &:before,
     &:after {
