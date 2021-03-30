@@ -2,7 +2,9 @@
   <v-container>
     <NavBar />
     <div id="microphone-test">
-      <audio ref="recordPlayer" controls src="" />
+      <audio ref="recordPlayer" controls src="">
+
+      </audio>
       <v-btn @click="startRecord">녹음</v-btn>
       <v-btn @click="endRecord">중단</v-btn>
     </div>
@@ -25,17 +27,18 @@ export default {
           this.mediaRecorder.addEventListener('dataavailable', (event) => {
             //녹음이 끝나면 Blob 객체를 가리키는 URL을 생성해서 audio에 저장
             this.$refs.recordPlayer.src = URL.createObjectURL(event.data)
+            console.log(this.$refs.recordPlayer.src)
             
             //Blob 객체 저장
             let blob = event.data
+
             //base64로 변환할 FileReader
             var reader = new FileReader();
             // blob -> base64
             reader.readAsDataURL(blob);
-
             reader.onloadend = function () {
               var base64String = reader.result;
-              console.log(base64String)
+              // console.log(base64String)
               var slicebase64 = base64String.slice(35,)
               const data = {
                 'access_key': '0d52fa25-2ce8-4c0f-b453-615126f29c56',

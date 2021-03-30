@@ -88,7 +88,7 @@ export default {
   },
   methods: {
     startGame: function () {
-      this.$router.push({ name: "PlayGame" });
+      this.$router.push({ name: "Test" });
     }
   }
 }

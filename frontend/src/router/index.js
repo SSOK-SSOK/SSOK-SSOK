@@ -6,6 +6,7 @@ import SmartCamera2 from "@/views/SmartCamera2.vue";
 import WelcomePage from "@/views/WelcomePage.vue";
 import CardGame from "@/views/CardGame.vue";
 import PlayGame from "@/views/PlayGame.vue";
+import Test from "@/views/Test.vue";
 
 Vue.use(VueRouter);
 
@@ -39,6 +40,11 @@ const routes = [
     path: "/game",
     name: "PlayGame",
     component: PlayGame,
+  },
+  {
+    path: "/test",
+    name: "Test",
+    component: Test,
   },
 ];
 
