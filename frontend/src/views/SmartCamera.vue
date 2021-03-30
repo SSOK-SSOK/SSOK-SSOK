@@ -35,8 +35,7 @@
       </div>
 
       <v-card
-        :loading="loading"
-        class="col-md-6 col-xs-12 mt-3 mx-auto"
+        class="col-md-6 col-xs-12 mt-3 pa-0 mx-auto"
         color="rgba(255, 255, 255, 0)"
         max-width="35vw"
         max-height="60vh"
@@ -44,25 +43,21 @@
       >
         <img
           :src="detected_img"
-          width="73%"
+          width="100%"
           class="d-flex mx-auto"
           style="position: relative; z-index: 100"
         />
 
-        <h1 class="text-center" style="color: white">정답 확인중입니다</h1>
-        <template slot="progress">
-          <v-progress-linear
-            color="#FFEE58"
-            height="10"
-            indeterminate
-          ></v-progress-linear>
-        </template>
-
-        <v-card-actions>
-          <v-btn color="deep-purple lighten-2" text @click="reserve">
-            로딩
-          </v-btn>
-        </v-card-actions>
+        <h1 v-if="loading" class="text-center" style="color: white">
+          정답 확인중입니다
+        </h1>
+        <v-progress-linear
+          class="mt-5"
+          :active="loading"
+          :indeterminate="loading"
+          color="#FFEE58"
+          height="10"
+        ></v-progress-linear>
       </v-card>
     </v-row>
   </v-container>
@@ -81,12 +76,16 @@ export default {
     NavBar,
   },
   data: () => ({
-    detected_img: null,
     camera: null,
     deviceId: null,
     devices: [],
-    question: "Cup",
     loading: false,
+    question: "cup",
+    detected_img: require("../../../AI/images/detected_image.jpg"),
+    score: 0,
+    category: null,
+    is_correct: null,
+    is_done: false,
   }),
   computed: {
     device: function () {
@@ -116,7 +115,18 @@ export default {
           question: this.question,
         })
         .then((res) => {
-          console.log(res);
+          var info = res.data.info;
+          this.is_correct = res.data.is_correct;
+
+          if (typeof info === "number") {
+            this.score = info;
+          } else {
+            this.category = info;
+          }
+          console.log(this.is_correct);
+          console.log(this.score);
+          console.log(this.category);
+          this.is_done = true;
         })
         .catch((err) => {
           console.log(err);

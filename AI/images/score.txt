@@ -1,9 +1,9 @@
-97,person
-75,book
-65,book
+98,person
+83,book
 61,book
-52,book
-43,book
+48,book
+44,book
+41,book
 39,book
 38,book
-35,book
+37,book
