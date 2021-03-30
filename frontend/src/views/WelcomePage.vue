@@ -1,28 +1,28 @@
 <template>
   <v-container fluid fill-height>
-    <v-toolbar 
-      :elevation="0"
-    >
-      <v-avatar class="mr-2">
-        <img src="@/assets/images/welcome-icon.png" alt="welcome-icon">
-      </v-avatar>
-      <h1>SSOK SSOK</h1>
-      <v-spacer></v-spacer>
-      <v-btn class="mr-2" icon @click="moveToMainPage"><v-icon color="white" size="75">mdi-google-controller</v-icon></v-btn>
-    </v-toolbar>
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+    <nav>
+      <div class="logo">
+        <img class="avatar" src="@/assets/images/welcome-icon.png" alt="welcome-icon">
+        <p>SSOK SSOK</p>
+      </div>
+      <div>
+        <div class="glow" @click="moveToMainPage"></div>
+      </div>
+    </nav>
 
     <v-row fluid fill-height align="center" class="mx-7" style="min-height: 85vh;">
       <div style="width: auto;">
-        <h1>
-          {{ userName }}
+        <p>
+          {{ user }}
           다양한 언어를
           <br>
           재밌게 배워보아요!
-        </h1>
-        <button class="box" @click="google">Google</button>
-        <button class="box" @click="logout">Logout</button>
-        <!-- <v-btn class="google" @click="google">Google</v-btn>
-        <v-btn class="logout" @click="logout">Logout</v-btn> -->
+        </p>
+        <button v-if="getCheckLogin" class="auth-button" @click="logout">Logout</button>
+        <button v-else class="auth-button" @click="google">Google</button>
       </div>
     </v-row>
   </v-container>
@@ -32,16 +32,25 @@
 <script>
 import { GOOGLE_AUTH_URL, ACCESS_TOKEN } from '@/config/index.js';
 import { mapState } from 'vuex';
+import "@/style/star.sass";
 import "@/style/auth-button.scss";
-
+import "@/style/light-button.scss";
 export default {
   name: "WelcomePage",
+  data () {
+    return {
+      user: this.userName,
+    }
+  },
   mounted () {
     console.log("마운티드")
     this.getToken()
   },
   computed: {
-    ...mapState(['userName'])
+    ...mapState('UserStore', ['userName']),
+    getCheckLogin () {
+      return this.$store.getters["UserStore/getCheckLogin"];
+    },
   },
   methods: {
     moveToMainPage: function () {
@@ -85,23 +94,39 @@ export default {
 <style lang="scss" scoped>
 .container {
   padding: 1%;
-  .v-toolbar {
-    height: 50%;
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:0 2vh;
+    height:10vh;
     width: 100%;
     color: white;
     background: none;
     font-size: 1rem;
-    .v-toolbar__content{
-      * {
-        font-size: 2.5rem;
+    .logo{
+      display: flex;
+      align-items: center;
+      width: 30vw;
+      .avatar{
+        vertical-align: middle;
+        border-radius: 50%;
+        width: 15%;
+        height: 15%;
+      }
+      p{
+        font-size: 5vh;
+        margin: 0 0 0 0.5vw
       }
     }
   }
   .row{
     div{
-      h1{
+      text-align: center;
+      p{
         font-size: 2.5rem;
         text-align: center;
+        margin: 0;
       }
     }
   }

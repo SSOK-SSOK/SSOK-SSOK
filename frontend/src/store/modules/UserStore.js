@@ -19,8 +19,12 @@ const UserStore = {
       state.currentUser = null;
     },
   },
+  getters: {
+    getCheckLogin(state) {
+      return state.authenticated;
+    },
+  },
   actions: {
-    
     fetchUser({ commit }) {
       axios({
         url: API_BASE_URL + "/user/me",

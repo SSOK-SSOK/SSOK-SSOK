@@ -11,10 +11,7 @@
         <v-btn icon class="ml-5 mt-5" @click="back"><v-icon style="color: white;" size="90">mdi-play-box</v-icon></v-btn>
       </div>
       <div>
-        <v-img
-          style="width: 75%"
-          src="@/assets/images/char1.png"
-        ></v-img>
+        <img src="@/assets/images/purple-note.png" alt="purple-note-mascot"></img>
       </div>
     </v-col>
 
@@ -27,7 +24,7 @@
             <v-btn icon class="mr-5 mt-5" @click.stop="drawer = !drawer"><v-icon style="color: white;" size="90">mdi-menu</v-icon></v-btn>
           </v-row>
           <v-row class="ma-4">
-            <v-btn icon class="ml-5 mt-5"><v-icon style="color: white;" size="90">mdi-play-box</v-icon></v-btn>
+            <v-btn icon class="ml-5 mt-5" @click="moveToCG"><v-icon style="color: white;" size="90">mdi-play-box</v-icon></v-btn>
           </v-row>
         </v-container>
       </v-row>
@@ -94,9 +91,60 @@ export default {
     moveToSC: function () {
       this.$router.push({ name: "SmartCamera2" });
     },
+    moveToCG: function () {
+      this.$router.push({ name: "CardGame" });
+    },
     back: function () {
       this.$router.push({ name: "WelcomePage" });
     },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.container{
+  .col{
+    div{
+      p{
+
+      }
+    }
+    div{
+      .v-btn{
+        .v-btn__content{
+          .v-icon{
+
+          }
+        }
+      }
+    }
+    div{
+      .v-btn{
+        .v-btn__content{
+          .v-icon{
+
+          }
+        }
+      }
+    }
+    div{
+      img{
+
+        width: 85%;
+      }
+    }
+  }
+  .col{
+    .row{
+      .container{
+        .row{
+          .header{
+
+          }
+        }
+      }
+    }
+
+  }
+}
+</style>

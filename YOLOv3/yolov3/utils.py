@@ -18,7 +18,6 @@ import tensorflow as tf
 from yolov3.configs import *
 from yolov3.yolov4 import *
 from tensorflow.python.saved_model import tag_constants
-from tools.Detection_to_XML import *
 
 
 def load_yolo_weights(model, weights_file):
@@ -154,6 +153,8 @@ def draw_bbox(image, bboxes, CLASSES=YOLO_COCO_CLASSES, show_label=True, show_co
     random.shuffle(colors)
     random.seed(None)
 
+    infos = []
+
     for i, bbox in enumerate(bboxes):
         coor = np.array(bbox[:4], dtype=np.int32)
         score = bbox[4]
@@ -194,7 +195,9 @@ def draw_bbox(image, bboxes, CLASSES=YOLO_COCO_CLASSES, show_label=True, show_co
             cv2.putText(image, label, (x1, y1-4), cv2.FONT_HERSHEY_COMPLEX_SMALL,
                         fontScale, Text_colors, bbox_thick, lineType=cv2.LINE_AA)
 
-    return image
+            infos.append([int(round(score,2)*100), NUM_CLASS[class_ind]])
+
+    return image, infos
 
 
 def bboxes_iou(boxes1, boxes2):
@@ -218,12 +221,7 @@ def bboxes_iou(boxes1, boxes2):
 
 
 def nms(bboxes, iou_threshold, sigma=0.3, method='nms'):
-    """
-    :param bboxes: (xmin, ymin, xmax, ymax, score, class)
 
-    Note: soft-nms, https://arxiv.org/pdf/1704.04503.pdf
-          https://github.com/bharatsingh430/soft-nms
-    """
     classes_in_img = list(set(bboxes[:, 5]))
     best_bboxes = []
 
@@ -329,20 +327,14 @@ def detect_image(Yolo, image_path, output_path, input_size=416, show=False, CLAS
         pred_bbox, original_image, input_size, score_threshold)
     bboxes = nms(bboxes, iou_threshold, method='nms')
 
-    image = draw_bbox(original_image, bboxes, CLASSES=CLASSES,
-                      rectangle_colors=rectangle_colors)
-    CreateXMLfile("XML_Detections", str(int(time.time())),
-                  original_image, bboxes, read_class_names(CLASSES))
-
+    image, infos = draw_bbox(original_image, bboxes, CLASSES=CLASSES, rectangle_colors=rectangle_colors)
+    
+    with open('../AI/images/score.txt', 'w') as f:
+        for info in infos:
+            f.write(str(info[0])+","+info[1]+"\n")
+    
     if output_path != '':
         cv2.imwrite(output_path, image)
-    if show:
-        # Show the image
-        cv2.imshow("predicted image", image)
-        # Load and hold the image
-        cv2.waitKey(0)
-        # To close the window after the required kill value was provided
-        cv2.destroyAllWindows()
 
     return image
 
@@ -420,7 +412,6 @@ def Show_Image_mp(Processed_frames, show, Final_frames):
 
 # detect from webcam
 
-
 def detect_video_realtime_mp(video_path, output_path, input_size=416, show=False, CLASSES=YOLO_COCO_CLASSES, score_threshold=0.3, iou_threshold=0.45, rectangle_colors='', realtime=False):
     if realtime:
         vid = cv2.VideoCapture(0)
@@ -480,85 +471,7 @@ def detect_video_realtime_mp(video_path, output_path, input_size=416, show=False
 
     cv2.destroyAllWindows()
 
-
-def detect_video(Yolo, video_path, output_path, input_size=416, show=False, CLASSES=YOLO_COCO_CLASSES, score_threshold=0.3, iou_threshold=0.45, rectangle_colors=''):
-    times, times_2 = [], []
-    vid = cv2.VideoCapture(video_path)
-
-    # by default VideoCapture returns float instead of int
-    width = int(vid.get(cv2.CAP_PROP_FRAME_WIDTH))
-    height = int(vid.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    fps = int(vid.get(cv2.CAP_PROP_FPS))
-    codec = cv2.VideoWriter_fourcc(*'XVID')
-    # output_path must be .mp4
-    out = cv2.VideoWriter(output_path, codec, fps, (width, height))
-
-    while True:
-        _, img = vid.read()
-
-        try:
-            original_image = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-            original_image = cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB)
-        except:
-            break
-
-        image_data = image_preprocess(np.copy(original_image), [
-                                      input_size, input_size])
-        image_data = image_data[np.newaxis, ...].astype(np.float32)
-
-        t1 = time.time()
-        if YOLO_FRAMEWORK == "tf":
-            pred_bbox = Yolo.predict(image_data)
-        elif YOLO_FRAMEWORK == "trt":
-            batched_input = tf.constant(image_data)
-            result = Yolo(batched_input)
-            pred_bbox = []
-            for key, value in result.items():
-                value = value.numpy()
-                pred_bbox.append(value)
-
-        t2 = time.time()
-
-        pred_bbox = [tf.reshape(x, (-1, tf.shape(x)[-1])) for x in pred_bbox]
-        pred_bbox = tf.concat(pred_bbox, axis=0)
-
-        bboxes = postprocess_boxes(
-            pred_bbox, original_image, input_size, score_threshold)
-        bboxes = nms(bboxes, iou_threshold, method='nms')
-
-        image = draw_bbox(original_image, bboxes, CLASSES=CLASSES,
-                          rectangle_colors=rectangle_colors)
-
-        t3 = time.time()
-        times.append(t2-t1)
-        times_2.append(t3-t1)
-
-        times = times[-20:]
-        times_2 = times_2[-20:]
-
-        ms = sum(times)/len(times)*1000
-        fps = 1000 / ms
-        fps2 = 1000 / (sum(times_2)/len(times_2)*1000)
-
-        image = cv2.putText(image, "Time: {:.1f}FPS".format(
-            fps), (0, 30), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), 2)
-        # CreateXMLfile("XML_Detections", str(int(time.time())), original_image, bboxes, read_class_names(CLASSES))
-
-        print("Time: {:.2f}ms, Detection FPS: {:.1f}, total FPS: {:.1f}".format(
-            ms, fps, fps2))
-        if output_path != '':
-            out.write(image)
-        if show:
-            cv2.imshow('output', image)
-            if cv2.waitKey(25) & 0xFF == ord("q"):
-                cv2.destroyAllWindows()
-                break
-
-    cv2.destroyAllWindows()
-
 # detect from webcam
-
-
 def detect_realtime(Yolo, output_path, input_size=416, show=False, CLASSES=YOLO_COCO_CLASSES, score_threshold=0.3, iou_threshold=0.45, rectangle_colors=''):
     times = []
     vid = cv2.VideoCapture(0)
@@ -613,7 +526,7 @@ def detect_realtime(Yolo, output_path, input_size=416, show=False, CLASSES=YOLO_
 
         frame = draw_bbox(original_frame, bboxes, CLASSES=CLASSES,
                           rectangle_colors=rectangle_colors)
-        # CreateXMLfile("XML_Detections", str(int(time.time())), original_frame, bboxes, read_class_names(CLASSES))
+        
         image = cv2.putText(frame, "Time: {:.1f}FPS".format(fps), (0, 30),
                             cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), 2)
 
