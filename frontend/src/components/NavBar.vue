@@ -12,7 +12,7 @@
         <v-avatar size="4rem" class="mr-2 d-md-flex d-none">
           <img src="@/assets/images/welcome-icon.png" alt="welcome-icon" />
         </v-avatar>
-        <p class="header mr-5 mb-0">Animals</p>
+        <h1 class="mr-5 mb-0" style="color: white">Animals</h1>
       </div>
     </v-app-bar>
   </div>
