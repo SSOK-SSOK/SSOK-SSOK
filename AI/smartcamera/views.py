@@ -13,8 +13,8 @@ from PIL import Image
 from io import BytesIO
 
 # For Object Detection (YOLO)
-from ../yolov3.configs import *
-from ../yolov3.utils import detect_image, detect_realtime, Load_Yolo_model, detect_video_realtime_mp
+from yolov3.configs import *
+from yolov3.utils import detect_image, detect_realtime, Load_Yolo_model, detect_video_realtime_mp
 import tensorflow as tf
 import numpy as np
 import cv2
@@ -37,13 +37,11 @@ def detection(request):
 
     # YOLO사용 준비
     os.environ['CUDA_VISIBLE_DEVICES'] = '0'
-    image_path = "../images/test_image.jpg"
-    detected_image_path = "../images/detected_image.jpg"
     video_path = ""
 
     # YOLO 모델로 detecting
     yolo = Load_Yolo_model()
-    detect_image(yolo, image_path, detected_image_path, input_size=YOLO_INPUT_SIZE, show=True, rectangle_colors=(255, 0, 0))
+    detect_image(yolo, input_size=YOLO_INPUT_SIZE, show=True, rectangle_colors=(255, 0, 0))
 
     return Response({
         'message' : '사진 잘 저장됨!!',

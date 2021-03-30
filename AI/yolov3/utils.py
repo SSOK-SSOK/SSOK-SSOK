@@ -301,8 +301,8 @@ def postprocess_boxes(pred_bbox, original_image, input_size, score_threshold):
     return np.concatenate([coors, scores[:, np.newaxis], classes[:, np.newaxis]], axis=-1)
 
 
-def detect_image(Yolo, image_path, output_path, input_size=416, show=False, CLASSES=YOLO_COCO_CLASSES, score_threshold=0.3, iou_threshold=0.45, rectangle_colors=''):
-    original_image = cv2.imread(image_path)
+def detect_image(Yolo, input_size=416, show=False, CLASSES=YOLO_COCO_CLASSES, score_threshold=0.3, iou_threshold=0.45, rectangle_colors=''):
+    original_image = cv2.imread("./images/test_image.jpg")
     original_image = cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB)
     original_image = cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB)
 
@@ -329,12 +329,11 @@ def detect_image(Yolo, image_path, output_path, input_size=416, show=False, CLAS
 
     image, infos = draw_bbox(original_image, bboxes, CLASSES=CLASSES, rectangle_colors=rectangle_colors)
     
-    with open('../images/score.txt', 'w') as f:
+    with open('./images/score.txt', 'w') as f:
         for info in infos:
             f.write(str(info[0])+","+info[1]+"\n")
-    
-    if output_path != '':
-        cv2.imwrite(output_path, image)
+            
+    cv2.imwrite("./images/detected_image.jpg", image)
 
     return image
 
