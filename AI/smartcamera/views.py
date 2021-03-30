@@ -38,12 +38,13 @@ def check_answer(answer):
         for line in lines:
             score, category = line.split(",")
             score = int(score)
+            category = category.strip("\n")
             items.append([score, category])
         f.close()
 
     # 정확도 순으로 내림차순 정렬합니다.
     items.sort(key=lambda x : -x[0])
-    
+    print(items)
     # 첫번째 값이 person이면 두번째 값과, 아니면 첫번째 값과 비교합니다.
     if items[0][1] == "person":
         score, category = items[1][0], items[1][1]
@@ -57,8 +58,6 @@ def check_answer(answer):
             return True, score
         else:
             return False, category
-
-
 
 
 @api_view(['POST'])
