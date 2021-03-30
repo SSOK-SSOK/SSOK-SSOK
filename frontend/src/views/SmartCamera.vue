@@ -1,5 +1,8 @@
 <template>
   <v-container fluid>
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
     <NavBar />
     <h1 class="font-color text-center mt-10">{{ question }}을 보여주세요😉</h1>
     <v-row class="mt-5">
@@ -31,21 +34,36 @@
         </div>
       </div>
 
-      <div class="col-md-6 col-xs-12">
-        <figure class="mx-auto">
-          <img
-            :src="detected_img"
-            width="73%"
-            class="d-flex mx-auto"
-            style="position: relative; z-index: 100"
-          />
-        </figure>
-        <span v-if="detected_img">
-          <h3 class="text-center mt-3" style="color: white">
-            잠시 기다려주세요! 정답여부를 알려줄게요
-          </h3>
-        </span>
-      </div>
+      <v-card
+        :loading="loading"
+        class="col-md-6 col-xs-12 mt-3 mx-auto"
+        color="rgba(255, 255, 255, 0)"
+        max-width="35vw"
+        max-height="60vh"
+        elevation="0"
+      >
+        <img
+          :src="detected_img"
+          width="73%"
+          class="d-flex mx-auto"
+          style="position: relative; z-index: 100"
+        />
+
+        <h1 class="text-center" style="color: white">정답 확인중입니다</h1>
+        <template slot="progress">
+          <v-progress-linear
+            color="#FFEE58"
+            height="10"
+            indeterminate
+          ></v-progress-linear>
+        </template>
+
+        <v-card-actions>
+          <v-btn color="deep-purple lighten-2" text @click="reserve">
+            로딩
+          </v-btn>
+        </v-card-actions>
+      </v-card>
     </v-row>
   </v-container>
 </template>
@@ -54,6 +72,7 @@
 import { WebCam } from "vue-web-cam";
 import NavBar from "@/components/NavBar.vue";
 import axios from "axios";
+import "@/style/star.sass";
 
 export default {
   name: "SmartCamera",
@@ -67,6 +86,7 @@ export default {
     deviceId: null,
     devices: [],
     question: "Cup",
+    loading: false,
   }),
   computed: {
     device: function () {
@@ -88,9 +108,13 @@ export default {
   },
   methods: {
     onCapture() {
+      this.loading = true;
       const img = this.$refs.webcam.capture();
       axios
-        .post("http://127.0.0.1:8000/ai/detection/", { image: img })
+        .post("http://127.0.0.1:8000/ai/detection/", {
+          image: img,
+          question: this.question,
+        })
         .then((res) => {
           console.log(res);
         })
@@ -122,8 +146,11 @@ export default {
       this.camera = deviceId;
       console.log("On Camera Change Event", deviceId);
     },
+    stop_loading() {
+      this.loading = false;
+    },
   },
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped></style>
