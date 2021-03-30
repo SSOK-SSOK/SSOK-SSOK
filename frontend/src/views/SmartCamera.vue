@@ -1,5 +1,8 @@
 <template>
   <v-container fluid>
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
     <NavBar />
     <h1 class="font-color text-center mt-10">{{ question }}을 보여주세요😉</h1>
     <v-row class="mt-5">
@@ -53,6 +56,7 @@
 <script>
 import { WebCam } from "vue-web-cam";
 import NavBar from "@/components/NavBar.vue";
+import "@/style/star.sass";
 import axios from "axios";
 
 export default {
@@ -126,4 +130,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped></style>
