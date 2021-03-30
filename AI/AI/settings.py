@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'smartcamera',
+    'cardgame',
     'corsheaders',
     'rest_framework',
     'django.contrib.admin',
