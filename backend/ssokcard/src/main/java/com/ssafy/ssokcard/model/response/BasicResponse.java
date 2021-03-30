@@ -1,4 +1,4 @@
-package com.ssafy.ssokcard.model;
+package com.ssafy.ssokcard.model.response;
 
 import io.swagger.annotations.ApiModelProperty;
 

@@ -1,5 +1,6 @@
-package com.ssafy.ssokcard.model;
+package com.ssafy.ssokcard.model.card;
 
+import com.ssafy.ssokcard.model.category.Category;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,22 +13,22 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
-public class Badge {
+public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String language;
+    private String path;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
-    public Badge() {
+    public Card() {
     }
 
-    public Badge(long id, String language, Category category) {
+    public Card(long id, String path, Category category) {
         this.id = id;
-        this.language = language;
+        this.path = path;
         this.category = category;
     }
 }
