@@ -82,6 +82,7 @@ def detection(request):
         'message' : '사진 테스트 완료!!',
         'is_correct' : is_correct,
         'info' : info,
+        'detected_image': "../../AI/images/detected_image.jpg"
     })
 
 # detect_realtime(yolo, '', input_size=YOLO_INPUT_SIZE, show=True, rectangle_colors=(255, 0, 0))
