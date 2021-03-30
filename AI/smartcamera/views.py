@@ -28,6 +28,38 @@ def convert_base64_to_img(data):
     im = Image.open(BytesIO(base64.b64decode(cut)))
     im.save('..\\AI\\images\\test_image.jpg')
 
+# 정답 여부를 체크합니다.
+def check_answer(answer):
+    items = []
+
+    # 파일을 불러옵니다.
+    with open('./images/score.txt', 'r') as f:
+        lines = f.readlines()
+        for line in lines:
+            score, category = line.split(",")
+            score = int(score)
+            items.append([score, category])
+        f.close()
+
+    # 정확도 순으로 내림차순 정렬합니다.
+    items.sort(key=lambda x : -x[0])
+    
+    # 첫번째 값이 person이면 두번째 값과, 아니면 첫번째 값과 비교합니다.
+    if items[0][1] == "person":
+        score, category = items[1][0], items[1][1]
+        if category == answer:
+            return True, score
+        else:
+            return False, category
+    else:
+        score, category = items[0][0], items[0][1]
+        if category == answer:
+            return True, score
+        else:
+            return False, category
+
+
+
 
 @api_view(['POST'])
 @method_decorator(csrf_exempt, name='dispatch')
@@ -43,14 +75,15 @@ def detection(request):
     yolo = Load_Yolo_model()
     detect_image(yolo, input_size=YOLO_INPUT_SIZE, show=True, rectangle_colors=(255, 0, 0))
 
+    # detecting된 결과와 정답 비교하기
+    answer = request.data['question']
+    is_correct, info = check_answer(answer)
+
     return Response({
-        'message' : '사진 잘 저장됨!!',
-        'items' : ['파이썬', '사진', '정확도', 'Azure'],
+        'message' : '사진 테스트 완료!!',
+        'is_correct' : is_correct,
+        'info' : info,
     })
-
-
-
-
 
 # detect_realtime(yolo, '', input_size=YOLO_INPUT_SIZE, show=True, rectangle_colors=(255, 0, 0))
 # detect_video_realtime_mp(video_path, "Output.mp4", input_size=YOLO_INPUT_SIZE, show=False, rectangle_colors=(255,0,0), realtime=False)
