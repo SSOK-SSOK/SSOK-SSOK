@@ -111,7 +111,7 @@ export default {
       this.loading = true;
       const img = this.$refs.webcam.capture();
       axios
-        .post("http://127.0.0.1:8000/ai/detection/", {
+        .post("http://127.0.0.1:8000/ai/smartcamera/detection/", {
           image: img,
           question: this.question,
         })
