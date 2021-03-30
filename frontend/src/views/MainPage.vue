@@ -1,45 +1,41 @@
 <template>
   <v-container fluid fill-height pa-0>
-    <v-col 
-      xl="6" lg="6" md="6" sm="12" xs="12" 
-      style="height: 100%; padding: 0;"
-    >
-      <div class="ma-4">
-        <p class="header">메인으로<br>돌아가기</p>
-      </div>
-      <div class="ma-4">
-        <v-btn icon class="ml-5 mt-5" @click="back"><v-icon style="color: white;" size="90">mdi-play-box</v-icon></v-btn>
-      </div>
+    <div class="left">
+      <div id="stars"></div>
+      <div id="stars2"></div>
+      <div id="stars3"></div>
       <div>
+        <p>메인으로 돌아가기</p>
+      </div>
+      <!-- <div class="ma-4">
+        <v-btn icon class="ml-5 mt-5" @click="back"><v-icon style="color: white;" size="90">mdi-play-box</v-icon></v-btn>
+      </div> -->
+      <div style="position: relative; z-index: 100; float: left;">
         <img src="@/assets/images/purple-note.png" alt="purple-note-mascot"></img>
       </div>
-    </v-col>
+    </div>
 
-    <v-col style="height: 100%; padding: 0;">
-      <v-row style="background-color: #f1ca21; height: 50.5%;">
-        <v-container class="pa-0">
-          <v-row class="ma-4">
-            <p class="header">카드<br>게임하기</p>
-            <v-spacer></v-spacer>
-            <v-btn icon class="mr-5 mt-5" @click.stop="drawer = !drawer"><v-icon style="color: white;" size="90">mdi-menu</v-icon></v-btn>
-          </v-row>
-          <v-row class="ma-4">
-            <v-btn icon class="ml-5 mt-5" @click="moveToCG"><v-icon style="color: white;" size="90">mdi-play-box</v-icon></v-btn>
-          </v-row>
-        </v-container>
-      </v-row>
-      <v-row style="background-color: #3ad0de; height: 51%;">
-        <v-container class="pa-0">
-          <v-row class="ma-4">
-            <p class="header">스마트 카메라<br>게임하기</p>
-          </v-row>
-          <v-row class="ma-4">
-            <v-btn icon class="ml-5 mt-5" @click="moveToSC"><v-icon style="color: white;" size="90">mdi-play-box</v-icon></v-btn>
-          </v-row>
-        </v-container>
-      </v-row>
-    </v-col>
-
+    <div class="right">
+      <div class="right-card">
+        <v-row>
+          <p>카드<br>게임하기</p>
+          <v-spacer></v-spacer>
+          <v-btn icon class="mr-5 mt-5" @click.stop="drawer = !drawer"><v-icon style="color: white;" size="90">mdi-menu</v-icon></v-btn>
+        </v-row>
+        <v-row>
+          <v-btn icon class="ml-5 mt-5" @click="moveToCG"><v-icon style="color: white;" size="90">mdi-play-box</v-icon></v-btn>
+        </v-row>
+      </div>
+      <div class="right-camera">
+        <v-row>
+          <p class="header">스마트 카메라<br>게임하기</p>
+        </v-row>
+        <v-row>
+          <v-btn icon class="ml-5 mt-5" @click="moveToSC"><v-icon style="color: white;" size="90">mdi-play-box</v-icon></v-btn>
+        </v-row>
+      </div>
+    </div>
+ 
     <v-navigation-drawer
       v-model="drawer"
       absolute
@@ -74,7 +70,8 @@
 </template>
 
 <script>
-
+import "@/style/star.sass";
+import "@/style/game-button.scss";
 export default {
   name: "MainPage",
   data: () => ({
@@ -103,48 +100,48 @@ export default {
 
 <style lang="scss" scoped>
 .container{
-  .col{
+  *{
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  .left{
+    width: 50%;
+    height: 100%;
+    #stars{
+    }
+    #stars2{
+    }
+    #stars3{
+    }
     div{
+      margin-top: 0%;
       p{
-
-      }
-    }
-    div{
-      .v-btn{
-        .v-btn__content{
-          .v-icon{
-
-          }
-        }
-      }
-    }
-    div{
-      .v-btn{
-        .v-btn__content{
-          .v-icon{
-
-          }
-        }
+        text-align: center;
       }
     }
     div{
       img{
-
-        width: 85%;
+        // margin: 50%;
+        margin-left: 70%;
+        margin-top: 30%;
+        width: 70%;
+        transform: rotate(25deg);
+        transform-origin: right top;
       }
     }
   }
-  .col{
-    .row{
-      .container{
-        .row{
-          .header{
-
-          }
-        }
-      }
+  .right{
+    width: 50%;
+    height: 100%;
+    .right-card{
+      height: 50%;
+      width: 100%;
     }
-
+    .right-camera{
+      height: 50%;
+      width: 100%;
+    }
   }
 }
 </style>
