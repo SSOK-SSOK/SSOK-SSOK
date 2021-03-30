@@ -36,6 +36,17 @@ export default {
             reader.onloadend = function () {
               var base64String = reader.result;
               console.log(base64String)
+              var slicebase64 = base64String.slice(35,)
+              const data = {
+                'access_key': '0d52fa25-2ce8-4c0f-b453-615126f29c56',
+                'argument': {
+                  'language_code': 'english',
+                  'audio': slicebase64
+                }
+              }
+              axios.post('http://aiopen.etri.re.kr:8000/WiseASR/Recognition', data)
+                .then(res => console.log(res))
+                .catch(err => console.log(err))
             }
           })
           this.mediaRecorder.start() //녹음 시작
