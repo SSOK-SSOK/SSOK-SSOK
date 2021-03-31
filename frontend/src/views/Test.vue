@@ -1,7 +1,7 @@
 <template>
   <div>
     <audio-recorder
-      upload-url="YOUR_API_URL"
+      upload-url="@/assets"
       :attempts="3"
       :time="2"
     />

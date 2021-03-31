@@ -31,7 +31,7 @@ export default {
             
             //Blob 객체 저장
             let blob = event.data
-
+            
             //base64로 변환할 FileReader
             var reader = new FileReader();
             // blob -> base64

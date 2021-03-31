@@ -75,14 +75,8 @@ export default {
       cards: [
         [
           { name: "Animals", sub: "동물"},
-          { name: "Clothes", sub: "옷"},
           { name: "Fruits", sub: "과일"}
         ],
-        [
-          { name: "Animals", sub: "동물"},
-          { name: "Clothes", sub: "옷"},
-          { name: "Fruits", sub: "과일"}
-        ]
       ]
     }
   },
