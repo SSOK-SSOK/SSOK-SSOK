@@ -1,0 +1,5 @@
+99,person
+38,person
+31,book
+95,cup
+57,cup
