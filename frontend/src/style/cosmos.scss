@@ -1,0 +1,391 @@
+:root {
+  /* Fixed colors that don't get transition/animation */
+  --dark-cosmos-color: hsl(290, 34%, 10%);
+  --star-color: hsl(272, 57%, 95%);
+  --star-color-transparency: hsla(272, 57%, 95%, 0.5);
+  --t-sun-color: hsl(47, 100%, 88%);
+  --t-moon-color: hsl(274, 93%, 94%);
+  --t-moon-pattern-color: hsl(274, 58%, 89%);
+
+  --sunsys-color: hsl(41, 99%, 75%);
+  --sunsys-patterns-color: hsl(33, 95%, 73%);
+
+  --earth-water-color: hsl(202, 62%, 74%);
+  --earth-continent-color: hsl(192, 34%, 64%);
+
+  /* colorz  that will change on transition */
+  --circle-bg-color: hsl(28, 97%, 70%);
+  --cactus-body-color: hsl(337, 43%, 28%);
+  --cactus-flower-color: hsl(348, 80%, 62%);
+  --mountain-color: hsl(346, 43%, 50%);
+  --sand-01-color: hsl(339, 55%, 30%);
+  --sand-02-color: hsl(335, 62%, 37%);
+  --sand-03-color: hsl(338, 53%, 38%);
+  --sand-04-color: hsl(336, 46%, 50%);
+
+  --poster: hsl(25, 43%, 79%);
+  --poster-border: 60px;
+
+  /* animation and transition timings */
+  --t-slow: 2500ms;
+  --t-med: 1500ms;
+  --t-fast: 1000ms;
+  --t-delay-motionpath: 400ms;
+  --t-delay-colorfades: 200ms;
+
+  --a-scale-from: scale(1);
+  --a-scale-to: scale(1.05);
+}
+
+#cosmos {
+  position: relative;
+  left: 45%;
+}
+
+/* CSS solar system animation */
+.sun-system-bg,
+.sun-system-shadow-01,
+.sun-system-shadow-02 {
+  fill: var(--sunsys-color);
+}
+
+.sun-system-shadow-01,
+.sun-system-shadow-02 {
+  opacity: 0.1;
+}
+
+.sun-system-patterns {
+  fill: var(--sunsys-patterns-color);
+}
+
+.earth-continent {
+  fill: var(--earth-continent-color);
+}
+
+.earth-water,
+.earth-shadow-01,
+.earth-shadow-02 {
+  fill: var(--earth-water-color);
+}
+.earth-shadow-01,
+.earth-shadow-02 {
+  opacity: 0.15;
+}
+
+.astral-paths {
+  fill: none;
+  stroke: var(--star-color);
+  stroke-miterlimit: 10;
+  stroke-width: 2px;
+  stroke-dasharray: 10 10;
+  opacity: 0.5;
+}
+
+/* Solar System Animations */
+
+/* moon around the earth */
+.system-moonlight {
+  offset-path: path(
+    "M536.21,257.25a163.79,163.79 0 1,0 327.58,0a163.79,163.79 0 1,0 -327.58,0"
+  ); /* convert circle to path http://complexdan.com/svg-circleellipse-to-path-converter/ */
+  offset-distance: 100%;
+  transform-origin: 700px 92px;
+}
+
+/* Earth around the sun */
+.system-earth-moon-container {
+  transform-origin: 700px 700px;
+}
+
+/* animating the sun in the system */
+.system-sun {
+  .sun-system-shadow-01 {
+    transform-origin: 700px 700px;
+  }
+  .sun-system-shadow-02 {
+    transform-origin: 700px 700px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Moon around the earth */
+  .system-moonlight {
+    animation: AstralRotation 21s infinite linear;
+  }
+
+  /* moon path rotation */
+  .moon-path {
+    transform-origin: 700px 257px;
+    animation: 21s linear infinite Rotation;
+  }
+
+  /* planet rotation */
+  .planet {
+    transform-origin: 700px 255px;
+    animation: 3s linear infinite Rotation;
+  }
+
+  /* earth rings pulsing */
+  .earth-shadow-01 {
+    transform-origin: 700px 255px;
+    animation: 2s linear infinite Pulsing;
+  }
+  .earth-shadow-02 {
+    --a-scale-from: scale(1.05);
+    --a-scale-to: scale(1);
+    transform-origin: 700px 255px;
+    animation: 2s linear infinite Pulsing;
+  }
+
+  /* Earth around the sun */
+  .system-earth-moon-container {
+    animation: 72s linear infinite Rotation;
+  }
+  /* earth path rotation */
+  .earth-path {
+    transform-origin: 700px 700px;
+    animation: 72s linear infinite Rotation;
+  }
+
+  /* moon rings animation */
+  .system-earth-moon {
+    .moon-shadow-02 {
+      --a-scale-from: scale(1.1);
+      --a-scale-to: scale(1);
+      transform-origin: 700px 92px;
+      animation: 2s linear infinite Pulsing;
+    }
+
+    .moon-shadow-01 {
+      --a-scale-from: scale(1.1);
+      --a-scale-to: scale(1);
+      transform-origin: 700px 92px;
+      animation: 2s linear infinite Pulsing;
+    }
+  }
+
+  /* animating the sun in the system */
+  .system-sun {
+    .shadow-01-container {
+      transform-origin: 700px 700px;
+      animation: 60s linear infinite Rotation;
+    }
+    .shadow-02-container {
+      transform-origin: 700px 700px;
+      animation: 80s linear infinite Rotation;
+    }
+
+    .sun-system-shadow-01 {
+      animation: 4s linear infinite OpacityRipple;
+    }
+    .sun-system-shadow-02 {
+      --a-scale-from: scale(1.1);
+      --a-scale-to: scale(1.01);
+      animation: 4s linear infinite OpacityRipple;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .system-moonlight {
+    animation: AstralRotation 280s infinite linear;
+  }
+
+  /* moon path rotation */
+  .moon-path {
+    transform-origin: 700px 257px;
+    animation: 280s linear infinite Rotation;
+  }
+
+  /* Earth around the sun */
+  .system-earth-moon-container {
+    animation: 600s linear infinite Rotation;
+  }
+
+  /* animating the sun in the system */
+  .system-sun {
+    .sun-system-shadow-01 {
+      --a-scale-from: scale(1);
+      --a-scale-to: scale(1);
+      animation: 10s linear infinite OpacityRipple 2s;
+    }
+    .sun-system-shadow-02 {
+      --a-scale-from: scale(1);
+      --a-scale-to: scale(1);
+      animation: 10s linear infinite OpacityRipple;
+    }
+  }
+}
+
+/* all the keyframes */
+
+@keyframes Pulsing {
+  0% {
+    transform: var(--a-scale-from);
+  }
+  50% {
+    transform: var(--a-scale-to);
+  }
+  100% {
+    transform: var(--a-scale-from);
+  }
+}
+
+@keyframes OpacityRipple {
+  0% {
+    transform: var(--a-scale-from);
+    opacity: 0.1;
+  }
+  50% {
+    transform: var(--a-scale-to);
+    opacity: 0.18;
+  }
+  100% {
+    transform: var(--a-scale-from);
+    opacity: 0.1;
+  }
+}
+
+@keyframes Rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes AstralRotation {
+  to {
+    offset-distance: 0%;
+  }
+}
+
+/* This is the code for the CSS transition demo */
+
+.svg-mask-transition {
+  clip-path: url(#clip-path);
+}
+
+/* Colors that do not transition */
+.sun-center,
+.sun-shadow-01,
+.sun-shadow-02,
+.cloud {
+  fill: var(--t-sun-color);
+}
+
+.sun-shadow-01 {
+  opacity: 0.3;
+}
+
+.sun-shadow-02 {
+  opacity: 0.2;
+}
+
+/* for both moons */
+
+.moon-center,
+.moon-shadow-01,
+.moon-shadow-02 {
+  fill: var(--t-moon-color);
+}
+
+.moon-shadow-01 {
+  opacity: 0.1;
+}
+
+.moon-shadow-02 {
+  opacity: 0.1;
+}
+
+.moon-pattern {
+  fill: var(--t-moon-pattern-color);
+}
+
+/* Let"s have some comets raining from the sky */
+
+.svg-defs {
+  display: none;
+}
+
+.comet-rain {
+  z-index: -1;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  // display:none;
+}
+
+.comet-instance {
+  height: auto;
+  position: absolute;
+  z-index: -1;
+  right: -10vw;
+  top: -10vh;
+  fill: url(#gradient);
+}
+
+.comet-01,
+.comet-03,
+.comet-04,
+.comet-06 {
+  width: 5vmin;
+  transform: scale(0);
+}
+.comet-02,
+.comet-05 {
+  width: 6vmin;
+  transform: scale(0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .comet-instance {
+    animation: MakeItRain 10s infinite;
+  }
+
+  .comet-01 {
+    right: 30vw;
+    animation-delay: 0ms;
+  }
+
+  .comet-02 {
+    right: 57vw;
+    animation-delay: 9s;
+  }
+
+  .comet-03 {
+    right: 83vw;
+    animation-delay: 6s;
+  }
+
+  .comet-04 {
+    top: 13vh;
+    animation-delay: 22s;
+  }
+
+  .comet-05 {
+    top: 34vh;
+    animation-delay: 5s;
+  }
+
+  .comet-06 {
+    top: 67vh;
+    animation-delay: 14s;
+  }
+
+  @keyframes MakeItRain {
+    0% {
+      opacity: 0;
+      transform: scale(0) translate(0, 0);
+    }
+    70% {
+      opacity: 0.4;
+      transform: scale(0.4) translate(0, 0);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translate(-101vw, 101vh);
+    }
+  }
+}
