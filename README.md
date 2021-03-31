@@ -47,17 +47,6 @@
 
 <br/>
 
-### 🎞 시퀀스 다이어그램
-
-![sequence diagram1](images/SequenceDiagram-Oauth.jpg)
-<br/>
-
-![sequence diagram2](images/SequenceDiagram-ImageCardGame.jpg)
-
-- 시퀀스 다이어그램 수정 예정
-
-<br/>
-
 ### 💙 캐릭터
 
 ![mascot1](images/mascot.jpg)
@@ -75,4 +64,14 @@
 | Frontend                | 👧 김효진       |
 | Frontend & AI           | 👧 이승아       |
 | Backend                 | 👧 이유진       |
+
+
+
+### 🎀 0325 Design Update
+
+![image-20210325213404350](images/image-20210325213404350.png)
+
+![image-20210325213519802](images/image-20210325213519802.png)
+
+![image-20210325213737430](images/image-20210325213737430.png)
 
