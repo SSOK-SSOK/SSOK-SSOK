@@ -4,7 +4,24 @@
     <div id="stars2"></div>
     <div id="stars3"></div>
     <NavBar />
-    <h1 class="font-color text-center mt-10">{{ question }}을 보여주세요😉</h1>
+    <div>
+      <span v-if="is_start">
+        <h1 class="font-color text-center mt-5">
+          {{ question }}을 보여주세요😉
+        </h1>
+      </span>
+      <span v-else>
+        <v-btn
+          rounded
+          large
+          color="warning"
+          class="d-flex mx-auto"
+          @click="initialize"
+        >
+          문제 보기
+        </v-btn>
+      </span>
+    </div>
     <v-row class="mt-5">
       <div class="col-md-6 col-xs-12">
         <vue-web-cam
@@ -40,24 +57,26 @@
         max-height="60vh"
         elevation="0"
       >
-        <img
-          :src="detected_img"
-          width="100%"
-          height="90%"
-          class="d-flex mx-auto"
-          style="position: relative; z-index: 100"
-        />
-        <span v-if="is_correct">
-          <h1 class="text-center mt-3" style="color: white">정답입니다!</h1>
-          <h3 class="text-center mt-3" style="color: white">
-            정확도 : {{ this.score }}%
-          </h3>
-        </span>
-        <span v-else>
-          <h1 class="text-center mt-3" style="color: white">틀렸어요😥</h1>
-          <h3 class="text-center mt-3" style="color: white">
-            가져온 물건 : {{ this.category }}
-          </h3>
+        <span v-if="is_done">
+          <img
+            :src="detected_img"
+            width="100%"
+            height="90%"
+            class="d-flex mx-auto"
+            style="position: relative; z-index: 100"
+          />
+          <span v-if="is_correct">
+            <h1 class="text-center mt-3" style="color: white">정답입니다!</h1>
+            <h3 class="text-center mt-3" style="color: white">
+              정확도 : {{ this.score }}%
+            </h3>
+          </span>
+          <span v-else>
+            <h1 class="text-center mt-3" style="color: white">틀렸어요😥</h1>
+            <h3 class="text-center mt-3" style="color: white">
+              가져온 물건 : {{ this.category }}
+            </h3>
+          </span>
         </span>
 
         <!--로딩중-->
@@ -78,9 +97,12 @@
 
 <script>
 import { WebCam } from "vue-web-cam";
+import { mapGetters } from "vuex";
 import NavBar from "@/components/NavBar.vue";
 import axios from "axios";
 import "@/style/star.sass";
+
+const SmartCameraStore = "SmartCameraStore";
 
 export default {
   name: "SmartCamera",
@@ -96,15 +118,24 @@ export default {
     question: "cup",
     img: null,
     detected_img: require("../../../AI/images/detected_image.jpg"),
-    score: 0,
-    category: "",
-    is_correct: false,
-    is_done: false,
+    is_start: false,
   }),
   computed: {
     device: function () {
       return this.devices.find((n) => n.deviceId === this.deviceId);
     },
+    ...mapGetters(SmartCameraStore, {
+      score: "getScore",
+    }),
+    ...mapGetters(SmartCameraStore, {
+      category: "getCategory",
+    }),
+    ...mapGetters(SmartCameraStore, {
+      is_correct: "getIsCorrect",
+    }),
+    ...mapGetters(SmartCameraStore, {
+      is_done: "getIsDone",
+    }),
   },
   watch: {
     camera: function (id) {
@@ -118,6 +149,7 @@ export default {
         this.deviceId = first.deviceId;
       }
     },
+    is_start: function () {},
   },
   methods: {
     onCapture() {
@@ -160,9 +192,17 @@ export default {
       this.camera = deviceId;
       console.log("On Camera Change Event", deviceId);
     },
+    initialize() {
+      this.$store.dispatch("SmartCameraStore/initializeInfo");
+      this.is_start = true;
+    },
   },
   mounted() {
     console.log("mount?");
+    console.log(this.score);
+    console.log(this.category);
+    console.log(this.is_correct);
+    console.log(this.is_done);
   },
 };
 </script>

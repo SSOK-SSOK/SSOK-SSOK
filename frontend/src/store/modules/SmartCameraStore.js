@@ -6,6 +6,20 @@ const SmartCameraStore = {
     is_correct: false,
     is_done: false,
   },
+  getters: {
+    getScore(state) {
+      return state.score
+    },
+    getCategory(state) {
+      return state.category
+    },
+    getIsCorrect(state) {
+      return state.is_correct
+    },
+    getIsDone(state) {
+      return state.is_done
+    },
+  },
   mutations: {
     SET_INFO: function (state, data) {
       var info = data.info;
@@ -19,16 +33,20 @@ const SmartCameraStore = {
       state.is_done = true;
       console.log(state.is_done)
     },
-  },
-  getters: {
-    getCheckLogin(state) {
-      return state.authenticated;
-    },
+    INITIALIZE_INFO: function (state) {
+      state.score= 0;
+      state.category= "";
+      state.is_correct= false;
+      state.is_done= false;
+    }
   },
   actions: {
     setInfo({ commit }, data) {
       commit("SET_INFO", data)
     },
+    initializeInfo({commit}){
+      commit("INITIALIZE_INFO")
+    }
   },
 };
 
