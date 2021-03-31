@@ -1,9 +1,2 @@
-97,person
-75,book
-65,book
-61,book
-52,book
-43,book
-39,book
-38,book
-35,book
+62,person
+96,cup
