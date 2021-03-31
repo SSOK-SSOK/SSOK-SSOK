@@ -156,7 +156,7 @@ export default {
       this.loading = true;
       var img = this.$refs.webcam.capture();
       axios
-        .post("https://j4a201.p.ssafy.io/ai/smartcamera/detection/", {
+        .post("http://127.0.0.1:8001/ai/smartcamera/detection/", {
           image: img,
           question: this.question,
         })
@@ -196,13 +196,6 @@ export default {
       this.$store.dispatch("SmartCameraStore/initializeInfo");
       this.is_start = true;
     },
-  },
-  mounted() {
-    console.log("mount?");
-    console.log(this.score);
-    console.log(this.category);
-    console.log(this.is_correct);
-    console.log(this.is_done);
   },
 };
 </script>

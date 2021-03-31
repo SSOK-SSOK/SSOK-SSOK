@@ -1,2 +1,2 @@
-62,person
-96,cup
+100,person
+38,car
