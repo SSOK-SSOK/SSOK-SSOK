@@ -1,41 +1,38 @@
 <template>
-  <v-container fluid fill-height pa-0>
-    <div class="left">
+  <v-container fluid fill-height>
+    <div class="background">
       <div id="stars"></div>
       <div id="stars2"></div>
       <div id="stars3"></div>
-      <div>
-        <p>메인으로 돌아가기</p>
-      </div>
-      <!-- <div class="ma-4">
-        <v-btn icon class="ml-5 mt-5" @click="back"><v-icon style="color: white;" size="90">mdi-play-box</v-icon></v-btn>
-      </div> -->
-      <div style="position: relative; z-index: 100; float: left;">
-        <img src="@/assets/images/purple-note.png" alt="purple-note-mascot"></img>
+    </div>
+    <div class="contents">
+      <nav>
+        <div @click="back">
+          <div class="glow" @click="moveToMainPage"></div>
+        </div>
+        <div @click.stop="drawer = !drawer">
+          <v-icon style="color: white;">mdi-menu</v-icon>
+        </div>
+      </nav>
+      <div class="planets">
+        <div class="venus">
+          <div>
+            <div><img class="spin" src="@/assets/images/venus.png" alt="venus"/></div>
+          </div>
+          <div>
+            <div><img @click="moveToCG" class="mascot-card" src="@/assets/images/card.png" alt="macot-card"/><p>카드 게임</p></div>          
+          </div>
+        </div>
+        <div class="greenus">
+           <div>
+            <div><img class="spin" src="@/assets/images/greenus.png" alt="greenus"/></div>
+          </div>
+          <div>
+            <div><img @click="moveToSC" class="mascot-camera" src="@/assets/images/camera.png" alt="macot-camera"/><p>카메라 게임</p></div>          
+          </div>     
+        </div>
       </div>
     </div>
-
-    <div class="right">
-      <div class="right-card">
-        <v-row>
-          <p>카드<br>게임하기</p>
-          <v-spacer></v-spacer>
-          <v-btn icon class="mr-5 mt-5" @click.stop="drawer = !drawer"><v-icon style="color: white;" size="90">mdi-menu</v-icon></v-btn>
-        </v-row>
-        <v-row>
-          <v-btn icon class="ml-5 mt-5" @click="moveToCG"><v-icon style="color: white;" size="90">mdi-play-box</v-icon></v-btn>
-        </v-row>
-      </div>
-      <div class="right-camera">
-        <v-row>
-          <p class="header">스마트 카메라<br>게임하기</p>
-        </v-row>
-        <v-row>
-          <v-btn icon class="ml-5 mt-5" @click="moveToSC"><v-icon style="color: white;" size="90">mdi-play-box</v-icon></v-btn>
-        </v-row>
-      </div>
-    </div>
- 
     <v-navigation-drawer
       v-model="drawer"
       absolute
@@ -67,8 +64,6 @@
 </template>
 
 <script>
-import "@/style/star.sass";
-import "@/style/game-button.scss";
 export default {
   name: "MainPage",
   data: () => ({
@@ -96,49 +91,123 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/style/star.sass";
+@import "@/style/light-button.scss";
 .container{
-  *{
-    margin: 0;
-    padding: 0;
-    border: 0;
-  }
-  .left{
-    width: 50%;
+  padding: 1%;
+  .background{
+    position: relative;
+    z-index: -1;
+    width: 100%;
     height: 100%;
-    #stars{
-    }
-    #stars2{
-    }
-    #stars3{
-    }
-    div{
-      margin-top: 0%;
-      p{
-        text-align: center;
+  }
+  .contents{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    padding: 1%;
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2.5% 1.5%;
+      margin-bottom: 5%;
+      height:5%;
+      width: 100%;
+      color: white;
+      background: none;
+      font-size: 1rem;
+      div{
+        //light-button
+      }
+      div{
+        color: white;
       }
     }
-    div{
-      img{
-        // margin: 50%;
-        margin-left: 70%;
-        margin-top: 30%;
-        width: 70%;
-        transform: rotate(25deg);
-        transform-origin: right top;
+    .planets{
+      display: flex;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+      margin-top: 8%;
+      .venus{
+        cursor: pointer;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        div{
+          position: absolute;
+          div{
+            position: relative;
+            .spin{
+              width: 90%;
+              height: 90%;
+              animation: rotate 12s linear infinite;
+              transform-origin: 50% 50%;    
+            }
+          }
+        }
+        div{
+          position: absolute;
+          div{
+            position: relative;
+            text-align: center;
+            .mascot-card{
+              width: 50%;
+              height: 50%;
+            }
+            p{
+              color: black;
+              font-size: 5vh;
+              font-weight: bold;
+              margin-right: 5%;
+            }
+          }
+        }
+      }
+      .greenus{
+        cursor: pointer;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        div{
+          position: absolute;
+          div{
+            position: relative;
+            .spin{
+              width: 90%;
+              height: 90%;
+              animation: rotate 10s linear infinite;
+              transform-origin: 50% 50%;    
+            }
+          }
+        }
+        div{
+          position: absolute;
+          div{
+            position: relative;
+            text-align: center;
+            .mascot-camera{
+              width: 50%;
+              height: 50%; 
+            }
+            p{
+              color: black;
+              font-size: 5vh;
+              font-weight: bold;
+              margin-left: 6%;
+            }
+          }
+        }
       }
     }
   }
-  .right{
-    width: 50%;
-    height: 100%;
-    .right-card{
-      height: 50%;
-      width: 100%;
-    }
-    .right-camera{
-      height: 50%;
-      width: 100%;
-    }
+}
+
+@keyframes rotate{
+	100% {
+    transform: rotate(360deg);
   }
 }
 </style>
