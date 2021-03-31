@@ -16,7 +16,6 @@
           @stopped="onStopped"
           @error="onError"
           @cameras="onCameras"
-          @camera-change="onCameraChange"
           style="position: relative; z-index: 100"
         />
         <div class="mt-5 d-flex justify-between">
@@ -44,10 +43,24 @@
         <img
           :src="detected_img"
           width="100%"
+          height="90%"
           class="d-flex mx-auto"
           style="position: relative; z-index: 100"
         />
+        <span v-if="is_correct">
+          <h1 class="text-center mt-3" style="color: white">정답입니다!</h1>
+          <h3 class="text-center mt-3" style="color: white">
+            정확도 : {{ this.score }}%
+          </h3>
+        </span>
+        <span v-else>
+          <h1 class="text-center mt-3" style="color: white">틀렸어요😥</h1>
+          <h3 class="text-center mt-3" style="color: white">
+            가져온 물건 : {{ this.category }}
+          </h3>
+        </span>
 
+        <!--로딩중-->
         <h1 v-if="loading" class="text-center" style="color: white">
           정답 확인중입니다
         </h1>
@@ -81,10 +94,11 @@ export default {
     devices: [],
     loading: false,
     question: "cup",
+    img: null,
     detected_img: require("../../../AI/images/detected_image.jpg"),
     score: 0,
-    category: null,
-    is_correct: null,
+    category: "",
+    is_correct: false,
     is_done: false,
   }),
   computed: {
@@ -108,25 +122,15 @@ export default {
   methods: {
     onCapture() {
       this.loading = true;
-      const img = this.$refs.webcam.capture();
+      var img = this.$refs.webcam.capture();
       axios
         .post("http://127.0.0.1:8000/ai/smartcamera/detection/", {
           image: img,
           question: this.question,
         })
         .then((res) => {
-          var info = res.data.info;
-          this.is_correct = res.data.is_correct;
-
-          if (typeof info === "number") {
-            this.score = info;
-          } else {
-            this.category = info;
-          }
-          console.log(this.is_correct);
-          console.log(this.score);
-          console.log(this.category);
-          this.is_done = true;
+          var data = res.data;
+          this.$store.dispatch("SmartCameraStore/setInfo", data);
         })
         .catch((err) => {
           console.log(err);
@@ -156,9 +160,9 @@ export default {
       this.camera = deviceId;
       console.log("On Camera Change Event", deviceId);
     },
-    stop_loading() {
-      this.loading = false;
-    },
+  },
+  mounted() {
+    console.log("mount?");
   },
 };
 </script>
