@@ -1,15 +1,21 @@
 package com.ssafy.ssokcard.dto;
 
 
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 public class GameResultDto {
 
+    @ApiModelProperty(example = "(int)")
     private long userId;
+    @ApiModelProperty(example = "0 ~ 15 (int)")
     private int score;
+    @ApiModelProperty(example = "1 ~ 2 (int)")
     private long categoryId;
+    @ApiModelProperty(example = "korea, us, china, japan, france, spain, vietnam (String)")
     private String language;
 
     public GameResultDto() {

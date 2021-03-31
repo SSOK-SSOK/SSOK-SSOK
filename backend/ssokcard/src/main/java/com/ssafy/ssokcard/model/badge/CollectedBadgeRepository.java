@@ -3,6 +3,9 @@ package com.ssafy.ssokcard.model.badge;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface CollectedBadgeRepository extends JpaRepository<CollectedBadge, Long> {
+    List<CollectedBadge> findByUserId(long id);
 }
