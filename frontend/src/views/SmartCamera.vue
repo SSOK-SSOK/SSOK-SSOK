@@ -161,8 +161,10 @@ export default {
           question: this.question,
         })
         .then((res) => {
+          console.log(res.data);
           var data = res.data;
           this.$store.dispatch("SmartCameraStore/setInfo", data);
+          this.loading = false;
         })
         .catch((err) => {
           console.log(err);
@@ -196,13 +198,13 @@ export default {
       this.$store.dispatch("SmartCameraStore/initializeInfo");
       this.is_start = true;
     },
-  },
-  mounted() {
-    console.log("mount?");
-    console.log(this.score);
-    console.log(this.category);
-    console.log(this.is_correct);
-    console.log(this.is_done);
+    mounted() {
+      console.log("다시 컴백!");
+      console.log(this.score);
+      console.log(this.category);
+      console.log(this.is_correct);
+      console.log(this.is_done);
+    },
   },
 };
 </script>

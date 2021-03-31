@@ -26,14 +26,14 @@ def convert_base64_to_img(data):
     prefix = 'data:image/jpeg;base64,'
     cut = data[len(prefix):]
     im = Image.open(BytesIO(base64.b64decode(cut)))
-    im.save('..\\AI\\images\\test_image.jpg')
+    im.save('test_image.jpg')
 
 # 정답 여부를 체크합니다.
 def check_answer(answer):
     items = []
 
     # 파일을 불러옵니다.
-    with open('./images/score.txt', 'r') as f:
+    with open('score.txt', 'r') as f:
         lines = f.readlines()
         for line in lines:
             score, category = line.split(",")
