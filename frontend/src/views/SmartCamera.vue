@@ -156,7 +156,7 @@ export default {
       this.loading = true;
       var img = this.$refs.webcam.capture();
       axios
-        .post("http://j4a201.p.ssafy.io:8008/ai/smartcamera/detection/", {
+        .post("http://j4a201.p.ssafy.io/ai/smartcamera/detection/", {
           image: img,
           question: this.question,
         })
