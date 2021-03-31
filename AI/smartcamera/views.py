@@ -33,7 +33,7 @@ def check_answer(answer):
     items = []
 
     # 파일을 불러옵니다.
-    with open('./images/score.txt', 'r') as f:
+    with open('score.txt', 'r') as f:
         lines = f.readlines()
         for line in lines:
             score, category = line.split(",")

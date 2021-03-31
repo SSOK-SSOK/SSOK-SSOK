@@ -329,7 +329,7 @@ def detect_image(Yolo, input_size=416, show=False, CLASSES=YOLO_COCO_CLASSES, sc
 
     image, infos = draw_bbox(original_image, bboxes, CLASSES=CLASSES, rectangle_colors=rectangle_colors)
     
-    with open('./images/score.txt', 'w') as f:
+    with open('score.txt', 'w') as f:
         for info in infos:
             f.write(str(info[0])+","+info[1]+"\n")
             
