@@ -26,14 +26,17 @@ public class CardGameLog {
 
     private Long userId;
 
+    private String language;
+
     public CardGameLog() {
 
     }
 
-    public CardGameLog(long id, LocalDateTime date, int score, Long userId) {
+    public CardGameLog(long id, LocalDateTime date, int score, Long userId, String language) {
         this.id = id;
         this.date = date;
         this.score = score;
         this.userId = userId;
+        this.language = language;
     }
 }
