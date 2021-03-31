@@ -19,16 +19,11 @@ public class Badge {
     private long id;
     private String language;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
-
     public Badge() {
     }
 
-    public Badge(long id, String language, Category category) {
+    public Badge(long id, String language) {
         this.id = id;
         this.language = language;
-        this.category = category;
     }
 }

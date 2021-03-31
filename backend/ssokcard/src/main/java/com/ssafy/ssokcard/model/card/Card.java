@@ -18,6 +18,7 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String path;
+    private String word;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -26,9 +27,10 @@ public class Card {
     public Card() {
     }
 
-    public Card(long id, String path, Category category) {
+    public Card(long id, String path, String word, Category category) {
         this.id = id;
         this.path = path;
+        this.word = word;
         this.category = category;
     }
 }
