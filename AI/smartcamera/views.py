@@ -44,20 +44,30 @@ def check_answer(answer):
 
     # 정확도 순으로 내림차순 정렬합니다.
     items.sort(key=lambda x : -x[0])
-    print(items)
-    # 첫번째 값이 person이면 두번째 값과, 아니면 첫번째 값과 비교합니다.
-    if items[0][1] == "person":
-        score, category = items[1][0], items[1][1]
-        if category == answer:
-            return True, score
-        else:
-            return False, category
-    else:
+    
+    if len(items) == 1:
         score, category = items[0][0], items[0][1]
-        if category == answer:
-            return True, score
+        if category == "person":
+            return False, "물체가 없어요"
         else:
-            return False, category
+            if category == answer:
+                return True, score
+            else:
+                return False, category
+    else:
+        # 첫번째 값이 person이면 두번째 값과, 아니면 첫번째 값과 비교합니다.
+        if items[0][1] == "person":
+            score, category = items[1][0], items[1][1]
+            if category == answer:
+                return True, score
+            else:
+                return False, category
+        else:
+            score, category = items[0][0], items[0][1]
+            if category == answer:
+                return True, score
+            else:
+                return False, category
 
 
 @api_view(['POST'])
@@ -82,7 +92,6 @@ def detection(request):
         'message' : '사진 테스트 완료!!',
         'is_correct' : is_correct,
         'info' : info,
-        'detected_image': "../../AI/images/detected_image.jpg"
     })
 
 # detect_realtime(yolo, '', input_size=YOLO_INPUT_SIZE, show=True, rectangle_colors=(255, 0, 0))
