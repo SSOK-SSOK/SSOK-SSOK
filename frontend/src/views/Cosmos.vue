@@ -114,7 +114,7 @@
 </template>
 
 <script>
-import cosmos from "@/style/cosmos.scss"
+
 export default {
   name: 'Cosmos',
   data() {
@@ -131,5 +131,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+@import "@/style/cosmos.scss";
 </style>

@@ -35,9 +35,6 @@
 import Cosmos from "./Cosmos.vue";
 import { GOOGLE_AUTH_URL, ACCESS_TOKEN } from '@/config/index.js';
 import { mapState } from 'vuex';
-import "@/style/star.sass";
-import "@/style/auth-button.scss";
-import "@/style/light-button.scss";
 export default {
   name: "WelcomePage",
   components: {
@@ -98,8 +95,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/style/star.sass";
+@import "@/style/auth-button.scss";
+@import "@/style/light-button.scss";
 .container {
-  z-index: 10;
   padding: 1%;
   .background{
     position: relative;
@@ -143,7 +142,9 @@ export default {
           margin: 0 0 0 0.5vw
         }
       }
+      div{
       // light-button.scss
+      }
     }
     div{
       text-align: center;
