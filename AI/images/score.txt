@@ -1,2 +1,2 @@
-97,person
-94,cup
+62,person
+96,cup
