@@ -148,7 +148,7 @@ export default {
     div{
       text-align: center;
       p{
-        font-size: 2.5rem;
+        font-size: 5vh;
         text-align: center;
         margin: 0;
       }
