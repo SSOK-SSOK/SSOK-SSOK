@@ -75,7 +75,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'AI.wsgi.application'
 
-CORS_ALLOWED_ORIGINS = [ "http://localhost:8080" ]
+CORS_ALLOWED_ORIGINS = [ 
+    "https://j4a201.p.ssafy.io",
+    "http://j4a201.p.ssafy.io",
+    "http://localhost:8080",
+]
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
