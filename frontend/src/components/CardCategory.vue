@@ -13,25 +13,21 @@
           </v-col>
         </v-row>
         <!--------------- 카드 리스트 ---------------->
-        <v-row
-          class="mx-10"
-          v-for="(card, idx) in cards"
-          :key="idx"
-        >
+        <v-row>
           <v-col
-            v-for="(cap, idx2) in card"
-            :key="idx2"
+            v-for="(card, idx) in cards"
+            :key="idx"
           >
             <v-card
               color="white"
               rounded="xl"
             >
               <v-card-title class="display-3 font-weight-bold" style="color: #5254ac">
-                {{ cap.name }}
+                {{ card.name }}
               </v-card-title>
 
               <v-card-text class="d-flex justify-space-between">
-                <p class="display-1 font-weight-bold" style="color: #5254ac">{{ cap.sub }}</p>
+                <p class="display-1 font-weight-bold" style="color: #5254ac">{{ card.sub }}</p>
                 <v-spacer></v-spacer>
                 <p class="title">15cards</p>
               </v-card-text>
@@ -73,22 +69,14 @@ export default {
         { name: "vn", icon: "vn.png"}
       ],
       cards: [
-        [
           { name: "Animals", sub: "동물"},
-          { name: "Clothes", sub: "옷"},
           { name: "Fruits", sub: "과일"}
-        ],
-        [
-          { name: "Animals", sub: "동물"},
-          { name: "Clothes", sub: "옷"},
-          { name: "Fruits", sub: "과일"}
-        ]
       ]
     }
   },
   methods: {
     startGame: function () {
-      this.$router.push({ name: "PlayGame" });
+      this.$router.push({ name: "AudioTest" });
     }
   }
 }

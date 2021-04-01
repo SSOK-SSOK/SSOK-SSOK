@@ -1,6 +1,6 @@
 <template>
   <div class="mt-5">
-    <v-app-bar style="background: transparent" :elevation="0" max-height="80">
+    <v-app-bar color="#040431" :elevation="0" max-height="80" style="background-color: transparent;">
       <v-btn icon class="ml-5" @click="moveToMP">
         <v-avatar tile size="4rem">
           <img src="@/assets/images/out-icon.png" alt="out-icon" />
