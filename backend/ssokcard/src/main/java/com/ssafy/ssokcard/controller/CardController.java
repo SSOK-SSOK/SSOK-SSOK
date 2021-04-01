@@ -52,4 +52,5 @@ public class CardController {
 
         return badgeResult;
     }
+
 }
