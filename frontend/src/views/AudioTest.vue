@@ -58,8 +58,10 @@ export default {
 
     upload: function () {
       const formData = new FormData();
-      console.log(this.blob)
-      formData.append('audio', this.blob);
+      console.log(formData)
+      // console.log(this.blob)
+      // formData.append('test','test')
+      formData.append('file', this.blob);
       console.log(formData)
 
       // $.ajax({
@@ -79,14 +81,14 @@ export default {
 
 
       const headers = {'Content-Type': 'multipart/form-data'}
-      const data = {"file": formData}
+      // const data = {"file": formData}
       // const headers = {
       //   'Content-type': `multipart/form-data; boundary=${formData.getBoundary()}`,
       //   'accept': '*/*'
       // }
       // const headers = {'Content-Type': this.blob.type }
             
-      axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", data, headers)
+      axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", formData, headers)
         .then(res => console.log(res))
         .catch(err => console.log(err))
     }
