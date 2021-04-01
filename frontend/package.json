@@ -16,6 +16,7 @@
     "cors": "^2.8.5",
     "vue": "^2.6.11",
     "vue-audio-recorder": "^3.0.1",
+    "vue-flip": "1.0.2",
     "vue-router": "^3.2.0",
     "vue-web-cam": "^1.9.0",
     "vuetify": "^2.4.7",

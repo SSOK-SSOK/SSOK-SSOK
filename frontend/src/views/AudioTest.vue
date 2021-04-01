@@ -7,7 +7,7 @@
       </audio>
       <v-btn @click="startRecord">녹음</v-btn>
       <v-btn @click="endRecord">중단</v-btn>
-      <!-- <v-btn @click="upload">업로드</v-btn> -->
+      <v-btn @click="upload">업로드</v-btn>
     </div>
   </v-container>
 </template>
@@ -17,6 +17,11 @@ import NavBar from "@/components/NavBar.vue";
 import axios from 'axios';
 export default {
   name: "AudioGame",
+  data: function () {
+    return {
+      blob: {}
+    }
+  },
   components: {
     NavBar
   },
@@ -31,46 +36,9 @@ export default {
             console.log(this.$refs.recordPlayer.src)
             
             //Blob 객체 저장
-            let blob = event.data
-            console.log(blob)
-            const formData = new FormData();
-            formData.append('audio', blob, 'record.mp3');
-            
-            // axios.post(url, frm, {
-            //   headers: {
-            //     'Content-Type': 'multipart/form-data'
-            //   }
-            // }).then().catch()
-
-
-
-
-            //////////////////////////////////////////////////////
-            // this.record = event.data
-            // console.log(blob)
-
-            //base64로 변환할 FileReader
+            this.blob = event.data
             var reader = new FileReader();
-            // blob -> base64
-            // reader.readAsDataURL(blob);
             reader.onloadend = function () {
-              
-              
-              // var base64String = reader.result;
-              // console.log(base64String)
-              // var slicebase64 = base64String.slice(35,);
-              // var newstr = '<script>' + slicebase64 + '</scrip' + 't>'
-              // console.log(newstr)
-              // const data = {
-              //   'access_key': '0d52fa25-2ce8-4c0f-b453-615126f29c56',
-              //   'argument': {
-              //     'language_code': 'english',
-              //     'audio': slicebase64
-              //   }
-              // }
-              // axios.post('http://aiopen.etri.re.kr:8000/WiseASR/Recognition', data)
-              //   .then(res => console.log(res))
-              //   .catch(err => console.log(err))
             }
           })
           this.mediaRecorder.start() //녹음 시작
@@ -83,6 +51,17 @@ export default {
       this.mediaRecorder.stop() //녹음 중단하면 audio tag에 저장도 멈춤
     },
 
+    upload: function () {
+      const formData = new FormData();
+      console.log(this.blob)
+      formData.append('file', this.blob);
+
+      const headers = {'Content-Type': 'multipart/form-data'}
+            
+      axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", formData, headers)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+    }
   }
 }
 
