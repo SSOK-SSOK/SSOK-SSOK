@@ -63,7 +63,10 @@ export default {
       const data = { "file": formData}
       const headers = {'Content-Type': `multipart/form-data; boundary=${formData._boundary}`}
       
-      axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", data)
+      axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", data, 
+        {
+          headers: { 'Content-type': false }
+        })
         .then(res => console.log(res))
         .catch(err => console.log(err))
     }
