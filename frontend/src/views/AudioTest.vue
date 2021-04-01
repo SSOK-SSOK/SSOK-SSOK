@@ -37,13 +37,8 @@ export default {
             
             //Blob 객체 저장
             this.blob = event.data
-
-            //base64로 변환할 FileReader
             var reader = new FileReader();
-            // blob -> base64
-            // reader.readAsDataURL(blob);
             reader.onloadend = function () {
-
             }
           })
           this.mediaRecorder.start() //녹음 시작
@@ -58,41 +53,15 @@ export default {
 
     upload: function () {
       const formData = new FormData();
-      console.log(formData)
-      // console.log(this.blob)
-      // formData.append('test','test')
+      console.log(this.blob)
       formData.append('file', this.blob);
-      console.log(formData)
-
-      // $.ajax({
-      //   enctype: 'multipart/form-data',
-      //   url: "https://j4a201.p.ssafy.io/card-api/file/upload",
-      //   method: "POST",
-      //   data: formData,
-      //   processData: false,
-      //   contentType: false,
-      //   success: function (res) {
-      //     console.log("res")
-      //   },
-      //   error: function () {
-      //     console.log('error')
-      //   }
-      // })
-
 
       const headers = {'Content-Type': 'multipart/form-data'}
-      // const data = {"file": formData}
-      // const headers = {
-      //   'Content-type': `multipart/form-data; boundary=${formData.getBoundary()}`,
-      //   'accept': '*/*'
-      // }
-      // const headers = {'Content-Type': this.blob.type }
             
       axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", formData, headers)
         .then(res => console.log(res))
         .catch(err => console.log(err))
     }
-
   }
 }
 
