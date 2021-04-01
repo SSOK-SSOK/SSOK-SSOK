@@ -64,14 +64,14 @@ export default {
       // console.log(this.blob)
       // const data = { "file": formData }
       const data = { "file": this.blob }
-      const headers = {'Content-Type': 'multipart/form-data'}
+      const headers = {'Content-Type': this.blob.type}
       // const headers = {
       //   'Content-type': `multipart/form-data; boundary=${formData.getBoundary()}`,
       //   'accept': '*/*'
       // }
       // const headers = {'Content-Type': this.blob.type }
             
-      axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", formData, headers)
+      axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", this.blob, headers)
         .then(res => console.log(res))
         .catch(err => console.log(err))
     }
