@@ -79,7 +79,7 @@ export default {
 
 
       const headers = {'Content-Type': 'multipart/form-data'}
-      const data = {"file": this.blob}
+      const data = {"file": formData}
       // const headers = {
       //   'Content-type': `multipart/form-data; boundary=${formData.getBoundary()}`,
       //   'accept': '*/*'
