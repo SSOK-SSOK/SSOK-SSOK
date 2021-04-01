@@ -61,7 +61,7 @@ export default {
       formData.append('audio', this.blob, 'record');
       console.log(this.blob)
       const data = { "file": formData}
-      const headers = {'Content-Type': `multipart/form-data; boundary=${params._boundary}`}
+      const headers = {'Content-Type': `multipart/form-data; boundary=${formData._boundary}`}
       
       axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", data,
         { headers: headers }
