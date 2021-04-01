@@ -59,9 +59,9 @@ export default {
     upload: function () {
       const formData = new FormData();
       formData.append('audio', this.blob, 'record');
-      console.log(formData)
-      console.log(formData.getBoundary())
-      console.log(this.blob)
+      // console.log(formData)
+      // console.log(formData.getBoundary())
+      // console.log(this.blob)
       // const data = { "file": formData }
       const data = { "file": this.blob }
       // const headers = {'Content-Type': `multipart/form-data; boundary=${formData._boundary}`}
