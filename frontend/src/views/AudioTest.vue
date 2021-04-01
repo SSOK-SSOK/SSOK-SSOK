@@ -60,7 +60,8 @@ export default {
       const formData = new FormData();
       formData.append('audio', this.blob, 'record');
       console.log(this.blob)
-      const data = { "file": formData}
+      // const data = { "file": formData }
+      const data = { "file": this.blob }
       // const headers = {'Content-Type': `multipart/form-data; boundary=${formData._boundary}`}
       const headers = {
         'Content-type': 'multipart/form-data',
