@@ -7,8 +7,8 @@
     </div>
     <div class="contents">
       <nav>
-        <div>
-          <div class="glow" @click="moveToSelectPage"></div>
+        <div @click="moveToSelectPage">
+          <div class="glow"></div>
         </div>
       </nav>
       <div class="game-field">
@@ -145,7 +145,7 @@ export default {
       } 
     },
     moveToSelectPage: function () {
-      this.$router.push({name: "CardGame"})
+      this.$router.push({name: "CardGame" })
     },
     // for Timer
     onTimesUp() {

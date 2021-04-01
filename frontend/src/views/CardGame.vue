@@ -1,21 +1,18 @@
 <template>
-  <v-container fluid pa-0>
-    <v-row class="mt-3 mb-7">
-      <v-app-bar
-        color="#040431"
-        :elevation="0"
-        max-height="80"
-        class="mb-10"
-      >
-        <v-btn icon class="ml-2" @click="back">
-          <v-icon style="color: white;" size="90">mdi-arrow-left</v-icon>
-        </v-btn>
-      </v-app-bar>
-    </v-row>
-    <v-row>
-      
-    </v-row>
-    <CardCategory/>
+  <v-container fluid fill-height>
+    <div class="background">
+      <div id="stars"></div>
+      <div id="stars2"></div>
+      <div id="stars3"></div>
+    </div>
+    <div class="contents">
+      <nav>
+        <div>
+          <div class="glow" @click="moveToMainPage"></div>
+        </div>
+      </nav>
+      <CardCategory/>
+    </div>
   </v-container>
 </template>
 
@@ -27,13 +24,45 @@ export default {
     CardCategory,
   },
   methods: {
-    back: function () {
+    moveToMainPage: function () {
       this.$router.push({ name: "MainPage" });
     }
   }
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+@import "@/style/star.sass";
+@import "@/style/light-button.scss";
+.container{
+  padding: 1%;
+  .background{
+    position: relative;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+  }
+  .contents{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    padding: 1%;
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2.5% 1.5%;
+      margin-bottom: 3%;
+      height:5%;
+      width: 100%;
+      color: white;
+      background: none;
+      font-size: 1rem;
+      div{
+        //light-button
+      }
+    }
+  }
+}
 </style>

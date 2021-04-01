@@ -1,65 +1,69 @@
 <template>
-  <v-layout align-center justify-center>
-    <v-card flat width="1400" style="background-color: transparent;">
-      <v-container>
-        <!------------ 국기 아이콘 리스트 ------------->
-        <v-row class="my-10 mx-15 px-10">
-          <v-col v-for="(flag, name) in flags" :key="name" align="center">
-            <v-btn icon width="140" height="140">
-              <v-avatar class="mr-2" size="140">
-                <img :src="require(`@/assets/images/flags/${flag.icon}`)">
-              </v-avatar>
-            </v-btn>
-          </v-col>
-        </v-row>
-        <!--------------- 카드 리스트 ---------------->
-        <v-row>
-          <v-col
-            v-for="(card, idx) in cards"
-            :key="idx"
-          >
-            <v-card
-              color="white"
-              rounded="xl"
+  <v-layout fluid fill-height>
+    <!------------ 국기 아이콘 리스트 ------------->
+    <!-- <div class="languages">
+      <div class="language" v-for="(flag, name) in flags" :key="name">
+        <v-btn icon>
+          <img :src="require(`@/assets/images/flags/${flag.icon}`)">
+        </v-btn>
+      </div>
+    </div> -->
+    <div class="category-field">
+      <SpreadCard/>
+      <!-- <div v-for="(category, idx) in categories" :key="idx">
+        <SpreadCard :category="category"/>
+      </div> -->
+    </div>
+    <!--------------- 카드 리스트 ---------------->
+    <!-- <v-row>
+      <v-col
+        v-for="(card, idx) in cards"
+        :key="idx"
+      >
+        <v-card
+          color="white"
+          rounded="xl"
+        >
+          <v-card-title class="display-3 font-weight-bold" style="color: #5254ac">
+            {{ card.name }}
+          </v-card-title>
+
+          <v-card-text class="d-flex justify-space-between">
+            <p class="display-1 font-weight-bold" style="color: #5254ac">{{ card.sub }}</p>
+            <v-spacer></v-spacer>
+            <p class="title">15cards</p>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-btn
+              rounded
+              elevation="0"
+              color="#f1ca21"
+              large
+              width="50%"
+              class="ml-4"
+              @click="startGame(card)"
             >
-              <v-card-title class="display-3 font-weight-bold" style="color: #5254ac">
-                {{ card.name }}
-              </v-card-title>
-
-              <v-card-text class="d-flex justify-space-between">
-                <p class="display-1 font-weight-bold" style="color: #5254ac">{{ card.sub }}</p>
-                <v-spacer></v-spacer>
-                <p class="title">15cards</p>
-              </v-card-text>
-
-              <v-card-actions>
-                <v-btn
-                  rounded
-                  elevation="0"
-                  color="#f1ca21"
-                  large
-                  width="50%"
-                  class="ml-4"
-                  @click="startGame(card)"
-                >
-                  게임하기
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-card>
+              게임하기
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row> -->
   </v-layout>
 </template>
 
 <script>
+import SpreadCard from "@/components/SpreadCard.vue";
 export default {
   name: 'CardCategory',
+  components: {
+    SpreadCard,
+  },
   data: function () {
     return {
       flags: [
-        { name: "ko", icon: "kr.png"},
+        { name: "kr", icon: "kr.png"},
         { name: "us", icon: "us.png"},
         { name: "cn", icon: "cn.png"},
         { name: "jp", icon: "jp.png"},
@@ -67,9 +71,9 @@ export default {
         { name: "es", icon: "es.png"},
         { name: "vn", icon: "vn.png"}
       ],
-      cards: [
-          { id: 1, name: "Animals", sub: "동물"},
-          { id: 2, name: "Fruits", sub: "과일"}
+      categories: [
+          { id: 1, name: "Animal", sub: "동물", path: "https://i.pinimg.com/originals/d6/3c/de/d63cded9d8454a5b57ee8bef31c3ee71.gif"},
+          { id: 2, name: "Fruit", sub: "과일", path: "https://acegif.com/wp-content/gifs/apple-8.gif"}
       ]
     }
   },
@@ -87,6 +91,36 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+.layout{
+  // .languages{
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   width: 100%;
+  //   height: 15%;
+  //   .language{
+  //     display: flex;
+  //     justify-content: center;
+  //     width: 8%;
+  //     .v-btn{
+  //       .v-btn__content{
+  //         img{
+  //           width: 20%;
 
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+  .category-field{
+    width: 100%;
+    height: 60%;
+    display: flex;
+    align-items: center;
+    div{
+      //SpreadCard
+    }
+  }
+}
 </style>
