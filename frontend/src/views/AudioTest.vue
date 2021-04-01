@@ -36,47 +36,14 @@ export default {
             console.log(this.$refs.recordPlayer.src)
             
             //Blob 객체 저장
-            let blob = event.data
             this.blob = event.data
-            // console.log(blob)
-            // const formData = new FormData();
-            // formData.append('audio', blob, 'record.mp3');
-            
-            // axios.post(url, frm, {
-            //   headers: {
-            //     'Content-Type': 'multipart/form-data'
-            //   }
-            // }).then().catch()
-
-
-
-
-            //////////////////////////////////////////////////////
-            // this.record = event.data
-            // console.log(blob)
 
             //base64로 변환할 FileReader
             var reader = new FileReader();
             // blob -> base64
             // reader.readAsDataURL(blob);
             reader.onloadend = function () {
-              
-              
-              // var base64String = reader.result;
-              // console.log(base64String)
-              // var slicebase64 = base64String.slice(35,);
-              // var newstr = '<script>' + slicebase64 + '</scrip' + 't>'
-              // console.log(newstr)
-              // const data = {
-              //   'access_key': '0d52fa25-2ce8-4c0f-b453-615126f29c56',
-              //   'argument': {
-              //     'language_code': 'english',
-              //     'audio': slicebase64
-              //   }
-              // }
-              // axios.post('http://aiopen.etri.re.kr:8000/WiseASR/Recognition', data)
-              //   .then(res => console.log(res))
-              //   .catch(err => console.log(err))
+
             }
           })
           this.mediaRecorder.start() //녹음 시작
@@ -90,12 +57,15 @@ export default {
     },
 
     upload: function () {
-      const formData = new FormData();
       const headers = {'Content-Type': 'multipart/form-data'}
+      
+      const formData = new FormData();
       formData.append('audio', this.blob, 'record');
       console.log(this.blob)
-      axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", formData,
-        {headers: headers}
+      const data = { "file": formData}
+      
+      axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", data,
+        { headers: headers }
       )
         .then(res => console.log(res))
         .catch(err => console.log(err))
