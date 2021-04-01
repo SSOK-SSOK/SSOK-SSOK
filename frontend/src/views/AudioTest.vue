@@ -65,7 +65,7 @@ export default {
       
       axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", data, 
         {
-          headers: { 'Content-type': false }
+          headers: { 'Content-type': 'false' }
         })
         .then(res => console.log(res))
         .catch(err => console.log(err))
