@@ -1,7 +1,7 @@
 <template>
   <div>
     <audio-recorder
-      upload-url="@/assets"
+      upload-url="https://j4a201.p.ssafy.io/card-api/file/upload"
       :attempts="3"
       :time="2"
     />

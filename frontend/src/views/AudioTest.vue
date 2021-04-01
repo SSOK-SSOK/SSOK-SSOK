@@ -7,7 +7,7 @@
       </audio>
       <v-btn @click="startRecord">녹음</v-btn>
       <v-btn @click="endRecord">중단</v-btn>
-      <!-- <v-btn @click="upload">업로드</v-btn> -->
+      <v-btn @click="upload">업로드</v-btn>
     </div>
   </v-container>
 </template>
@@ -17,6 +17,11 @@ import NavBar from "@/components/NavBar.vue";
 import axios from 'axios';
 export default {
   name: "AudioGame",
+  data: function () {
+    return {
+      blob: {}
+    }
+  },
   components: {
     NavBar
   },
@@ -32,9 +37,10 @@ export default {
             
             //Blob 객체 저장
             let blob = event.data
-            console.log(blob)
-            const formData = new FormData();
-            formData.append('audio', blob, 'record.mp3');
+            this.blob = event.data
+            // console.log(blob)
+            // const formData = new FormData();
+            // formData.append('audio', blob, 'record.mp3');
             
             // axios.post(url, frm, {
             //   headers: {
@@ -82,6 +88,18 @@ export default {
     endRecord: function () {
       this.mediaRecorder.stop() //녹음 중단하면 audio tag에 저장도 멈춤
     },
+
+    upload: function () {
+      const formData = new FormData();
+      const headers = {'Content-Type': 'multipart/form-data'}
+      formData.append('audio', this.blob, 'record');
+      console.log(this.blob)
+      axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", formData,
+        {headers: headers}
+      )
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+    }
 
   }
 }
