@@ -71,7 +71,7 @@ export default {
       // }
       // const headers = {'Content-Type': this.blob.type }
             
-      axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", this.blob, headers)
+      axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", formData, headers)
         .then(res => console.log(res))
         .catch(err => console.log(err))
     }
