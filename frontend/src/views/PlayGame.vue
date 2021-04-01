@@ -1,23 +1,11 @@
 <template>
-  <v-container>
-    <NavBar />
-  </v-container>
+  <div></div>
 </template>
 
 <script>
-import NavBar from "@/components/NavBar.vue";
 export default {
-  name: "PlayGame",
-  data: function () {
-    return {
+  name: 'PlayGame'
 
-    }
-  },
-  components: {
-    NavBar
-  },
-  methods: {
-  }
 }
 </script>
 
