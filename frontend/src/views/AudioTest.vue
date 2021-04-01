@@ -61,12 +61,13 @@ export default {
       formData.append('audio', this.blob, 'record');
       console.log(this.blob)
       const data = { "file": formData}
-      const headers = {'Content-Type': `multipart/form-data; boundary=${formData._boundary}`}
-      
-      axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", data, 
-        {
-          headers: { 'Content-type': 'false' }
-        })
+      // const headers = {'Content-Type': `multipart/form-data; boundary=${formData._boundary}`}
+      const headers = {
+        'Content-type': 'multipart/form-data',
+        'accept': '*/*'
+      }
+            
+      axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", data, {headers})
         .then(res => console.log(res))
         .catch(err => console.log(err))
     }
