@@ -58,20 +58,35 @@ export default {
 
     upload: function () {
       const formData = new FormData();
-      formData.append('audio', this.blob, 'record');
-      // console.log(formData)
-      // console.log(formData.getBoundary())
-      // console.log(this.blob)
-      // const data = { "file": formData }
-      const data = { "file": this.blob }
-      const headers = {'Content-Type': this.blob.type}
+      console.log(this.blob)
+      formData.append('audio', this.blob);
+      console.log(formData)
+
+      // $.ajax({
+      //   enctype: 'multipart/form-data',
+      //   url: "https://j4a201.p.ssafy.io/card-api/file/upload",
+      //   method: "POST",
+      //   data: formData,
+      //   processData: false,
+      //   contentType: false,
+      //   success: function (res) {
+      //     console.log("res")
+      //   },
+      //   error: function () {
+      //     console.log('error')
+      //   }
+      // })
+
+
+      const headers = {'Content-Type': 'multipart/form-data'}
+      const data = {"file": this.blob}
       // const headers = {
       //   'Content-type': `multipart/form-data; boundary=${formData.getBoundary()}`,
       //   'accept': '*/*'
       // }
       // const headers = {'Content-Type': this.blob.type }
             
-      axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", this.blob, headers)
+      axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", data, headers)
         .then(res => console.log(res))
         .catch(err => console.log(err))
     }
