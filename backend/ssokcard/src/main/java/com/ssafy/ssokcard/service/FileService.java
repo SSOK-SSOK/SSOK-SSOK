@@ -38,7 +38,7 @@ public class FileService {
         UUID uuid = UUID.randomUUID();
         String newFileName = uuid.toString() + fileName;
 
-        File file = new File(LOCAL_PATH, newFileName);
+        File file = new File(SERVER_PATH, newFileName);
         inputFile.transferTo(file);
 
         result.status = true;

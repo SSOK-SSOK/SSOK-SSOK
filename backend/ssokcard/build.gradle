@@ -44,6 +44,9 @@ dependencies {
     // https://mvnrepository.com/artifact/commons-codec/commons-codec
     implementation group: 'commons-codec', name: 'commons-codec', version: '1.9'
 
+    // https://mvnrepository.com/artifact/com.google.cloud/google-cloud-translate
+    implementation group: 'com.google.cloud', name: 'google-cloud-translate', version: '1.94.3'
+
 }
 
 test {
