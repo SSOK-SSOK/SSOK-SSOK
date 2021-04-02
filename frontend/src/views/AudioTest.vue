@@ -16,7 +16,7 @@
 import NavBar from "@/components/NavBar.vue";
 import axios from 'axios';
 export default {
-  name: "AudioGame",
+  name: "AudioTest",
   data: function () {
     return {
       blob: {}
@@ -59,7 +59,22 @@ export default {
       const headers = {'Content-Type': 'multipart/form-data'}
             
       axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", formData, headers)
-        .then(res => console.log(res))
+        .then(res => {
+          console.log(res)
+          const path = res.data.object;
+          // Blob 데이터 다운로드
+          var ffmpeg = require('ffmpeg');
+          var process = new ffmpeg(path);
+          process.then(function (audio) {
+            audio.fnExtractSoundToMP3('./assets/record.mp3', function (err, file){
+              if (!err) {
+                console.log(file)
+              }
+            });
+          }, function (err) {
+            console.log(err)
+          })
+        })
         .catch(err => console.log(err))
     }
   }

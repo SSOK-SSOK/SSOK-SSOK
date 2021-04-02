@@ -15,7 +15,7 @@
       </div> -->
     </div>
     <!--------------- 카드 리스트 ---------------->
-    <!-- <v-row>
+    <v-row>
       <v-col
         v-for="(category, idx) in categories"
         :key="idx"
@@ -33,7 +33,6 @@
             <v-spacer></v-spacer>
             <p class="title">15cards</p>
           </v-card-text>
-
           <v-card-actions>
             <v-btn
               rounded
@@ -49,7 +48,8 @@
           </v-card-actions>
         </v-card>
       </v-col>
-    </v-row> -->
+    </v-row>
+    <v-btn @click="audioTest">오디오 테스트</v-btn>
   </v-layout>
 </template>
 
@@ -78,15 +78,18 @@ export default {
     }
   },
   methods: {
-    // startGame: function (info) {
-    //   this.$store.dispatch("CardGameStore/fetchCards", info.id)
-    //   this.$router.push({
-    //     name: "PlayGame",
-    //     params: {
-    //       card: info,
-    //     }
-    //   });
-    // }
+    startGame: function (info) {
+      this.$store.dispatch("CardGameStore/fetchCards", info.id)
+      this.$router.push({
+        name: "PlayGame",
+        params: {
+          card: info,
+        }
+      });
+    },
+    audioTest: function () {
+      this.$router.push({ name: "AudioTest" })
+    }
   }
 }
 </script>
