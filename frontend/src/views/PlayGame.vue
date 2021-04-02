@@ -156,9 +156,9 @@ export default {
   },
   methods: {
     getParams: function () {
-      const card = this.$route.params.card;
-      this.categoryName = card.name;
-      this.categorySub = card.sub;
+      const category = this.$route.params.category;
+      this.categoryName = category.name;
+      this.categorySub = category.sub;
     },
     sendCurrentQuiz(idx) {
       if (idx < 15) {

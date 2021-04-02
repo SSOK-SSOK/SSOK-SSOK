@@ -8,7 +8,7 @@
     <div class="contents">
       <nav>
         <div @click="back">
-          <div class="glow" @click="moveToMainPage"></div>
+          <div class="glow"></div>
         </div>
       </nav>
       <div class="planets">

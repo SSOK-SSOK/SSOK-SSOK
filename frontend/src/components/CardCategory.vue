@@ -15,7 +15,7 @@
       </div> -->
     </div>
     <!--------------- 카드 리스트 ---------------->
-    <v-row>
+    <!-- <v-row>
       <v-col
         v-for="(category, idx) in categories"
         :key="idx"
@@ -29,7 +29,7 @@
           </v-card-title>
 
           <v-card-text class="d-flex justify-space-between">
-            <p class="display-1 font-weight-bold" style="color: #5254ac">{{ card.sub }}</p>
+            <p class="display-1 font-weight-bold" style="color: #5254ac">{{ category.sub }}</p>
             <v-spacer></v-spacer>
             <p class="title">15cards</p>
           </v-card-text>
@@ -48,7 +48,7 @@
           </v-card-actions>
         </v-card>
       </v-col>
-    </v-row>
+    </v-row> -->
     <v-btn @click="audioTest">오디오 테스트</v-btn>
   </v-layout>
 </template>
@@ -72,8 +72,8 @@ export default {
         { name: "vn", icon: "vn.png"}
       ],
       categories: [
-          { id: 1, name: "Animal", sub: "동물", path: "https://i.pinimg.com/originals/d6/3c/de/d63cded9d8454a5b57ee8bef31c3ee71.gif"},
-          { id: 2, name: "Fruit", sub: "과일", path: "https://acegif.com/wp-content/gifs/apple-8.gif"}
+        { id: 1, name: "Animal", sub: "동물", path: "https://i.pinimg.com/originals/d6/3c/de/d63cded9d8454a5b57ee8bef31c3ee71.gif"},
+        { id: 2, name: "Fruit", sub: "과일", path: "https://acegif.com/wp-content/gifs/apple-8.gif"}
       ]
     }
   },
@@ -83,7 +83,7 @@ export default {
       this.$router.push({
         name: "PlayGame",
         params: {
-          card: info,
+          category: info,
         }
       });
     },

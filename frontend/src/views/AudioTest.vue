@@ -36,30 +36,7 @@ export default {
             console.log(this.$refs.recordPlayer.src)
             
             //Blob 객체 저장
-<<<<<<< HEAD
             this.blob = event.data
-=======
-            let blob = event.data
-            this.blob = event.data
-            // console.log(blob)
-            // const formData = new FormData();
-            // formData.append('audio', blob, 'record.mp3');
-            
-            // axios.post(url, frm, {
-            //   headers: {
-            //     'Content-Type': 'multipart/form-data'
-            //   }
-            // }).then().catch()
-
-
-
-
-            //////////////////////////////////////////////////////
-            // this.record = event.data
-            // console.log(blob)
-
-            //base64로 변환할 FileReader
->>>>>>> a79c559c19bc57ef4943ac05523ce58a65383d09
             var reader = new FileReader();
             reader.onloadend = function () {
             }
@@ -76,7 +53,6 @@ export default {
 
     upload: function () {
       const formData = new FormData();
-<<<<<<< HEAD
       console.log(this.blob)
       formData.append('file', this.blob);
 
@@ -101,18 +77,6 @@ export default {
         })
         .catch(err => console.log(err))
     }
-=======
-      const headers = {'Content-Type': 'multipart/form-data'}
-      formData.append('audio', this.blob, 'record');
-      console.log(this.blob)
-      axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", formData,
-        {headers: headers}
-      )
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
-    }
-
->>>>>>> a79c559c19bc57ef4943ac05523ce58a65383d09
   }
 }
 

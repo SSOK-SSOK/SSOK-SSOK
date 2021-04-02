@@ -1,7 +1,7 @@
 <template>
   <div class="category-cards">
     <div class="perspective">
-      <div class='animal-card-container' @click="startGame(card)">
+      <div class='animal-card-container' @click="startGame(1)">
         <div class='card card-card1'>
           <div class='card__face card__face--top'>
             <span class='card__value'>
@@ -160,12 +160,12 @@ export default {
     
   },
   methods: {
-    startGame: function () {
-      this.$store.dispatch("CardGameStore/fetchCards", 1)
+    startGame: function (idx) {
+      this.$store.dispatch("CardGameStore/fetchCards", idx)
       this.$router.push({
         name: "PlayGame",
         params: {
-          card: { id: 1, name: "Animal", sub: "동물", path: "https://i.pinimg.com/originals/d6/3c/de/d63cded9d8454a5b57ee8bef31c3ee71.gif"},
+          category: { id: 1, name: "Animal", sub: "동물", path: "https://i.pinimg.com/originals/d6/3c/de/d63cded9d8454a5b57ee8bef31c3ee71.gif"}
         }
       });
     }
