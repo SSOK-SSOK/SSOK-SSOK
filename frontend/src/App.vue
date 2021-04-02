@@ -7,14 +7,12 @@
 </template>
 
 <script>
-import "@/style/base.scss";
-
 export default {
   name: "App",
   data: () => ({}),
 };
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+@import "@/style/base.scss";
 </style>
