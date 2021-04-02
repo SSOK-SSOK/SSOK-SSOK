@@ -44,18 +44,18 @@ export default {
   }
   .contents {
     position: absolute;
+    left: 0;
     width: 100%;
     height: 100%;
-    left: 0;
     padding: 1%;
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 2.5% 1.5%;
-      margin-bottom: 3%;
-      height: 5%;
       width: 100%;
+      height: 5%;
+      padding: 2.5% 1.5%;
+      margin-bottom: 1%;
       color: white;
       background: none;
       font-size: 1rem;
