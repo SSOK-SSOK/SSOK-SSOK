@@ -9,44 +9,37 @@
       <nav>
         <div @click="moveToSelectPage" class="glow"></div>
       </nav>
-      <div v-if="started" class="countdown-timer">
-        <div class="base-timer">
-          <svg
-            class="base-timer__svg"
-            viewBox="0 0 100 100"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g class="base-timer__circle">
-              <circle
-                class="base-timer__path-elapsed"
-                cx="50"
-                cy="50"
-                r="45"
-              ></circle>
-              <path
-                :stroke-dasharray="circleDasharray"
-                class="base-timer__path-remaining"
-                :class="remainingPathColor"
-                d="
-                  M 50, 50
-                  m -45, 0
-                  a 45,45 0 1,0 90,0
-                  a 45,45 0 1,0 -90,0
-                "
-              ></path>
-            </g>
-          </svg>
-          <span class="base-timer__label">{{ formattedTimeLeft }}</span>
+      <h1 v-if="started" class="text-center">
+        녹음버튼을 눌러 정답을 말해주세요😉
+      </h1>
+      <div class="game-contents">
+        <!--타이머-->
+        <div class="countdown-timer">
+          <Timer
+            v-if="started"
+            :quizIdx="quizIdx"
+            @solvingStatus="is_solved"
+          ></Timer>
         </div>
-      </div>
-      <div class="game-field">
-        <div class="card">
-          <div v-if="started">
-            <QuizCard :currentQuiz="currentQuiz" />
+        <!--카드-->
+        <div class="game-field">
+          <div class="card">
+            <div v-if="started">
+              <QuizCard :currentQuiz="currentQuiz" />
+            </div>
+            <button v-else-if="ended" class="auth-button mx-auto">
+              결과 보기
+            </button>
+            <button v-else class="auth-button mx-auto" @click="getStart">
+              게임 시작
+            </button>
           </div>
-          <button v-else class="auth-button mx-auto" @click="getStart">
-            게임 시작
-          </button>
+        </div>
+        <!--오디오버튼-->
+        <div v-if="started" class="audio-button">
+          <v-btn fab dark large color="white">
+            <v-icon color="red"> mdi-record </v-icon>
+          </v-btn>
         </div>
       </div>
     </div>
@@ -55,33 +48,14 @@
 
 <script>
 import QuizCard from "@/components/QuizCard.vue";
+import Timer from "@/components/Timer.vue";
 import { mapState } from "vuex";
-
-// for Timer
-const FULL_DASH_ARRAY = 283;
-const WARNING_THRESHOLD = 10;
-const ALERT_THRESHOLD = 5;
-
-const COLOR_CODES = {
-  info: {
-    color: "green",
-  },
-  warning: {
-    color: "orange",
-    threshold: WARNING_THRESHOLD,
-  },
-  alert: {
-    color: "red",
-    threshold: ALERT_THRESHOLD,
-  },
-};
-
-const TIME_LIMIT = 15;
 
 export default {
   name: "PlayCardGame",
   components: {
     QuizCard,
+    Timer,
   },
   data() {
     return {
@@ -89,13 +63,10 @@ export default {
       categorySub: "",
       quizIdx: 0,
 
-      //for game button
+      //for game
       started: false,
+      ended: false,
       solvingStatus: false,
-
-      // for Timer
-      timePassed: 0,
-      timerInterval: null,
     };
   },
   computed: {
@@ -104,60 +75,19 @@ export default {
       // 0초가 남으면 watch에서 quizIdx의 값을 증가시켜준다. 변하는 quizIdx의 값에 따라 다른 퀴즈가 QuizCard에 넘어가게 하자.
       return this.sendCurrentQuiz(this.quizIdx);
     },
-    // for Timer
-    circleDasharray() {
-      return `${(this.timeFraction * FULL_DASH_ARRAY).toFixed(0)} 283`;
-    },
-    formattedTimeLeft() {
-      const timeLeft = this.timeLeft;
-      let seconds = timeLeft % 60;
-      if (seconds < 10) {
-        seconds = `0${seconds}`;
-      }
-      return `${seconds}`;
-    },
-    timeLeft() {
-      return TIME_LIMIT - this.timePassed;
-    },
-    timeFraction() {
-      const rawTimeFraction = this.timeLeft / TIME_LIMIT;
-      return rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction);
-    },
-    remainingPathColor() {
-      const { alert, warning, info } = COLOR_CODES;
-      if (this.timeLeft <= alert.threshold) {
-        return alert.color;
-      } else if (this.timeLeft <= warning.threshold) {
-        return warning.color;
-      } else {
-        return info.color;
-      }
-    },
   },
   watch: {
-    // for Timer
-    timePassed(newValue) {
-      if (newValue === 15) {
-        this.onTimesUp();
-        this.solvingStatus = false;
-      }
-    },
     solvingStatus(newValue) {
+      // 시간 초과일 때
       if (newValue === false) {
         this.quizIdx += 1;
-        this.timePassed = 0;
         this.solvingStatus = true;
-      } else {
-        this.startTimer();
       }
     },
   },
   created() {
-    this.getParams();
-  },
-  mounted() {
+    // this.getParams();
     this.solvingStatus = false;
-    this.timePassed = 0;
   },
   methods: {
     getParams: function () {
@@ -168,31 +98,22 @@ export default {
     sendCurrentQuiz(idx) {
       if (idx < 15) {
         return this.playingCards[idx];
+      } else {
+        this.started = false;
+        this.ended = true;
+        this.quizIdx = 0;
       }
     },
     moveToSelectPage: function () {
       this.$router.push({ name: "SelectCardGame" });
     },
-
+    is_solved(value) {
+      this.solvingStatus = value;
+    },
     //forButton
     getStart: function () {
       this.started = true;
       this.solvingStatus = true;
-    },
-    moveNext: function () {
-      this.onTimesUp();
-    },
-
-    // for Timer
-    onTimesUp: function () {
-      clearInterval(this.timerInterval);
-      this.timePassed = 15;
-      // clearInterval은 setInterval로 인해 반복하고 있는 것을 멈추게 한다.
-    },
-    startTimer: function () {
-      this.timePassed = 0;
-      // 1초마다 timePassed에 1을 더해준다.
-      this.timerInterval = setInterval(() => (this.timePassed += 1), 1000);
     },
   },
 };
@@ -202,6 +123,7 @@ export default {
 @import "@/style/star.sass";
 @import "@/style/light-button.scss";
 @import "@/style/auth-button.scss";
+
 .container {
   padding: 1%;
   .background {
@@ -229,73 +151,33 @@ export default {
       background: none;
       font-size: 1rem;
     }
-    // 타이머
-    .countdown-timer {
-      position: absolute;
-      text-align: end;
-      width: 100%;
-      height: 3%;
-      padding: 1% 3%;
-      .base-timer {
-        position: relative;
-        width: 100%;
-        height: 100%;
-
-        &__svg {
-          width: 10%;
-          transform: scaleX(-1);
-        }
-
-        &__circle {
-          fill: none;
-          stroke: none;
-        }
-
-        &__path-elapsed {
-          stroke-width: 6%;
-          stroke: grey;
-        }
-
-        &__path-remaining {
-          stroke-width: 6%;
-          stroke-linecap: round;
-          transform: rotate(90deg);
-          transform-origin: center;
-          transition: 1s linear all;
-          fill-rule: nonzero;
-          stroke: currentColor;
-
-          &.green {
-            color: rgb(65, 184, 131);
-          }
-
-          &.orange {
-            color: orange;
-          }
-
-          &.red {
-            color: red;
-          }
-        }
-        // 숫자에 해당하는 css
-        &__label {
-          position: absolute;
-          width: 10%;
-          top: 22%;
-          right: 3.8%;
-          font-size: 2rem;
-        }
-      }
-    }
-    .game-field {
-      width: 100%;
-      height: 65%;
+    .game-contents {
       display: flex;
-      .card {
-        width: 100%;
+      align-items: center;
+      margin-top: 1%;
+      // 타이머
+      .countdown-timer {
+        width: 20%;
+        padding: 1% 3%;
+        // 카드
+      }
+      .game-field {
+        width: 60%;
+        height: 60vh;
         display: flex;
         justify-content: center;
         align-items: center;
+        .card {
+          width: 100%;
+          height: 65%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+      // 오디오 버튼
+      .audio-button {
+        width: 20%;
       }
     }
   }

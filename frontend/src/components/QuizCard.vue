@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="flip-card" v-bind:class="{ active: flip }" @click="flipCard">
+    <div class="flip-card" v-bind:class="{ active: flip }">
       <div class="flip-card-inner">
-        <div class="flip-card-front">
+        <div class="flip-card-front" @click="flipCard">
           <div class="overlay" style="border-radius: 30px">
             <h1 class="text">정답을 보고 싶으면 카드를 클릭하세요</h1>
           </div>
@@ -15,6 +15,7 @@
         </div>
         <div class="flip-card-back" style="border-radius: 30px">
           <h1>{{ cardAnswer }}</h1>
+          <button class="auth-button mx-auto" @click="goNext">결과 보기</button>
         </div>
       </div>
     </div>
@@ -22,7 +23,6 @@
 </template>
 
 <script>
-// import { mapState } from 'vuex';
 export default {
   name: "QuizCard",
   components: {},
@@ -48,15 +48,19 @@ export default {
     flipCard() {
       this.flip = !this.flip;
     },
+    goNext() {
+      console.log("다음 카드");
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@import "@/style/auth-button.scss";
 .flip-card {
   background-color: transparent;
-  width: 750px;
-  height: 500px;
+  width: 600px;
+  height: 400px;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
   transition: 0.5s ease;
   backface-visibility: hidden;
@@ -110,7 +114,7 @@ export default {
   background-color: rgb(0, 0, 0);
 }
 
-.flip-card:hover .overlay {
+.image:hover .overlay {
   opacity: 0.7;
 }
 </style>
