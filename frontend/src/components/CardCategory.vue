@@ -48,6 +48,7 @@
             </v-card>
           </v-col>
         </v-row>
+        <v-btn @click="audioTest">오디오 테스트</v-btn>
       </v-container>
     </v-card>
   </v-layout>
@@ -82,6 +83,9 @@ export default {
           card: info,
         }
       });
+    },
+    audioTest: function () {
+      this.$router.push({ name: "AudioTest" })
     }
   }
 }
