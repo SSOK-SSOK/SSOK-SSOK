@@ -1,10 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import MainPage from "@/views/MainPage.vue";
-import SmartCamera from "@/views/SmartCamera.vue";
+import SmartCameraGame from "@/views/SmartCameraGame.vue";
 import WelcomePage from "@/views/WelcomePage.vue";
-import CardGame from "@/views/CardGame.vue";
-import PlayGame from "@/views/PlayGame.vue";
+import SelectCardGame from "@/views/SelectCardGame.vue";
+import PlayCardGame from "@/views/PlayCardGame.vue";
 import AudioTest from "@/views/AudioTest.vue";
 
 Vue.use(VueRouter);
@@ -21,19 +21,19 @@ const routes = [
     component: MainPage,
   },
   {
-    path: "/smartcamera",
-    name: "SmartCamera",
-    component: SmartCamera,
+    path: "/smartcameragame",
+    name: "SmartCameraGame",
+    component: SmartCameraGame,
   },
   {
-    path: "/card",
-    name: "CardGame",
-    component: CardGame,
+    path: "/selectcardgame",
+    name: "SelectCardGame",
+    component: SelectCardGame,
   },
   {
-    path: "/game",
-    name: "PlayGame",
-    component: PlayGame,
+    path: "/playcardgame",
+    name: "PlayCardGame",
+    component: PlayCardGame,
   },
   {
     path: "/audiotest",

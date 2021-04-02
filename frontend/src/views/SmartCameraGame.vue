@@ -105,7 +105,7 @@ import "@/style/star.sass";
 const SmartCameraStore = "SmartCameraStore";
 
 export default {
-  name: "SmartCamera",
+  name: "SmartCameraGame",
   components: {
     "vue-web-cam": WebCam,
     NavBar,

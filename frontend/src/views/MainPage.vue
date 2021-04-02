@@ -14,11 +14,16 @@
       <div class="planets">
         <div class="venus">
           <div class="venusimg">
-            <img class="spin" src="@/assets/images/venus.png" alt="venus" />
+            <img
+              @click="moveSelectCardGame"
+              class="spin"
+              src="@/assets/images/venus.png"
+              alt="venus"
+            />
           </div>
           <div class="mascotimg">
             <img
-              @click="moveToCG"
+              @click="moveSelectCardGame"
               class="mascot-card ma-0"
               src="@/assets/images/card.png"
               alt="macot-card"
@@ -28,11 +33,16 @@
         </div>
         <div class="greenus">
           <div class="greenusimg">
-            <img class="spin" src="@/assets/images/greenus.png" alt="greenus" />
+            <img
+              @click="moveSmartCameraGame"
+              class="spin"
+              src="@/assets/images/greenus.png"
+              alt="greenus"
+            />
           </div>
           <div class="mascotimg2">
             <img
-              @click="moveToSC"
+              @click="moveSmartCameraGame"
               class="mascot-camera"
               src="@/assets/images/camera.png"
               alt="macot-camera"
@@ -59,11 +69,11 @@ export default {
     },
   },
   methods: {
-    moveToSC: function () {
-      this.$router.push({ name: "SmartCamera" });
+    moveSmartCameraGame: function () {
+      this.$router.push({ name: "SmartCameraGame" });
     },
-    moveToCG: function () {
-      this.$router.push({ name: "CardGame" });
+    moveSelectCardGame: function () {
+      this.$router.push({ name: "SelectCardGame" });
     },
     back: function () {
       this.$router.push({ name: "WelcomePage" });

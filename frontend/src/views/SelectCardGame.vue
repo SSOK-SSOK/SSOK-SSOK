@@ -11,7 +11,7 @@
           <div class="glow" @click="moveToMainPage"></div>
         </div>
       </nav>
-      <CardCategory/>
+      <CardCategory />
     </div>
   </v-container>
 </template>
@@ -19,30 +19,30 @@
 <script>
 import CardCategory from "@/components/CardCategory.vue";
 export default {
-  name: 'CardGame',
+  name: "SelectCardGame",
   components: {
     CardCategory,
   },
   methods: {
     moveToMainPage: function () {
       this.$router.push({ name: "MainPage" });
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
 @import "@/style/star.sass";
 @import "@/style/light-button.scss";
-.container{
+.container {
   padding: 1%;
-  .background{
+  .background {
     position: relative;
     z-index: -1;
     width: 100%;
     height: 100%;
   }
-  .contents{
+  .contents {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -54,12 +54,12 @@ export default {
       align-items: center;
       padding: 2.5% 1.5%;
       margin-bottom: 3%;
-      height:5%;
+      height: 5%;
       width: 100%;
       color: white;
       background: none;
       font-size: 1rem;
-      div{
+      div {
         //light-button
       }
     }
