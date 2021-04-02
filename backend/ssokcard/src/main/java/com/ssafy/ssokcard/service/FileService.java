@@ -1,6 +1,7 @@
 package com.ssafy.ssokcard.service;
 
 import com.google.gson.Gson;
+import com.ssafy.ssokcard.model.response.BasicResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,22 +19,33 @@ import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @Service
 public class FileService {
-//    saveFile
-    private final String LOCAL_PATH = "C:/ssafy";
-    private final String SERVER_PATH = "/home/ubuntu/s04p23a201/backend/cardgamevoice";
+    @Value("${file.localPath}")
+    private String LOCAL_PATH;
+    @Value("${file.serverPath}")
+    private String SERVER_PATH;
 
-//    convertVoiceToText
-    private final String openApiURL = "http://aiopen.etri.re.kr:8000/WiseASR/Recognition";
+    @Value("${AIHub.STT.openApiURL}")
+    private String openApiURL;
     @Value("${AIHub.STT.accessKey}")
     private String accessKey;    // 발급받은 API Key
 
-    public File saveFile(MultipartFile inputFile, String fileName) throws IOException {
-        File file = new File(LOCAL_PATH, fileName);
+    public BasicResponse saveFile(MultipartFile inputFile, String fileName) throws IOException {
+        BasicResponse result = new BasicResponse();
+        UUID uuid = UUID.randomUUID();
+        String newFileName = uuid.toString() + fileName;
+
+        File file = new File(LOCAL_PATH, newFileName);
         inputFile.transferTo(file);
-        return file;
+
+        result.status = true;
+        result.data = "파일 경로";
+        result.object = file.getPath();
+
+        return result;
     }
 
     public Object convertVoiceToText(String languageCode, String audioFilePath) {
