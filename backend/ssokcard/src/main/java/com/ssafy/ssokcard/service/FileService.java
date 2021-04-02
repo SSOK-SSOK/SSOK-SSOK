@@ -6,16 +6,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Blob;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,14 +36,66 @@ public class FileService {
         UUID uuid = UUID.randomUUID();
         String newFileName = uuid.toString() + fileName;
 
-        File file = new File(SERVER_PATH, newFileName);
+        File file = new File(LOCAL_PATH, newFileName);
         inputFile.transferTo(file);
+
+        // 내가 추가한 부분 /////////////////////////////////////////////////////////
+//        Blob blob;
+//
+//        try {
+//            blob = convertFileToBlob(file);
+//            System.out.println("blob 변환 성공");
+//            System.out.println(blob.length());
+//
+//            InputStream is = blob.getBinaryStream();
+//            OutputStream os = new FileOutputStream(LOCAL_PATH + "/banana.wav");
+//
+//            int bytesRead = -1;
+//            byte[] buffer = new byte[4096];
+//            while ((bytesRead = is.read(buffer)) != -1) {
+//                os.write(buffer, 0, bytesRead);
+//            }
+//        } catch (Exception e) {
+//            result.status = false;
+//            result.data = "Blob 변환 실패";
+//            result.object = null;
+//
+//            return result;
+//        }
+        // 내가 추가한 부분 /////////////////////////////////////////////////////////
 
         result.status = true;
         result.data = "파일 경로";
         result.object = file.getPath();
 
         return result;
+    }
+
+    public Blob convertFileToBlob(File file) throws Exception {
+
+        Blob blob = null;
+        FileInputStream inputStream = null;
+        try {
+            byte[] byteArray = new byte[(int) file.length()];
+            inputStream = new FileInputStream(file);
+            inputStream.read(byteArray);
+
+            blob = new javax.sql.rowset.serial.SerialBlob(byteArray);
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+            } catch (Exception e) {
+                inputStream = null;
+            } finally {
+                inputStream = null;
+            }
+        }
+
+        return blob;
     }
 
     public Object convertVoiceToText(String languageCode, String audioFilePath) {
@@ -72,7 +122,7 @@ public class FileService {
         String responBody = null;
         try {
             url = new URL(openApiURL);
-            HttpURLConnection con = (HttpURLConnection)url.openConnection();
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("POST");
             con.setDoOutput(true);
 
