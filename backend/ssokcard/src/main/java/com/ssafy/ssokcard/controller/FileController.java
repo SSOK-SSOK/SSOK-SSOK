@@ -37,7 +37,7 @@ public class FileController {
     @ApiOperation(value = "파일 업로드")
     @PostMapping(value = "/upload")
     public Object readFile(@RequestParam ("file") MultipartFile inputFile) throws IOException {
-//        return fileService.convertVoiceToText("korean", "C:/SSAFY/banana.wav");
+//        return fileService.convertVoiceToText("korean", "C:/SSAFY/PJT2/chamoi.mp3");
         return fileService.saveFile(inputFile, inputFile.getOriginalFilename());
     }
 }

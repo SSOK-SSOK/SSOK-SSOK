@@ -47,6 +47,13 @@ dependencies {
     // https://mvnrepository.com/artifact/com.google.cloud/google-cloud-translate
     implementation group: 'com.google.cloud', name: 'google-cloud-translate', version: '1.94.3'
 
+    // https://mvnrepository.com/artifact/net.bramp.ffmpeg/ffmpeg
+    implementation group: 'net.bramp.ffmpeg', name: 'ffmpeg', version: '0.6.2'
+
+    // https://mvnrepository.com/artifact/org/jaudiotagger
+    implementation group: 'org', name: 'jaudiotagger', version: '2.0.3'
+
+
 }
 
 test {

@@ -2,6 +2,9 @@ package com.ssafy.ssokcard.service;
 
 import com.google.gson.Gson;
 import com.ssafy.ssokcard.model.response.BasicResponse;
+import org.jaudiotagger.audio.AudioFileIO;
+import org.jaudiotagger.audio.mp3.MP3AudioHeader;
+import org.jaudiotagger.audio.mp3.MP3File;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,28 +43,35 @@ public class FileService {
         inputFile.transferTo(file);
 
         // 내가 추가한 부분 /////////////////////////////////////////////////////////
-//        Blob blob;
+        Blob blob;
+
+        try {
+            blob = convertFileToBlob(file);
+            System.out.println("blob 변환 성공");
+            System.out.println(blob.length());
+
+            InputStream is = blob.getBinaryStream();
+            OutputStream os = new FileOutputStream(LOCAL_PATH + "/chamoi.mp3");
+
+//            bitrate 테스트
+//            File mp3file = new File(LOCAL_PATH + "/chamoi.mp3");
+//            MP3File mp3file2 =  (MP3File) AudioFileIO.read(mp3file);
 //
-//        try {
-//            blob = convertFileToBlob(file);
-//            System.out.println("blob 변환 성공");
-//            System.out.println(blob.length());
-//
-//            InputStream is = blob.getBinaryStream();
-//            OutputStream os = new FileOutputStream(LOCAL_PATH + "/banana.wav");
-//
-//            int bytesRead = -1;
-//            byte[] buffer = new byte[4096];
-//            while ((bytesRead = is.read(buffer)) != -1) {
-//                os.write(buffer, 0, bytesRead);
-//            }
-//        } catch (Exception e) {
-//            result.status = false;
-//            result.data = "Blob 변환 실패";
-//            result.object = null;
-//
-//            return result;
-//        }
+//            MP3AudioHeader audioHeader = mp3file2.getMP3AudioHeader();
+//            System.out.println(audioHeader.getBitRate());
+
+            int bytesRead = -1;
+            byte[] buffer = new byte[10 + (int)blob.length()];
+            while ((bytesRead = is.read(buffer)) != -1) {
+                os.write(buffer, 0, bytesRead);
+            }
+        } catch (Exception e) {
+            result.status = false;
+            result.data = "Blob 변환 실패";
+            result.object = null;
+
+            return result;
+        }
         // 내가 추가한 부분 /////////////////////////////////////////////////////////
 
         result.status = true;
