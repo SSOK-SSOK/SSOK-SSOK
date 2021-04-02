@@ -4,16 +4,16 @@
     <!-- <div class="languages">
       <div class="language" v-for="(flag, name) in flags" :key="name">
         <v-btn icon>
-          <img :src="require(`@/assets/images/flags/${flag.icon}`)">
+          <img :src="require(`@/assets/images/flags/${flag.icon}`)" />
         </v-btn>
       </div>
-    </div> -->
-    <div class="category-field">
-      <SpreadCard/>
-      <!-- <div v-for="(category, idx) in categories" :key="idx">
+    </div>
+    <div class="category-field"> -->
+    <SpreadCard />
+    <!-- <div v-for="(category, idx) in categories" :key="idx">
         <SpreadCard :category="category"/>
       </div> -->
-    </div>
+    <!-- </div> -->
     <!--------------- 카드 리스트 ---------------->
     <!-- <v-row>
       <v-col
@@ -56,72 +56,82 @@
 <script>
 import SpreadCard from "@/components/SpreadCard.vue";
 export default {
-  name: 'CardCategory',
+  name: "CardCategory",
   components: {
     SpreadCard,
   },
   data: function () {
     return {
       flags: [
-        { name: "kr", icon: "kr.png"},
-        { name: "us", icon: "us.png"},
-        { name: "cn", icon: "cn.png"},
-        { name: "jp", icon: "jp.png"},
-        { name: "fr", icon: "fr.png"},
-        { name: "es", icon: "es.png"},
-        { name: "vn", icon: "vn.png"}
+        { name: "kr", icon: "kr.png" },
+        { name: "us", icon: "us.png" },
+        { name: "cn", icon: "cn.png" },
+        { name: "jp", icon: "jp.png" },
+        { name: "fr", icon: "fr.png" },
+        { name: "es", icon: "es.png" },
+        { name: "vn", icon: "vn.png" },
       ],
       categories: [
-        { id: 1, name: "Animal", sub: "동물", path: "https://i.pinimg.com/originals/d6/3c/de/d63cded9d8454a5b57ee8bef31c3ee71.gif"},
-        { id: 2, name: "Fruit", sub: "과일", path: "https://acegif.com/wp-content/gifs/apple-8.gif"}
-      ]
-    }
+        {
+          id: 1,
+          name: "Animal",
+          sub: "동물",
+          path:
+            "https://i.pinimg.com/originals/d6/3c/de/d63cded9d8454a5b57ee8bef31c3ee71.gif",
+        },
+        {
+          id: 2,
+          name: "Fruit",
+          sub: "과일",
+          path: "https://acegif.com/wp-content/gifs/apple-8.gif",
+        },
+      ],
+    };
   },
   methods: {
     startGame: function (info) {
-      this.$store.dispatch("CardGameStore/fetchCards", info.id)
+      this.$store.dispatch("CardGameStore/fetchCards", info.id);
       this.$router.push({
-        name: "PlayGame",
+        name: "PlayCardGame",
         params: {
           category: info,
-        }
+        },
       });
     },
     audioTest: function () {
-      this.$router.push({ name: "AudioTest" })
-    }
-  }
-}
+      this.$router.push({ name: "AudioTest" });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-.layout{
-  .languages{
+.layout {
+  .languages {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 15%;
-    .language{
+    .language {
       display: flex;
       justify-content: center;
       width: 8%;
-      .v-btn{
-        .v-btn__content{
-          img{
+      .v-btn {
+        .v-btn__content {
+          img {
             width: 20%;
-
           }
         }
       }
     }
   }
-  .category-field{
+  .category-field {
     width: 100%;
     height: 60%;
     display: flex;
     align-items: center;
-    div{
+    div {
       //SpreadCard
     }
   }

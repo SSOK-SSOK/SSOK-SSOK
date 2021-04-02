@@ -12,7 +12,7 @@
         </div>
       </nav>
       <div class="game-field">
-        <QuizCard :currentQuiz="currentQuiz"/>
+        <QuizCard :currentQuiz="currentQuiz" />
       </div>
       <div class="game-buttons">
         <button v-if="started" @click="moveNext" class="game-btn">
@@ -24,9 +24,18 @@
       </div>
       <div class="countdown-timer">
         <div class="base-timer">
-          <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <svg
+            class="base-timer__svg"
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <g class="base-timer__circle">
-              <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
+              <circle
+                class="base-timer__path-elapsed"
+                cx="50"
+                cy="50"
+                r="45"
+              ></circle>
               <path
                 :stroke-dasharray="circleDasharray"
                 class="base-timer__path-remaining"
@@ -48,8 +57,8 @@
 </template>
 
 <script>
-import QuizCard from '@/components/QuizCard.vue';
-import { mapState } from 'vuex';
+import QuizCard from "@/components/QuizCard.vue";
+import { mapState } from "vuex";
 
 // for Timer
 const FULL_DASH_ARRAY = 283;
@@ -58,30 +67,29 @@ const ALERT_THRESHOLD = 5;
 
 const COLOR_CODES = {
   info: {
-    color: "green"
+    color: "green",
   },
   warning: {
     color: "orange",
-    threshold: WARNING_THRESHOLD
+    threshold: WARNING_THRESHOLD,
   },
   alert: {
     color: "red",
-    threshold: ALERT_THRESHOLD
-  }
+    threshold: ALERT_THRESHOLD,
+  },
 };
 
 const TIME_LIMIT = 15;
 
-
 export default {
-  name: 'PlayGame',
+  name: "PlayCardGame",
   components: {
     QuizCard,
   },
   data() {
     return {
-      categoryName: '',
-      categorySub: '',
+      categoryName: "",
+      categorySub: "",
       quizIdx: 0,
 
       //for game button
@@ -94,8 +102,8 @@ export default {
     };
   },
   computed: {
-    ...mapState('CardGameStore', ['playingCards']),
-    currentQuiz () {
+    ...mapState("CardGameStore", ["playingCards"]),
+    currentQuiz() {
       // 0초가 남으면 watch에서 quizIdx의 값을 증가시켜준다. 변하는 quizIdx의 값에 따라 다른 퀴즈가 QuizCard에 넘어가게 하자.
       return this.sendCurrentQuiz(this.quizIdx);
     },
@@ -108,7 +116,7 @@ export default {
       let seconds = timeLeft % 60;
       if (seconds < 10) {
         seconds = `0${seconds}`;
-      } 
+      }
       return `${seconds}`;
     },
     timeLeft() {
@@ -127,32 +135,32 @@ export default {
       } else {
         return info.color;
       }
-    }    
+    },
   },
   watch: {
     // for Timer
     timePassed(newValue) {
       if (newValue === 15) {
-        this.onTimesUp()
-        this.solvingStatus = false
+        this.onTimesUp();
+        this.solvingStatus = false;
       }
     },
     solvingStatus(newValue) {
       if (newValue === false) {
-        this.quizIdx += 1
-        this.timePassed = 0
-        this.solvingStatus = true
+        this.quizIdx += 1;
+        this.timePassed = 0;
+        this.solvingStatus = true;
       } else {
-        this.startTimer()
+        this.startTimer();
       }
-    }
+    },
   },
   created() {
     this.getParams();
   },
   mounted() {
-    this.solvingStatus = false
-    this.timePassed = 0
+    this.solvingStatus = false;
+    this.timePassed = 0;
   },
   methods: {
     getParams: function () {
@@ -162,51 +170,50 @@ export default {
     },
     sendCurrentQuiz(idx) {
       if (idx < 15) {
-        return this.playingCards[idx]
-      } 
+        return this.playingCards[idx];
+      }
     },
     moveToSelectPage: function () {
-      this.$router.push({name: "CardGame" })
+      this.$router.push({ name: "CardGame" });
     },
 
     //forButton
     getStart: function () {
-      this.started = true
-      this.solvingStatus = true
+      this.started = true;
+      this.solvingStatus = true;
     },
     moveNext: function () {
-      this.onTimesUp()
+      this.onTimesUp();
     },
 
     // for Timer
     onTimesUp: function () {
       clearInterval(this.timerInterval);
-      this.timePassed = 15
+      this.timePassed = 15;
       // clearInterval은 setInterval로 인해 반복하고 있는 것을 멈추게 한다.
-
     },
-    startTimer: function() {
-      this.timePassed = 0
+    startTimer: function () {
+      this.timePassed = 0;
       // 1초마다 timePassed에 1을 더해준다.
       this.timerInterval = setInterval(() => (this.timePassed += 1), 1000);
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
 @import "@/style/star.sass";
 @import "@/style/light-button.scss";
 @import "@/style/game-button.scss";
-.container{
+.container {
   padding: 1%;
-  .background{
+  .background {
     position: relative;
     z-index: -1;
     width: 100%;
     height: 100%;
   }
-  .contents{
+  .contents {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -218,28 +225,28 @@ export default {
       align-items: center;
       padding: 2.5% 1.5%;
       margin-bottom: 3%;
-      height:5%;
+      height: 5%;
       width: 100%;
       color: white;
       background: none;
       font-size: 1rem;
-      div{
+      div {
         //light-button
       }
     }
-    .game-field{
+    .game-field {
       width: 100%;
       height: 50%;
       display: flex;
       justify-content: center;
       margin-bottom: 0.5%;
-      div{
+      div {
         //QuizCard
       }
     }
 
     // 타이머
-    .countdown-timer{
+    .countdown-timer {
       text-align: end;
       padding: 1% 3%;
       width: 100%;
