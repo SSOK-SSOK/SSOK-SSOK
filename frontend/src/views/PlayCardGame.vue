@@ -7,49 +7,46 @@
     </div>
     <div class="contents">
       <nav>
-        <div @click="moveToSelectPage">
-          <div class="glow"></div>
-        </div>
+        <div @click="moveToSelectPage" class="glow"></div>
       </nav>
       <div class="game-field">
-        <QuizCard :currentQuiz="currentQuiz" />
-      </div>
-      <div class="game-buttons">
-        <button v-if="started" @click="moveNext" class="game-btn">
-          <span>NEXT</span>
-        </button>
-        <button v-else @click="getStart" class="game-btn">
-          <span>START</span>
-        </button>
-      </div>
-      <div class="countdown-timer">
-        <div class="base-timer">
-          <svg
-            class="base-timer__svg"
-            viewBox="0 0 100 100"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g class="base-timer__circle">
-              <circle
-                class="base-timer__path-elapsed"
-                cx="50"
-                cy="50"
-                r="45"
-              ></circle>
-              <path
-                :stroke-dasharray="circleDasharray"
-                class="base-timer__path-remaining"
-                :class="remainingPathColor"
-                d="
+        <div class="card">
+          <div v-if="started">
+            <QuizCard :currentQuiz="currentQuiz" />
+          </div>
+          <button v-else class="auth-button mx-auto" @click="getStart">
+            게임 시작
+          </button>
+        </div>
+        <div v-if="started" class="countdown-timer">
+          <div class="base-timer">
+            <svg
+              class="base-timer__svg"
+              viewBox="0 0 100 100"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g class="base-timer__circle">
+                <circle
+                  class="base-timer__path-elapsed"
+                  cx="50"
+                  cy="50"
+                  r="45"
+                ></circle>
+                <path
+                  :stroke-dasharray="circleDasharray"
+                  class="base-timer__path-remaining"
+                  :class="remainingPathColor"
+                  d="
                   M 50, 50
                   m -45, 0
                   a 45,45 0 1,0 90,0
                   a 45,45 0 1,0 -90,0
                 "
-              ></path>
-            </g>
-          </svg>
-          <span class="base-timer__label">{{ formattedTimeLeft }}</span>
+                ></path>
+              </g>
+            </svg>
+            <span class="base-timer__label">{{ formattedTimeLeft }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -174,7 +171,7 @@ export default {
       }
     },
     moveToSelectPage: function () {
-      this.$router.push({ name: "CardGame" });
+      this.$router.push({ name: "SelectCardGame" });
     },
 
     //forButton
@@ -204,7 +201,7 @@ export default {
 <style lang="scss" scoped>
 @import "@/style/star.sass";
 @import "@/style/light-button.scss";
-@import "@/style/game-button.scss";
+@import "@/style/auth-button.scss";
 .container {
   padding: 1%;
   .background {
@@ -217,6 +214,7 @@ export default {
     position: absolute;
     width: 100%;
     height: 100%;
+    z-index: 10;
     left: 0;
     padding: 1%;
     nav {
@@ -230,75 +228,73 @@ export default {
       color: white;
       background: none;
       font-size: 1rem;
-      div {
-        //light-button
-      }
     }
     .game-field {
       width: 100%;
-      height: 50%;
+      height: 65%;
       display: flex;
-      justify-content: center;
-      margin-bottom: 0.5%;
-      div {
-        //QuizCard
-      }
-    }
-
-    // 타이머
-    .countdown-timer {
-      text-align: end;
-      padding: 1% 3%;
-      width: 100%;
-      height: 30%;
-      .base-timer {
-        position: relative;
+      // margin-bottom: 0.5%;
+      .card {
         width: 100%;
-        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      // 타이머
+      .countdown-timer {
+        text-align: end;
+        width: 30%;
+        height: 30%;
+        padding: 1% 3%;
+        .base-timer {
+          position: relative;
+          width: 100%;
+          height: 100%;
 
-        &__svg {
-          width: 10%;
-          transform: scaleX(-1);
-        }
-
-        &__circle {
-          fill: none;
-          stroke: none;
-        }
-
-        &__path-elapsed {
-          stroke-width: 6%;
-          stroke: grey;
-        }
-
-        &__path-remaining {
-          stroke-width: 6%;
-          stroke-linecap: round;
-          transform: rotate(90deg);
-          transform-origin: center;
-          transition: 1s linear all;
-          fill-rule: nonzero;
-          stroke: currentColor;
-
-          &.green {
-            color: rgb(65, 184, 131);
+          &__svg {
+            width: 10%;
+            transform: scaleX(-1);
           }
 
-          &.orange {
-            color: orange;
+          &__circle {
+            fill: none;
+            stroke: none;
           }
 
-          &.red {
-            color: red;
+          &__path-elapsed {
+            stroke-width: 6%;
+            stroke: grey;
           }
-        }
-        // 숫자에 해당하는 css
-        &__label {
-          position: absolute;
-          width: 10%;
-          top: 22%;
-          right: 3.8%;
-          font-size: 2rem;
+
+          &__path-remaining {
+            stroke-width: 6%;
+            stroke-linecap: round;
+            transform: rotate(90deg);
+            transform-origin: center;
+            transition: 1s linear all;
+            fill-rule: nonzero;
+            stroke: currentColor;
+
+            &.green {
+              color: rgb(65, 184, 131);
+            }
+
+            &.orange {
+              color: orange;
+            }
+
+            &.red {
+              color: red;
+            }
+          }
+          // 숫자에 해당하는 css
+          &__label {
+            position: absolute;
+            width: 10%;
+            top: 22%;
+            right: 3.8%;
+            font-size: 2rem;
+          }
         }
       }
     }
