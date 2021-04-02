@@ -40,7 +40,7 @@
                   large
                   width="50%"
                   class="ml-4"
-                  @click="startGame"
+                  @click="startGame(card)"
                 >
                   게임하기
                 </v-btn>
@@ -51,7 +51,6 @@
       </v-container>
     </v-card>
   </v-layout>
-  
 </template>
 
 <script>
@@ -69,14 +68,20 @@ export default {
         { name: "vn", icon: "vn.png"}
       ],
       cards: [
-          { name: "Animals", sub: "동물"},
-          { name: "Fruits", sub: "과일"}
+          { id: 1, name: "Animals", sub: "동물"},
+          { id: 2, name: "Fruits", sub: "과일"}
       ]
     }
   },
   methods: {
-    startGame: function () {
-      this.$router.push({ name: "AudioTest" });
+    startGame: function (info) {
+      this.$store.dispatch("CardGameStore/fetchCards", info.id)
+      this.$router.push({
+        name: "PlayGame",
+        params: {
+          card: info,
+        }
+      });
     }
   }
 }
