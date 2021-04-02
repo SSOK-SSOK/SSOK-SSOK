@@ -6,7 +6,6 @@ import WelcomePage from "@/views/WelcomePage.vue";
 import CardGame from "@/views/CardGame.vue";
 import PlayGame from "@/views/PlayGame.vue";
 import AudioTest from "@/views/AudioTest.vue";
-import Test from "@/views/Test.vue";
 
 Vue.use(VueRouter);
 
@@ -40,11 +39,6 @@ const routes = [
     path: "/audiotest",
     name: "AudioTest",
     component: AudioTest,
-  },
-  {
-    path: "/test",
-    name: "Test",
-    component: Test,
   },
 ];
 
