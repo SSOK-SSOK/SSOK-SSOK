@@ -14,6 +14,14 @@
       <div class="game-field">
         <QuizCard :currentQuiz="currentQuiz"/>
       </div>
+      <div class="game-buttons">
+        <button v-if="started" @click="moveNext" class="game-btn">
+          <span>NEXT</span>
+        </button>
+        <button v-else @click="getStart" class="game-btn">
+          <span>START</span>
+        </button>
+      </div>
       <div class="countdown-timer">
         <div class="base-timer">
           <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -76,6 +84,10 @@ export default {
       categorySub: '',
       quizIdx: 0,
 
+      //for game button
+      started: false,
+      solvingStatus: false,
+
       // for Timer
       timePassed: 0,
       timerInterval: null,
@@ -119,19 +131,28 @@ export default {
   },
   watch: {
     // for Timer
-    timeLeft(newValue) {
-      if (newValue === 0) {
-        this.onTimesUp();
-        this.quizIdx += 1
+    timePassed(newValue) {
+      if (newValue === 15) {
+        this.onTimesUp()
+        this.solvingStatus = false
       }
     },
+    solvingStatus(newValue) {
+      if (newValue === false) {
+        this.quizIdx += 1
+        this.timePassed = 0
+        this.solvingStatus = true
+      } else {
+        this.startTimer()
+      }
+    }
   },
   created() {
     this.getParams();
   },
   mounted() {
-    // for Timer
-    this.startTimer();
+    this.solvingStatus = false
+    this.timePassed = 0
   },
   methods: {
     getParams: function () {
@@ -147,14 +168,25 @@ export default {
     moveToSelectPage: function () {
       this.$router.push({name: "CardGame" })
     },
-    // for Timer
-    onTimesUp() {
-      // clearInterval은 setInterval로 인해 반복하고 있는 것을 멈추게 한다.
-      clearInterval(this.timerInterval);
-      // 다음 카드를 보여주자.
-      this.quizIdx += 1
+
+    //forButton
+    getStart: function () {
+      this.started = true
+      this.solvingStatus = true
     },
-    startTimer() {
+    moveNext: function () {
+      this.onTimesUp()
+    },
+
+    // for Timer
+    onTimesUp: function () {
+      clearInterval(this.timerInterval);
+      this.timePassed = 15
+      // clearInterval은 setInterval로 인해 반복하고 있는 것을 멈추게 한다.
+
+    },
+    startTimer: function() {
+      this.timePassed = 0
       // 1초마다 timePassed에 1을 더해준다.
       this.timerInterval = setInterval(() => (this.timePassed += 1), 1000);
     },
@@ -165,7 +197,7 @@ export default {
 <style lang="scss" scoped>
 @import "@/style/star.sass";
 @import "@/style/light-button.scss";
-
+@import "@/style/game-button.scss";
 .container{
   padding: 1%;
   .background{
@@ -198,6 +230,9 @@ export default {
     .game-field{
       width: 100%;
       height: 50%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 0.5%;
       div{
         //QuizCard
       }

@@ -17,7 +17,7 @@
     <!--------------- 카드 리스트 ---------------->
     <!-- <v-row>
       <v-col
-        v-for="(card, idx) in cards"
+        v-for="(category, idx) in categories"
         :key="idx"
       >
         <v-card
@@ -25,7 +25,7 @@
           rounded="xl"
         >
           <v-card-title class="display-3 font-weight-bold" style="color: #5254ac">
-            {{ card.name }}
+            {{ category.name }}
           </v-card-title>
 
           <v-card-text class="d-flex justify-space-between">
@@ -42,7 +42,7 @@
               large
               width="50%"
               class="ml-4"
-              @click="startGame(card)"
+              @click="startGame(category)"
             >
               게임하기
             </v-btn>
@@ -78,41 +78,41 @@ export default {
     }
   },
   methods: {
-    startGame: function (info) {
-      this.$store.dispatch("CardGameStore/fetchCards", info.id)
-      this.$router.push({
-        name: "PlayGame",
-        params: {
-          card: info,
-        }
-      });
-    }
+    // startGame: function (info) {
+    //   this.$store.dispatch("CardGameStore/fetchCards", info.id)
+    //   this.$router.push({
+    //     name: "PlayGame",
+    //     params: {
+    //       card: info,
+    //     }
+    //   });
+    // }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .layout{
-  // .languages{
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   width: 100%;
-  //   height: 15%;
-  //   .language{
-  //     display: flex;
-  //     justify-content: center;
-  //     width: 8%;
-  //     .v-btn{
-  //       .v-btn__content{
-  //         img{
-  //           width: 20%;
+  .languages{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 15%;
+    .language{
+      display: flex;
+      justify-content: center;
+      width: 8%;
+      .v-btn{
+        .v-btn__content{
+          img{
+            width: 20%;
 
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
+          }
+        }
+      }
+    }
+  }
   .category-field{
     width: 100%;
     height: 60%;
