@@ -1,7 +1,7 @@
 .animal-card-container {
   position: absolute;
   top: 30%;
-  left: 30%;
+  left: 35%;
   width: 32vw;
   height: 45vw;
   max-width: 320px;
@@ -31,7 +31,7 @@
 .fruit-card-container {
   position: absolute;
   top: 30%;
-  right: 5%;
+  right: 6%;
   width: 32vw;
   height: 45vw;
   max-width: 320px;
@@ -60,8 +60,8 @@
 
 .card {
   position: absolute;
-  width: 32vw;
-  height: 45vw;
+  width: 19vw;
+  height: 28vw;
   max-width: 320px;
   max-height: 450px;
   min-height: 225px;
@@ -96,7 +96,7 @@
 }
 .fruit-card-card3 {
   background-image: url("https://acegif.com/wp-content/gifs/apple-8.gif");
-  background-size: 150%;
+  background-size: 160%;
   background-position: 50%;
   color: #a68385;
   .card__suit {
