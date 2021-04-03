@@ -43,9 +43,7 @@
         </div>
         <!--오디오버튼-->
         <div v-if="started" class="audio-button">
-          <v-btn fab dark large color="white">
-            <v-icon color="red"> mdi-record </v-icon>
-          </v-btn>
+          <Audio />
         </div>
       </div>
     </div>
@@ -55,6 +53,7 @@
 <script>
 import QuizCard from "@/components/QuizCard.vue";
 import Timer from "@/components/Timer.vue";
+import Audio from "@/components/Audio.vue";
 import { mapState } from "vuex";
 
 export default {
@@ -62,6 +61,7 @@ export default {
   components: {
     QuizCard,
     Timer,
+    Audio
   },
   data() {
     return {
