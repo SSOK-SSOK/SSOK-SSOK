@@ -132,6 +132,4 @@ export default {
 .flip-card-front:hover .overlay {
   opacity: 0.7;
 }
-button {
-}
 </style>
