@@ -29,7 +29,68 @@
 import axios from 'axios';
 export default {
   name: "Audio",
-  
+  data: function () {
+    return {
+      isRecorded: false,
+      blob: {}
+    }
+  },
+  watch: {
+    isRecorded: function (val) {
+      console.log(val)
+      if (val === true) {
+        this.startRecord();
+      } else {
+        this.endRecord();
+      }
+    }
+  },
+  methods: {
+    startRecord: function () {
+      navigator.mediaDevices.getUserMedia({ audio: true })
+        .then((stream) => {
+          this.mediaRecorder = new MediaRecorder(stream)
+          this.mediaRecorder.addEventListener('dataavailable', (event) => {
+            //Blob 객체 저장
+            this.blob = event.data
+          })
+          this.mediaRecorder.start() //녹음 시작
+        }).catch((error) => {
+          console.log(error)
+        })
+    },
+
+    endRecord: function () {
+      this.mediaRecorder.stop() //녹음 중단하면 audio tag에 저장도 멈춤
+      this.upload()
+    },
+
+    upload: function () {
+      const formData = new FormData();
+      formData.append('file', this.blob);
+
+      const headers = {'Content-Type': 'multipart/form-data'}
+            
+      axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", formData, headers)
+        .then(res => {
+          console.log(res)
+          const path = res.data.object;
+          // Blob 데이터 다운로드
+          // var ffmpeg = require('ffmpeg');
+          // var process = new ffmpeg(path);
+          // process.then(function (audio) {
+          //   audio.fnExtractSoundToMP3('./assets/record.mp3', function (err, file){
+          //     if (!err) {
+          //       console.log(file)
+          //     }
+          //   });
+          // }, function (err) {
+          //   console.log(err)
+          // })
+        })
+        .catch(err => console.log(err))
+    }
+  }
 
 }
 </script>
