@@ -25,7 +25,7 @@
         ></path>
       </g>
     </svg>
-    <span class="base-timer__label">{{ formattedTimeLeft }}</span>
+    <h1 class="label">{{ formattedTimeLeft }}</h1>
   </div>
 </template>
 
@@ -52,7 +52,7 @@ const TIME_LIMIT = 15;
 
 export default {
   name: "Timer",
-  props: { quizIdx: Number },
+  props: { quizIdx: Number, resetTime: Boolean },
   data() {
     return {
       timePassed: 0,
@@ -90,6 +90,7 @@ export default {
     },
   },
   watch: {
+    // 카드가 바뀔 때마다 타이머를 시작합니다.
     quizIdx(newValue) {
       if (newValue < 15) {
         console.log(newValue + 1 + "번째 카드");
@@ -98,32 +99,37 @@ export default {
         console.log("끝!");
       }
     },
-    // 시간이 15초가 지나면 타이머를 초기화하고 문제를 못 풀었음을 상위 컴포넌트에 전달한다.
+    // 시간이 15초가 지나면 타이머를 초기화하고 문제를 못 품 (false)을 상위 컴포넌트에 전달한다.
     timePassed(newValue) {
       if (newValue === 15) {
         this.onTimesUp();
         this.$emit("solvingStatus", false);
       }
     },
+    resetTime(newValue) {
+      if (newValue === true) {
+        this.onTimesUp();
+      }
+    },
   },
   mounted() {
     if (this.quizIdx === 0) {
-      console.log("첫번재 카드");
+      console.log("첫번째 카드");
       this.start();
     }
   },
   methods: {
-    moveNext: function () {
+    moveNext() {
       this.onTimesUp();
     },
-    onTimesUp: function () {
-      // clearInterval은 setInterval로 인해 반복하고 있는 것을 멈추게 한다.
+    // 타이머 정지 및 초기화
+    onTimesUp() {
       clearInterval(this.timerInterval);
       this.timePassed = 15;
     },
-    start: function () {
+    // 타이머 시작
+    start() {
       this.timePassed = 0;
-      // 1초마다 timePassed에 1을 더해준다.
       this.timerInterval = setInterval(() => (this.timePassed += 1), 1000);
     },
   },
@@ -135,10 +141,11 @@ export default {
   position: relative;
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
-  &__svg {
-    width: 10%;
+  svg {
+    width: 30%;
     transform: scaleX(-1);
   }
   &__circle {
@@ -167,13 +174,11 @@ export default {
       color: red;
     }
   }
-  // 숫자에 해당하는 css
-  &__label {
+  // 숫자
+  .label {
     position: absolute;
-    width: 10%;
-    top: 22%;
-    right: 3.8%;
-    font-size: 2rem;
+    // right: %;
+    font-size: 3rem;
   }
 }
 </style>

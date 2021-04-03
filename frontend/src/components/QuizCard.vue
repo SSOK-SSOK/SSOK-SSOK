@@ -14,9 +14,13 @@
           ></v-img>
         </div>
         <div class="flip-card-back" style="border-radius: 30px">
-          <h1>{{ cardAnswer }}</h1>
-          <button class="auth-button mx-auto" @click="goNext">결과 보기</button>
+          <h1 class="text-center">{{ cardAnswer }}</h1>
         </div>
+      </div>
+      <div class="d-flex justify-content-center">
+        <button v-if="flip" class="auth-button mx-auto" @click="goNext">
+          다음 문제
+        </button>
       </div>
     </div>
   </div>
@@ -25,9 +29,9 @@
 <script>
 export default {
   name: "QuizCard",
-  components: {},
   props: {
     currentQuiz: Object,
+    fliped: Boolean,
   },
   data() {
     return {
@@ -42,14 +46,25 @@ export default {
       return this.currentQuiz.word;
     },
   },
-  watch: {},
-  created() {},
+  watch: {
+    fliped(newValue) {
+      // 시간초과라서 카드를 뒤집으라는 prop이오면 카드를 뒤집습니다.
+      if (newValue === true) {
+        this.flipCard();
+      }
+    },
+  },
   methods: {
+    // 카드 뒤집기
     flipCard() {
       this.flip = !this.flip;
+      this.$emit("is_fliped", true);
     },
+    // 다음 카드로 이동
     goNext() {
       console.log("다음 카드");
+      this.flipCard();
+      this.$emit("nextCard", true);
     },
   },
 };
@@ -59,8 +74,8 @@ export default {
 @import "@/style/auth-button.scss";
 .flip-card {
   background-color: transparent;
-  width: 600px;
-  height: 400px;
+  width: 700px;
+  height: 500px;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
   transition: 0.5s ease;
   backface-visibility: hidden;
@@ -114,7 +129,9 @@ export default {
   background-color: rgb(0, 0, 0);
 }
 
-.image:hover .overlay {
+.flip-card-front:hover .overlay {
   opacity: 0.7;
+}
+button {
 }
 </style>

@@ -10,7 +10,7 @@
         <div @click="moveToSelectPage" class="glow"></div>
       </nav>
       <h1 v-if="started" class="text-center">
-        녹음버튼을 눌러 정답을 말해주세요😉
+        녹음버튼을 눌러 정답을 말해보세요
       </h1>
       <div class="game-contents">
         <!--타이머-->
@@ -18,6 +18,7 @@
           <Timer
             v-if="started"
             :quizIdx="quizIdx"
+            :resetTime="resetTime"
             @solvingStatus="is_solved"
           ></Timer>
         </div>
@@ -25,7 +26,12 @@
         <div class="game-field">
           <div class="card">
             <div v-if="started">
-              <QuizCard :currentQuiz="currentQuiz" />
+              <QuizCard
+                :currentQuiz="currentQuiz"
+                :fliped="fliped"
+                @nextCard="nextCard"
+                @is_fliped="is_fliped"
+              />
             </div>
             <button v-else-if="ended" class="auth-button mx-auto">
               결과 보기
@@ -62,26 +68,25 @@ export default {
       categoryName: "",
       categorySub: "",
       quizIdx: 0,
-
-      //for game
       started: false,
       ended: false,
       solvingStatus: false,
+      fliped: false,
+      resetTime: false,
     };
   },
   computed: {
     ...mapState("CardGameStore", ["playingCards"]),
     currentQuiz() {
-      // 0초가 남으면 watch에서 quizIdx의 값을 증가시켜준다. 변하는 quizIdx의 값에 따라 다른 퀴즈가 QuizCard에 넘어가게 하자.
       return this.sendCurrentQuiz(this.quizIdx);
     },
   },
   watch: {
+    // 시간 초과면 카드를 뒤집는다
     solvingStatus(newValue) {
-      // 시간 초과일 때
       if (newValue === false) {
-        this.quizIdx += 1;
-        this.solvingStatus = true;
+        console.log("시간초과");
+        this.fliped = true;
       }
     },
   },
@@ -104,16 +109,32 @@ export default {
         this.quizIdx = 0;
       }
     },
+    is_solved(value) {
+      if (value === false) {
+        console.log("시간초과!");
+        this.solvingStatus = value;
+        this.fliped = true;
+      }
+    },
+    is_fliped(newValue) {
+      console.log("정답확인");
+      this.resetTime = true;
+    },
+    nextCard(newValue) {
+      if (newValue === true) {
+        this.quizIdx += 1;
+        this.solvingStatus = true;
+        this.fliped = false;
+        this.resetTime = false;
+      }
+    },
+    // 게임시작 버튼
+    getStart() {
+      this.started = true;
+    },
+    // 뒤로가기 버튼
     moveToSelectPage: function () {
       this.$router.push({ name: "SelectCardGame" });
-    },
-    is_solved(value) {
-      this.solvingStatus = value;
-    },
-    //forButton
-    getStart: function () {
-      this.started = true;
-      this.solvingStatus = true;
     },
   },
 };
@@ -157,12 +178,14 @@ export default {
       margin-top: 1%;
       // 타이머
       .countdown-timer {
-        width: 20%;
-        padding: 1% 3%;
-        // 카드
+        width: 30%;
+        padding: 1% 0% 1% 3%;
+        display: flex;
+        justify-content: flex-end;
       }
+      // 카드
       .game-field {
-        width: 60%;
+        width: 40%;
         height: 60vh;
         display: flex;
         justify-content: center;
@@ -177,7 +200,9 @@ export default {
       }
       // 오디오 버튼
       .audio-button {
-        width: 20%;
+        width: 30%;
+        display: flex;
+        justify-content: center;
       }
     }
   }
