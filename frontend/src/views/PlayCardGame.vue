@@ -22,6 +22,12 @@
           <span>START</span>
         </button>
       </div>
+
+      <!-- 지우지 마세요
+      <div v-if="started">
+        <Audio />
+      </div> -->
+
       <div class="countdown-timer">
         <div class="base-timer">
           <svg
@@ -58,6 +64,7 @@
 
 <script>
 import QuizCard from "@/components/QuizCard.vue";
+import Audio from "@/components/Audio.vue";
 import { mapState } from "vuex";
 
 // for Timer
@@ -85,6 +92,7 @@ export default {
   name: "PlayCardGame",
   components: {
     QuizCard,
+    Audio
   },
   data() {
     return {
@@ -184,6 +192,7 @@ export default {
     },
     moveNext: function () {
       this.onTimesUp();
+
     },
 
     // for Timer

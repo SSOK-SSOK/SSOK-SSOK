@@ -3,7 +3,6 @@
     <NavBar />
     <div id="microphone-test">
       <audio ref="recordPlayer" controls src="">
-
       </audio>
       <v-btn @click="startRecord">녹음</v-btn>
       <v-btn @click="endRecord">중단</v-btn>
@@ -43,7 +42,7 @@ export default {
           })
           this.mediaRecorder.start() //녹음 시작
         }).catch((error) => {
-          this.$alert({ title:'error', text: 'Failed to turn on the microphone! ' + error })
+          console.log(error)
         })
     },
 
@@ -79,7 +78,6 @@ export default {
     }
   }
 }
-
 </script>
 
 <style>
