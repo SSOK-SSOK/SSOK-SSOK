@@ -4,7 +4,7 @@
       <div class="flip-card-inner">
         <div class="flip-card-front" @click="flipCard">
           <div class="overlay" style="border-radius: 30px">
-            <h1 class="text">정답을 보고 싶으면 카드를 클릭하세요</h1>
+            <h1 class="text">정답을 보고 싶으면 카드를 더블클릭하세요</h1>
           </div>
           <v-img
             class="image"
@@ -14,7 +14,7 @@
           ></v-img>
         </div>
         <div class="flip-card-back" style="border-radius: 30px">
-          <h1 class="text-center">{{ cardAnswer }}</h1>
+          <h1 v-if="flip" class="text-center">{{ cardAnswer }}</h1>
         </div>
       </div>
       <div class="d-flex justify-content-center">
@@ -131,7 +131,5 @@ export default {
 
 .flip-card-front:hover .overlay {
   opacity: 0.7;
-}
-button {
 }
 </style>

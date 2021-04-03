@@ -20,17 +20,19 @@
           <div class="glow" @click="moveToMainPage"></div>
         </div>
       </nav>
-      <div>
-        <p>
-          {{ user }}
-          다양한 언어를
-          <br />
-          재밌게 배워보아요!
-        </p>
-        <button v-if="getCheckLogin" class="auth-button" @click="logout">
-          Logout
-        </button>
-        <button v-else class="auth-button" @click="google">Google</button>
+      <div class="loginZone d-flex align-items-center">
+        <div>
+          <p>
+            {{ user }}
+            다양한 언어를
+            <br />
+            재밌게 배워보아요!
+          </p>
+          <button v-if="getCheckLogin" class="auth-button" @click="logout">
+            Logout
+          </button>
+          <button v-else class="auth-button" @click="google">Google</button>
+        </div>
       </div>
     </div>
   </v-container>
@@ -122,7 +124,7 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-right: 1.2%;
+      padding: 0 2rem 0 0;
       margin-bottom: 5%;
       height: 5%;
       width: 100%;
@@ -145,14 +147,19 @@ export default {
           margin: 0 0 0 0.5vw;
         }
       }
-      div {
-        // light-button.scss
-      }
     }
-    div {
-      text-align: center;
+    .loginZone {
+      width: 50%;
+      height: 30%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      div {
+        text-align: center;
+      }
       p {
-        font-size: 5vh;
+        font-size: 4rem;
         text-align: center;
         margin: 0;
       }
