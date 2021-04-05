@@ -37,8 +37,30 @@ export default {
             //Blob 객체 저장
             this.blob = event.data
             var reader = new FileReader();
-            reader.onloadend = function () {
+
+            
+            console.log(this.blob)
+            console.log(stream)
+
+
+
+
+
+
+
+            reader.readAsDataURL(this.blob);
+            reader.onload = () => {
+              const base64AudioMessage = reader.result.split(',')[1];
+              console.log(base64AudioMessage)
+
+              const headers = { 'Content-Type': 'application/json' }
+              axios.post("https://j4a201.p.ssafy.io/card-api/file/upload",base64AudioMessage, headers)
+                .then(res => console.log(res))
+                .catch(error => console.log(error))
             }
+
+            // reader.onloadend = function () {
+            // }
           })
           this.mediaRecorder.start() //녹음 시작
         }).catch((error) => {
@@ -55,26 +77,14 @@ export default {
       console.log(this.blob)
       formData.append('file', this.blob);
 
-      const headers = {'Content-Type': 'multipart/form-data'}
+      // const headers = {'Content-Type': 'multipart/form-data'}
             
-      axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", formData, headers)
-        .then(res => {
-          console.log(res)
-          const path = res.data.object;
-          // Blob 데이터 다운로드
-          var ffmpeg = require('ffmpeg');
-          var process = new ffmpeg(path);
-          process.then(function (audio) {
-            audio.fnExtractSoundToMP3('./assets/record.mp3', function (err, file){
-              if (!err) {
-                console.log(file)
-              }
-            });
-          }, function (err) {
-            console.log(err)
-          })
-        })
-        .catch(err => console.log(err))
+      // axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", formData, headers)
+      //   .then(res => {
+      //     console.log(res)
+      //     const path = res.data.object;
+      //   })
+      //   .catch(err => console.log(err))
     }
   }
 }
