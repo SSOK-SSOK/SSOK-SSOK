@@ -7,9 +7,13 @@
     </div>
     <div class="contents">
       <nav>
-        <div>
-          <div class="glow" @click="moveToMainPage"></div>
-        </div>
+        <v-tooltip bottom color="deep-purple accent-3">
+          <template v-slot:activator="{ on, attrs }">
+            <div v-bind="attrs" v-on="on"
+             class="glow" @click="moveMainPage"></div>
+          </template>
+          <span>게임 선택 GO GO!</span>
+        </v-tooltip>
       </nav>
       <CardCategory />
     </div>
@@ -24,7 +28,7 @@ export default {
     CardCategory,
   },
   methods: {
-    moveToMainPage: function () {
+    moveMainPage: function () {
       this.$router.push({ name: "MainPage" });
     },
   },

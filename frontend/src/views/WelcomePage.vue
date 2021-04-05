@@ -16,9 +16,13 @@
           />
           <p>SSOK SSOK</p>
         </div>
-        <div>
-          <div class="glow" @click="moveToMainPage"></div>
-        </div>
+        <v-tooltip bottom color="deep-purple accent-3">
+          <template v-slot:activator="{ on, attrs }">
+            <div v-bind="attrs" v-on="on"
+             class="glow" @click="moveMainPage"></div>
+          </template>
+          <span>게임 선택 GO GO!</span>
+        </v-tooltip>
       </nav>
       <div class="loginZone d-flex align-items-center">
         <div>
@@ -63,7 +67,7 @@ export default {
     },
   },
   methods: {
-    moveToMainPage: function () {
+    moveMainPage: function () {
       this.$router.push({ name: "MainPage" });
     },
     google() {
@@ -146,6 +150,9 @@ export default {
           font-size: 5vh;
           margin: 0 0 0 0.5vw;
         }
+      }
+      div{
+        //light-button.scss
       }
     }
     .loginZone {
