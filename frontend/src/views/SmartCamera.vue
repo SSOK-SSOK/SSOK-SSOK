@@ -58,13 +58,13 @@
         elevation="0"
       >
         <span v-if="is_done">
-          <img
+          <!-- <img
             :src="detected_img"
             width="100%"
             height="90%"
             class="d-flex mx-auto"
             style="position: relative; z-index: 100"
-          />
+          /> -->
           <span v-if="is_correct">
             <h1 class="text-center mt-3" style="color: white">정답입니다!</h1>
             <h3 class="text-center mt-3" style="color: white">
@@ -117,7 +117,6 @@ export default {
     loading: false,
     question: "cup",
     img: null,
-    detected_img: require("../../../AI/images/detected_image.jpg"),
     is_start: false,
   }),
   computed: {
@@ -197,13 +196,6 @@ export default {
     initialize() {
       this.$store.dispatch("SmartCameraStore/initializeInfo");
       this.is_start = true;
-    },
-    mounted() {
-      console.log("다시 컴백!");
-      console.log(this.score);
-      console.log(this.category);
-      console.log(this.is_correct);
-      console.log(this.is_done);
     },
   },
 };

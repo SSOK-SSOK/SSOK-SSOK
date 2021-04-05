@@ -13,6 +13,7 @@ import base64, secrets, io
 from PIL import Image
 from django.core.files.base import ContentFile
 from .models import Images
+from django.conf import settings
 
 # For Object Detection (YOLO)
 from yolov3.configs import *
@@ -49,47 +50,6 @@ def get_image_from_data_url( data_url, resize=True, base_width=600 ):
 
     return file
 
-# 정답 여부를 체크합니다.
-def check_answer(answer):
-    items = []
-
-    # 파일을 불러옵니다.
-    with open('./images/score.txt', 'r') as f:
-        lines = f.readlines()
-        for line in lines:
-            score, category = line.split(",")
-            score = int(score)
-            category = category.strip("\n")
-            items.append([score, category])
-        f.close()
-
-    # 정확도 순으로 내림차순 정렬합니다.
-    items.sort(key=lambda x : -x[0])
-    
-    if len(items) == 1:
-        score, category = items[0][0], items[0][1]
-        if category == "person":
-            return False, "물체가 없어요"
-        else:
-            if category == answer:
-                return True, score
-            else:
-                return False, category
-    else:
-        # 첫번째 값이 person이면 두번째 값과, 아니면 첫번째 값과 비교합니다.
-        if items[0][1] == "person":
-            score, category = items[1][0], items[1][1]
-            if category == answer:
-                return True, score
-            else:
-                return False, category
-        else:
-            score, category = items[0][0], items[0][1]
-            if category == answer:
-                return True, score
-            else:
-                return False, category
-
 
 @api_view(['POST'])
 @method_decorator(csrf_exempt, name='dispatch')
@@ -101,7 +61,10 @@ def detection(request):
     image = Images.objects.last()
     image.images = im
     image.save()
-    
+
+    # 비교할 정답
+    answer = request.data['question']
+
     # YOLO사용 준비
     os.environ['CUDA_VISIBLE_DEVICES'] = '0'
     video_path = ""
@@ -109,16 +72,12 @@ def detection(request):
     # YOLO 모델로 detecting
     last_image = Images.objects.last().images
     yolo = Load_Yolo_model()
-    detect_image(yolo, image.images.url,  input_size=YOLO_INPUT_SIZE, show=True, rectangle_colors=(255, 0, 0))
-
-    # detecting된 결과와 정답 비교하기
-    answer = request.data['question']
-    is_correct, info = check_answer(answer)
-
+    is_correct, info = detect_image(yolo, image.images.url, answer, input_size=YOLO_INPUT_SIZE, show=True, rectangle_colors=(255, 0, 0))
+    
     return Response({
         'message' : '사진 테스트 완료!!',
         'is_correct' : is_correct,
-        'info' : info,
+        'info' : info
     })
 
 # detect_realtime(yolo, '', input_size=YOLO_INPUT_SIZE, show=True, rectangle_colors=(255, 0, 0))
