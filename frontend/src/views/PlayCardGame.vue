@@ -15,7 +15,7 @@
           <span>카드게임 다시 고르기!</span>
         </v-tooltip>
       </nav>
-      <h1 v-if="started" class="text-center">
+      <h1 v-if="started">
         녹음버튼을 눌러 정답을 말해보세요
       </h1>
       <div class="game-contents">
@@ -34,9 +34,9 @@
             <div v-if="started">
               <QuizCard
                 :currentQuiz="currentQuiz"
-                :fliped="fliped"
+                :flipped="flipped"
                 @nextCard="nextCard"
-                @is_fliped="is_fliped"
+                @is_flipped="is_flipped"
               />
             </div>
             <button v-else-if="ended" class="auth-button mx-auto">
@@ -77,9 +77,9 @@ export default {
       started: false,
       ended: false,
       solvingStatus: false,
-      fliped: false,
+      flipped: false,
       resetTime: false,
-    };
+    }
   },
   computed: {
     ...mapState("CardGameStore", ["playingCards"]),
@@ -92,7 +92,7 @@ export default {
     solvingStatus(newValue) {
       if (newValue === false) {
         console.log("시간초과");
-        this.fliped = true;
+        this.flipped = true;
       }
     },
   },
@@ -101,7 +101,7 @@ export default {
     this.solvingStatus = false;
   },
   methods: {
-    getParams: function () {
+    getParams() {
       const category = this.$route.params.category;
       this.categoryName = category.name;
       this.categorySub = category.sub;
@@ -119,10 +119,10 @@ export default {
       if (value === false) {
         console.log("시간초과!");
         this.solvingStatus = value;
-        this.fliped = true;
+        this.flipped = true;
       }
     },
-    is_fliped(newValue) {
+    is_flipped(newValue) {
       console.log("정답확인");
       this.resetTime = true;
     },
@@ -130,7 +130,7 @@ export default {
       if (newValue === true) {
         this.quizIdx += 1;
         this.solvingStatus = true;
-        this.fliped = false;
+        this.flipped = false;
         this.resetTime = false;
       }
     },
@@ -139,7 +139,7 @@ export default {
       this.started = true;
     },
     // 뒤로가기 버튼
-    moveSelectCardGame: function () {
+    moveSelectCardGame() {
       this.$router.push({ name: "SelectCardGame" });
     },
   },
@@ -161,22 +161,25 @@ export default {
   }
   .contents {
     position: absolute;
+    z-index: 10;
     width: 100%;
     height: 100%;
-    z-index: 10;
     left: 0;
     padding: 1%;
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      width: 100%;
+      height: 5%;
       padding: 2.5% 1.5%;
       margin-bottom: 2%;
-      height: 5%;
-      width: 100%;
-      color: white;
       background: none;
+      color: white;
       font-size: 1rem;
+    }
+    h1{
+      text-align: center;
     }
     .game-contents {
       display: flex;
@@ -184,11 +187,11 @@ export default {
       margin-top: 1%;
       // 타이머
       .countdown-timer {
+        display: flex;
+        justify-content: flex-end;
         width: 30%;
         height: 60vh;
         padding: 1% 0% 1% 3%;
-        display: flex;
-        justify-content: flex-end;
       }
       // 카드
       .game-field {
@@ -207,11 +210,11 @@ export default {
       }
       // 오디오 버튼
       .audio-button {
-        width: 30%;
-        height: 60vh;
         display: flex;
         justify-content: start;
         align-items: center;
+        width: 30%;
+        height: 60vh;
       }
     }
   }

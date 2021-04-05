@@ -64,24 +64,18 @@
 <script>
 export default {
   name: "MainPage",
-  data: () => ({
-    drawer: false,
-    group: null,
-  }),
-
-  watch: {
-    group() {
-      this.drawer = false;
-    },
+  data () {
+    return {
+    }
   },
   methods: {
-    moveSmartCameraGame: function () {
+    moveSmartCameraGame() {
       this.$router.push({ name: "SmartCameraGame" });
     },
-    moveSelectCardGame: function () {
+    moveSelectCardGame() {
       this.$router.push({ name: "SelectCardGame" });
     },
-    moveWelcomePage: function () {
+    moveWelcomePage() {
       this.$router.push({ name: "WelcomePage" });
     },
   },
@@ -107,15 +101,12 @@ export default {
     padding: 1%;
     nav {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      width: 100%;
+      height: 5%;
       padding: 2.5% 1.5%;
       margin-bottom: 1.5%;
-      height: 5%;
-      width: 100%;
-      color: white;
       background: none;
-      font-size: 1rem;
     }
     .planets {
       width: 100%;

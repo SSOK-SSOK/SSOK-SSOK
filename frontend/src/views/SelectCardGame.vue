@@ -28,7 +28,7 @@ export default {
     CardCategory,
   },
   methods: {
-    moveMainPage: function () {
+    moveMainPage() {
       this.$router.push({ name: "MainPage" });
     },
   },

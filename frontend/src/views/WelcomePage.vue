@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import Cosmos from "./Cosmos.vue";
+import Cosmos from "@/components/Cosmos.vue";
 import { GOOGLE_AUTH_URL, ACCESS_TOKEN } from "@/config/index.js";
 import { mapState } from "vuex";
 export default {
@@ -54,11 +54,7 @@ export default {
   data() {
     return {
       user: this.userName,
-    };
-  },
-  mounted() {
-    console.log("마운티드");
-    this.getToken();
+    }
   },
   computed: {
     ...mapState("UserStore", ["userName"]),
@@ -66,8 +62,12 @@ export default {
       return this.$store.getters["UserStore/getCheckLogin"];
     },
   },
+  mounted() {
+    console.log("마운티드");
+    this.getToken();
+  },
   methods: {
-    moveMainPage: function () {
+    moveMainPage () {
       this.$router.push({ name: "MainPage" });
     },
     google() {
