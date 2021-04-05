@@ -7,7 +7,13 @@
     </div>
     <div class="contents">
       <nav>
-        <div @click="moveToSelectPage" class="glow"></div>
+        <v-tooltip bottom color="deep-purple accent-3">
+          <template v-slot:activator="{ on, attrs }">
+            <div v-bind="attrs" v-on="on"
+             class="glow" @click="moveSelectCardGame"></div>
+          </template>
+          <span>카드게임 다시 고르기!</span>
+        </v-tooltip>
       </nav>
       <h1 v-if="started" class="text-center">
         녹음버튼을 눌러 정답을 말해보세요
@@ -133,7 +139,7 @@ export default {
       this.started = true;
     },
     // 뒤로가기 버튼
-    moveToSelectPage: function () {
+    moveSelectCardGame: function () {
       this.$router.push({ name: "SelectCardGame" });
     },
   },

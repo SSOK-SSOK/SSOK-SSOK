@@ -5,52 +5,28 @@
       <div id="stars2"></div>
       <div id="stars3"></div>
     </div>
-    <NavBar />
     <div class="contents">
-      <span v-if="is_start">
-        <h1 class="font-color text-center mt-5">
-          {{ question }}을 보여주세요😉
-        </h1>
-      </span>
-      <span v-else>
-        <v-btn
-          rounded
-          large
-          color="warning"
-          class="d-flex mx-auto"
-          @click="initialize"
-        >
-          문제 보기
-        </v-btn>
-      </span>
-    </div>
-    <v-row class="mt-5">
-      <div class="col-md-6 col-xs-12">
-        <vue-web-cam
-          height="60%"
-          width="100%"
-          ref="webcam"
-          :device-id="deviceId"
-          @started="onStarted"
-          @stopped="onStopped"
-          @error="onError"
-          @cameras="onCameras"
-          style="position: relative; z-index: 100"
-        />
-        <div class="mt-5 d-flex justify-between">
-          <div class="mx-auto">
-            <v-btn fab large class="mx-5" @click="onCapture"
-              ><v-icon>mdi-camera-iris</v-icon></v-btn
-            >
-            <v-btn fab large class="mx-5" @click="onStop"
-              ><v-icon>mdi-camera-off</v-icon></v-btn
-            >
-            <v-btn fab large class="mx-5" @click="onStart"
-              ><v-icon>mdi-camera</v-icon></v-btn
-            >
-          </div>
-        </div>
+      <nav>
+        <v-tooltip bottom color="deep-purple accent-3">
+          <template v-slot:activator="{ on, attrs }">
+            <div v-bind="attrs" v-on="on"
+             class="glow" @click="moveMainPage"></div>
+          </template>
+          <span>게임 선택 GO GO!</span>
+        </v-tooltip>
+      </nav>
+      <div class="head-section">
+        <span v-if="is_start">
+          <h1>{{ question }}을 보여주세요😉</h1>
+        </span>
+        <span v-else>
+          <button class="auth-button" @click="initialize">문제 보기</button>
+          <!-- <v-btn rounded @click="initialize">
+            문제 보기
+          </v-btn> -->
+        </span>        
       </div>
+<<<<<<< HEAD
 
       <v-card
         class="col-md-6 col-xs-12 mt-3 pa-0 mx-auto"
@@ -94,13 +70,80 @@
         ></v-progress-linear>
       </v-card>
     </v-row>
+=======
+      <v-row class="body-section">
+        <div class="camera-section col-md-6 col-xs-12">
+          <vue-web-cam
+            ref="webcam"
+            :device-id="deviceId"
+            @started="onStarted"
+            @stopped="onStopped"
+            @error="onError"
+            @cameras="onCameras"
+          />
+          <div class="camera-btns">
+            <v-tooltip bottom color="deep-purple accent-3">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn v-bind="attrs" v-on="on" fab large @click="onCapture">
+                  <v-icon>mdi-camera-iris</v-icon>
+                </v-btn>
+              </template>
+              <span>제출하기!</span>
+            </v-tooltip>
+            <v-tooltip bottom color="deep-purple accent-3">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn v-bind="attrs" v-on="on" fab large @click="onStop">
+                  <v-icon>mdi-camera-off</v-icon>
+                </v-btn>
+              </template>
+              <span>카메라 끄기</span>
+            </v-tooltip>
+            <v-tooltip bottom color="deep-purple accent-3">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn v-bind="attrs" v-on="on" fab large @click="onStart">
+                  <v-icon>mdi-camera</v-icon>
+                </v-btn>
+              </template>
+              <span>카메라 켜기!</span>
+            </v-tooltip>
+          </div>
+        </div>
+        <v-card class="answer-section col-md-6 col-xs-12" elevation="0">
+          <div v-if="loading">
+            <div>
+              <h1>
+                정답 확인중입니다
+              </h1>
+              <v-progress-linear
+                :active="loading"
+                :indeterminate="loading"
+                color="#FFEE58"
+              ></v-progress-linear>
+            </div>
+          </div>
+          <div v-if="is_done">
+            <img :src="detected_img"/>
+            <div v-if="is_correct">
+              <h1>정답입니다!</h1>
+              <h3>
+                정확도 : {{ this.score }}%
+              </h3>
+            </div>
+            <div v-else>
+              <h1>틀렸어요😥</h1>
+              <h3>가져온 물건 : {{ this.category }}</h3>
+            </div>
+          </div>
+        </v-card>
+      </v-row>
+    </div>
+>>>>>>> d174944dfba112ed7430d4c120f9c32abfb73cbd
   </v-container>
 </template>
 
 <script>
 import { WebCam } from "vue-web-cam";
 import { mapGetters } from "vuex";
-import NavBar from "@/components/NavBar.vue";
 import axios from "axios";
 import "@/style/star.sass";
 
@@ -110,7 +153,6 @@ export default {
   name: "SmartCameraGame",
   components: {
     "vue-web-cam": WebCam,
-    NavBar,
   },
   data: () => ({
     camera: null,
@@ -150,7 +192,7 @@ export default {
         this.deviceId = first.deviceId;
       }
     },
-    is_start: function () {},
+    // is_start: function () {},
   },
   methods: {
     onCapture() {
@@ -177,11 +219,11 @@ export default {
     onStopped(stream) {
       console.log("On Stopped Event", stream);
     },
-    onStop() {
-      this.$refs.webcam.stop();
-    },
     onStart() {
       this.$refs.webcam.start();
+    },
+    onStop() {
+      this.$refs.webcam.stop();
     },
     onError(error) {
       console.log("On Error Event", error);
@@ -199,13 +241,16 @@ export default {
       this.$store.dispatch("SmartCameraStore/initializeInfo");
       this.is_start = true;
     },
+    moveMainPage: function () {
+      this.$router.push({ name: "MainPage" });
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "@/style/star.sass";
-
+@import "@/style/light-button.scss";
+@import "@/style/auth-button.scss";
 .container {
   padding: 1%;
   .background {
@@ -220,6 +265,99 @@ export default {
     width: 100%;
     height: 100%;
     padding: 1%;
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 5%;
+      width: 100%;
+      padding: 2.5% 1.5%;
+      margin-bottom: 1%;
+      background: none;
+      color: white;
+      font-size: 1rem;
+      div {
+        color: white;
+      }
+    }
+    .head-section{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 8%;
+      span{
+        h1{
+        }
+      }
+    }
+    .body-section{
+      width: 100%;
+      height: 80%;
+      padding: 1%;
+      margin-top: 1%;
+      .camera-section{
+        height: 100%;
+        video{
+          position: relative;
+          z-index: 100;
+          width: 100%;
+          height: 75%;
+        }
+        .camera-btns{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 65%;
+          height: 15%;
+          margin: 2.5% auto;
+          *{
+            margin: 1.5rem;
+          }
+        }
+      }
+      .answer-section{
+        height: 100%;
+        background: none;
+        div{
+          width: 100%;
+          height: 100%;
+          div{
+            width: 100%;
+            height: 75%;
+            h1{
+            }
+            .v-progress-linear{
+              width: 100%;
+              height: 10;
+              margin-top: 2rem;
+            }
+          }
+          img{
+            position: relative; 
+            z-index: 100;
+            width: 80%;
+            height: 75%;
+            object-fit: contain;
+            margin: 0 10%;
+          }
+          div{
+            width: 65%;
+            height: 20%;
+            padding: 1% 0;
+            margin: 0 auto;
+            *{
+              text-align: center;
+              color: white;
+            }
+          }
+        } 
+        h1{
+          text-align: center;
+          color: white;
+        }
+      }
+    }
   }
 }
 </style>
