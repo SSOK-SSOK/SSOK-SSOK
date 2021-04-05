@@ -15,46 +15,48 @@
           <span>웰컴페이지 GO GO!</span>
         </v-tooltip>
       </nav>
-      <div class="planets">
-        <div class="venus">
-          <div class="venusimg">
-            <img
-              @click="moveSelectCardGame"
-              class="spin"
-              src="@/assets/images/venus.png"
-              alt="venus"
-            />
+      <v-row class="planets">
+        <div class="left-section col-md-6">
+          <div class="venus">
+            <div class="mascot-card">
+              <img
+                @click="moveSelectCardGame"
+                src="@/assets/images/mascot-card.png"
+                alt="mascot-card"
+              />
+              <p>카드 게임</p>
+            </div>
+            <div class="venus-img">
+              <img
+                @click="moveSelectCardGame"
+                class="spin"
+                src="@/assets/images/venus.png"
+                alt="venus"
+              />
+            </div>
           </div>
-          <div class="mascotimg">
-            <img
-              @click="moveSelectCardGame"
-              class="mascot-card ma-0"
-              src="@/assets/images/card.png"
-              alt="macot-card"
-            />
-          </div>
-          <p>카드 게임</p>
         </div>
-        <div class="greenus">
-          <div class="greenusimg">
-            <img
-              @click="moveSmartCameraGame"
-              class="spin"
-              src="@/assets/images/greenus.png"
-              alt="greenus"
-            />
+        <div class="right-section col-md-6">
+          <div class="greenus">
+            <div class="mascot-camera">
+              <img
+                @click="moveSmartCameraGame"
+                src="@/assets/images/mascot-camera.png"
+                alt="mascot-camera"
+              />
+              <p>카메라 게임</p>
+            </div>
+            <div class="greenus-img">
+              <img
+                @click="moveSmartCameraGame"
+                class="spin"
+                src="@/assets/images/greenus.png"
+                alt="greenus"
+              />
+            </div>
           </div>
-          <div class="mascotimg2">
-            <img
-              @click="moveSmartCameraGame"
-              class="mascot-camera"
-              src="@/assets/images/camera.png"
-              alt="macot-camera"
-            />
-          </div>
-          <p>카메라 게임</p>
         </div>
-      </div>
+      </v-row>
     </div>
   </v-container>
 </template>
@@ -108,102 +110,98 @@ export default {
       justify-content: space-between;
       align-items: center;
       padding: 2.5% 1.5%;
-      margin-bottom: 5%;
+      margin-bottom: 1.5%;
       height: 5%;
       width: 100%;
       color: white;
       background: none;
       font-size: 1rem;
-      div {
-        color: white;
-      }
     }
     .planets {
-      display: flex;
       width: 100%;
-      height: 100%;
-      justify-content: center;
-      margin-top: 8%;
-      .venus {
-        cursor: pointer;
-        width: 50%;
-        display: flex;
-        justify-content: center;
-        .venusimg {
-          position: absolute;
-          justify-content: center;
-          align-items: center;
-          top: 43%;
-          left: 18%;
-          .spin {
-            width: 90%;
-            height: 90%;
-            display: flex;
-            justify-content: center;
-            align-items: top;
-            animation: rotate 12s linear infinite;
-            transform-origin: 50% 50%;
-          }
-        }
-        .mascotimg {
-          display: flex;
-          justify-content: center;
-          position: absolute;
-          top: 15%;
-          left: 16%;
+      height: 84%;
+      padding: 0 10%;
+      margin: 0;
+      .left-section{
+        .venus {
+          height: 100%;
+          padding: 1%;
           .mascot-card {
-            width: 45%;
-            height: 45%;
+            position: relative;
+            z-index: 10;
+            width: 40%;
+            margin: 0 auto;
+            img {
+              position: relative;
+              z-index: 20;
+              width: 100%;
+              cursor: pointer;
+            }
+            p {
+              position: absolute;
+              z-index: 100;
+              width: 100%;
+              margin: 35% 0;
+              background: rgba(22, 18, 0, 0.8);
+              color: white;
+              text-align: center;
+              font-size: 2.5em;
+              font-weight: bold;
+            }
           }
-        }
-        p {
-          background-color: rgb(0, 0, 0, 50%);
-          position: absolute;
-          top: 57%;
-          color: white;
-          font-size: 6vh;
-          font-weight: bold;
+          .venus-img {
+            position: relative;
+            bottom: 10%;
+            width: 70%;
+            margin:0 auto;
+            .spin {
+              width: 100%;
+              animation: rotate 12.5s linear infinite;
+              transform-origin: 50% 50%;
+              cursor: pointer;
+            }
+          }
         }
       }
-      .greenus {
-        cursor: pointer;
-        width: 50%;
-        display: flex;
-        justify-content: center;
-        .greenusimg {
-          position: absolute;
-          justify-content: center;
-          align-items: center;
-          top: 43%;
-          left: 58%;
-          .spin {
-            width: 90%;
-            height: 90%;
-            display: flex;
-            justify-content: center;
-            align-items: top;
-            animation: rotate 12s linear infinite;
-            transform-origin: 50% 50%;
-          }
-        }
-        .mascotimg2 {
-          display: flex;
-          justify-content: center;
-          position: absolute;
-          top: 16%;
-          right: 16.5%;
+      .right-section{
+        .greenus {
+          height: 100%;
+          padding: 1%;
           .mascot-camera {
-            width: 45%;
-            height: 45%;
+            position: relative;
+            z-index: 10;
+            width: 40%;
+            margin: 0 auto;
+            img {
+              position: relative;
+              z-index: 20;
+              width: 100%;
+              cursor: pointer;
+            }
+            p{
+              position: absolute;
+              z-index: 100;
+              width: 100%;
+              margin: 35% 0;
+              background: rgba(22, 18, 0, 0.8);
+              color: white;
+              text-align: center;
+              font-size: 2.5em;
+              font-weight: bold;
+            }
           }
-        }
-        p {
-          background-color: rgb(0, 0, 0, 50%);
-          position: absolute;
-          top: 57%;
-          color: white;
-          font-size: 6vh;
-          font-weight: bold;
+          .greenus-img {
+            position: relative;
+            bottom: 10%;
+            width: 70%;
+            margin:0 auto;
+            .spin {
+              width: 100%;
+              animation: rotate 12s linear infinite;
+              transform-origin: 50% 50%;
+              cursor: pointer;
+            }
+          }
         }
       }
     }
