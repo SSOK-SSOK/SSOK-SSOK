@@ -2,7 +2,7 @@
 
 > 아래 번호 순서대로 클릭하고 `4` 번에서 `.pem` 키를 등록합니다.
 
-![image-20210323134814508](./images/deploy1.png)
+![image-20210323134814508](../images/deploy1.png)
 
 ✔ `login as :` 가 뜨면 `ubuntu`를 입력한다.
 
@@ -31,6 +31,57 @@ $ sudo apt-get install python3
 # pip를 설치하고 업그레이드합니다.
 $ sudo apt-get install python3-pip
 $ sudo pip3 install --upgrade pip 
+
+# Java
+# Java 8 설치
+$ sudo apt-get install openjdk-8-jdk
+
+# 타임존 변경
+$ sudo timedatectl set-timezone 'Asia/Seoul'
+
+# 설치 가능한 MySQL 버전 확인
+$ sudo apt-cache search mysql-server
+
+# MySQL
+# MySQL 설치
+$ sudo apt-get install mysql-server
+
+# MySQL 설치 확인
+$ dpkg -l | grep mysql-server
+
+# MySQL 구동
+$ sudo systemctl start mysql.service
+
+# MySQL 구동 확인
+$ ps -ef | grep mysql
+
+# MySQL 외부접속 허용 설정
+$ cd /etc/mysql/mysql.conf.d
+$ vi mysqld.cnf
+bind-address 값을 0.0.0.0 으로 수정
+
+# MySQL 접속
+$ sudo mysql -u root -p
+
+# 모든 IP로 접속가능한 계정 생성
+$ create user '아이디'@'%' identified by '비밀번호';
+
+# Workbench Connection 설정
+Connection Name: 원하는 이름
+Connection Method: Stanard TCP/IP over SSH
+SSH Hostname: j4a201.p.ssafy.io
+SSH Username: ubuntu
+SSH Key File: .pem 파일 등록
+MySQL Hostname: 0.0.0.0
+MySQL Server Port: 3306
+Username: 모든 IP로 접속가능한 계정 ex) '아이디'
+Test Connection 클릭
+
+# Workbench DB 생성
+
+# 특정 DB, 모든 Table, 모든 IP 접속 허용
+# ssokauth DB, 모든 Table, 모든 IP 접속 권한부여
+$ GRANT ALL PRIVILEGES ON ssokauth.* TO 아이디@'%';
 ```
 
 <br/>
@@ -204,4 +255,4 @@ $ sudo service nginx start
 
 #### 성공!
 
-![image-20210323213700897](images/image-20210323213700897.png)
+![image-20210323213700897](../images/image-20210323213700897.png)
