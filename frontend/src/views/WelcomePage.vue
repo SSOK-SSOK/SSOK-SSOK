@@ -18,8 +18,12 @@
         </div>
         <v-tooltip bottom color="deep-purple accent-3">
           <template v-slot:activator="{ on, attrs }">
-            <div v-bind="attrs" v-on="on"
-             class="glow" @click="moveMainPage"></div>
+            <div
+              v-bind="attrs"
+              v-on="on"
+              class="glow mx-2"
+              @click="moveMainPage"
+            ></div>
           </template>
           <span>게임 선택 GO GO!</span>
         </v-tooltip>
@@ -129,6 +133,7 @@ export default {
       justify-content: space-between;
       align-items: center;
       padding: 2rem;
+      margin-top: 1%;
       margin-bottom: 5%;
       height: 5%;
       width: 100%;
@@ -150,9 +155,6 @@ export default {
           font-size: 5vh;
           margin: 0 0 0 0.5vw;
         }
-      }
-      div{
-        //light-button.scss
       }
     }
     .loginZone {

@@ -9,13 +9,36 @@
       <nav>
         <v-tooltip bottom color="deep-purple accent-3">
           <template v-slot:activator="{ on, attrs }">
-            <div v-bind="attrs" v-on="on"
-             class="glow" @click="moveWelcomePage"></div>
+            <div
+              v-bind="attrs"
+              v-on="on"
+              class="glow mx-2"
+              @click="moveWelcomePage"
+            ></div>
           </template>
           <span>웰컴페이지 GO GO!</span>
         </v-tooltip>
       </nav>
+      <div class="mascots">
+        <div class="cardMascot">
+          <img
+            @click="moveSelectCardGame"
+            class="mascot-card ma-0"
+            src="@/assets/images/card.png"
+            alt="macot-card"
+          />
+        </div>
+        <div class="cameraMascot">
+          <img
+            @click="moveSmartCameraGame"
+            class="mascot-camera"
+            src="@/assets/images/camera.png"
+            alt="macot-camera"
+          />
+        </div>
+      </div>
       <div class="planets">
+        <!--카드게임-->
         <div class="venus">
           <div class="venusimg">
             <img
@@ -25,16 +48,9 @@
               alt="venus"
             />
           </div>
-          <div class="mascotimg">
-            <img
-              @click="moveSelectCardGame"
-              class="mascot-card ma-0"
-              src="@/assets/images/card.png"
-              alt="macot-card"
-            />
-          </div>
           <p>카드 게임</p>
         </div>
+        <!--스마트카메라게임-->
         <div class="greenus">
           <div class="greenusimg">
             <img
@@ -42,14 +58,6 @@
               class="spin"
               src="@/assets/images/greenus.png"
               alt="greenus"
-            />
-          </div>
-          <div class="mascotimg2">
-            <img
-              @click="moveSmartCameraGame"
-              class="mascot-camera"
-              src="@/assets/images/camera.png"
-              alt="macot-camera"
             />
           </div>
           <p>카메라 게임</p>
@@ -103,12 +111,13 @@ export default {
     height: 100%;
     left: 0;
     padding: 1%;
+    // navbar
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 2.5% 1.5%;
-      margin-bottom: 5%;
+      margin-bottom: 2%;
       height: 5%;
       width: 100%;
       color: white;
@@ -118,26 +127,51 @@ export default {
         color: white;
       }
     }
+    // 캐릭터
+    .mascots {
+      position: relative;
+      display: flex;
+      height: 30%;
+      width: 100%;
+      z-index: 5;
+      .cardMascot {
+        display: flex;
+        justify-content: center;
+        width: 50%;
+        height: 100%;
+        .mascot-card {
+          height: 100%;
+        }
+      }
+      .cameraMascot {
+        display: flex;
+        justify-content: center;
+        width: 50%;
+        height: 100%;
+        .mascot-camera {
+          height: 100%;
+        }
+      }
+    }
     .planets {
       display: flex;
       width: 100%;
-      height: 100%;
-      justify-content: center;
-      margin-top: 8%;
+      height: 50%;
       .venus {
         cursor: pointer;
         width: 50%;
+        height: 100%;
         display: flex;
         justify-content: center;
+        align-items: center;
         .venusimg {
+          display: flex;
           position: absolute;
           justify-content: center;
           align-items: center;
-          top: 43%;
-          left: 18%;
           .spin {
-            width: 90%;
-            height: 90%;
+            width: 85%;
+            height: 85%;
             display: flex;
             justify-content: center;
             align-items: top;
@@ -145,21 +179,9 @@ export default {
             transform-origin: 50% 50%;
           }
         }
-        .mascotimg {
-          display: flex;
-          justify-content: center;
-          position: absolute;
-          top: 15%;
-          left: 16%;
-          .mascot-card {
-            width: 45%;
-            height: 45%;
-          }
-        }
         p {
           background-color: rgb(0, 0, 0, 50%);
-          position: absolute;
-          top: 57%;
+          z-index: 5;
           color: white;
           font-size: 6vh;
           font-weight: bold;
@@ -170,15 +192,15 @@ export default {
         width: 50%;
         display: flex;
         justify-content: center;
+        align-items: center;
         .greenusimg {
+          display: flex;
           position: absolute;
           justify-content: center;
           align-items: center;
-          top: 43%;
-          left: 58%;
           .spin {
-            width: 90%;
-            height: 90%;
+            width: 85%;
+            height: 85%;
             display: flex;
             justify-content: center;
             align-items: top;
@@ -186,21 +208,9 @@ export default {
             transform-origin: 50% 50%;
           }
         }
-        .mascotimg2 {
-          display: flex;
-          justify-content: center;
-          position: absolute;
-          top: 16%;
-          right: 16.5%;
-          .mascot-camera {
-            width: 45%;
-            height: 45%;
-          }
-        }
         p {
           background-color: rgb(0, 0, 0, 50%);
-          position: absolute;
-          top: 57%;
+          z-index: 5;
           color: white;
           font-size: 6vh;
           font-weight: bold;
