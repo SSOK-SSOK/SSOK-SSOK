@@ -9,8 +9,12 @@
       <nav>
         <v-tooltip bottom color="deep-purple accent-3">
           <template v-slot:activator="{ on, attrs }">
-            <div v-bind="attrs" v-on="on"
-             class="glow" @click="moveMainPage"></div>
+            <div
+              v-bind="attrs"
+              v-on="on"
+              class="glow"
+              @click="moveMainPage"
+            ></div>
           </template>
           <span>게임 선택 GO GO!</span>
         </v-tooltip>
@@ -24,53 +28,8 @@
           <!-- <v-btn rounded @click="initialize">
             문제 보기
           </v-btn> -->
-        </span>        
-      </div>
-<<<<<<< HEAD
-
-      <v-card
-        class="col-md-6 col-xs-12 mt-3 pa-0 mx-auto"
-        color="rgba(255, 255, 255, 0)"
-        max-width="35vw"
-        max-height="60vh"
-        elevation="0"
-      >
-        <span v-if="is_done">
-          <!-- <img
-            :src="detected_img"
-            width="100%"
-            height="90%"
-            class="d-flex mx-auto"
-            style="position: relative; z-index: 100"
-          /> -->
-          <span v-if="is_correct">
-            <h1 class="text-center mt-3" style="color: white">정답입니다!</h1>
-            <h3 class="text-center mt-3" style="color: white">
-              정확도 : {{ this.score }}%
-            </h3>
-          </span>
-          <span v-else>
-            <h1 class="text-center mt-3" style="color: white">틀렸어요😥</h1>
-            <h3 class="text-center mt-3" style="color: white">
-              가져온 물건 : {{ this.category }}
-            </h3>
-          </span>
         </span>
-
-        <!--로딩중-->
-        <h1 v-if="loading" class="text-center" style="color: white">
-          정답 확인중입니다
-        </h1>
-        <v-progress-linear
-          class="mt-5"
-          :active="loading"
-          :indeterminate="loading"
-          color="#FFEE58"
-          height="10"
-        ></v-progress-linear>
-      </v-card>
-    </v-row>
-=======
+      </div>
       <v-row class="body-section">
         <div class="camera-section col-md-6 col-xs-12">
           <vue-web-cam
@@ -111,9 +70,7 @@
         <v-card class="answer-section col-md-6 col-xs-12" elevation="0">
           <div v-if="loading">
             <div>
-              <h1>
-                정답 확인중입니다
-              </h1>
+              <h1>정답 확인중입니다</h1>
               <v-progress-linear
                 :active="loading"
                 :indeterminate="loading"
@@ -122,12 +79,9 @@
             </div>
           </div>
           <div v-if="is_done">
-            <img :src="detected_img"/>
             <div v-if="is_correct">
               <h1>정답입니다!</h1>
-              <h3>
-                정확도 : {{ this.score }}%
-              </h3>
+              <h3>정확도 : {{ this.score }}%</h3>
             </div>
             <div v-else>
               <h1>틀렸어요😥</h1>
@@ -137,7 +91,6 @@
         </v-card>
       </v-row>
     </div>
->>>>>>> d174944dfba112ed7430d4c120f9c32abfb73cbd
   </v-container>
 </template>
 
@@ -280,79 +233,79 @@ export default {
         color: white;
       }
     }
-    .head-section{
+    .head-section {
       display: flex;
       justify-content: center;
       align-items: center;
       width: 100%;
       height: 8%;
-      span{
-        h1{
+      span {
+        h1 {
         }
       }
     }
-    .body-section{
+    .body-section {
       width: 100%;
       height: 80%;
       padding: 1%;
       margin-top: 1%;
-      .camera-section{
+      .camera-section {
         height: 100%;
-        video{
+        video {
           position: relative;
           z-index: 100;
           width: 100%;
           height: 75%;
         }
-        .camera-btns{
+        .camera-btns {
           display: flex;
           justify-content: center;
           align-items: center;
           width: 65%;
           height: 15%;
           margin: 2.5% auto;
-          *{
+          * {
             margin: 1.5rem;
           }
         }
       }
-      .answer-section{
+      .answer-section {
         height: 100%;
         background: none;
-        div{
+        div {
           width: 100%;
           height: 100%;
-          div{
+          div {
             width: 100%;
             height: 75%;
-            h1{
+            h1 {
             }
-            .v-progress-linear{
+            .v-progress-linear {
               width: 100%;
               height: 10;
               margin-top: 2rem;
             }
           }
-          img{
-            position: relative; 
+          img {
+            position: relative;
             z-index: 100;
             width: 80%;
             height: 75%;
             object-fit: contain;
             margin: 0 10%;
           }
-          div{
+          div {
             width: 65%;
             height: 20%;
             padding: 1% 0;
             margin: 0 auto;
-            *{
+            * {
               text-align: center;
               color: white;
             }
           }
-        } 
-        h1{
+        }
+        h1 {
           text-align: center;
           color: white;
         }
