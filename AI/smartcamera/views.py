@@ -57,6 +57,10 @@ def detection(request):
 
     # base64이미지를 jpg로 저장
     im = get_image_from_data_url(request.data['image'])
+
+    image = Image()
+    image.images = im
+    image.save()
     
     image = Images.objects.last()
     image.images = im
