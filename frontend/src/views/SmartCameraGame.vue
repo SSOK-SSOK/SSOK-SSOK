@@ -117,7 +117,6 @@ export default {
     img: null,
     detected_img: require("../../../AI/images/detected_image.jpg"),
     is_start: false,
-    is_done: true,
   }),
   computed: {
     device: function () {
