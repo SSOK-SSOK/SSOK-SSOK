@@ -15,6 +15,8 @@ import random
 import colorsys
 import numpy as np
 import tensorflow as tf
+from PIL import Image
+from io import BytesIO
 from yolov3.configs import *
 from yolov3.yolov4 import *
 from tensorflow.python.saved_model import tag_constants
@@ -301,8 +303,8 @@ def postprocess_boxes(pred_bbox, original_image, input_size, score_threshold):
     return np.concatenate([coors, scores[:, np.newaxis], classes[:, np.newaxis]], axis=-1)
 
 
-def detect_image(Yolo, input_size=416, show=False, CLASSES=YOLO_COCO_CLASSES, score_threshold=0.3, iou_threshold=0.45, rectangle_colors=''):
-    original_image = cv2.imread("./images/test_image.jpg")
+def detect_image(Yolo, image, input_size=416, show=False, CLASSES=YOLO_COCO_CLASSES, score_threshold=0.3, iou_threshold=0.45, rectangle_colors=''):
+    original_image = Image.open(image)
     original_image = cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB)
     original_image = cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB)
 
