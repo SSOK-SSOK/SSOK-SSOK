@@ -74,8 +74,8 @@ export default {
 @import "@/style/auth-button.scss";
 .flip-card {
   background-color: transparent;
-  width: 700px;
-  height: 500px;
+  width: 600px;
+  height: 400px;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
   transition: 0.5s ease;
   backface-visibility: hidden;

@@ -61,7 +61,7 @@ export default {
   components: {
     QuizCard,
     Timer,
-    Audio
+    Audio,
   },
   data() {
     return {
@@ -91,7 +91,7 @@ export default {
     },
   },
   created() {
-    // this.getParams();
+    this.getParams();
     this.solvingStatus = false;
   },
   methods: {
@@ -148,7 +148,7 @@ export default {
 .container {
   padding: 1%;
   .background {
-    position: relative;
+    position: absolute;
     z-index: -1;
     width: 100%;
     height: 100%;
@@ -165,7 +165,7 @@ export default {
       justify-content: space-between;
       align-items: center;
       padding: 2.5% 1.5%;
-      margin-bottom: 3%;
+      margin-bottom: 2%;
       height: 5%;
       width: 100%;
       color: white;
@@ -179,6 +179,7 @@ export default {
       // 타이머
       .countdown-timer {
         width: 30%;
+        height: 60vh;
         padding: 1% 0% 1% 3%;
         display: flex;
         justify-content: flex-end;
@@ -201,8 +202,10 @@ export default {
       // 오디오 버튼
       .audio-button {
         width: 30%;
+        height: 60vh;
         display: flex;
-        justify-content: center;
+        justify-content: start;
+        align-items: center;
       }
     }
   }

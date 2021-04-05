@@ -88,7 +88,7 @@ export default {
 .container {
   padding: 1%;
   .background {
-    position: relative;
+    position: absolute;
     z-index: -1;
     width: 100%;
     height: 100%;
