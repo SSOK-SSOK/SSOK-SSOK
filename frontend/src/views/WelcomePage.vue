@@ -106,7 +106,7 @@ export default {
 .container {
   padding: 1%;
   .background {
-    position: relative;
+    position: absolute;
     z-index: -1;
     width: 100%;
     height: 100%;
@@ -124,7 +124,7 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 2rem 0 0;
+      padding: 2rem;
       margin-bottom: 5%;
       height: 5%;
       width: 100%;
@@ -150,7 +150,7 @@ export default {
     }
     .loginZone {
       width: 50%;
-      height: 30%;
+      height: 60%;
       position: relative;
       display: flex;
       align-items: center;

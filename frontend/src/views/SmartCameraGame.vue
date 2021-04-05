@@ -1,10 +1,12 @@
 <template>
-  <v-container fluid>
-    <div id="stars"></div>
-    <div id="stars2"></div>
-    <div id="stars3"></div>
+  <v-container fluid fill-height>
+    <div class="background">
+      <div id="stars"></div>
+      <div id="stars2"></div>
+      <div id="stars3"></div>
+    </div>
     <NavBar />
-    <div>
+    <div class="contents">
       <span v-if="is_start">
         <h1 class="font-color text-center mt-5">
           {{ question }}을 보여주세요😉
@@ -198,15 +200,27 @@ export default {
       this.$store.dispatch("SmartCameraStore/initializeInfo");
       this.is_start = true;
     },
-    mounted() {
-      console.log("다시 컴백!");
-      console.log(this.score);
-      console.log(this.category);
-      console.log(this.is_correct);
-      console.log(this.is_done);
-    },
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@import "@/style/star.sass";
+
+.container {
+  padding: 1%;
+  .background {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+  }
+  .contents {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 1%;
+  }
+}
+</style>
