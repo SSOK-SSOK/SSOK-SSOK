@@ -15,9 +15,12 @@ import random
 import colorsys
 import numpy as np
 import tensorflow as tf
+from PIL import Image
+from io import BytesIO
 from yolov3.configs import *
 from yolov3.yolov4 import *
 from tensorflow.python.saved_model import tag_constants
+from django.conf import settings
 
 
 def load_yolo_weights(model, weights_file):
@@ -197,7 +200,7 @@ def draw_bbox(image, bboxes, CLASSES=YOLO_COCO_CLASSES, show_label=True, show_co
 
             infos.append([int(round(score,2)*100), NUM_CLASS[class_ind]])
 
-    return image, infos
+    return infos
 
 
 def bboxes_iou(boxes1, boxes2):
@@ -301,10 +304,11 @@ def postprocess_boxes(pred_bbox, original_image, input_size, score_threshold):
     return np.concatenate([coors, scores[:, np.newaxis], classes[:, np.newaxis]], axis=-1)
 
 
-def detect_image(Yolo, input_size=416, show=False, CLASSES=YOLO_COCO_CLASSES, score_threshold=0.3, iou_threshold=0.45, rectangle_colors=''):
-    original_image = cv2.imread("./images/test_image.jpg")
-    original_image = cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB)
-    original_image = cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB)
+def detect_image(Yolo, image, answer, input_size=416, show=False, CLASSES=YOLO_COCO_CLASSES, score_threshold=0.3, iou_threshold=0.45, rectangle_colors=''):
+    image = "." + image
+    original_image = Image.open(image)
+    original_image = cv2.cvtColor(np.float32(original_image), cv2.COLOR_BGR2RGB)
+    original_image = cv2.cvtColor(np.float32(original_image), cv2.COLOR_BGR2RGB)
 
     image_data = image_preprocess(np.copy(original_image), [
                                   input_size, input_size])
@@ -327,16 +331,42 @@ def detect_image(Yolo, input_size=416, show=False, CLASSES=YOLO_COCO_CLASSES, sc
         pred_bbox, original_image, input_size, score_threshold)
     bboxes = nms(bboxes, iou_threshold, method='nms')
 
-    image, infos = draw_bbox(original_image, bboxes, CLASSES=CLASSES, rectangle_colors=rectangle_colors)
+    infos = draw_bbox(original_image, bboxes, CLASSES=CLASSES, rectangle_colors=rectangle_colors)
     
-    with open('./images/score.txt', 'w') as f:
-        for info in infos:
-            f.write(str(info[0])+","+info[1]+"\n")
-            
-    cv2.imwrite("./images/detected_image.jpg", image)
+    # 정답 체크
+    is_correct, info = check_answer(infos, answer)
 
-    return image
+    return is_correct, info
 
+
+def check_answer(items, answer):
+
+    # 정확도 순으로 내림차순 정렬합니다.
+    items.sort(key=lambda x : -x[0])
+    
+    if len(items) == 1:
+        score, category = items[0][0], items[0][1]
+        if category == "person":
+            return False, "물체가 없어요"
+        else:
+            if category == answer:
+                return True, score
+            else:
+                return False, category
+    else:
+        # 첫번째 값이 person이면 두번째 값과, 아니면 첫번째 값과 비교합니다.
+        if items[0][1] == "person":
+            score, category = items[1][0], items[1][1]
+            if category == answer:
+                return True, score
+            else:
+                return False, category
+        else:
+            score, category = items[0][0], items[0][1]
+            if category == answer:
+                return True, score
+            else:
+                return False, category
 
 
 
