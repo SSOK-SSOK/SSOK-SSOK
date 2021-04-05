@@ -39,40 +39,8 @@ public class FileService {
         UUID uuid = UUID.randomUUID();
         String newFileName = uuid.toString() + fileName;
 
-        File file = new File(LOCAL_PATH, newFileName);
+        File file = new File(SERVER_PATH, newFileName + ".wav");
         inputFile.transferTo(file);
-
-        // 내가 추가한 부분 /////////////////////////////////////////////////////////
-        Blob blob;
-
-        try {
-            blob = convertFileToBlob(file);
-            System.out.println("blob 변환 성공");
-            System.out.println(blob.length());
-
-            InputStream is = blob.getBinaryStream();
-            OutputStream os = new FileOutputStream(LOCAL_PATH + "/chamoi.mp3");
-
-//            bitrate 테스트
-//            File mp3file = new File(LOCAL_PATH + "/chamoi.mp3");
-//            MP3File mp3file2 =  (MP3File) AudioFileIO.read(mp3file);
-//
-//            MP3AudioHeader audioHeader = mp3file2.getMP3AudioHeader();
-//            System.out.println(audioHeader.getBitRate());
-
-            int bytesRead = -1;
-            byte[] buffer = new byte[10 + (int)blob.length()];
-            while ((bytesRead = is.read(buffer)) != -1) {
-                os.write(buffer, 0, bytesRead);
-            }
-        } catch (Exception e) {
-            result.status = false;
-            result.data = "Blob 변환 실패";
-            result.object = null;
-
-            return result;
-        }
-        // 내가 추가한 부분 /////////////////////////////////////////////////////////
 
         result.status = true;
         result.data = "파일 경로";
