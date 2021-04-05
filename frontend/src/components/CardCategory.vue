@@ -4,9 +4,8 @@
       class="languages"
       v-model="selected_language"
       mandatory dark color="deep-purple accent-3" group>
-      <v-btn class="language" v-for="(flag, name) in flags" :key="name">
-        {{flag.name}}
-        <!-- <img @click="checkLanguage(flag)" :src="require(`@/assets/images/flags/${flag.icon}`)"> -->
+      <v-btn class="language" v-for="(language, name) in languages" :key="name">
+        {{language.name}}
       </v-btn>
     </v-btn-toggle>
     <div class="category-field">
@@ -24,17 +23,16 @@ export default {
   components: {
     SpreadCard,
   },
-  data: function () {
+  data () {
     return {
       selected_language: undefined,
-      flags: [
-        // { name: "kr", icon: "kr.png"},
-        { id: 1, name: "us", icon: "us.png"},
-        { id: 2, name: "cn", icon: "cn.png"},
-        { id: 3, name: "jp", icon: "jp.png"},
-        { id: 4, name: "vn", icon: "vn.png"},
-        { id: 5, name: "fr", icon: "fr.png"},
-        { id: 6, name: "es", icon: "es.png"}
+      languages: [
+        { id: 1, name: "us"},
+        { id: 2, name: "cn"},
+        { id: 3, name: "jp"},
+        { id: 4, name: "vn"},
+        { id: 5, name: "fr"},
+        { id: 6, name: "es"},
       ],
       categories: [
         { id: 1, name: "Animal", sub: "동물", path: "https://i.pinimg.com/originals/d6/3c/de/d63cded9d8454a5b57ee8bef31c3ee71.gif"},
@@ -43,10 +41,10 @@ export default {
     }
   },
   methods: {
-    checkLanguage: function (lang) {
+    checkLanguage(lang) {
       this.selectedLanguage = lang.name
     },
-    startGame: function (info) {
+    startGame(info) {
       // 언어 내용까지 합해서 넘어가야할 것 같습니다. 
       this.$store.dispatch("CardGameStore/fetchCards", info.id)
       this.$router.push({
@@ -56,7 +54,7 @@ export default {
         }
       });
     },
-    audioTest: function () {
+    audioTest() {
       this.$router.push({ name: "AudioTest" })
     }
   }
@@ -79,9 +77,9 @@ export default {
       height: 70vh;
       margin: 0;
       overflow: hidden;
-      cursor: pointer;
       background-color: rgba(22, 18, 0, 0.4);
       box-shadow: 0 2px 3px 0 rgba(151, 150, 146, 0.4);
+      cursor: pointer;
       img{
         width: 100%;
         height: auto;
