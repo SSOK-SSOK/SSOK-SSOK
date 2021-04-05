@@ -7,9 +7,13 @@
     </div>
     <div class="contents">
       <nav>
-        <div @click="back">
-          <div class="glow"></div>
-        </div>
+        <v-tooltip bottom color="deep-purple accent-3">
+          <template v-slot:activator="{ on, attrs }">
+            <div v-bind="attrs" v-on="on"
+             class="glow" @click="moveWelcomePage"></div>
+          </template>
+          <span>웰컴페이지 GO GO!</span>
+        </v-tooltip>
       </nav>
       <div class="planets">
         <div class="venus">
@@ -75,7 +79,7 @@ export default {
     moveSelectCardGame: function () {
       this.$router.push({ name: "SelectCardGame" });
     },
-    back: function () {
+    moveWelcomePage: function () {
       this.$router.push({ name: "WelcomePage" });
     },
   },
