@@ -9,11 +9,10 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
 # For save Image
-import base64
+import base64, secrets, io
 from PIL import Image
-from io import BytesIO
-from .models import Images
 from django.core.files.base import ContentFile
+from .models import Images
 
 # For Object Detection (YOLO)
 from yolov3.configs import *
@@ -24,20 +23,31 @@ import cv2
 import os
 
 
-# base64코드를 변환하여 jpg로 저장합니다.
-def convert_base64_to_img(data):
-    images = Images()
-    prefix = 'data:image/jpeg;base64,'
-    cut = data[len(prefix):]
-    # im = Image.open(BytesIO(base64.b64decode(cut)))
-    imgdata = base64.b64decode(cut)
-    filename = 'test_image.jpg'  
-    with open(filename, 'wb') as f:
-        f.write(imgdata)
-    # im.save('./images/test_image.jpg', im)
-    # images.title = 'test_image.jpg'
-    # images.image = data
-    # images.save()
+# base64코드를 변환하여 jpeg로 저장합니다.
+def get_image_from_data_url( data_url, resize=True, base_width=600 ):
+    _format, _dataurl       = data_url.split(';base64,')
+    _filename, _extension   = secrets.token_hex(20), _format.split('/')[-1]
+
+    # generating the contents of the file
+    file = ContentFile( base64.b64decode(_dataurl), name="test_image.jpg")
+
+    # resizing the image, reducing quality and size
+    if resize:
+        image = Image.open(file)
+        image_io = io.BytesIO()
+
+        # resize
+        w_percent    = (base_width/float(image.size[0]))
+        h_size       = int((float(image.size[1])*float(w_percent)))
+        image        = image.resize((base_width,h_size), Image.ANTIALIAS)
+
+        # save resized image
+        image.save(image_io, format=_extension)
+
+        # generating the content of the new image
+        file = ContentFile( image_io.getvalue(), name="test_image.jpg" )
+
+    return file
 
 # 정답 여부를 체크합니다.
 def check_answer(answer):
@@ -84,17 +94,22 @@ def check_answer(answer):
 @api_view(['POST'])
 @method_decorator(csrf_exempt, name='dispatch')
 def detection(request):
+
     # base64이미지를 jpg로 저장
-    convert_base64_to_img(request.data['image'])
-    image = Images.objects.last().image
+    im = get_image_from_data_url(request.data['image'])
+    
+    image = Images.objects.last()
+    image.images = im
+    image.save()
     
     # YOLO사용 준비
     os.environ['CUDA_VISIBLE_DEVICES'] = '0'
     video_path = ""
 
     # YOLO 모델로 detecting
+    last_image = Images.objects.last().images
     yolo = Load_Yolo_model()
-    detect_image(yolo, image, input_size=YOLO_INPUT_SIZE, show=True, rectangle_colors=(255, 0, 0))
+    detect_image(yolo, image.images.url,  input_size=YOLO_INPUT_SIZE, show=True, rectangle_colors=(255, 0, 0))
 
     # detecting된 결과와 정답 비교하기
     answer = request.data['question']
