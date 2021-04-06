@@ -27,7 +27,7 @@
 
 <script>
 import axios from 'axios'
-import  "@/store/modules/p5.sound.js"
+import "@/store/modules/p5.sound.js"
 import p5 from 'p5';
 
 let mic, recorder, soundFile;
@@ -74,30 +74,14 @@ export default {
     },
 
     store: function () {
+      // let myp5 = new p5();
+      // console.log(soundFile);
+      // myp5.saveSound(soundFile, './assets/mySound.wav');
+
       const view = this.convertToWav(soundFile.buffer);
-      this.writeFile(view)
+      this.writeFile([view]);
     },
 
-    writeFile: function (dataToDownload) {
-      var type = 'application/octet-stream';
-      if (p5.prototype._isSafari()) {
-        type = 'text/plain';
-      }
-      var blob = new Blob(dataToDownload, {
-        type: type
-      });
-
-      const formData = new FormData();
-      formData.append('file', blob);
-
-      const headers = {'Content-Type': 'multipart/form-data'}
-      axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", formData, headers)
-        .then(res => {
-          console.log(res)
-        })
-        .catch(err => console.log(err))
-    },
-    
     convertToWav: function (audioBuffer) {
       var leftChannel, rightChannel;
       leftChannel = audioBuffer.getChannelData(0);
@@ -154,7 +138,31 @@ export default {
       for (var i = 0; i < lng; i++) {
         view.setUint8(offset + i, string.charCodeAt(i));
       }
-    }
+    },
+
+    writeFile: function (dataToDownload) {
+      var type = 'application/octet-stream';
+      if (p5.prototype._isSafari()) {
+        type = 'text/plain';
+      }
+      var blob = new Blob(dataToDownload, {
+        type: type
+      });
+      
+      console.log(dataToDownload)
+      console.log(blob)
+
+      const formData = new FormData();
+      formData.append('file', blob);
+      formData.append('code', 'ko-KR');
+
+      // const headers = {'Content-Type': 'multipart/form-data'}
+      // axios.post("https://j4a201.p.ssafy.io/card-api/stt/convert", formData, headers)
+      //   .then(res => {
+      //     console.log(res)
+      //   })
+      //   .catch(err => console.log(err))
+    },
   }
 
 }
