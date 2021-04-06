@@ -21,13 +21,10 @@
       </nav>
       <div class="head-section">
         <span v-if="is_start">
-          <h1>{{ question }}을 보여주세요😉</h1>
+          <h1>{{ this.question }}을 보여주세요😉</h1>
         </span>
         <span v-else>
           <button class="auth-button" @click="initialize">문제 보기</button>
-          <!-- <v-btn rounded @click="initialize">
-            문제 보기
-          </v-btn> -->
         </span>
       </div>
       <v-row class="body-section">
@@ -107,16 +104,16 @@ export default {
   components: {
     "vue-web-cam": WebCam,
   },
-  data () {
+  data() {
     return {
       camera: null,
       deviceId: null,
       devices: [],
       loading: false,
-      question: "cup",
+      questions: ["cup", "book", "chair"],
       img: null,
       is_start: false,
-    }
+    };
   },
   computed: {
     device: function () {
@@ -134,6 +131,11 @@ export default {
     ...mapGetters(SmartCameraStore, {
       is_done: "getIsDone",
     }),
+    question: function () {
+      var randNum = Math.random() * 3;
+      var randInt = parseInt(randNum);
+      return this.questions[randInt];
+    },
   },
   watch: {
     camera: function (id) {
@@ -196,7 +198,7 @@ export default {
       this.$store.dispatch("SmartCameraStore/initializeInfo");
       this.is_start = true;
     },
-    moveMainPage () {
+    moveMainPage() {
       this.$router.push({ name: "MainPage" });
     },
   },
