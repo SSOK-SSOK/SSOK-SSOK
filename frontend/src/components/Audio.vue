@@ -27,17 +27,17 @@
 
 <script>
 import axios from 'axios'
+
+// 실시간 음성 녹음 & 파일로 변환 하는 라이브러리
 import "@/store/modules/p5.sound.js"
 import p5 from 'p5';
-
 let mic, recorder, soundFile;
 
 export default {
   name: "Audio",
   data: function () {
     return {
-      isRecorded: false,
-      blob: {}
+      isRecorded: false
     }
   },
   watch: {
@@ -45,13 +45,16 @@ export default {
       console.log(val)
       if (val === true) {
         this.load();
-        this.record();
+        setTimeout(() => {
+          this.startRecord();
+        }, 200);
       } else {
-        this.end();
+        this.endRecord();
       }
     }
   },
   methods: {
+    // 1. 녹음을 위한 마이크 접근
     load: function () {
       mic = new p5.AudioIn();
       mic.start();
@@ -60,7 +63,8 @@ export default {
       soundFile = new p5.SoundFile();
     },
 
-    record: function () {
+    // 2. load되어 있다면 녹음 시작
+    startRecord: function () {
       if (mic.enabled) {
         let audio_p5 = new p5();
         audio_p5.getAudioContext().resume();
@@ -68,20 +72,22 @@ export default {
       }
     },
 
-    end: function () {
+    // 3. 녹음을 멈춤
+    endRecord: function () {
       recorder.stop();
-      this.store();
+      setTimeout(() => {
+        this.store();
+      }, 200);
     },
 
+    // 4. 파일을 서버로 전송
     store: function () {
-      // let myp5 = new p5();
       // console.log(soundFile);
-      // myp5.saveSound(soundFile, './assets/mySound.wav');
-
       const view = this.convertToWav(soundFile.buffer);
-      this.writeFile([view]);
+      this.writeFile([view],'record','wav');
     },
 
+    // 4-1. 녹음한 데이터를 Wav 파일형식의 buffer로 저장. chunk로 조각내어서 array를 반환
     convertToWav: function (audioBuffer) {
       var leftChannel, rightChannel;
       leftChannel = audioBuffer.getChannelData(0);
@@ -140,6 +146,7 @@ export default {
       }
     },
 
+    //4-2. array buffer 형식의 데이터를 Blob으로 변환하여 multipart로 전송.
     writeFile: function (dataToDownload) {
       var type = 'application/octet-stream';
       if (p5.prototype._isSafari()) {
@@ -156,12 +163,12 @@ export default {
       formData.append('file', blob);
       formData.append('code', 'ko-KR');
 
-      // const headers = {'Content-Type': 'multipart/form-data'}
-      // axios.post("https://j4a201.p.ssafy.io/card-api/stt/convert", formData, headers)
-      //   .then(res => {
-      //     console.log(res)
-      //   })
-      //   .catch(err => console.log(err))
+      const headers = {'Content-Type': 'multipart/form-data'}
+      axios.post("https://j4a201.p.ssafy.io/card-api/stt/convert", formData, headers)
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => console.log(err))
     },
   }
 
