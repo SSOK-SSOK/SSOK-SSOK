@@ -53,6 +53,9 @@ dependencies {
     // https://mvnrepository.com/artifact/org/jaudiotagger
     implementation group: 'org', name: 'jaudiotagger', version: '2.0.3'
 
+    implementation platform('com.google.cloud:libraries-bom:19.0.0')
+
+    compile 'com.google.cloud:google-cloud-speech'
 
 }
 

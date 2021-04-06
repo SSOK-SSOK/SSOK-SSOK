@@ -1,5 +1,6 @@
 package com.ssafy.ssokcard.service;
 
+import com.google.cloud.speech.v1.*;
 import com.google.gson.Gson;
 import com.ssafy.ssokcard.model.response.BasicResponse;
 import org.jaudiotagger.audio.AudioFileIO;
@@ -17,10 +18,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Blob;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class FileService {
@@ -34,49 +32,65 @@ public class FileService {
     @Value("${AIHub.STT.accessKey}")
     private String accessKey;    // 발급받은 API Key
 
-    public BasicResponse saveFile(MultipartFile inputFile, String fileName) throws IOException {
-        BasicResponse result = new BasicResponse();
+    public File saveFile(MultipartFile inputFile, String fileName) throws IOException {
         UUID uuid = UUID.randomUUID();
         String newFileName = uuid.toString() + fileName;
 
         File file = new File(SERVER_PATH, newFileName + ".wav");
         inputFile.transferTo(file);
 
-        result.status = true;
-        result.data = "파일 경로";
-        result.object = file.getPath();
-
-        return result;
+        return file;
     }
 
-    public Blob convertFileToBlob(File file) throws Exception {
+//    zh(중국), en-US(미국), ja-JP(일본), es-ES(스페인), vi-VN(베트남), ko-KR(대한민국), fr-FR(프랑스)
+    public Object googleConvertVoiceToText(String languageCode, String audioFilePath) {
+        BasicResponse answer = new BasicResponse();
 
-        Blob blob = null;
-        FileInputStream inputStream = null;
-        try {
-            byte[] byteArray = new byte[(int) file.length()];
-            inputStream = new FileInputStream(file);
-            inputStream.read(byteArray);
+        try (SpeechClient speechClient = SpeechClient.create()) {
+            // The path to the audio file to transcribe
+            String gcsUri = audioFilePath;
 
-            blob = new javax.sql.rowset.serial.SerialBlob(byteArray);
-        } catch (Exception e) {
-            throw e;
-        } finally {
-            try {
-                if (inputStream != null) {
-                    inputStream.close();
-                }
-            } catch (Exception e) {
-                inputStream = null;
-            } finally {
-                inputStream = null;
-            }
+            // Builds the sync recognize request
+            RecognitionConfig config =
+                    RecognitionConfig.newBuilder()
+                            .setEncoding(RecognitionConfig.AudioEncoding.LINEAR16)
+                            .setSampleRateHertz(16000)
+                            .setLanguageCode(languageCode) // "en-US"
+                            .build();
+
+            RecognitionAudio audio = RecognitionAudio.newBuilder().setUri(gcsUri).build();
+
+            // Performs speech recognition on the audio file
+            RecognizeResponse response = speechClient.recognize(config, audio);
+            List<SpeechRecognitionResult> results = response.getResultsList();
+
+//            for (SpeechRecognitionResult result : results) {
+//                // There can be several alternative transcripts for a given chunk of speech. Just use the
+//                // first (most likely) one here.
+//                SpeechRecognitionAlternative alternative = result.getAlternativesList().get(0);
+//                System.out.printf("Transcription: %s%n", alternative.getTranscript());
+//            }
+
+            SpeechRecognitionAlternative alternative = results.get(0).getAlternativesList().get(0);
+
+            answer.status = true;
+            answer.data = "음성 번역 성공";
+            answer.object = alternative.getTranscript();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+            answer.status = false;
+            answer.data = "음성 번역 실패";
+            answer.object = null;
+
+            return answer;
         }
 
-        return blob;
+        return answer;
     }
 
-    public Object convertVoiceToText(String languageCode, String audioFilePath) {
+    public Object aihubConvertVoiceToText(String languageCode, String audioFilePath) {
         String audioContents = null;
         Gson gson = new Gson();
         Map<String, Object> request = new HashMap<>();
