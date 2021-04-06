@@ -8,9 +8,12 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
+# For save Image
 import base64
 from PIL import Image
 from io import BytesIO
+from .models import Images
+from django.core.files.base import ContentFile
 
 # For Object Detection (YOLO)
 from yolov3.configs import *
@@ -23,10 +26,18 @@ import os
 
 # base64코드를 변환하여 jpg로 저장합니다.
 def convert_base64_to_img(data):
+    images = Images()
     prefix = 'data:image/jpeg;base64,'
     cut = data[len(prefix):]
-    im = Image.open(BytesIO(base64.b64decode(cut)))
-    im.save('./images/test_image.jpg')
+    # im = Image.open(BytesIO(base64.b64decode(cut)))
+    imgdata = base64.b64decode(cut)
+    filename = 'test_image.jpg'  
+    with open(filename, 'wb') as f:
+        f.write(imgdata)
+    # im.save('./images/test_image.jpg', im)
+    # images.title = 'test_image.jpg'
+    # images.image = data
+    # images.save()
 
 # 정답 여부를 체크합니다.
 def check_answer(answer):
@@ -75,14 +86,15 @@ def check_answer(answer):
 def detection(request):
     # base64이미지를 jpg로 저장
     convert_base64_to_img(request.data['image'])
-
+    image = Images.objects.last().image
+    
     # YOLO사용 준비
     os.environ['CUDA_VISIBLE_DEVICES'] = '0'
     video_path = ""
 
     # YOLO 모델로 detecting
     yolo = Load_Yolo_model()
-    detect_image(yolo, input_size=YOLO_INPUT_SIZE, show=True, rectangle_colors=(255, 0, 0))
+    detect_image(yolo, image, input_size=YOLO_INPUT_SIZE, show=True, rectangle_colors=(255, 0, 0))
 
     # detecting된 결과와 정답 비교하기
     answer = request.data['question']
