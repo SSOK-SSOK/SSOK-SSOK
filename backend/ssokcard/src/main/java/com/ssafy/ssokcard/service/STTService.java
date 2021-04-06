@@ -20,7 +20,7 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
-public class FileService {
+public class STTService {
     @Value("${file.localPath}")
     private String LOCAL_PATH;
     @Value("${file.serverPath}")
