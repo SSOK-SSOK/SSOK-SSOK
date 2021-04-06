@@ -37,7 +37,8 @@ export default {
   name: "Audio",
   data: function () {
     return {
-      isRecorded: false
+      isRecorded: false,
+      translatedWord: '',
     }
   },
   watch: {
@@ -47,7 +48,7 @@ export default {
         this.load();
         setTimeout(() => {
           this.startRecord();
-        }, 200);
+        }, 300);
       } else {
         this.endRecord();
       }
@@ -77,14 +78,16 @@ export default {
       recorder.stop();
       setTimeout(() => {
         this.store();
-      }, 200);
+      }, 500);
     },
 
     // 4. 파일을 서버로 전송
     store: function () {
       // console.log(soundFile);
       const view = this.convertToWav(soundFile.buffer);
-      this.writeFile([view],'record','wav');
+      setTimeout(() => {
+        this.writeFile([view],'record','wav');
+      }, 500);
     },
 
     // 4-1. 녹음한 데이터를 Wav 파일형식의 buffer로 저장. chunk로 조각내어서 array를 반환
@@ -166,7 +169,7 @@ export default {
       const headers = {'Content-Type': 'multipart/form-data'}
       axios.post("https://j4a201.p.ssafy.io/card-api/stt/convert", formData, headers)
         .then(res => {
-          console.log(res)
+          this.translatedWord = res.data.object;
         })
         .catch(err => console.log(err))
     },
