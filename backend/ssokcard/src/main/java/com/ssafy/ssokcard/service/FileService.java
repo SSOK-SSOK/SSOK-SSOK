@@ -1,17 +1,10 @@
 package com.ssafy.ssokcard.service;
 
 import com.google.cloud.speech.v1.*;
-import com.google.cloud.storage.Acl;
-import com.google.cloud.storage.BlobInfo;
-import com.google.cloud.storage.Storage;
-import com.google.cloud.storage.StorageOptions;
+import com.google.cloud.storage.*;
 import com.google.gson.Gson;
 import com.ssafy.ssokcard.model.response.BasicResponse;
 import lombok.RequiredArgsConstructor;
-import org.jaudiotagger.audio.AudioFileIO;
-import org.jaudiotagger.audio.mp3.MP3AudioHeader;
-import org.jaudiotagger.audio.mp3.MP3File;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,7 +16,6 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Blob;
 import java.util.*;
 
 @Service
@@ -39,39 +31,35 @@ public class FileService {
     @Value("${AIHub.STT.accessKey}")
     private String accessKey;    // 발급받은 API Key
 
-//    private Storage storage = StorageOptions.getDefaultInstance().getService();
-    private Storage storage;
-    private final String bucketName = "ssokssok";
+    @Value("${google.cloud.storage.projectId}")
+    private String projectId;
+    @Value("${google.cloud.storage.bucketName}")
+    private String bucketName;
 
     public File saveFile(MultipartFile inputFile, String fileName) throws IOException {
         UUID uuid = UUID.randomUUID();
         String newFileName = uuid.toString() + fileName;
 
-//        File file = new File(SERVER_PATH, newFileName + ".wav");
-        File file = new File(LOCAL_PATH, newFileName + ".wav");
+        File file = new File(SERVER_PATH, newFileName + ".wav");
         inputFile.transferTo(file);
 
         return file;
     }
 
-    public String saveBucket(String fileName, String localFileLocation) {
+    public String saveBucket(String objectName, String filePath) {
+        Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();
+        BlobId blobId = BlobId.of(bucketName, objectName);
+        BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
 
-        BlobInfo blobInfo = null;
-        //            blobInfo = storage.create(
-//                    BlobInfo.newBuilder(bucketName, fileName)
-//                            .setAcl(new ArrayList<>(Arrays.asList(Acl.of(Acl.User.ofAllAuthenticatedUsers(), Acl.Role.READER))))
-//                            .build(),
-//                    new FileInputStream(localFileLocation));
+        try {
+            storage.create(blobInfo, Files.readAllBytes(Paths.get(filePath)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        blobInfo = BlobInfo.newBuilder(bucketName, fileName).build();
-        storage.create(blobInfo);
-
-        System.out.println(blobInfo.toString());
-
-        return "";
+        return "gs://" + bucketName + "/" + objectName;
     }
 
-    //    zh(중국), en-US(미국), ja-JP(일본), es-ES(스페인), vi-VN(베트남), ko-KR(대한민국), fr-FR(프랑스)
     public Object googleConvertVoiceToText(String languageCode, String audioFilePath) {
         BasicResponse answer = new BasicResponse();
 
@@ -83,7 +71,7 @@ public class FileService {
             RecognitionConfig config =
                     RecognitionConfig.newBuilder()
                             .setEncoding(RecognitionConfig.AudioEncoding.LINEAR16)
-                            .setSampleRateHertz(16000)
+                            .setAudioChannelCount(2) // WAV header indicates 2 channels
                             .setLanguageCode(languageCode) // "en-US"
                             .build();
 
@@ -92,13 +80,6 @@ public class FileService {
             // Performs speech recognition on the audio file
             RecognizeResponse response = speechClient.recognize(config, audio);
             List<SpeechRecognitionResult> results = response.getResultsList();
-
-//            for (SpeechRecognitionResult result : results) {
-//                // There can be several alternative transcripts for a given chunk of speech. Just use the
-//                // first (most likely) one here.
-//                SpeechRecognitionAlternative alternative = result.getAlternativesList().get(0);
-//                System.out.printf("Transcription: %s%n", alternative.getTranscript());
-//            }
 
             SpeechRecognitionAlternative alternative = results.get(0).getAlternativesList().get(0);
 

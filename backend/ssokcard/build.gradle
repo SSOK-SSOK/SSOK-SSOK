@@ -59,6 +59,8 @@ dependencies {
 
 //    implementation 'org.springframework.cloud:spring-cloud-gcp-starter-storage'
     compile 'com.google.cloud:google-cloud-storage:1.17.0'
+
+    compile 'com.google.http-client:google-http-client-jackson:1.15.0-rc'
 }
 
 test {
