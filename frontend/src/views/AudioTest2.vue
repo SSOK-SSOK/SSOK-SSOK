@@ -44,7 +44,7 @@ export default {
     store: function () {
       let myp5 = new p5();
       console.log(soundFile);
-      myp5.saveSound(soundFile, './assets/mySound.wav');
+      // myp5.saveSound(soundFile, './assets/mySound.wav');
 
       const view = this.convertToWav(soundFile.buffer);
       this.writeFile([view],'record','wav');
