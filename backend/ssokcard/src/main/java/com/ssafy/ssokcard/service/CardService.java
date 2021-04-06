@@ -15,9 +15,9 @@ public class CardService {
     @Autowired
     private CardRepository cardRepo;
 
-    public BasicResponse findCard(long id) {
+    public BasicResponse findCard(long id, String languageCode) {
         BasicResponse result = new BasicResponse();
-        List<Card> cardList = cardRepo.findByCategoryId(id);
+        List<Card> cardList = cardRepo.findByCategoryIdAndLanguage(id, languageCode);
 
         if(cardList.size() == 0 || cardList == null){
             result.status = false;

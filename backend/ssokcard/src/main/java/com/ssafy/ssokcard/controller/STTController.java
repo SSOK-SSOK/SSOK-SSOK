@@ -30,7 +30,7 @@ public class STTController {
 
         String gcsUri = sttService.saveBucket(file.getName(), file.getPath());
 
-//        zh(중국), en-US(미국), ja-JP(일본), es-ES(스페인), vi-VN(베트남), ko-KR(대한민국), fr-FR(프랑스)
-        return sttService.googleConvertVoiceToText("ja-JP", gcsUri);
+        // zh(중국), en-US(미국), ja-JP(일본), es-ES(스페인), vi-VN(베트남), ko-KR(대한민국), fr-FR(프랑스)
+        return sttService.googleConvertVoiceToText(languageCode, gcsUri);
     }
 }

@@ -1,6 +1,7 @@
 package com.ssafy.ssokcard.controller;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,7 @@ public class TranslateController {
     @Value("${google.cloud.projectId}")
     private String projectId;
 
+    @ApiOperation(value = "번역하기")
     @GetMapping("/{text}")
     public String translateText(@PathVariable("text")String text) throws IOException {
         TranslateTextResponse response;
