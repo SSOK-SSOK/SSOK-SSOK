@@ -4,6 +4,7 @@ const SmartCameraStore = {
   namespaced: true,
   state: {
     playingCards: [],
+    language: '',
   },
   getters: {
   },
@@ -11,6 +12,9 @@ const SmartCameraStore = {
     SET_CARDS (state, payload) {
       state.playingCards = payload; 
     },
+    SET_LANGUAGE (state, data) {
+      state.language = data;
+    }
   },
   actions: {
     fetchCards({ commit }, data) {
@@ -22,6 +26,9 @@ const SmartCameraStore = {
           console.log(err)
         })
     },
+    fetchLanguage({ commit }, data) {
+      commit("SET_LANGUAGE", data)
+    }
   },
 };
 

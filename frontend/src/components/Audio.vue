@@ -27,9 +27,10 @@
 
 <script>
 import axios from 'axios'
+import { mapState } from "vuex";
 
 // 실시간 음성 녹음 & 파일로 변환 하는 라이브러리
-import "@/store/modules/p5.sound.js"
+import "@/plugins/p5.sound.js"
 import p5 from 'p5';
 let mic, recorder, soundFile;
 
@@ -40,6 +41,9 @@ export default {
       isRecorded: false,
       translatedWord: '',
     }
+  },
+  computed: {
+    ...mapState("CardGameStore", ["language"]),
   },
   watch: {
     isRecorded: function (val) {
@@ -158,13 +162,10 @@ export default {
       var blob = new Blob(dataToDownload, {
         type: type
       });
-      
-      console.log(dataToDownload)
-      console.log(blob)
 
       const formData = new FormData();
       formData.append('file', blob);
-      formData.append('code', 'ko-KR');
+      formData.append('code', this.language);
 
       const headers = {'Content-Type': 'multipart/form-data'}
       axios.post("https://j4a201.p.ssafy.io/card-api/stt/convert", formData, headers)

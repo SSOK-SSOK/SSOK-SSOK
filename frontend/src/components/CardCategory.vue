@@ -12,7 +12,6 @@
       <SpreadCard :category="categories[0]"/>
       <SpreadCard :category="categories[1]"/>
     </div>
-    <!-- <v-btn @click="audioTest">오디오 테스트</v-btn> -->
   </v-container>
 </template>
 
@@ -22,6 +21,12 @@ export default {
   name: 'CardCategory',
   components: {
     SpreadCard,
+  },
+  watch: {
+    selected_language: function (val) {
+      const lanArray = ['ko-KR', 'en-US', 'zh', 'ja-JP', 'vi-VN', 'fr-FR', 'es-ES'];
+      this.$store.dispatch("CardGameStore/fetchLanguage", lanArray[val]);
+    }
   },
   data () {
     return {
@@ -42,22 +47,20 @@ export default {
     }
   },
   methods: {
-    checkLanguage(lang) {
-      this.selectedLanguage = lang.name
-    },
-    startGame(info) {
-      // 언어 내용까지 합해서 넘어가야할 것 같습니다. 
-      this.$store.dispatch("CardGameStore/fetchCards", info.id)
-      this.$router.push({
-        name: "PlayGame",
-        params: {
-          category: info,
-        }
-      });
-    },
-    audioTest() {
-      this.$router.push({ name: "AudioTest" })
-    }
+    // checkLanguage(lang) {
+    //   this.selectedLanguage = lang.name
+    // },
+    // startGame(info) {
+    //   // 언어 내용까지 합해서 넘어가야할 것 같습니다. 
+    //   this.$store.dispatch("CardGameStore/fetchCards", info.id)
+    //   this.$router.push({
+    //     name: "PlayGame",
+    //     params: {
+    //       category: info,
+    //     }
+    //   });
+    // },
+
   }
 }
 </script>

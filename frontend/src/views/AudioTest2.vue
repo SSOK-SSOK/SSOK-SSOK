@@ -9,7 +9,7 @@
 
 <script>
 import axios from 'axios'
-import  "@/store/modules/p5.sound.js"
+import  "@/plugins/p5.sound.js"
 import p5 from 'p5';
 let mic, recorder, soundFile;
 
