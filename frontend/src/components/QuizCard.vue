@@ -107,6 +107,7 @@ export default {
 
 /* Style the back side */
 .flip-card-back {
+  z-index: 100;
   display: flex;
   justify-content: center;
   align-items: center;
