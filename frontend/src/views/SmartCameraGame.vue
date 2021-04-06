@@ -19,6 +19,7 @@
           <span>게임 선택 GO GO!</span>
         </v-tooltip>
       </nav>
+      <!--문제 영역-->
       <div class="head-section">
         <span v-if="is_start">
           <h1>{{ this.question }}을 보여주세요😉</h1>
@@ -27,7 +28,9 @@
           <button class="auth-button" @click="initialize">문제 보기</button>
         </span>
       </div>
+      <!--카메라 & 정답영역-->
       <v-row class="body-section">
+        <!--카메라-->
         <div class="camera-section col-md-6 col-xs-12">
           <vue-web-cam
             ref="webcam"
@@ -64,9 +67,10 @@
             </v-tooltip>
           </div>
         </div>
+        <!--정답-->
         <v-card class="answer-section col-md-6 col-xs-12" elevation="0">
           <div v-if="loading">
-            <div>
+            <div class="progress">
               <h1>정답 확인중입니다</h1>
               <v-progress-linear
                 :active="loading"
@@ -76,13 +80,25 @@
             </div>
           </div>
           <div v-if="is_done">
-            <div v-if="is_correct">
-              <h1>정답입니다!</h1>
-              <h3>정확도 : {{ this.score }}%</h3>
+            <div v-if="is_correct" class="answer">
+              <img src="@/assets/images/mascot-success.png" />
+              <h1 class="my-1">정답입니다!</h1>
+              <h2 class="my-1">정확도 : {{ this.score }}%</h2>
+              <div>
+                <button class="auth-button mx-auto" @click="regame">
+                  다시하기
+                </button>
+              </div>
             </div>
-            <div v-else>
-              <h1>틀렸어요😥</h1>
-              <h3>가져온 물건 : {{ this.category }}</h3>
+            <div v-else class="answer">
+              <img src="@/assets/images/mascot-fail.png" />
+              <h1 class="my-1">틀렸어요😥</h1>
+              <h2 class="my-1">가져온 물건 : {{ this.category }}</h2>
+              <div>
+                <button class="auth-button mx-auto" @click="regame">
+                  다시하기
+                </button>
+              </div>
             </div>
           </div>
         </v-card>
@@ -149,14 +165,13 @@ export default {
         this.deviceId = first.deviceId;
       }
     },
-    // is_start: function () {},
   },
   methods: {
     onCapture() {
       this.loading = true;
       var img = this.$refs.webcam.capture();
       axios
-        .post("https://j4a201.p.ssafy.io/ai/smartcamera/detection/", {
+        .post("http://127.0.0.1:8000/ai/smartcamera/detection/", {
           image: img,
           question: this.question,
         })
@@ -201,7 +216,12 @@ export default {
     moveMainPage() {
       this.$router.push({ name: "MainPage" });
     },
+    regame() {
+      this.initialize();
+      this.is_start = false;
+    },
   },
+  created() {},
 };
 </script>
 
@@ -243,10 +263,6 @@ export default {
       align-items: center;
       width: 100%;
       height: 8%;
-      span {
-        h1 {
-        }
-      }
     }
     .body-section {
       width: 100%;
@@ -279,24 +295,26 @@ export default {
         div {
           width: 100%;
           height: 100%;
-          div {
+          .progress {
             width: 100%;
             height: 75%;
-            h1 {
-            }
             .v-progress-linear {
               width: 100%;
               height: 10;
               margin-top: 2rem;
             }
           }
-          img {
-            position: relative;
-            z-index: 100;
-            width: 80%;
+          .answer {
+            width: 100%;
             height: 75%;
-            object-fit: contain;
-            margin: 0 10%;
+            img {
+              position: relative;
+              z-index: 100;
+              width: 80%;
+              height: 75%;
+              object-fit: contain;
+              margin: 0 10%;
+            }
           }
           div {
             width: 65%;
