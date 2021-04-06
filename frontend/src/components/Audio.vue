@@ -38,12 +38,15 @@ export default {
   name: "Audio",
   data: function () {
     return {
-      isRecorded: false,
-      translatedWord: '',
+      isRecorded: false
     }
   },
+  props: {
+    quizIdx: Number,
+    score: Number
+  },
   computed: {
-    ...mapState("CardGameStore", ["language"]),
+    ...mapState("CardGameStore", ["playingCards", "language", "score"]),
   },
   watch: {
     isRecorded: function (val) {
@@ -168,9 +171,19 @@ export default {
       formData.append('code', this.language);
 
       const headers = {'Content-Type': 'multipart/form-data'}
+      
       axios.post("https://j4a201.p.ssafy.io/card-api/stt/convert", formData, headers)
         .then(res => {
-          this.translatedWord = res.data.object;
+          const translatedWord = res.data.object;
+          const cards = this.playingCards;
+          const idx = this.quizIdx;
+
+          if (translatedWord === cards[idx].word) {
+            console.log("정답!")
+            this.$emit("audioResult", true)
+          } else {
+            this.$emit("audioResult", false)
+          }
         })
         .catch(err => console.log(err))
     },

@@ -167,6 +167,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "SpreadCard",
   props: {
@@ -177,6 +178,7 @@ export default {
     }
   },
   computed: {
+    ...mapState("CardGameStore", ["language"]),
     categoryId: function () {
       return this.category.id
     },
@@ -207,7 +209,9 @@ export default {
   },
   methods: {
     startGame(info) {
-      this.$store.dispatch("CardGameStore/fetchCards", info.id);
+      const data = [info.id, this.language];
+      console.log(data)
+      this.$store.dispatch("CardGameStore/fetchCards", data);
       this.$router.push({
         name: "PlayCardGame",
         params: {

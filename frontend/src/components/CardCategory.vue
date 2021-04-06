@@ -45,22 +45,6 @@ export default {
         { id: 2, name: "Fruit", sub: "과일", path: "https://acegif.com/wp-content/gifs/apple-8.gif"}
       ],
     }
-  },
-  methods: {
-    // checkLanguage(lang) {
-    //   this.selectedLanguage = lang.name
-    // },
-    // startGame(info) {
-    //   // 언어 내용까지 합해서 넘어가야할 것 같습니다. 
-    //   this.$store.dispatch("CardGameStore/fetchCards", info.id)
-    //   this.$router.push({
-    //     name: "PlayGame",
-    //     params: {
-    //       category: info,
-    //     }
-    //   });
-    // },
-
   }
 }
 </script>
