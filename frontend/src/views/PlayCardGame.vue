@@ -39,12 +39,13 @@
                 @is_flipped="is_flipped"
               />
             </div>
-            <button v-else-if="ended" class="auth-button mx-auto">
+            <button v-else-if="ended" class="auth-button mx-auto" @click="openModal=true">
               결과 보기
             </button>
             <button v-else class="auth-button mx-auto" @click="getStart">
               게임 시작
             </button>
+            <Modal v-if="openModal" @close="openModal=false"/>
           </div>
         </div>
         <!--오디오버튼-->
@@ -60,6 +61,7 @@
 import QuizCard from "@/components/QuizCard.vue";
 import Timer from "@/components/Timer.vue";
 import Audio from "@/components/Audio.vue";
+import Modal from "@/components/Modal.vue";
 import { mapState } from "vuex";
 
 export default {
@@ -68,6 +70,7 @@ export default {
     QuizCard,
     Timer,
     Audio,
+    Modal,
   },
   data() {
     return {
@@ -79,6 +82,7 @@ export default {
       solvingStatus: false,
       flipped: false,
       resetTime: false,
+      openModal: false,
     }
   },
   computed: {
@@ -219,4 +223,5 @@ export default {
     }
   }
 }
+
 </style>
