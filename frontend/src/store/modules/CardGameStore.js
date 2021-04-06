@@ -1,9 +1,10 @@
 import axios from "axios";
 
-const SmartCameraStore = {
+const CardGameStore = {
   namespaced: true,
   state: {
     playingCards: [],
+    language: '',
   },
   getters: {
   },
@@ -11,18 +12,27 @@ const SmartCameraStore = {
     SET_CARDS (state, payload) {
       state.playingCards = payload; 
     },
+    SET_LANGUAGE (state, data) {
+      state.language = data;
+    },
   },
   actions: {
     fetchCards({ commit }, data) {
-      axios.get(`https://j4a201.p.ssafy.io/card-api/card/${data}`)
+      const idx = data[0];
+      const lan = data[1];
+      axios.get(`https://j4a201.p.ssafy.io/card-api/card/${idx}/${lan}`)
         .then((res) => {
+          console.log(res);
           commit("SET_CARDS", res.data.object)
         })
         .catch((err) => {
           console.log(err)
         })
     },
+    fetchLanguage({ commit }, data) {
+      commit("SET_LANGUAGE", data)
+    },
   },
 };
 
-export default SmartCameraStore;
+export default CardGameStore;
