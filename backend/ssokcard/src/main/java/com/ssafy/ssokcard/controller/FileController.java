@@ -43,8 +43,12 @@ public class FileController {
     @ApiOperation(value = "파일 업로드")
     @PostMapping(value = "/upload")
     public Object readFile(@RequestParam ("file") MultipartFile inputFile) throws IOException {
-//        File file = fileService.saveFile(inputFile, inputFile.getOriginalFilename());
+        File file = fileService.saveFile(inputFile, inputFile.getOriginalFilename());
 //        return fileService.googleConvertVoiceToText("ko-KR", file.getPath());
+
+        // 업로드 파일, 로컬파일주소, 버킷이름은 서비스상수
+        String gcsUri = fileService.saveBucket(file.getName(), file.getPath());
+
         return fileService.googleConvertVoiceToText("ko-KR", "C:\\SSAFY\\dog.wav");
 //        return fileService.aihubConvertVoiceToText("korean", file.getPath());
     }

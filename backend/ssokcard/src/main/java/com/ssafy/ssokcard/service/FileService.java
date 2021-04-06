@@ -1,11 +1,17 @@
 package com.ssafy.ssokcard.service;
 
 import com.google.cloud.speech.v1.*;
+import com.google.cloud.storage.Acl;
+import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
 import com.google.gson.Gson;
 import com.ssafy.ssokcard.model.response.BasicResponse;
+import lombok.RequiredArgsConstructor;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.mp3.MP3AudioHeader;
 import org.jaudiotagger.audio.mp3.MP3File;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +27,7 @@ import java.sql.Blob;
 import java.util.*;
 
 @Service
+@RequiredArgsConstructor
 public class FileService {
     @Value("${file.localPath}")
     private String LOCAL_PATH;
@@ -32,17 +39,39 @@ public class FileService {
     @Value("${AIHub.STT.accessKey}")
     private String accessKey;    // 발급받은 API Key
 
+//    private Storage storage = StorageOptions.getDefaultInstance().getService();
+    private Storage storage;
+    private final String bucketName = "ssokssok";
+
     public File saveFile(MultipartFile inputFile, String fileName) throws IOException {
         UUID uuid = UUID.randomUUID();
         String newFileName = uuid.toString() + fileName;
 
-        File file = new File(SERVER_PATH, newFileName + ".wav");
+//        File file = new File(SERVER_PATH, newFileName + ".wav");
+        File file = new File(LOCAL_PATH, newFileName + ".wav");
         inputFile.transferTo(file);
 
         return file;
     }
 
-//    zh(중국), en-US(미국), ja-JP(일본), es-ES(스페인), vi-VN(베트남), ko-KR(대한민국), fr-FR(프랑스)
+    public String saveBucket(String fileName, String localFileLocation) {
+
+        BlobInfo blobInfo = null;
+        //            blobInfo = storage.create(
+//                    BlobInfo.newBuilder(bucketName, fileName)
+//                            .setAcl(new ArrayList<>(Arrays.asList(Acl.of(Acl.User.ofAllAuthenticatedUsers(), Acl.Role.READER))))
+//                            .build(),
+//                    new FileInputStream(localFileLocation));
+
+        blobInfo = BlobInfo.newBuilder(bucketName, fileName).build();
+        storage.create(blobInfo);
+
+        System.out.println(blobInfo.toString());
+
+        return "";
+    }
+
+    //    zh(중국), en-US(미국), ja-JP(일본), es-ES(스페인), vi-VN(베트남), ko-KR(대한민국), fr-FR(프랑스)
     public Object googleConvertVoiceToText(String languageCode, String audioFilePath) {
         BasicResponse answer = new BasicResponse();
 
