@@ -38,26 +38,19 @@ export default {
             this.blob = event.data
             var reader = new FileReader();
 
-            
             console.log(this.blob)
             console.log(stream)
 
+            // reader.readAsDataURL(this.blob);
+            // reader.onload = () => {
+            //   const base64AudioMessage = reader.result.split(',')[1];
+            //   console.log(base64AudioMessage)
 
-
-
-
-
-
-            reader.readAsDataURL(this.blob);
-            reader.onload = () => {
-              const base64AudioMessage = reader.result.split(',')[1];
-              console.log(base64AudioMessage)
-
-              const headers = { 'Content-Type': 'application/json' }
-              axios.post("https://j4a201.p.ssafy.io/card-api/file/upload",base64AudioMessage, headers)
-                .then(res => console.log(res))
-                .catch(error => console.log(error))
-            }
+            //   const headers = { 'Content-Type': 'application/json' }
+            //   axios.post("https://j4a201.p.ssafy.io/card-api/file/upload",base64AudioMessage, headers)
+            //     .then(res => console.log(res))
+            //     .catch(error => console.log(error))
+            // }
 
             // reader.onloadend = function () {
             // }
@@ -77,14 +70,14 @@ export default {
       console.log(this.blob)
       formData.append('file', this.blob);
 
-      // const headers = {'Content-Type': 'multipart/form-data'}
+      const headers = {'Content-Type': 'multipart/form-data'}
             
-      // axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", formData, headers)
-      //   .then(res => {
-      //     console.log(res)
-      //     const path = res.data.object;
-      //   })
-      //   .catch(err => console.log(err))
+      axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", formData, headers)
+        .then(res => {
+          console.log(res)
+          const path = res.data.object;
+        })
+        .catch(err => console.log(err))
     }
   }
 }
