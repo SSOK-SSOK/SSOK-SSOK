@@ -24,8 +24,6 @@ public class STTController {
     )
     @PostMapping(value = "/convert")
     public Object convertVoiceToText(@RequestParam("file") MultipartFile inputFile, @RequestParam("code")String languageCode) throws IOException {
-        System.out.println("convertVoiceToText()");
-
         File file = sttService.saveFile(inputFile, inputFile.getOriginalFilename());
 
         String gcsUri = sttService.saveBucket(file.getName(), file.getPath());
