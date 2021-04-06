@@ -31,12 +31,12 @@ export default {
   name: "QuizCard",
   props: {
     currentQuiz: Object,
-    fliped: Boolean,
+    flipped: Boolean,
   },
   data() {
     return {
       flip: false,
-    }
+    };
   },
   computed: {
     cardImg: function () {
@@ -47,7 +47,7 @@ export default {
     },
   },
   watch: {
-    fliped(newValue) {
+    flipped(newValue) {
       // 시간초과라서 카드를 뒤집으라는 prop이오면 카드를 뒤집습니다.
       if (newValue === true) {
         this.flipCard();
@@ -58,7 +58,7 @@ export default {
     // 카드 뒤집기
     flipCard() {
       this.flip = !this.flip;
-      this.$emit("is_fliped", true);
+      this.$emit("is_flipped", true);
     },
     // 다음 카드로 이동
     goNext() {

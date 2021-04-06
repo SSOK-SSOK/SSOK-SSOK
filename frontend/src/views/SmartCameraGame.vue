@@ -221,7 +221,10 @@ export default {
       this.is_start = false;
     },
   },
-  created() {},
+  created() {
+    this.initialize();
+    this.is_start = false;
+  },
 };
 </script>
 
@@ -299,7 +302,7 @@ export default {
             width: 100%;
             height: 75%;
             .v-progress-linear {
-              width: 100%;
+              width: 70%;
               height: 10;
               margin-top: 2rem;
             }
