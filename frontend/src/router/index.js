@@ -5,7 +5,6 @@ import SmartCameraGame from "@/views/SmartCameraGame.vue";
 import WelcomePage from "@/views/WelcomePage.vue";
 import SelectCardGame from "@/views/SelectCardGame.vue";
 import PlayCardGame from "@/views/PlayCardGame.vue";
-import AudioTest from "@/views/AudioTest.vue";
 import AudioTest2 from "@/views/AudioTest2.vue";
 
 Vue.use(VueRouter);
@@ -35,11 +34,6 @@ const routes = [
     path: "/playcardgame",
     name: "PlayCardGame",
     component: PlayCardGame,
-  },
-  {
-    path: "/audiotest",
-    name: "AudioTest",
-    component: AudioTest,
   },
   {
     path: "/audiotest2",

@@ -8,13 +8,18 @@
 </template>
 
 <script>
-import  "@/store/p5.sound.js"
 import axios from 'axios'
+import  "@/store/modules/p5.sound.js"
 import p5 from 'p5';
 let mic, recorder, soundFile;
 
 export default {
   name: "AudioTest2",
+  data: function () {
+    return {
+      data: {},
+    }
+  },
   methods: {
     load: function () {
       mic = new p5.AudioIn();
@@ -23,6 +28,7 @@ export default {
       recorder.setInput(mic);
       soundFile = new p5.SoundFile();
     },
+
     record: function () {
       if (mic.enabled) {
         let audio_p5 = new p5();
@@ -30,33 +36,39 @@ export default {
         recorder.record(soundFile);
       }
     },
+
     end: function () {
       recorder.stop();
     },
+
     store: function () {
       let myp5 = new p5();
-      // console.log(soundFile);
-      // myp5.saveSound(soundFile, 'mySound.wav');
-      const view1 = this.convertToWav(soundFile.buffer)
-      console.log(view1)
+      console.log(soundFile);
+      myp5.saveSound(soundFile, './assets/mySound.wav');
 
-      // save('C:/Users/multicampus/Desktop/Gitlab/s04p23a201/frontend/src/assets'+ view1 +'.wav')
+      const view = this.convertToWav(soundFile.buffer);
+      this.writeFile([view],'record','wav');
+    },
 
-      // console.log(view1)
+    writeFile: function (dataToDownload, filename, extension) {
+      var type = 'application/octet-stream';
+      if (p5.prototype._isSafari()) {
+        type = 'text/plain';
+      }
+      var blob = new Blob(dataToDownload, {
+        type: type
+      });
 
       const formData = new FormData();
-      formData.append('file', view1);
-      const headers = {'Content-Type': 'multipart/form-data'};
-            
-      axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", formData, headers)
+      formData.append('file', blob);
+      formData.append('code', 'ko-KR');
+
+      const headers = {'Content-Type': 'multipart/form-data'}
+      axios.post("https://j4a201.p.ssafy.io/card-api/stt/convert", formData, headers)
         .then(res => {
           console.log(res)
         })
         .catch(err => console.log(err))
-
-      // console.log(['../assets',view1])
-      // myp5.writeFile([view1], 'record', 'wav');
-      
     },
     
     convertToWav: function (audioBuffer) {
