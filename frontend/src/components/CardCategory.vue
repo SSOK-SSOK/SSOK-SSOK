@@ -27,6 +27,7 @@ export default {
     return {
       selected_language: undefined,
       languages: [
+        { id: 0, name: "kr"},
         { id: 1, name: "us"},
         { id: 2, name: "cn"},
         { id: 3, name: "jp"},
