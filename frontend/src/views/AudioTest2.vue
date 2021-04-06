@@ -9,7 +9,7 @@
 
 <script>
 import axios from 'axios'
-import  "@/store/p5.sound.js"
+import  "@/store/modules/p5.sound.js"
 import p5 from 'p5';
 let mic, recorder, soundFile;
 
@@ -45,6 +45,9 @@ export default {
       let myp5 = new p5();
       console.log(soundFile);
       myp5.saveSound(soundFile, './assets/mySound.wav');
+
+      const view = this.convertToWav(soundFile.buffer);
+      this.writeFile([view],'record','wav');
     },
 
     writeFile: function (dataToDownload, filename, extension) {
@@ -58,9 +61,10 @@ export default {
 
       const formData = new FormData();
       formData.append('file', blob);
+      formData.append('code', 'ko-KR');
 
       const headers = {'Content-Type': 'multipart/form-data'}
-      axios.post("https://j4a201.p.ssafy.io/card-api/file/upload", formData, headers)
+      axios.post("https://j4a201.p.ssafy.io/card-api/stt/convert", formData, headers)
         .then(res => {
           console.log(res)
         })
