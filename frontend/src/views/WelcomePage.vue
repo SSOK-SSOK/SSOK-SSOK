@@ -139,7 +139,6 @@ export default {
       width: 100%;
       color: white;
       background: none;
-      font-size: 1rem;
       .logo {
         display: flex;
         align-items: center;
@@ -152,7 +151,7 @@ export default {
           height: 15%;
         }
         p {
-          font-size: 5vh;
+          font-size: 2.5em;
           margin: 0 0 0 0.5vw;
         }
       }
