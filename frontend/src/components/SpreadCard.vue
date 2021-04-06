@@ -173,7 +173,8 @@ export default {
     category: Object,
   },
   data() {
-    return {};
+    return {
+    }
   },
   computed: {
     categoryId: function () {
@@ -205,7 +206,7 @@ export default {
     },
   },
   methods: {
-    startGame: function (info) {
+    startGame(info) {
       this.$store.dispatch("CardGameStore/fetchCards", info.id);
       this.$router.push({
         name: "PlayCardGame",

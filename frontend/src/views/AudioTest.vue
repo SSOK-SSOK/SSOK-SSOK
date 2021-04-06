@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <NavBar />
     <div id="microphone-test">
       <audio ref="recordPlayer" controls src="">
       </audio>
@@ -12,7 +11,6 @@
 </template>
 
 <script>
-import NavBar from "@/components/NavBar.vue";
 import axios from 'axios';
 export default {
   name: "AudioTest",
@@ -20,9 +18,6 @@ export default {
     return {
       blob: {}
     }
-  },
-  components: {
-    NavBar
   },
   methods: {
     startRecord: function () {

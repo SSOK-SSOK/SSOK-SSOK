@@ -36,7 +36,7 @@ export default {
   data() {
     return {
       flip: false,
-    };
+    }
   },
   computed: {
     cardImg: function () {

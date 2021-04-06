@@ -107,15 +107,17 @@ export default {
   components: {
     "vue-web-cam": WebCam,
   },
-  data: () => ({
-    camera: null,
-    deviceId: null,
-    devices: [],
-    loading: false,
-    question: "cup",
-    img: null,
-    is_start: false,
-  }),
+  data () {
+    return {
+      camera: null,
+      deviceId: null,
+      devices: [],
+      loading: false,
+      question: "cup",
+      img: null,
+      is_start: false,
+    }
+  },
   computed: {
     device: function () {
       return this.devices.find((n) => n.deviceId === this.deviceId);
@@ -194,7 +196,7 @@ export default {
       this.$store.dispatch("SmartCameraStore/initializeInfo");
       this.is_start = true;
     },
-    moveMainPage: function () {
+    moveMainPage () {
       this.$router.push({ name: "MainPage" });
     },
   },

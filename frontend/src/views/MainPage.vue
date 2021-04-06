@@ -19,50 +19,48 @@
           <span>웰컴페이지 GO GO!</span>
         </v-tooltip>
       </nav>
-      <div class="mascots">
-        <div class="cardMascot">
-          <img
-            @click="moveSelectCardGame"
-            class="mascot-card ma-0"
-            src="@/assets/images/card.png"
-            alt="macot-card"
-          />
-        </div>
-        <div class="cameraMascot">
-          <img
-            @click="moveSmartCameraGame"
-            class="mascot-camera"
-            src="@/assets/images/camera.png"
-            alt="macot-camera"
-          />
-        </div>
-      </div>
-      <div class="planets">
-        <!--카드게임-->
-        <div class="venus">
-          <div class="venusimg">
-            <img
-              @click="moveSelectCardGame"
-              class="spin"
-              src="@/assets/images/venus.png"
-              alt="venus"
-            />
+      <v-row class="planets">
+        <div class="left-section col-md-6">
+          <div class="venus">
+            <div class="mascot-card">
+              <img
+                @click="moveSelectCardGame"
+                src="@/assets/images/mascot-card.png"
+                alt="mascot-card"
+              />
+              <p>카드 게임</p>
+            </div>
+            <div class="venus-img">
+              <img
+                @click="moveSelectCardGame"
+                class="spin"
+                src="@/assets/images/venus.png"
+                alt="venus"
+              />
+            </div>
           </div>
-          <p>카드 게임</p>
         </div>
-        <!--스마트카메라게임-->
-        <div class="greenus">
-          <div class="greenusimg">
-            <img
-              @click="moveSmartCameraGame"
-              class="spin"
-              src="@/assets/images/greenus.png"
-              alt="greenus"
-            />
+        <div class="right-section col-md-6">
+          <div class="greenus">
+            <div class="mascot-camera">
+              <img
+                @click="moveSmartCameraGame"
+                src="@/assets/images/mascot-camera.png"
+                alt="mascot-camera"
+              />
+              <p>카메라 게임</p>
+            </div>
+            <div class="greenus-img">
+              <img
+                @click="moveSmartCameraGame"
+                class="spin"
+                src="@/assets/images/greenus.png"
+                alt="greenus"
+              />
+            </div>
           </div>
-          <p>카메라 게임</p>
         </div>
-      </div>
+      </v-row>
     </div>
   </v-container>
 </template>
@@ -70,24 +68,17 @@
 <script>
 export default {
   name: "MainPage",
-  data: () => ({
-    drawer: false,
-    group: null,
-  }),
-
-  watch: {
-    group() {
-      this.drawer = false;
-    },
+  data() {
+    return {};
   },
   methods: {
-    moveSmartCameraGame: function () {
+    moveSmartCameraGame() {
       this.$router.push({ name: "SmartCameraGame" });
     },
-    moveSelectCardGame: function () {
+    moveSelectCardGame() {
       this.$router.push({ name: "SelectCardGame" });
     },
-    moveWelcomePage: function () {
+    moveWelcomePage() {
       this.$router.push({ name: "WelcomePage" });
     },
   },
@@ -114,18 +105,12 @@ export default {
     // navbar
     nav {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 2.5% 1.5%;
-      margin-bottom: 2%;
-      height: 5%;
       width: 100%;
-      color: white;
+      height: 5%;
+      padding: 2.5% 1.5%;
+      margin-bottom: 1.5%;
       background: none;
-      font-size: 1rem;
-      div {
-        color: white;
-      }
     }
     // 캐릭터
     .mascots {
@@ -154,66 +139,90 @@ export default {
       }
     }
     .planets {
-      display: flex;
       width: 100%;
-      height: 50%;
-      .venus {
-        cursor: pointer;
-        width: 50%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        .venusimg {
-          display: flex;
-          position: absolute;
-          justify-content: center;
-          align-items: center;
-          .spin {
-            width: 85%;
-            height: 85%;
-            display: flex;
-            justify-content: center;
-            align-items: top;
-            animation: rotate 12s linear infinite;
-            transform-origin: 50% 50%;
+      height: 84%;
+      padding: 0 10%;
+      margin: 0;
+      .left-section {
+        .venus {
+          height: 100%;
+          padding: 1%;
+          .mascot-card {
+            position: relative;
+            z-index: 10;
+            width: 40%;
+            margin: 0 auto;
+            img {
+              position: relative;
+              z-index: 20;
+              width: 100%;
+              cursor: pointer;
+            }
+            p {
+              position: absolute;
+              z-index: 100;
+              width: 100%;
+              margin: 35% 0;
+              background: rgba(22, 18, 0, 0.8);
+              color: white;
+              text-align: center;
+              font-size: 2.5em;
+              font-weight: bold;
+            }
           }
-        }
-        p {
-          background-color: rgb(0, 0, 0, 50%);
-          z-index: 5;
-          color: white;
-          font-size: 6vh;
-          font-weight: bold;
+          .venus-img {
+            position: relative;
+            bottom: 10%;
+            width: 70%;
+            margin: 0 auto;
+            .spin {
+              width: 100%;
+              animation: rotate 12.5s linear infinite;
+              transform-origin: 50% 50%;
+              cursor: pointer;
+            }
+          }
         }
       }
-      .greenus {
-        cursor: pointer;
-        width: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        .greenusimg {
-          display: flex;
-          position: absolute;
-          justify-content: center;
-          align-items: center;
-          .spin {
-            width: 85%;
-            height: 85%;
-            display: flex;
-            justify-content: center;
-            align-items: top;
-            animation: rotate 12s linear infinite;
-            transform-origin: 50% 50%;
+      .right-section {
+        .greenus {
+          height: 100%;
+          padding: 1%;
+          .mascot-camera {
+            position: relative;
+            z-index: 10;
+            width: 40%;
+            margin: 0 auto;
+            img {
+              position: relative;
+              z-index: 20;
+              width: 100%;
+              cursor: pointer;
+            }
+            p {
+              position: absolute;
+              z-index: 100;
+              width: 100%;
+              margin: 35% 0;
+              background: rgba(22, 18, 0, 0.8);
+              color: white;
+              text-align: center;
+              font-size: 2.5em;
+              font-weight: bold;
+            }
           }
-        }
-        p {
-          background-color: rgb(0, 0, 0, 50%);
-          z-index: 5;
-          color: white;
-          font-size: 6vh;
-          font-weight: bold;
+          .greenus-img {
+            position: relative;
+            bottom: 10%;
+            width: 70%;
+            margin: 0 auto;
+            .spin {
+              width: 100%;
+              animation: rotate 12s linear infinite;
+              transform-origin: 50% 50%;
+              cursor: pointer;
+            }
+          }
         }
       }
     }
