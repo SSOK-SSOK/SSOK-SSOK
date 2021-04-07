@@ -50,7 +50,7 @@ export default {
         this.load();
         setTimeout(() => {
           this.startRecord();
-        }, 300);
+        }, 500);
       } else {
         this.endRecord();
       }
