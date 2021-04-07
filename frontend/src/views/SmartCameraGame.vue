@@ -19,90 +19,98 @@
           <span>게임 선택 GO GO!</span>
         </v-tooltip>
       </nav>
-      <!--문제 영역-->
-      <div class="head-section">
-        <span v-if="is_start">
-          <h1>{{ this.question }}을 보여주세요😉</h1>
-        </span>
-        <span v-else>
-          <button class="auth-button" @click="initialize">문제 보기</button>
-        </span>
-      </div>
-      <!--카메라 & 정답영역-->
-      <v-row class="body-section">
-        <!--카메라-->
-        <div class="camera-section col-md-6 col-xs-12">
-          <vue-web-cam
-            ref="webcam"
-            :device-id="deviceId"
-            @started="onStarted"
-            @stopped="onStopped"
-            @error="onError"
-            @cameras="onCameras"
-          />
-          <div class="camera-btns">
-            <v-tooltip bottom color="deep-purple accent-3">
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn v-bind="attrs" v-on="on" fab large @click="onCapture">
-                  <v-icon>mdi-camera-iris</v-icon>
-                </v-btn>
-              </template>
-              <span>제출하기!</span>
-            </v-tooltip>
-            <v-tooltip bottom color="deep-purple accent-3">
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn v-bind="attrs" v-on="on" fab large @click="onStop">
-                  <v-icon>mdi-camera-off</v-icon>
-                </v-btn>
-              </template>
-              <span>카메라 끄기</span>
-            </v-tooltip>
-            <v-tooltip bottom color="deep-purple accent-3">
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn v-bind="attrs" v-on="on" fab large @click="onStart">
-                  <v-icon>mdi-camera</v-icon>
-                </v-btn>
-              </template>
-              <span>카메라 켜기!</span>
-            </v-tooltip>
-          </div>
+      <div v-if="game_started" class="camera-game-field">
+        <!--문제 영역-->
+        <div class="head-section">
+          <span v-if="is_start">
+            <h1>{{ this.question }}을 보여주세요😉</h1>
+          </span>
+          <span v-else>
+            <button class="auth-button" @click="initialize">문제 보기</button>
+          </span>
         </div>
-        <!--정답-->
-        <v-card class="answer-section col-md-6 col-xs-12" elevation="0">
-          <div v-if="loading">
-            <div class="progress">
-              <h1>정답 확인중입니다</h1>
-              <v-progress-linear
-                :active="loading"
-                :indeterminate="loading"
-                color="#FFEE58"
-              ></v-progress-linear>
+        <!--카메라 & 정답영역-->
+        <v-row class="body-section">
+          <!--카메라-->
+          <div class="camera-section col-md-6 col-xs-12">
+            <vue-web-cam
+              ref="webcam"
+              :device-id="deviceId"
+              @started="onStarted"
+              @stopped="onStopped"
+              @error="onError"
+              @cameras="onCameras"
+            />
+            <div class="camera-btns">
+              <v-tooltip bottom color="deep-purple accent-3">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn v-bind="attrs" v-on="on" fab large @click="onCapture">
+                    <v-icon>mdi-camera-iris</v-icon>
+                  </v-btn>
+                </template>
+                <span>제출하기!</span>
+              </v-tooltip>
+              <v-tooltip bottom color="deep-purple accent-3">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn v-bind="attrs" v-on="on" fab large @click="onStop">
+                    <v-icon>mdi-camera-off</v-icon>
+                  </v-btn>
+                </template>
+                <span>카메라 끄기</span>
+              </v-tooltip>
+              <v-tooltip bottom color="deep-purple accent-3">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn v-bind="attrs" v-on="on" fab large @click="onStart">
+                    <v-icon>mdi-camera</v-icon>
+                  </v-btn>
+                </template>
+                <span>카메라 켜기!</span>
+              </v-tooltip>
             </div>
           </div>
-          <div v-if="is_done">
-            <div v-if="is_correct" class="answer">
-              <img src="@/assets/images/mascot-success.png" />
-              <h1 class="my-1">정답입니다!</h1>
-              <h2 class="my-1">정확도 : {{ this.score }}%</h2>
-              <div>
-                <button class="auth-button mx-auto" @click="regame">
-                  다시하기
-                </button>
+          <!--정답-->
+          <v-card class="answer-section col-md-6 col-xs-12" elevation="0">
+            <div v-if="loading">
+              <div class="progress">
+                <h1>정답 확인중입니다</h1>
+                <v-progress-linear
+                  :active="loading"
+                  :indeterminate="loading"
+                  color="#FFEE58"
+                ></v-progress-linear>
               </div>
             </div>
-            <div v-else class="answer">
-              <img src="@/assets/images/mascot-fail.png" />
-              <h1 class="my-1">틀렸어요😥</h1>
-              <h2 class="my-1">가져온 물건 : {{ this.category }}</h2>
-              <div>
-                <button class="auth-button mx-auto" @click="regame">
-                  다시하기
-                </button>
+            <div v-if="is_done">
+              <div v-if="is_correct" class="answer">
+                <img src="@/assets/images/mascot-success.png" />
+                <h1 class="my-1">정답입니다!</h1>
+                <h2 class="my-1">정확도 : {{ this.score }}%</h2>
+                <div>
+                  <button class="auth-button mx-auto" @click="regame">
+                    다시하기
+                  </button>
+                </div>
+              </div>
+              <div v-else class="answer">
+                <img src="@/assets/images/mascot-fail.png" />
+                <h1 class="my-1">틀렸어요😥</h1>
+                <h2 class="my-1">가져온 물건 : {{ this.category }}</h2>
+                <div>
+                  <button class="auth-button mx-auto" @click="regame">
+                    다시하기
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </v-card>
-      </v-row>
+          </v-card>
+        </v-row>
+      </div>
+      <div v-else class="start-button">
+        <button v-if="!languageModal" class="auth-button" @click="[getGameStart, languageModal=true]">
+          게임 시작
+        </button>
+      </div>
+      <LanguageModal v-if="languageModal" @close="getMessage"/>
     </div>
   </v-container>
 </template>
@@ -110,6 +118,7 @@
 <script>
 import { WebCam } from "vue-web-cam";
 import { mapGetters } from "vuex";
+import LanguageModal from "@/components/LanguageModal.vue";
 import axios from "axios";
 import "@/style/star.sass";
 
@@ -119,6 +128,7 @@ export default {
   name: "SmartCameraGame",
   components: {
     "vue-web-cam": WebCam,
+    LanguageModal,
   },
   data() {
     return {
@@ -129,6 +139,9 @@ export default {
       questions: ["cup", "book", "chair"],
       img: null,
       is_start: false,
+      game_started: false,
+      languageModal: false,
+      selected_language: undefined,
     };
   },
   computed: {
@@ -220,6 +233,14 @@ export default {
       this.initialize();
       this.is_start = false;
     },
+    getGameStart() {
+      this.game_started = true;
+    },
+    getMessage(language) {
+      this.languageModal = false;
+      this.game_started = true;
+      this.selected_language = language
+    },
   },
   created() {
     this.initialize();
@@ -231,6 +252,10 @@ export default {
 <style lang="scss" scoped>
 @import "@/style/light-button.scss";
 @import "@/style/auth-button.scss";
+*p{
+  text-align: center;
+  font-size: 2.2em;
+}
 .container {
   padding: 1%;
   .background {
@@ -260,81 +285,94 @@ export default {
         color: white;
       }
     }
-    .head-section {
+    .camera-game-field{
+      width: 100%; 
+      height: 87%;
+      .head-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 15%;
+
+      }
+      .body-section {
+        width: 100%;
+        height: 85%;
+        padding: 1%;
+        margin: 0;
+        .camera-section {
+          height: 100%;
+          video {
+            position: relative;
+            z-index: 100;
+            width: 100%;
+            height: 75%;
+          }
+          .camera-btns {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 65%;
+            height: 15%;
+            margin: 2.5% auto;
+            * {
+              margin: 1.5rem;
+            }
+          }
+        }
+        .answer-section {
+          height: 100%;
+          background: none;
+          div {
+            width: 100%;
+            height: 100%;
+            .progress {
+              width: 100%;
+              height: 75%;
+              .v-progress-linear {
+                width: 70%;
+                height: 10;
+                margin-top: 2rem;
+              }
+            }
+            .answer {
+              width: 100%;
+              height: 75%;
+              img {
+                position: relative;
+                z-index: 100;
+                width: 80%;
+                height: 75%;
+                object-fit: contain;
+                margin: 0 10%;
+              }
+            }
+            div {
+              width: 65%;
+              height: 20%;
+              padding: 1% 0;
+              margin: 0 auto;
+              * {
+                text-align: center;
+                color: white;
+              }
+            }
+          }
+          h1 {
+            text-align: center;
+            color: white;
+          }
+        }
+      }
+    }
+    .start-button{
+      width: 100%; 
+      height: 87%;
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 100%;
-      height: 8%;
-    }
-    .body-section {
-      width: 100%;
-      height: 80%;
-      padding: 1%;
-      margin-top: 1%;
-      .camera-section {
-        height: 100%;
-        video {
-          position: relative;
-          z-index: 100;
-          width: 100%;
-          height: 75%;
-        }
-        .camera-btns {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: 65%;
-          height: 15%;
-          margin: 2.5% auto;
-          * {
-            margin: 1.5rem;
-          }
-        }
-      }
-      .answer-section {
-        height: 100%;
-        background: none;
-        div {
-          width: 100%;
-          height: 100%;
-          .progress {
-            width: 100%;
-            height: 75%;
-            .v-progress-linear {
-              width: 70%;
-              height: 10;
-              margin-top: 2rem;
-            }
-          }
-          .answer {
-            width: 100%;
-            height: 75%;
-            img {
-              position: relative;
-              z-index: 100;
-              width: 80%;
-              height: 75%;
-              object-fit: contain;
-              margin: 0 10%;
-            }
-          }
-          div {
-            width: 65%;
-            height: 20%;
-            padding: 1% 0;
-            margin: 0 auto;
-            * {
-              text-align: center;
-              color: white;
-            }
-          }
-        }
-        h1 {
-          text-align: center;
-          color: white;
-        }
-      }
+      padding-bottom: 9%;
     }
   }
 }
