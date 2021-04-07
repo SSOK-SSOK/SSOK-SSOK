@@ -31,6 +31,7 @@ public class BadgeService {
             return result;
         }
 
+        // 15문제 중 12개 미만 정답일 시 뱃지 미부여
         if(gameResultDto.getScore() < 12) {
             result.status = true;
             result.data = "점수 미달";
