@@ -45,12 +45,12 @@
             <button v-else class="auth-button mx-auto" @click="getStart">
               게임 시작
             </button>
-            <ScoreModal v-if="openModal" @close="openModal=false"/>
+            <ScoreModal v-if="openModal" @close="openModal=false" :score="score"/>
           </div>
         </div>
         <!--오디오버튼-->
         <div v-if="started" class="audio-button">
-          <Audio :quizIdx="quizIdx" :score="score" @audioResult="onAudioResult"/>
+          <Audio :quizIdx="quizIdx" @audioResult="onAudioResult"/>
         </div>
       </div>
       <div id="alert" v-if="alertDialog">
