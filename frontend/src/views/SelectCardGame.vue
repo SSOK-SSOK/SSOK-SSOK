@@ -9,8 +9,12 @@
       <nav>
         <v-tooltip bottom color="deep-purple accent-3">
           <template v-slot:activator="{ on, attrs }">
-            <div v-bind="attrs" v-on="on"
-             class="glow" @click="moveMainPage"></div>
+            <div
+              v-bind="attrs"
+              v-on="on"
+              class="glow"
+              @click="moveMainPage"
+            ></div>
           </template>
           <span>게임 선택 GO GO!</span>
         </v-tooltip>
@@ -59,13 +63,10 @@ export default {
       width: 100%;
       height: 5%;
       padding: 2.5% 1.5%;
-      margin-bottom: 1%;
+      margin: 2vh 0 1% 2vw;
       color: white;
       background: none;
       font-size: 1rem;
-      div {
-        //light-button
-      }
     }
   }
 }
