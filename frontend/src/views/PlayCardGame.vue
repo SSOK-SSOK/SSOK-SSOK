@@ -15,9 +15,9 @@
           <span>카드게임 다시 고르기!</span>
         </v-tooltip>
       </nav>
-      <h1 v-if="started">
+      <p v-if="started">
         녹음버튼을 눌러 정답을 말해보세요
-      </h1>
+      </p>
       <div class="game-contents">
         <!--타이머-->
         <div class="countdown-timer">
@@ -45,7 +45,7 @@
             <button v-else class="auth-button mx-auto" @click="getStart">
               게임 시작
             </button>
-            <Modal v-if="openModal" @close="openModal=false"/>
+            <ScoreModal v-if="openModal" @close="openModal=false"/>
           </div>
         </div>
         <!--오디오버튼-->
@@ -61,7 +61,7 @@
 import QuizCard from "@/components/QuizCard.vue";
 import Timer from "@/components/Timer.vue";
 import Audio from "@/components/Audio.vue";
-import Modal from "@/components/Modal.vue";
+import ScoreModal from "@/components/ScoreModal.vue";
 import { mapState } from "vuex";
 
 export default {
@@ -70,7 +70,7 @@ export default {
     QuizCard,
     Timer,
     Audio,
-    Modal,
+    ScoreModal,
   },
   data() {
     return {
@@ -182,8 +182,9 @@ export default {
       color: white;
       font-size: 1rem;
     }
-    h1{
+    p{
       text-align: center;
+      font-size: 2.2em;
     }
     .game-contents {
       display: flex;

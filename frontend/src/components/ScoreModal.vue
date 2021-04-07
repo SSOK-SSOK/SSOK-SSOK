@@ -2,19 +2,17 @@
   <div class="modal-mask">
     <div class="modal-wrapper">
       <div class="modal-container">
-        <!-- <div class="modal-contents"> -->
-          <div class="modal-header">
-            <p>✨당신의 점수는?✨</p>
-          </div>
-          <div class="modal-body">
-            <p>5 / 10</p>
-          </div>
-          <div class="modal-footer">
-            <button @click="$emit('close')">
-              OK
-            </button>
-          </div>
-        <!-- </div> -->
+        <div class="modal-header">
+          <p>✨당신의 점수는?✨</p>
+        </div>
+        <div class="modal-body">
+          <p>5 / 10</p>
+        </div>
+        <div class="modal-footer">
+          <button @click="$emit('close')">
+            OK
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -22,7 +20,7 @@
 
 <script>
 export default {
-  name: 'Modal',
+  name: 'ScoreModal',
   data() {
     return {
       
@@ -32,7 +30,6 @@ export default {
     
   },
   methods: {
-    
   },
 };
 </script>

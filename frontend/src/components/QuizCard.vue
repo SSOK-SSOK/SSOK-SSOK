@@ -86,6 +86,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
+  margin-bottom: 5%;
   transition: transform 0.8s;
   transform-style: preserve-3d;
 }
@@ -107,6 +108,7 @@ export default {
 
 /* Style the back side */
 .flip-card-back {
+  z-index: 100;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -132,4 +134,5 @@ export default {
 .flip-card-front:hover .overlay {
   opacity: 0.7;
 }
+
 </style>
