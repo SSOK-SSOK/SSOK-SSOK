@@ -112,7 +112,7 @@ export default {
       this.categorySub = category.sub;
     },
     sendCurrentQuiz(idx) {
-      if (idx < 15) {
+      if (idx < this.playingCards.length) {
         return this.playingCards[idx];
       } else {
         this.started = false;
