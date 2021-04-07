@@ -50,7 +50,7 @@
         </div>
         <!--오디오버튼-->
         <div v-if="started" class="audio-button">
-          <Audio />
+          <Audio :quizIdx="quizIdx" :score="score" @audioResult="onAudioResult"/>
         </div>
       </div>
     </div>
@@ -83,6 +83,7 @@ export default {
       flipped: false,
       resetTime: false,
       openModal: false,
+      score: 0,
     }
   },
   computed: {
@@ -146,6 +147,11 @@ export default {
     moveSelectCardGame() {
       this.$router.push({ name: "SelectCardGame" });
     },
+    onAudioResult(result) {
+      if (result === true) {
+        this.score += 1;
+      }
+    }
   },
 };
 </script>

@@ -6,7 +6,7 @@
           <p>✨당신의 점수는?✨</p>
         </div>
         <div class="modal-body">
-          <p>5 / 10</p>
+          <p>{{ score }}/15</p>
         </div>
         <div class="modal-footer">
           <button @click="$emit('close')">
@@ -21,9 +21,11 @@
 <script>
 export default {
   name: 'ScoreModal',
+  props: {
+    score: Number
+  },
   data() {
     return {
-      
     };
   },
   mounted() {
