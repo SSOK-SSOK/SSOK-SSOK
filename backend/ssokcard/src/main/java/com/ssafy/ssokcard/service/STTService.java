@@ -84,6 +84,13 @@ public class STTService {
             RecognizeResponse response = speechClient.recognize(config, audio);
             List<SpeechRecognitionResult> results = response.getResultsList();
 
+            if(results == null || results.size() == 0) {
+                answer.status = false;
+                answer.data = "변환 실패";
+                answer.object = null;
+                return answer;
+            }
+
             SpeechRecognitionAlternative alternative = results.get(0).getAlternativesList().get(0);
 
             answer.status = true;

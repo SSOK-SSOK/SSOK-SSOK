@@ -6,6 +6,7 @@ import com.ssafy.ssokcard.model.response.BasicResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class CardService {
         }
 
         Collections.shuffle(cardList);
+
         result.status = true;
         result.data = "카드 조회 성공";
         result.object = cardList;
