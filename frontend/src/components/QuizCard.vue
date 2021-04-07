@@ -14,7 +14,7 @@
           ></v-img>
         </div>
         <div class="flip-card-back" style="border-radius: 30px">
-          <h1 v-if="flip" class="text-center">{{ cardAnswer }}</h1>
+          <h2 v-if="flip" class="text-center">{{ cardAnswer }}</h2>
         </div>
       </div>
       <div class="d-flex justify-content-center">
@@ -134,5 +134,4 @@ export default {
 .flip-card-front:hover .overlay {
   opacity: 0.7;
 }
-
 </style>
