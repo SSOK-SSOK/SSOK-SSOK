@@ -106,12 +106,17 @@
         </v-row>
       </div>
       <div v-else class="start-button">
+        <Stepper
+          class="d-none d-md-block"
+          v-if="!languageModal"
+          @stepperDone="stepperDone"
+        />
         <button
           v-if="!languageModal"
-          class="gold-button"
-          @click="[getGameStart, (languageModal = true)]"
+          class="gold-button mx-auto d-block d-md-none"
+          @click="getGameStart"
         >
-          게임 시작
+          게임하기
         </button>
       </div>
       <LanguageModal
@@ -127,6 +132,7 @@
 import { WebCam } from "vue-web-cam";
 import { mapGetters } from "vuex";
 import LanguageModal from "@/components/LanguageModal.vue";
+import Stepper from "@/components/Stepper.vue";
 import axios from "axios";
 import "@/style/star.sass";
 
@@ -137,6 +143,7 @@ export default {
   components: {
     "vue-web-cam": WebCam,
     LanguageModal,
+    Stepper,
   },
   data() {
     return {
@@ -158,6 +165,7 @@ export default {
       game_started: false,
       languageModal: false,
       selected_language: undefined,
+      stepper: false,
     };
   },
   computed: {
@@ -248,12 +256,17 @@ export default {
       this.is_start = false;
     },
     getGameStart() {
-      this.game_started = true;
+      this.languageModal = true;
     },
     getMessage(language) {
       this.languageModal = false;
       this.game_started = true;
       this.selected_language = language;
+    },
+    stepperDone(value) {
+      if (value == true) {
+        this.languageModal = true;
+      }
     },
     moveMainPage() {
       this.$router.push({ name: "MainPage" });
