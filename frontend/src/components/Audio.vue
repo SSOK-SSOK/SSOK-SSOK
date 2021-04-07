@@ -55,7 +55,7 @@ export default {
         this.load();
         setTimeout(() => {
           this.startRecord();
-        }, 300);
+        }, 200);
       } else {
         this.endRecord();
       }
@@ -85,7 +85,7 @@ export default {
       recorder.stop();
       setTimeout(() => {
         this.store();
-      }, 500);
+      }, 200);
     },
 
     // 4. 파일을 서버로 전송
@@ -94,7 +94,7 @@ export default {
       const view = this.convertToWav(soundFile.buffer);
       setTimeout(() => {
         this.writeFile([view],'record','wav');
-      }, 500);
+      }, 200);
     },
 
     // 4-1. 녹음한 데이터를 Wav 파일형식의 buffer로 저장. chunk로 조각내어서 array를 반환
@@ -180,8 +180,10 @@ export default {
 
           if (translatedWord === cards[idx].word) {
             console.log("정답!")
+            this.$store.dispatch("CardGameStore/fetchAlertMessage", '정답입니다!');
             this.$emit("audioResult", true)
           } else {
+            this.$store.dispatch("CardGameStore/fetchAlertMessage", '틀렸어요ㅠㅠ');
             this.$emit("audioResult", false)
           }
         })
