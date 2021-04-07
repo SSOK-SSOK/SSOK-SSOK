@@ -9,15 +9,17 @@
       <nav>
         <v-tooltip bottom color="deep-purple accent-3">
           <template v-slot:activator="{ on, attrs }">
-            <div v-bind="attrs" v-on="on"
-             class="glow" @click="moveSelectCardGame"></div>
+            <div
+              v-bind="attrs"
+              v-on="on"
+              class="glow"
+              @click="moveSelectCardGame"
+            ></div>
           </template>
           <span>카드게임 다시 고르기!</span>
         </v-tooltip>
       </nav>
-      <p v-if="started">
-        녹음버튼을 눌러 정답을 말해보세요
-      </p>
+      <p v-if="started">녹음버튼을 눌러 정답을 말해보세요</p>
       <div class="game-contents">
         <!--타이머-->
         <div class="countdown-timer">
@@ -39,7 +41,11 @@
                 @is_flipped="is_flipped"
               />
             </div>
-            <button v-else-if="ended" class="auth-button mx-auto" @click="openModal=true">
+            <button
+              v-else-if="ended"
+              class="auth-button mx-auto"
+              @click="openModal = true"
+            >
               결과 보기
             </button>
             <button v-else class="auth-button mx-auto" @click="getStart">
@@ -50,7 +56,20 @@
         </div>
         <!--오디오버튼-->
         <div v-if="started" class="audio-button">
-          <Audio :quizIdx="quizIdx" @audioResult="onAudioResult"/>
+          <div v-if="loading" class="loading-circle">
+            <v-progress-circular
+              indeterminate
+              color="amber"
+              :size="80"
+            ></v-progress-circular>
+          </div>
+          <Audio
+            :quizIdx="quizIdx"
+            :score="score"
+            @audioResult="onAudioResult"
+            @is_flipped="is_flipped"
+            @is_loading="is_loading"
+          />
         </div>
       </div>
       <div id="alert" v-if="alertDialog">
@@ -61,17 +80,13 @@
             outlined
             text
             type="success"
-            style="position: fixed;
-                  float:  right;
-                  bottom: 3%;
-                  right:  2%;"
+            style="position: fixed; float: right; bottom: 3%; right: 2%"
           >
             {{ alertMessage }}
           </v-alert>
         </div>
       </div>
     </div>
-    
   </v-container>
 </template>
 
@@ -101,10 +116,15 @@ export default {
       openModal: false,
       score: 0,
       snackbar: false,
-    }
+      loading: false,
+    };
   },
   computed: {
-    ...mapState("CardGameStore", ["playingCards","alertMessage", "alertDialog"]),
+    ...mapState("CardGameStore", [
+      "playingCards",
+      "alertMessage",
+      "alertDialog",
+    ]),
     currentQuiz() {
       return this.sendCurrentQuiz(this.quizIdx);
     },
@@ -113,7 +133,6 @@ export default {
     // 시간 초과면 카드를 뒤집는다
     solvingStatus(newValue) {
       if (newValue === false) {
-        console.log("시간초과");
         this.flipped = true;
       }
     },
@@ -133,13 +152,11 @@ export default {
     },
     is_solved(value) {
       if (value === false) {
-        console.log("시간초과!");
         this.solvingStatus = value;
         this.flipped = true;
       }
     },
     is_flipped(newValue) {
-      console.log("정답확인");
       this.resetTime = true;
     },
     nextCard(newValue) {
@@ -163,7 +180,10 @@ export default {
         this.score += 1;
         this.snackbar = true;
       }
-    }
+    },
+    is_loading(value) {
+      this.loading = value;
+    },
   },
 };
 </script>
@@ -200,7 +220,7 @@ export default {
       color: white;
       font-size: 1rem;
     }
-    p{
+    p {
       text-align: center;
       font-size: 2.2em;
     }
@@ -238,9 +258,13 @@ export default {
         align-items: center;
         width: 30%;
         height: 60vh;
+        .loading-circle {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+        }
       }
     }
   }
 }
-
 </style>
