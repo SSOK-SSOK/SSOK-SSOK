@@ -14,7 +14,7 @@ public class GameResultDto {
     private int score;
     @ApiModelProperty(example = "1 ~ 2 (int)")
     private long categoryId;
-    @ApiModelProperty(example = "korea, us, china, japan, france, spain, vietnam (String)")
+    @ApiModelProperty(example = "ko-KR(대한민국), en-US(미국), zh(중국), ja-JP(일본), vi-VN(베트남), fr-FR(프랑스), es-ES(스페인) (String)")
     private String language;
 
     public GameResultDto() {
