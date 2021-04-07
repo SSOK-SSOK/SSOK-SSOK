@@ -49,9 +49,7 @@ body {
     div {
       margin-right: 0;
       .v-main {
-        overflow: auto;
-        div {
-        }
+        overflow: hidden;
       }
     }
   }
