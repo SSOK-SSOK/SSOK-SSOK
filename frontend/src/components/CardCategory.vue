@@ -8,19 +8,23 @@
         {{language.name}}
       </v-btn>
     </v-btn-toggle>
-    <div class="category-field">
-      <SpreadCard :category="categories[0]"/>
-      <SpreadCard :category="categories[1]"/>
-    </div>
+    <v-row class="category-field">
+      <div class="col-md-6">
+        <SelectCard :category="categories[0]"/>
+      </div>
+      <div class="col-md-6">
+        <SelectCard :category="categories[1]"/>
+      </div>
+    </v-row>
   </v-container>
 </template>
 
 <script>
-import SpreadCard from "@/components/SpreadCard.vue";
+import SelectCard from "@/components/SelectCard.vue";
 export default {
   name: 'CardCategory',
   components: {
-    SpreadCard,
+    SelectCard,
   },
   watch: {
     selected_language: function (val) {
@@ -51,18 +55,19 @@ export default {
 
 <style lang="scss" scoped>
 .container{
-  padding: 0 !important;
+  width: 100%;
+  height: 85%;
+  padding: 0 1% !important;
   .languages{
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 14%;
-    margin-bottom: 1%;
+    height: 15%;
     background: none !important;
     .language{
       width: 8%;
-      height: 60% !important;
+      height: 70% !important;
       font-size: 1.3em;
       margin: 0;
       overflow: hidden;
@@ -76,11 +81,12 @@ export default {
     }
   }
   .category-field{
-    display: flex;
-    justify-content: space-around;
-    perspective: 4500px;
     width: 100%;
-    height: 70%;
+    height: 85%;
+    padding: 0 20%;
+    div{
+      // height: 100%;
+    }
   }
 }
 </style>
