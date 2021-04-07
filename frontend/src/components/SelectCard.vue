@@ -67,6 +67,7 @@ export default {
     border-radius: 20px;
     box-shadow: 0 1px 2px 0 rgba(151, 150, 146, 0.4),
       0 2px 4px 0 rgba(151, 150, 146, 0.4);
+    cursor: pointer;
     .card-top{
       width: 100%;
       height: 10%;
