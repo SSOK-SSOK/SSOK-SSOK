@@ -114,7 +114,11 @@
           게임 시작
         </button>
       </div>
-      <LanguageModal v-if="languageModal" @close="languageModal=false" @language="getMessage"/>
+      <LanguageModal
+        v-if="languageModal"
+        @close="languageModal = false"
+        @language="getMessage"
+      />
     </div>
   </v-container>
 </template>
@@ -202,12 +206,11 @@ export default {
       this.loading = true;
       var img = this.$refs.webcam.capture();
       axios
-        .post("http://127.0.0.1:8000/ai/smartcamera/detection/", {
+        .post("https://j4a201.p.ssafy.io/ai/smartcamera/detection/", {
           image: img,
           question: this.answer,
         })
         .then((res) => {
-          console.log(res.data);
           var data = res.data;
           this.$store.dispatch("SmartCameraStore/setInfo", data);
           this.loading = false;
@@ -216,12 +219,8 @@ export default {
           console.log(err);
         });
     },
-    onStarted(stream) {
-      console.log("On Started Event", stream);
-    },
-    onStopped(stream) {
-      console.log("On Stopped Event", stream);
-    },
+    onStarted() {},
+    onStopped() {},
     onStart() {
       this.$refs.webcam.start();
     },
@@ -233,12 +232,10 @@ export default {
     },
     onCameras(cameras) {
       this.devices = cameras;
-      console.log("On Cameras Event", cameras);
     },
     onCameraChange(deviceId) {
       this.deviceId = deviceId;
       this.camera = deviceId;
-      console.log("On Camera Change Event", deviceId);
     },
     initialize() {
       this.$store.dispatch("SmartCameraStore/initializeInfo");
@@ -270,6 +267,7 @@ export default {
 <style lang="scss" scoped>
 @import "@/style/light-button.scss";
 @import "@/style/auth-button.scss";
+
 *p {
   text-align: center;
   font-size: 2.2em;
