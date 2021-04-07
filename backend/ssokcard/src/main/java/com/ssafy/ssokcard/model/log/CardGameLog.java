@@ -1,4 +1,4 @@
-package com.ssafy.ssokcard.model;
+package com.ssafy.ssokcard.model.log;
 
 import lombok.Builder;
 import lombok.Getter;

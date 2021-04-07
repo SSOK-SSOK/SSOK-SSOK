@@ -17,8 +17,15 @@ public class CardService {
 
     public BasicResponse findCard(long id, String languageCode) {
         BasicResponse result = new BasicResponse();
-        List<Card> cardList = cardRepo.findByCategoryIdAndLanguage(id, languageCode);
+        if(languageCode == null) {
+            result.status = false;
+            result.data = "카드 조회 실패";
+            result.object = null;
 
+            return result;
+        }
+
+        List<Card> cardList = cardRepo.findByCategoryIdAndLanguage(id, languageCode);
         if(cardList.size() == 0 || cardList == null){
             result.status = false;
             result.data = "카드 조회 실패";

@@ -1,6 +1,5 @@
 package com.ssafy.ssokcard.model.badge;
 
-import com.ssafy.ssokcard.model.category.Category;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

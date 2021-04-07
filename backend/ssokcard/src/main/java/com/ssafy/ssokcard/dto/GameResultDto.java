@@ -2,7 +2,6 @@ package com.ssafy.ssokcard.dto;
 
 
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiOperation;
 import lombok.Builder;
 import lombok.Getter;
 

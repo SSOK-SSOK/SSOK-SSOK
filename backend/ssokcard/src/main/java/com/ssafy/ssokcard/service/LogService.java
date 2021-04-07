@@ -1,7 +1,7 @@
 package com.ssafy.ssokcard.service;
 
 import com.ssafy.ssokcard.dto.GameResultDto;
-import com.ssafy.ssokcard.model.CardGameLog;
+import com.ssafy.ssokcard.model.log.CardGameLog;
 import com.ssafy.ssokcard.model.log.CardGameLogRepository;
 import com.ssafy.ssokcard.model.response.BasicResponse;
 import org.springframework.beans.factory.annotation.Autowired;

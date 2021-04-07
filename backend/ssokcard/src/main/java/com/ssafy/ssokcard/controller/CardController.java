@@ -27,7 +27,7 @@ public class CardController {
 
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "카테고리 아이디 (1: animals, 2: fruits)"),
-            @ApiImplicitParam(name = "code", value = "언어 코드 (zh: 중국, en-US: 미국, ja-JP: 일본, es-ES: 스페인, vi-VN: 베트남, ko-KR: 대한민국, fr-FR: 프랑스)")
+            @ApiImplicitParam(name = "code", value = "언어 코드 (ko-KR: 대한민국, en-US: 미국, zh: 중국, ja-JP: 일본, vi-VN: 베트남, fr-FR: 프랑스, es-ES: 스페인)")
     })
     @ApiOperation(value = "카드 불러오기")
     @GetMapping("/{id}/{code}")
