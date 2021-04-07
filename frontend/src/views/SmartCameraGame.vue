@@ -106,7 +106,18 @@
         </v-row>
       </div>
       <div v-else class="start-button">
-        <Stepper v-if="!languageModal" @stepperDone="stepperDone" />
+        <Stepper
+          class="d-none d-md-block"
+          v-if="!languageModal"
+          @stepperDone="stepperDone"
+        />
+        <button
+          v-if="!languageModal"
+          class="gold-button mx-auto d-block d-md-none"
+          @click="getGameStart"
+        >
+          게임하기
+        </button>
       </div>
       <LanguageModal
         v-if="languageModal"
@@ -244,16 +255,18 @@ export default {
       this.initialize();
       this.is_start = false;
     },
-    // getGameStart() {
-    //   this.game_started = true;
-    // },
+    getGameStart() {
+      this.languageModal = true;
+    },
     getMessage(language) {
       this.languageModal = false;
+      this.game_started = true;
       this.selected_language = language;
     },
-    stepperDone() {
-      this.game_started = true;
-      this.languageModal = true;
+    stepperDone(value) {
+      if (value == true) {
+        this.languageModal = true;
+      }
     },
     moveMainPage() {
       this.$router.push({ name: "MainPage" });
