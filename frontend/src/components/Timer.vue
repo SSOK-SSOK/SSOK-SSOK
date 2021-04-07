@@ -176,7 +176,7 @@ export default {
   // 숫자
   .label {
     position: absolute;
-    font-size: 3rem;
+    font-size: 3vw;
   }
 }
 </style>

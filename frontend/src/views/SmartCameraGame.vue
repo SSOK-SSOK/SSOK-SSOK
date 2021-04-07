@@ -26,7 +26,7 @@
             <h1>{{ this.question }}을 보여주세요😉</h1>
           </span>
           <span v-else>
-            <button class="auth-button" @click="initialize">문제 보기</button>
+            <button class="gold-button" @click="initialize">문제 보기</button>
           </span>
         </div>
         <!--카메라 & 정답영역-->
@@ -86,7 +86,7 @@
                 <h1 class="my-1">정답입니다!</h1>
                 <h2 class="my-1">정확도 : {{ this.score }}%</h2>
                 <div>
-                  <button class="auth-button mx-auto" @click="regame">
+                  <button class="gold-button mx-auto" @click="regame">
                     다시하기
                   </button>
                 </div>
@@ -96,7 +96,7 @@
                 <h1 class="my-1">틀렸어요😥</h1>
                 <h2 class="my-1">가져온 물건 : {{ this.category }}</h2>
                 <div>
-                  <button class="auth-button mx-auto" @click="regame">
+                  <button class="gold-button mx-auto" @click="regame">
                     다시하기
                   </button>
                 </div>
@@ -108,7 +108,7 @@
       <div v-else class="start-button">
         <button
           v-if="!languageModal"
-          class="auth-button"
+          class="gold-button"
           @click="[getGameStart, (languageModal = true)]"
         >
           게임 시작
@@ -116,7 +116,7 @@
       </div>
       <LanguageModal
         v-if="languageModal"
-        @close="languageModal = false"
+        @close="moveMainPage"
         @language="getMessage"
       />
     </div>
@@ -193,7 +193,6 @@ export default {
       this.deviceId = id;
     },
     devices: function () {
-      // Once we have a list select the first one
       const [first, ...tail] = this.devices;
       if (first) {
         this.camera = first.deviceId;
@@ -256,6 +255,9 @@ export default {
       this.game_started = true;
       this.selected_language = language;
     },
+    moveMainPage() {
+      this.$router.push({ name: "MainPage" });
+    },
   },
   created() {
     this.initialize();
@@ -266,7 +268,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/style/light-button.scss";
-@import "@/style/auth-button.scss";
+@import "@/style/gold-button.scss";
 
 *p {
   text-align: center;

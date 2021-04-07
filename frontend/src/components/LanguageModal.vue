@@ -16,11 +16,11 @@
           </v-btn-toggle>
         </div>
         <div class="modal-footer">
-          <button class="back-button" @click="$emit('close')">
-            돌아가기
-          </button>
           <button class="select-button" @click="sendInfo">
             선택 완료
+          </button>
+          <button class="back-button" @click="$emit('close')">
+            돌아가기
           </button>
         </div>
       </div>
@@ -73,8 +73,8 @@ export default {
   display: table-cell;
   vertical-align: middle;
     .modal-container {
-      width: 50%;
-      height: 35%;
+      width: 50vw;
+      height: 20vw;
       padding: 1% 2%;
       margin: 0 auto;
       border-radius: 20px;
@@ -86,7 +86,7 @@ export default {
         width: 100%;
         height: 25%;
         padding-top: 1%;
-        font-size: 1.8em;
+        font-size: 2vw;
       }
       .modal-body {
         display: flex;
@@ -94,7 +94,7 @@ export default {
         align-items: center;
         width: 100%;
         height: 60%;
-        font-size: 3em;
+        font-size: 2vw;
         .languages{
           display: flex;
           justify-content: center;
@@ -104,7 +104,7 @@ export default {
           .language{
             width: 14%;
             height: 40%;
-            font-size: 0.4em;
+            font-size: 0.7em;
             margin: 0;
             overflow: hidden;
             background-color: rgba(22, 18, 0, 0.4);
@@ -119,12 +119,12 @@ export default {
         align-items: center;
         width: 100%;
         height: 15%;
-        .back-button{
-          font-size: 1.1em;
-          margin-right: 5%;
-        }
         .select-button{
-          font-size: 1.1em;      
+          margin-right: 5%;
+          font-size: 1.1vw;      
+        }
+        .back-button{
+          font-size: 1.1vw;
         }
       }
     }

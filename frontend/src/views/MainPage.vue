@@ -28,7 +28,7 @@
                 src="@/assets/images/mascot-card.png"
                 alt="mascot-card"
               />
-              <p>카드 게임</p>
+              <p @click="moveSelectCardGame">카드 게임</p>
             </div>
             <div class="venus-img">
               <img
@@ -48,7 +48,7 @@
                 src="@/assets/images/mascot-camera.png"
                 alt="mascot-camera"
               />
-              <p>카메라 게임</p>
+              <p @click="moveSmartCameraGame">카메라 게임</p>
             </div>
             <div class="greenus-img">
               <img
@@ -112,32 +112,6 @@ export default {
       margin-bottom: 1.5%;
       background: none;
     }
-    // 캐릭터
-    .mascots {
-      position: relative;
-      display: flex;
-      height: 30%;
-      width: 100%;
-      z-index: 5;
-      .cardMascot {
-        display: flex;
-        justify-content: center;
-        width: 50%;
-        height: 100%;
-        .mascot-card {
-          height: 100%;
-        }
-      }
-      .cameraMascot {
-        display: flex;
-        justify-content: center;
-        width: 50%;
-        height: 100%;
-        .mascot-camera {
-          height: 100%;
-        }
-      }
-    }
     .planets {
       width: 100%;
       height: 84%;
@@ -166,8 +140,9 @@ export default {
               background: rgba(22, 18, 0, 0.8);
               color: white;
               text-align: center;
-              font-size: 2.5em;
+              font-size: 2.7vw;
               font-weight: bold;
+              cursor: pointer;
             }
           }
           .venus-img {
@@ -207,8 +182,9 @@ export default {
               background: rgba(22, 18, 0, 0.8);
               color: white;
               text-align: center;
-              font-size: 2.5em;
+              font-size: 2.7vw;
               font-weight: bold;
+              cursor: pointer;
             }
           }
           .greenus-img {

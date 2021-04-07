@@ -1,9 +1,9 @@
 <template>
   <div class="card-container">
     <div :class=categoryClass(categoryId) @click="startGame(category)">
-      <div class="card-top"><span class="card-value">{{categoryName}}</span></div>
+      <div class="card-top"><span class="card-value"><p>{{categorySub}}</p></span></div>
       <div class="card-body"></div>
-      <div class="card-bottom"><span class="card-value">{{categoryName}}</span></div>
+      <div class="card-bottom"><span class="card-value"><p>{{categorySub}}</p></span></div>
     </div>
   </div>
 </template>
@@ -28,8 +28,8 @@ export default {
     categoryImg: function () {
       return this.category.path
     },
-    categoryName: function () {
-      return this.category.name
+    categorySub: function () {
+      return this.category.sub
     },
     categoryClass() {
       return (id) => {
@@ -61,8 +61,8 @@ export default {
   width: 100%;
   height: 100%;
   .card{
-    width: 60%;
-    height: 62%;
+    width: 30vw;
+    height: 22vw;
     color: #a68385;
     border-radius: 20px;
     box-shadow: 0 1px 2px 0 rgba(151, 150, 146, 0.4),
@@ -75,7 +75,6 @@ export default {
       .card__value {
         display: block;
         text-align: center;
-        font-size: 1em;
       }
     }
     .card-body{
@@ -85,24 +84,23 @@ export default {
     .card-bottom{
       width: 100%;
       height: 10%;
-      padding: 5%;
+      padding:  10% 5% 0;
       transform: rotate(180deg);
       .card__value {
         display: block;
-        text-align: center;
-        width: 1rem;
+        text-align: center;;
       }
     }
   }
 }
 .animal-background{
   background-image: url("https://i.pinimg.com/originals/d6/3c/de/d63cded9d8454a5b57ee8bef31c3ee71.gif");
-  background-size: 160%;
+  background-size: cover;
   background-position: 45%;
 }
 .fruit-background{
   background-image: url("https://acegif.com/wp-content/gifs/apple-8.gif");
-  background-size: 160%;
+  background-size: cover;
   background-position: 50%;
 }
 </style>

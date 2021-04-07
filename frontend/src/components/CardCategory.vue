@@ -66,9 +66,9 @@ export default {
     height: 15%;
     background: none !important;
     .language{
-      width: 8%;
-      height: 70% !important;
-      font-size: 1.3em;
+      width: 8vw;
+      height: 4vw !important;
+      font-size: 1.2vw;
       margin: 0;
       overflow: hidden;
       background-color: rgba(22, 18, 0, 0.4);
@@ -83,7 +83,7 @@ export default {
   .category-field{
     width: 100%;
     height: 85%;
-    padding: 0 20%;
+    padding: 0 15%;
     div{
       // height: 100%;
     }
