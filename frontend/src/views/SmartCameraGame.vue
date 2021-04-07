@@ -114,7 +114,7 @@
           게임 시작
         </button>
       </div>
-      <LanguageModal v-if="languageModal" @close="getMessage" />
+      <LanguageModal v-if="languageModal" @close="languageModal=false" @language="getMessage"/>
     </div>
   </v-container>
 </template>

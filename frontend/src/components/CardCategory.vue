@@ -32,14 +32,14 @@ export default {
     return {
       selected_language: undefined,
       languages: [
-        { id: 0, name: "kr"},
-        { id: 1, name: "us"},
-        { id: 2, name: "cn"},
-        { id: 3, name: "jp"},
-        { id: 4, name: "vn"},
-        { id: 5, name: "fr"},
-        { id: 6, name: "es"},
-      ],
+        { id: 0, name: "한국어"},
+        { id: 1, name: "영  어"},
+        { id: 2, name: "중국어"},
+        { id: 3, name: "일본어"},
+        { id: 4, name: "베트남어"},
+        { id: 5, name: "프랑스어"},
+        { id: 6, name: "스페인어"},
+      ],  
       categories: [
         { id: 1, name: "Animal", sub: "동물", path: "https://i.pinimg.com/originals/d6/3c/de/d63cded9d8454a5b57ee8bef31c3ee71.gif"},
         { id: 2, name: "Fruit", sub: "과일", path: "https://acegif.com/wp-content/gifs/apple-8.gif"}
@@ -57,12 +57,13 @@ export default {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 10%;
-    margin-bottom: 5%;
+    height: 14%;
+    margin-bottom: 1%;
     background: none !important;
     .language{
-      width: 6vw;
-      height: 70vh;
+      width: 8%;
+      height: 60% !important;
+      font-size: 1.3em;
       margin: 0;
       overflow: hidden;
       background-color: rgba(22, 18, 0, 0.4);
