@@ -343,8 +343,12 @@ def check_answer(items, answer):
 
     # 정확도 순으로 내림차순 정렬합니다.
     items.sort(key=lambda x : -x[0])
+    print(items)
 
-    if len(items) == 1:
+    if len(items) == 0:
+        return False, "물체가 없어요"
+
+    elif len(items) == 1:
         score, category = items[0][0], items[0][1]
         if category == answer:
             return True, score
