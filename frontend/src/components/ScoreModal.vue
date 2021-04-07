@@ -1,8 +1,3 @@
-	
-오전 10:42
-
-
-
 <template>
   <div class="modal-mask">
     <div class="modal-wrapper">
@@ -11,7 +6,7 @@
           <p>✨당신의 점수는?✨</p>
         </div>
         <div class="modal-body">
-          <p>{{ score }}/15</p>
+          <p>{{ score }}/5</p>
         </div>
         <div class="modal-footer">
           <button @click="$emit('close')">
@@ -28,16 +23,7 @@ export default {
   name: 'ScoreModal',
   props: {
     score: Number
-  },
-  data() {
-    return {
-    };
-  },
-  mounted() {
-    
-  },
-  methods: {
-  },
+  }
 };
 </script>
 
