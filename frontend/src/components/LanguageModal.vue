@@ -9,19 +9,23 @@
           <v-btn-toggle
             class="languages"
             v-model="selected_language"
-            mandatory dark color="deep-purple accent-3" group>
-            <v-btn class="language" v-for="(language, name) in languages" :key="name">
-              {{language.name}}
+            mandatory
+            dark
+            color="deep-purple accent-3"
+            group
+          >
+            <v-btn
+              class="language"
+              v-for="(language, name) in languages"
+              :key="name"
+            >
+              {{ language.name }}
             </v-btn>
           </v-btn-toggle>
         </div>
         <div class="modal-footer">
-          <button class="select-button" @click="sendInfo">
-            선택 완료
-          </button>
-          <button class="back-button" @click="$emit('close')">
-            돌아가기
-          </button>
+          <button class="back-button" @click="$emit('close')">돌아가기</button>
+          <button class="select-button" @click="sendInfo">선택 완료</button>
         </div>
       </div>
     </div>
@@ -30,34 +34,32 @@
 
 <script>
 export default {
-  name: 'LanguageModal',
+  name: "LanguageModal",
   data() {
     return {
-      selected_language: undefined,  
+      selected_language: undefined,
       languages: [
-        { id: 0, name: "한국어"},
-        { id: 1, name: "영  어"},
-        { id: 2, name: "중국어"},
-        { id: 3, name: "일본어"},
-        { id: 4, name: "베트남어"},
-        { id: 5, name: "프랑스어"},
-        { id: 6, name: "스페인어"},
-      ],  
+        { id: 0, name: "한국어" },
+        { id: 1, name: "영  어" },
+        { id: 2, name: "중국어" },
+        { id: 3, name: "일본어" },
+        { id: 4, name: "베트남어" },
+        { id: 5, name: "프랑스어" },
+        { id: 6, name: "스페인어" },
+      ],
     };
   },
-  mounted() {
-    
-  },
+  mounted() {},
   methods: {
     sendInfo() {
-      this.$emit('language', this.selected_language)
-    }
+      this.$emit("language", this.selected_language);
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-*{
+* {
   color: white;
 }
 .modal-mask {
@@ -68,19 +70,19 @@ export default {
   display: table;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, .3);
+  background-color: rgba(0, 0, 0, 0.3);
   .modal-wrapper {
-  display: table-cell;
-  vertical-align: middle;
+    display: table-cell;
+    vertical-align: middle;
     .modal-container {
       width: 50vw;
       height: 20vw;
       padding: 1% 2%;
       margin: 0 auto;
       border-radius: 20px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
       background-color: rgba(22, 18, 0, 0.4);
-      .modal-header{
+      .modal-header {
         display: flex;
         justify-content: center;
         width: 100%;
@@ -95,13 +97,13 @@ export default {
         width: 100%;
         height: 60%;
         font-size: 2vw;
-        .languages{
+        .languages {
           display: flex;
           justify-content: center;
           align-items: center;
           width: 100%;
           height: 100%;
-          .language{
+          .language {
             width: 14%;
             height: 40%;
             font-size: 0.7em;
@@ -113,17 +115,17 @@ export default {
           }
         }
       }
-      .modal-footer{
+      .modal-footer {
         display: flex;
         justify-content: flex-end;
         align-items: center;
         width: 100%;
         height: 15%;
-        .select-button{
+        .back-button {
           margin-right: 5%;
-          font-size: 1.1vw;      
+          font-size: 1.1vw;
         }
-        .back-button{
+        .select-button {
           font-size: 1.1vw;
         }
       }
