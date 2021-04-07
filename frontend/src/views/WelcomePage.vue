@@ -9,20 +9,21 @@
       <nav>
         <div class="logo">
           <img
-            class="avatar"
+            class="avatar d-none d-sm-block"
             src="@/assets/images/welcome-icon.png"
             alt="welcome-icon"
           />
           <p>SSOK SSOK</p>
         </div>
-        <button v-if="getCheckLogin" class="auth-button" @click="logout">Logout</button>
+        <button v-if="getCheckLogin" class="auth-button" @click="logout">
+          Logout
+        </button>
         <button v-else class="auth-button" @click="google">Google</button>
       </nav>
       <v-row>
-        <div class="loginZone col-md-6 col-sm-12">
+        <div class="loginZone col-md-12 col-lg-6">
           <div>
             <p>
-              {{ user }}
               다양한 언어를
               <br />
               재미있게 배워보아요!
@@ -30,8 +31,8 @@
             <button @click="moveMainPage" class="gold-button">게임 시작</button>
           </div>
         </div>
-        <div class="cosmosZone col-md-6 col-sm-0">
-          <Cosmos/>
+        <div class="cosmosZone col-sm-0 col-lg-6">
+          <Cosmos />
         </div>
       </v-row>
     </div>
@@ -50,7 +51,7 @@ export default {
   data() {
     return {
       user: this.userName,
-    }
+    };
   },
   computed: {
     ...mapState("UserStore", ["userName"]),
@@ -63,7 +64,7 @@ export default {
     this.getToken();
   },
   methods: {
-    moveMainPage () {
+    moveMainPage() {
       this.$router.push({ name: "MainPage" });
     },
     google() {
@@ -144,7 +145,7 @@ export default {
         }
       }
     }
-    .row{
+    .row {
       width: 100%;
       height: 90%;
       margin: 0;
@@ -158,15 +159,13 @@ export default {
         div {
           text-align: center;
           p {
-            font-size: 2.8em;
+            font-size: 6vh;
             text-align: center;
             margin: 0 0 5% 0;
           }
-          //gold-button.scss
         }
-
       }
-      .cosmosZone{
+      .cosmosZone {
         height: 100%;
         padding: 0;
       }
