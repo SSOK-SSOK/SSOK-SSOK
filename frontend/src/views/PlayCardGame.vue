@@ -51,7 +51,11 @@
             <button v-else class="auth-button mx-auto" @click="getStart">
               게임 시작
             </button>
-            <ScoreModal v-if="openModal" @close="openModal=false" :score="score"/>
+            <ScoreModal
+              v-if="openModal"
+              @close="openModal = false"
+              :score="score"
+            />
           </div>
         </div>
         <!--오디오버튼-->
@@ -65,7 +69,6 @@
           </div>
           <Audio
             :quizIdx="quizIdx"
-            :score="score"
             @audioResult="onAudioResult"
             @is_flipped="is_flipped"
             @is_loading="is_loading"
