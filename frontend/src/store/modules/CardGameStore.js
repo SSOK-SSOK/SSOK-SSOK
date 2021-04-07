@@ -5,6 +5,8 @@ const CardGameStore = {
   state: {
     playingCards: [],
     language: '',
+    alertMessage: '',
+    alertDialog: false,
   },
   getters: {
   },
@@ -14,6 +16,13 @@ const CardGameStore = {
     },
     SET_LANGUAGE (state, data) {
       state.language = data;
+    },
+    SET_ALERT_MESSAGE (state, msg) {
+      state.alertDialog = true;
+      state.alertMessage = msg;
+    },
+    CANCEL_ALERT_MESSAGE: function (state) {
+      state.alertDialog = false;
     },
   },
   actions: {
@@ -32,6 +41,12 @@ const CardGameStore = {
     fetchLanguage({ commit }, data) {
       commit("SET_LANGUAGE", data)
     },
+    fetchAlertMessage({ commit }, msg) {
+      commit("SET_ALERT_MESSAGE", msg)
+      setTimeout(function () {
+        commit('CANCEL_ALERT_MESSAGE');
+      }, 2000);
+    }
   },
 };
 

@@ -53,7 +53,25 @@
           <Audio :quizIdx="quizIdx" :score="score" @audioResult="onAudioResult"/>
         </div>
       </div>
+      <div id="alert" v-if="alertDialog">
+        <div>
+          <v-alert
+            color="white"
+            right
+            outlined
+            text
+            type="success"
+            style="position: fixed;
+                  float:  right;
+                  bottom: 3%;
+                  right:  2%;"
+          >
+            {{ alertMessage }}
+          </v-alert>
+        </div>
+      </div>
     </div>
+    
   </v-container>
 </template>
 
@@ -84,10 +102,11 @@ export default {
       resetTime: false,
       openModal: false,
       score: 0,
+      snackbar: false,
     }
   },
   computed: {
-    ...mapState("CardGameStore", ["playingCards"]),
+    ...mapState("CardGameStore", ["playingCards","alertMessage", "alertDialog"]),
     currentQuiz() {
       return this.sendCurrentQuiz(this.quizIdx);
     },
@@ -150,6 +169,7 @@ export default {
     onAudioResult(result) {
       if (result === true) {
         this.score += 1;
+        this.snackbar = true;
       }
     }
   },
