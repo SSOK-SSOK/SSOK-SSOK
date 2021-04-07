@@ -106,11 +106,15 @@
         </v-row>
       </div>
       <div v-else class="start-button">
-        <button v-if="!languageModal" class="auth-button" @click="[getGameStart, languageModal=true]">
+        <button
+          v-if="!languageModal"
+          class="auth-button"
+          @click="[getGameStart, (languageModal = true)]"
+        >
           게임 시작
         </button>
       </div>
-      <LanguageModal v-if="languageModal" @close="getMessage"/>
+      <LanguageModal v-if="languageModal" @close="languageModal=false" @language="getMessage"/>
     </div>
   </v-container>
 </template>
@@ -136,7 +140,15 @@ export default {
       deviceId: null,
       devices: [],
       loading: false,
-      questions: ["cup", "book", "chair"],
+      questions: [
+        ["컵", "책", "의자"],
+        ["cup", "book", "chair"],
+        ["杯子", "書", "椅子"],
+        ["カップ", "本", "椅子"],
+        ["cốc", "sách", "cái ghế"],
+        ["Coupe", "livre", "chaise"],
+        ["taza", "libro", "silla"],
+      ],
       img: null,
       is_start: false,
       game_started: false,
@@ -160,10 +172,16 @@ export default {
     ...mapGetters(SmartCameraStore, {
       is_done: "getIsDone",
     }),
-    question: function () {
+    randInt: function () {
       var randNum = Math.random() * 3;
-      var randInt = parseInt(randNum);
-      return this.questions[randInt];
+      var randNumInt = parseInt(randNum);
+      return randNumInt;
+    },
+    question: function () {
+      return this.questions[this.selected_language][this.randInt];
+    },
+    answer: function () {
+      return this.questions[1][this.randInt];
     },
   },
   watch: {
@@ -186,7 +204,7 @@ export default {
       axios
         .post("http://127.0.0.1:8000/ai/smartcamera/detection/", {
           image: img,
-          question: this.question,
+          question: this.answer,
         })
         .then((res) => {
           console.log(res.data);
@@ -239,7 +257,7 @@ export default {
     getMessage(language) {
       this.languageModal = false;
       this.game_started = true;
-      this.selected_language = language
+      this.selected_language = language;
     },
   },
   created() {
@@ -252,7 +270,7 @@ export default {
 <style lang="scss" scoped>
 @import "@/style/light-button.scss";
 @import "@/style/auth-button.scss";
-*p{
+*p {
   text-align: center;
   font-size: 2.2em;
 }
@@ -285,8 +303,8 @@ export default {
         color: white;
       }
     }
-    .camera-game-field{
-      width: 100%; 
+    .camera-game-field {
+      width: 100%;
       height: 87%;
       .head-section {
         display: flex;
@@ -294,7 +312,6 @@ export default {
         align-items: center;
         width: 100%;
         height: 15%;
-
       }
       .body-section {
         width: 100%;
@@ -366,8 +383,8 @@ export default {
         }
       }
     }
-    .start-button{
-      width: 100%; 
+    .start-button {
+      width: 100%;
       height: 87%;
       display: flex;
       justify-content: center;

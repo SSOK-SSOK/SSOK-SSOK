@@ -1,3 +1,8 @@
+	
+오전 10:42
+
+
+
 <template>
   <div class="modal-mask">
     <div class="modal-wrapper">
@@ -10,7 +15,7 @@
         </div>
         <div class="modal-footer">
           <button @click="$emit('close')">
-            OK
+            돌아가기
           </button>
         </div>
       </div>
