@@ -16,8 +16,11 @@
           </v-btn-toggle>
         </div>
         <div class="modal-footer">
-          <button @click="sendInfo">
-            OK
+          <button class="back-button" @click="$emit('close')">
+            돌아가기
+          </button>
+          <button class="select-button" @click="sendInfo">
+            선택 완료
           </button>
         </div>
       </div>
@@ -32,13 +35,13 @@ export default {
     return {
       selected_language: undefined,  
       languages: [
-        { id: 0, name: "kr"},
-        { id: 1, name: "us"},
-        { id: 2, name: "cn"},
-        { id: 3, name: "jp"},
-        { id: 4, name: "vn"},
-        { id: 5, name: "fr"},
-        { id: 6, name: "es"},
+        { id: 0, name: "한국어"},
+        { id: 1, name: "영  어"},
+        { id: 2, name: "중국어"},
+        { id: 3, name: "일본어"},
+        { id: 4, name: "베트남어"},
+        { id: 5, name: "프랑스어"},
+        { id: 6, name: "스페인어"},
       ],  
     };
   },
@@ -47,7 +50,7 @@ export default {
   },
   methods: {
     sendInfo() {
-      this.$emit('close', this.selected_language)
+      this.$emit('language', this.selected_language)
     }
   },
 };
@@ -70,7 +73,7 @@ export default {
   display: table-cell;
   vertical-align: middle;
     .modal-container {
-      width: 45%;
+      width: 50%;
       height: 35%;
       padding: 1% 2%;
       margin: 0 auto;
@@ -83,7 +86,7 @@ export default {
         width: 100%;
         height: 25%;
         padding-top: 1%;
-        font-size: 1.5em;
+        font-size: 1.8em;
       }
       .modal-body {
         display: flex;
@@ -99,8 +102,9 @@ export default {
           width: 100%;
           height: 100%;
           .language{
-            width: 13%;
+            width: 14%;
             height: 40%;
+            font-size: 0.4em;
             margin: 0;
             overflow: hidden;
             background-color: rgba(22, 18, 0, 0.4);
@@ -115,6 +119,13 @@ export default {
         align-items: center;
         width: 100%;
         height: 15%;
+        .back-button{
+          font-size: 1.1em;
+          margin-right: 5%;
+        }
+        .select-button{
+          font-size: 1.1em;      
+        }
       }
     }
   }
