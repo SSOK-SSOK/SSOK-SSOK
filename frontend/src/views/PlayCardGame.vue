@@ -51,7 +51,7 @@
             <button v-else class="auth-button mx-auto" @click="getStart">
               게임 시작
             </button>
-            <ScoreModal v-if="openModal" @close="openModal = false" />
+            <ScoreModal v-if="openModal" @close="openModal=false" :score="score"/>
           </div>
         </div>
         <!--오디오버튼-->
@@ -107,8 +107,6 @@ export default {
   },
   data() {
     return {
-      categoryName: "",
-      categorySub: "",
       quizIdx: 0,
       started: false,
       ended: false,
@@ -140,17 +138,11 @@ export default {
     },
   },
   created() {
-    this.getParams();
     this.solvingStatus = false;
   },
   methods: {
-    getParams() {
-      const category = this.$route.params.category;
-      this.categoryName = category.name;
-      this.categorySub = category.sub;
-    },
     sendCurrentQuiz(idx) {
-      if (idx < 15) {
+      if (idx < this.playingCards.length) {
         return this.playingCards[idx];
       } else {
         this.started = false;

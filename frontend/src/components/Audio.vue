@@ -38,11 +38,10 @@ export default {
     };
   },
   props: {
-    quizIdx: Number,
-    score: Number,
+    quizIdx: Number
   },
   computed: {
-    ...mapState("CardGameStore", ["playingCards", "language", "score"]),
+    ...mapState("CardGameStore", ["playingCards", "language"]),
   },
   watch: {
     isRecorded: function (val) {
