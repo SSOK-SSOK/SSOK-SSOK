@@ -4,7 +4,7 @@
       <div class="flip-card-inner">
         <div class="flip-card-front" @click="flipCard">
           <div class="overlay" style="border-radius: 30px">
-            <h1 class="text">정답을 보고 싶으면 카드를 더블클릭하세요</h1>
+            <p class="text">정답을 보고 싶으면 카드를 더블클릭하세요</p>
           </div>
           <v-img
             class="image"
@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="d-flex justify-content-center">
-        <button v-if="flip" class="auth-button mx-auto" @click="goNext">
+        <button v-if="flip" class="gold-button mx-auto" @click="goNext">
           다음 문제
         </button>
       </div>
@@ -71,11 +71,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/style/auth-button.scss";
+@import "@/style/gold-button.scss";
 .flip-card {
   background-color: transparent;
-  width: 600px;
-  height: 400px;
+  width: 40vw;
+  height: 25vw;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
   transition: 0.5s ease;
   backface-visibility: hidden;
@@ -114,7 +114,7 @@ export default {
   align-items: center;
   background-color: dodgerblue;
   color: white;
-  font-size: 3rem;
+  font-size: 4vw;
   transform: rotateY(180deg);
 }
 
@@ -133,5 +133,8 @@ export default {
 
 .flip-card-front:hover .overlay {
   opacity: 0.7;
+}
+.text{
+  font-size: 2vw;
 }
 </style>

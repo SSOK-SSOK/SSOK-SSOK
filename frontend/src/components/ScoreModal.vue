@@ -44,8 +44,8 @@ export default {
   display: table-cell;
   vertical-align: middle;
     .modal-container {
-      width: 35%;
-      height: 35%;
+      width: 30vw;
+      height: 20vw;
       padding: 1% 2%;
       margin: 0 auto;
       border-radius: 20px;
@@ -57,7 +57,7 @@ export default {
         width: 100%;
         height: 25%;
         padding-top: 1%;
-        font-size: 1.5em;
+        font-size: 1.8vw;
       }
       .modal-body {
         display: flex;
@@ -65,7 +65,7 @@ export default {
         align-items: center;
         width: 100%;
         height: 60%;
-        font-size: 3em;
+        font-size: 4vw;
       }
       .modal-footer{
         display: flex;

@@ -41,7 +41,7 @@
       </svg>
     </div>
     <div class="solar-system-animation">
-      <svg id="animation-scene" class="animation-scene" viewBox="0 0 2600 2600">
+      <svg id="animation-scene" class="animation-scene" viewBox="0 0 1400 1400">
         <g id="Solar-system">
           <circle id="sun-path" class="astral-paths earth-path" cx="700" cy="700" r="446.73" />
           <g id="system-sun" class="system-sun">

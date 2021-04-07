@@ -4,7 +4,6 @@
       <div id="stars"></div>
       <div id="stars2"></div>
       <div id="stars3"></div>
-      <Cosmos />
     </div>
     <div class="contents">
       <nav>
@@ -16,32 +15,25 @@
           />
           <p>SSOK SSOK</p>
         </div>
-        <v-tooltip bottom color="deep-purple accent-3">
-          <template v-slot:activator="{ on, attrs }">
-            <div
-              v-bind="attrs"
-              v-on="on"
-              class="glow mx-2"
-              @click="moveMainPage"
-            ></div>
-          </template>
-          <span>게임 선택 GO GO!</span>
-        </v-tooltip>
+        <button v-if="getCheckLogin" class="auth-button" @click="logout">Logout</button>
+        <button v-else class="auth-button" @click="google">Google</button>
       </nav>
-      <div class="loginZone d-flex align-items-center">
-        <div>
-          <p>
-            {{ user }}
-            다양한 언어를
-            <br />
-            재밌게 배워보아요!
-          </p>
-          <button v-if="getCheckLogin" class="auth-button" @click="logout">
-            Logout
-          </button>
-          <button v-else class="auth-button" @click="google">Google</button>
+      <v-row>
+        <div class="loginZone col-md-6 col-sm-12">
+          <div>
+            <p>
+              {{ user }}
+              다양한 언어를
+              <br />
+              재미있게 배워보아요!
+            </p>
+            <button @click="moveMainPage" class="gold-button">게임 시작</button>
+          </div>
         </div>
-      </div>
+        <div class="cosmosZone col-md-6 col-sm-0">
+          <Cosmos/>
+        </div>
+      </v-row>
     </div>
   </v-container>
 </template>
@@ -110,7 +102,8 @@ export default {
 <style lang="scss" scoped>
 @import "@/style/star.sass";
 @import "@/style/auth-button.scss";
-@import "@/style/light-button.scss";
+@import "@/style/gold-button.scss";
+
 .container {
   padding: 1%;
   .background {
@@ -118,8 +111,6 @@ export default {
     z-index: -1;
     width: 100%;
     height: 100%;
-    // Cosmos.vue
-    // star.sass
   }
   .contents {
     position: absolute;
@@ -132,44 +123,52 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 2rem;
-      margin-top: 1%;
-      margin-bottom: 5%;
-      height: 5%;
+      padding: 2%;
+      height: 10%;
       width: 100%;
       color: white;
       background: none;
       .logo {
         display: flex;
         align-items: center;
-        width: 30%;
+        width: 70%;
         padding: 0;
         .avatar {
           vertical-align: middle;
           border-radius: 50%;
-          width: 15%;
-          height: 15%;
+          width: 3em;
         }
         p {
-          font-size: 2.5em;
+          font-size: 2em;
           margin: 0 0 0 0.5vw;
         }
       }
     }
-    .loginZone {
-      width: 50%;
-      height: 60%;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      div {
-        text-align: center;
+    .row{
+      width: 100%;
+      height: 90%;
+      margin: 0;
+      .loginZone {
+        height: 100%;
+        padding: 0;
+        // position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        div {
+          text-align: center;
+          p {
+            font-size: 2.8em;
+            text-align: center;
+            margin: 0 0 5% 0;
+          }
+          //gold-button.scss
+        }
+
       }
-      p {
-        font-size: 4rem;
-        text-align: center;
-        margin: 0;
+      .cosmosZone{
+        height: 100%;
+        padding: 0;
       }
     }
   }

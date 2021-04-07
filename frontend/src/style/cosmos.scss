@@ -39,10 +39,9 @@
 
 #cosmos {
   position: relative;
-  left: 45%;
+  width: 100%;
 }
 
-/* CSS solar system animation */
 .sun-system-bg,
 .sun-system-shadow-01,
 .sun-system-shadow-02 {
@@ -83,21 +82,18 @@
 
 /* Solar System Animations */
 
-/* moon around the earth */
 .system-moonlight {
   offset-path: path(
     "M536.21,257.25a163.79,163.79 0 1,0 327.58,0a163.79,163.79 0 1,0 -327.58,0"
-  ); /* convert circle to path http://complexdan.com/svg-circleellipse-to-path-converter/ */
+  );
   offset-distance: 100%;
   transform-origin: 700px 92px;
 }
 
-/* Earth around the sun */
 .system-earth-moon-container {
   transform-origin: 700px 700px;
 }
 
-/* animating the sun in the system */
 .system-sun {
   .sun-system-shadow-01 {
     transform-origin: 700px 700px;
@@ -108,24 +104,20 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  /* Moon around the earth */
   .system-moonlight {
     animation: AstralRotation 21s infinite linear;
   }
 
-  /* moon path rotation */
   .moon-path {
     transform-origin: 700px 257px;
     animation: 21s linear infinite Rotation;
   }
 
-  /* planet rotation */
   .planet {
     transform-origin: 700px 255px;
     animation: 3s linear infinite Rotation;
   }
 
-  /* earth rings pulsing */
   .earth-shadow-01 {
     transform-origin: 700px 255px;
     animation: 2s linear infinite Pulsing;
@@ -137,17 +129,15 @@
     animation: 2s linear infinite Pulsing;
   }
 
-  /* Earth around the sun */
   .system-earth-moon-container {
     animation: 72s linear infinite Rotation;
   }
-  /* earth path rotation */
+
   .earth-path {
     transform-origin: 700px 700px;
     animation: 72s linear infinite Rotation;
   }
 
-  /* moon rings animation */
   .system-earth-moon {
     .moon-shadow-02 {
       --a-scale-from: scale(1.1);
@@ -164,7 +154,6 @@
     }
   }
 
-  /* animating the sun in the system */
   .system-sun {
     .shadow-01-container {
       transform-origin: 700px 700px;
@@ -191,18 +180,15 @@
     animation: AstralRotation 280s infinite linear;
   }
 
-  /* moon path rotation */
   .moon-path {
     transform-origin: 700px 257px;
     animation: 280s linear infinite Rotation;
   }
 
-  /* Earth around the sun */
   .system-earth-moon-container {
     animation: 600s linear infinite Rotation;
   }
 
-  /* animating the sun in the system */
   .system-sun {
     .sun-system-shadow-01 {
       --a-scale-from: scale(1);
@@ -216,8 +202,6 @@
     }
   }
 }
-
-/* all the keyframes */
 
 @keyframes Pulsing {
   0% {
@@ -261,13 +245,11 @@
   }
 }
 
-/* This is the code for the CSS transition demo */
-
 .svg-mask-transition {
   clip-path: url(#clip-path);
 }
 
-/* Colors that do not transition */
+//sun
 .sun-center,
 .sun-shadow-01,
 .sun-shadow-02,
@@ -283,8 +265,7 @@
   opacity: 0.2;
 }
 
-/* for both moons */
-
+//moon
 .moon-center,
 .moon-shadow-01,
 .moon-shadow-02 {
@@ -303,8 +284,7 @@
   fill: var(--t-moon-pattern-color);
 }
 
-/* Let"s have some comets raining from the sky */
-
+//comets
 .svg-defs {
   display: none;
 }
