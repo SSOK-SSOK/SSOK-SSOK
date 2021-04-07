@@ -21,7 +21,7 @@
         <button v-else class="auth-button" @click="google">Google</button>
       </nav>
       <v-row>
-        <div class="loginZone col-md-12 col-lg-6">
+        <div class="loginZone col-sm-12 col-lg-6">
           <div>
             <p>
               다양한 언어를
@@ -140,7 +140,7 @@ export default {
           width: 3em;
         }
         p {
-          font-size: 2em;
+          font-size: 4.3vh;
           margin: 0 0 0 0.5vw;
         }
       }

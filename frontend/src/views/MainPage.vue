@@ -20,10 +20,11 @@
         </v-tooltip>
       </nav>
       <v-row class="planets">
-        <div class="left-section col-md-6">
-          <div class="venus">
+        <div class="left-section col-sm-12 col-lg-6">
+          <div class="venus pa-1">
             <div class="mascot-card">
               <img
+                class="d-xl-block d-sm-none d-lg-block"
                 @click="moveSelectCardGame"
                 src="@/assets/images/mascot-card.png"
                 alt="mascot-card"
@@ -40,10 +41,11 @@
             </div>
           </div>
         </div>
-        <div class="right-section col-md-6">
-          <div class="greenus">
+        <div class="right-section col-sm-12 col-lg-6">
+          <div class="greenus pa-1">
             <div class="mascot-camera">
               <img
+                class="d-xl-block d-sm-none d-lg-block"
                 @click="moveSmartCameraGame"
                 src="@/assets/images/mascot-camera.png"
                 alt="mascot-camera"
@@ -109,13 +111,15 @@ export default {
       width: 100%;
       height: 5%;
       padding: 2.5% 1.5%;
+      margin-top: 2vh;
       margin-bottom: 1.5%;
       background: none;
     }
     .planets {
+      overflow: visible !important;
       width: 100%;
-      height: 84%;
-      padding: 0 10%;
+      height: 60vw;
+      padding: 0 12%;
       margin: 0;
       .left-section {
         .venus {
@@ -140,7 +144,7 @@ export default {
               background: rgba(22, 18, 0, 0.8);
               color: white;
               text-align: center;
-              font-size: 2.7vw;
+              font-size: 3vw;
               font-weight: bold;
               cursor: pointer;
             }
