@@ -210,14 +210,8 @@ export default {
   methods: {
     startGame(info) {
       const data = [info.id, this.language];
-      console.log(data)
       this.$store.dispatch("CardGameStore/fetchCards", data);
-      this.$router.push({
-        name: "PlayCardGame",
-        params: {
-          category: info,
-        },
-      });
+      this.$router.push({name: "PlayCardGame"});
     },
   },
 };

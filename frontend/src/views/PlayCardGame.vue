@@ -92,8 +92,6 @@ export default {
   },
   data() {
     return {
-      categoryName: "",
-      categorySub: "",
       quizIdx: 0,
       started: false,
       ended: false,
@@ -121,15 +119,9 @@ export default {
     },
   },
   created() {
-    this.getParams();
     this.solvingStatus = false;
   },
   methods: {
-    getParams() {
-      const category = this.$route.params.category;
-      this.categoryName = category.name;
-      this.categorySub = category.sub;
-    },
     sendCurrentQuiz(idx) {
       if (idx < this.playingCards.length) {
         return this.playingCards[idx];
