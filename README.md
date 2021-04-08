@@ -1,4 +1,6 @@
-<우리 서비스 썸네일>
+![썸네일](images/SSOKSSOK 썸네일.jpg)
+
+
 
 <h2 align="center">쏙쏙 (SSOK SSOK)</h2>
 
@@ -124,6 +126,6 @@ $ python manage.py runserver
 | :------------- | ----------------------- | ---------------------------- |
 | :crown: 강채원 | Captain & Frontend & AI |                              |
 | 👦 김성진       | Backend                 |                              |
-| 👧 김효진       | Frontend                |                              |
+| 👧 김효진       | Frontend                | https://github.com/devhyojin |
 | 👧 이승아       | Frontend & AI           | https://github.com/salee1023 |
 | 👧 이유진       | Backend                 |                              |
