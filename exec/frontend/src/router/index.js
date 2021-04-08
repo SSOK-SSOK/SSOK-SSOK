@@ -5,6 +5,7 @@ import SmartCameraGame from "@/views/SmartCameraGame.vue";
 import WelcomePage from "@/views/WelcomePage.vue";
 import SelectCardGame from "@/views/SelectCardGame.vue";
 import PlayCardGame from "@/views/PlayCardGame.vue";
+import PageNotFound from "@/views/PageNotFound.vue";
 
 Vue.use(VueRouter);
 
@@ -13,6 +14,15 @@ const routes = [
     path: "/",
     name: "WelcomePage",
     component: WelcomePage,
+  },
+  {
+    path: "*",
+    redirect: "/404",
+  },
+  {
+    path: "/404",
+    name: "PageNotFound",
+    component: PageNotFound,
   },
   {
     path: "/main",
@@ -33,7 +43,7 @@ const routes = [
     path: "/playcardgame",
     name: "PlayCardGame",
     component: PlayCardGame,
-  }
+  },
 ];
 
 const router = new VueRouter({
