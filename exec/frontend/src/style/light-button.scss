@@ -1,0 +1,147 @@
+div {
+  .glow {
+    position: relative;
+    width: 5vh;
+    height: 5vh;
+    transform: rotate(45deg);
+    background: #c0ffe4;
+    box-shadow: 1px 1px 0 #1d8758, 0 0 20px 5px #c0ffe4, inset 2px 2px 0 #d3ffec;
+    animation: glow 2s infinite ease;
+    cursor: pointer;
+
+    &:before,
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+    }
+
+    &:before {
+      width: 2.5vh;
+      height: 2.5vh;
+      display: flex;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.25);
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 0 2px 3px #b3f6d9;
+      box-shadow: 1px 1px 0 #a2e6c9, 0 0 20px 5px #c0ffe4,
+        inset 2px 2px 0 #d3ffec;
+    }
+
+    &:after {
+      left: 0;
+      width: 0.2vw;
+      height: 2.5vw;
+      background: #fff;
+      z-index: 5;
+      animation: sheen 5s infinite;
+    }
+  }
+
+  @keyframes glow {
+    0% {
+      box-shadow: 1px 1px #1d8758, 0 0 20px 5px #8fffcf, inset 2px 2px #d3ffec;
+    }
+
+    50% {
+      box-shadow: 1px 1px #1d8758, 0 0 16px 8px #8fffcf, inset 2px 2px #d3ffec;
+    }
+
+    100% {
+      box-shadow: 1px 1px #1d8758, 0 0 20px 5px #8fffcf, inset 2px 2px #d3ffec;
+    }
+  }
+
+  @keyframes sheen {
+    0% {
+      left: 0;
+      opacity: 0;
+    }
+
+    1% {
+      opacity: 1;
+    }
+
+    10% {
+      left: calc(100% - 4px);
+    }
+
+    11% {
+      left: 100%;
+      opacity: 0;
+    }
+
+    98% {
+      left: 100%;
+      opacity: 0;
+    }
+
+    100% {
+      left: 0;
+      opacity: 0;
+    }
+  }
+
+  .shine {
+    position: absolute;
+    width: 0.06vw;
+    height: 1vw;
+    background: #fff;
+    transform: rotate(15deg);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.75);
+    animation: shine 10s infinite;
+
+    &:before,
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+    }
+
+    &:before {
+      top: 2px;
+      left: -2px;
+      width: 0.06vw;
+      height: 1vw;
+      background: #fff;
+      transform: rotate(-90deg);
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.75);
+    }
+
+    &:after {
+      top: 6px;
+      left: -2px;
+      width: 0.38vw;
+      height: 0.38vw;
+      background: #fff;
+      transform: rotate(45deg);
+      box-shadow: 0 0 8px 5px rgba(255, 255, 255, 0.75);
+    }
+  }
+
+  @keyframes shine {
+    0% {
+      opacity: 0;
+    }
+
+    34% {
+      opacity: 0;
+      transform: rotate(15deg);
+    }
+
+    40% {
+      opacity: 0.6;
+      transform: rotate(620deg);
+    }
+
+    48% {
+      opacity: 0;
+      transform: rotate(635deg);
+    }
+
+    100% {
+      opacity: 0;
+      transform: rotate(635deg);
+    }
+  }
+}
