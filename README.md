@@ -107,12 +107,12 @@ CARD SERVER (LOCAL)
 3. 구글 STT를 위한 환경변수 등록 (https://codedragon.tistory.com/9406)
 4. 실행
 
-AUTH SERVER
+AUTH SERVER (UBUNTU)
 ```bash
 $ java -jar spring-social-0.0.1-SNAPSHOT.jar --server.servlet.context-path=/api
 ```
 
-CARD SERVER
+CARD SERVER (UBUNTU)
 ```bash
 $ export GOOGLE_APPLICATION_CREDENTIALS="/home/ubuntu/s04p23a201/backend/ssokssok-bd6c9dfa56f1.json"
 $ java -jar ssokcard-0.0.1-SNAPSHOT.jar --server.servlet.context-path=/card-api --server.port=8081
