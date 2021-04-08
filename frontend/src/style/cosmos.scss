@@ -1,5 +1,4 @@
 :root {
-  /* Fixed colors that don't get transition/animation */
   --dark-cosmos-color: hsl(290, 34%, 10%);
   --star-color: hsl(272, 57%, 95%);
   --star-color-transparency: hsla(272, 57%, 95%, 0.5);
@@ -13,7 +12,6 @@
   --earth-water-color: hsl(202, 62%, 74%);
   --earth-continent-color: hsl(192, 34%, 64%);
 
-  /* colorz  that will change on transition */
   --circle-bg-color: hsl(28, 97%, 70%);
   --cactus-body-color: hsl(337, 43%, 28%);
   --cactus-flower-color: hsl(348, 80%, 62%);
@@ -26,7 +24,6 @@
   --poster: hsl(25, 43%, 79%);
   --poster-border: 60px;
 
-  /* animation and transition timings */
   --t-slow: 2500ms;
   --t-med: 1500ms;
   --t-fast: 1000ms;
@@ -79,8 +76,6 @@
   stroke-dasharray: 10 10;
   opacity: 0.5;
 }
-
-/* Solar System Animations */
 
 .system-moonlight {
   offset-path: path(

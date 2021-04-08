@@ -1,8 +1,5 @@
-// delete the following line if no text is used
-// edit the line if you wanna use other fonts
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:700,300);
 
-// use only the available space inside the 400x400 frame
 .frame {
   position: absolute;
   top: 50%;
@@ -32,8 +29,6 @@
   left: -999px;
 }
 #audio-record:checked + label {
-  /*animation: loadingCircle 2s infinite 0s ease-in-out both,
-		rotateCircle  2s infinite 0s ease-in-out ;*/
   .circle {
     animation: circle 5s linear infinite;
   }

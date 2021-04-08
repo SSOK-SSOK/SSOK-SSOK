@@ -204,8 +204,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// delete the following line if no text is used
-// edit the line if you wanna use other fonts
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:700,300);
 
 // use only the available space inside the 400x400 frame
@@ -270,7 +268,6 @@ label {
   display: block;
   width: 100px;
   height: 100px;
-  /*border: 2px solid #fff;*/
   border-radius: 50%;
   cursor: pointer;
 }
@@ -292,7 +289,6 @@ label {
   display: inline-block;
   margin: 2px;
   opacity: 0;
-  /*animation: bubling 1s infinite ease-in-out alternate;*/
 }
 .icone div:nth-child(1) {
   width: 25px;
@@ -325,7 +321,6 @@ label {
 }
 @keyframes rotateCircle {
   0% {
-    /*transform: rotate(0deg);*/
   }
   100% {
     transform: rotate(360deg);
