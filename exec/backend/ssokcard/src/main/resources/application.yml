@@ -30,7 +30,7 @@ AIHub:
 
 file:
   localPath: C:/ssafy
-  serverPath: /home/ubuntu/s04p23a201/backend/cardgamevoice
+  serverPath: /home/ubuntu/s04p23a201/exec/backend/cardgamevoice
 
 google:
   cloud:
