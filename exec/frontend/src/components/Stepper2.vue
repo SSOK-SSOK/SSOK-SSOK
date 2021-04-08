@@ -3,21 +3,23 @@
     <p class="howToPlay">게임 방법</p>
     <v-stepper v-model="e1">
       <v-stepper-header>
-        <v-stepper-step :complete="e1 > 1" step="1"> 언어 선택 </v-stepper-step>
+        <v-stepper-step :complete="e1 > 1" step="1">
+          언어 & 카드 선택
+        </v-stepper-step>
         <v-divider></v-divider>
-        <v-stepper-step :complete="e1 > 2" step="2"> 문제 보기 </v-stepper-step>
+        <v-stepper-step :complete="e1 > 2" step="2"> 게임 시작 </v-stepper-step>
         <v-divider></v-divider>
-        <v-stepper-step :complete="e1 > 3" step="3"> 사진 찍기 </v-stepper-step>
+        <v-stepper-step :complete="e1 > 3" step="3"> 정답 보기 </v-stepper-step>
         <v-divider></v-divider>
-        <v-stepper-step step="4"> 정답 확인 </v-stepper-step>
+        <v-stepper-step step="4"> 게임 즐기기 </v-stepper-step>
       </v-stepper-header>
 
       <v-stepper-items>
         <v-stepper-content step="1">
           <v-card class="mb-6" color="grey lighten-1" height="300px">
-            <img src="@/assets/images/cardStepper1.PNG" />
+            <img src="@/assets/images/cardStep1.jpg" />
           </v-card>
-          <p>🌍 원하는 언어를 선택해주세요</p>
+          <p>🌍 원하는 언어와 카드를 선택해주세요</p>
           <div class="d-flex">
             <v-spacer></v-spacer>
             <v-btn outlined color="indigo" class="text--white" @click="e1 = 2">
@@ -28,9 +30,12 @@
 
         <v-stepper-content step="2">
           <v-card class="mb-6" color="grey lighten-1" height="300px">
-            <img src="@/assets/images/cardStepper2.PNG" />
+            <img src="@/assets/images/cardStep2.jpg" />
           </v-card>
-          <p>🔠 [문제보기] 버튼을 눌러 단어를 확인해주세요</p>
+          <p>
+            🎙 [녹음] 버튼을 눌러 단어를 말해보세요! ❗❕(주의)❗❕ 한 번 더
+            눌러야 정답이 제출됩니다
+          </p>
           <div class="d-flex">
             <v-btn outlined color="indigo" @click="e1 = 1"> 이전 </v-btn>
             <v-spacer></v-spacer>
@@ -40,9 +45,12 @@
 
         <v-stepper-content step="3">
           <v-card class="mb-6" color="grey lighten-1" height="300px">
-            <img src="@/assets/images/cardStepper3.PNG" />
+            <img src="@/assets/images/cardStep3.jpg" />
           </v-card>
-          <p>📷 단어에 맞는 물건을 사진찍어주세요</p>
+          <p>
+            ✅ 목소리를 들려주면 정답 여부를 알려주면서 카드 뒷면의 답을 볼 수
+            있습니다
+          </p>
           <div class="d-flex">
             <v-btn outlined color="indigo" @click="e1 = 2"> 이전 </v-btn>
             <v-spacer></v-spacer>
@@ -52,11 +60,9 @@
 
         <v-stepper-content step="4">
           <v-card class="mb-6" color="grey lighten-1" height="300px">
-            <img src="@/assets/images/cardStepper4.PNG" />
+            <img src="@/assets/images/cardStep4.jpg" />
           </v-card>
-          <p>
-            🎇 정답을 확인하고 [다시하기] 버튼을 눌러 게임을 마음껏 즐겨보세요
-          </p>
+          <p>🎇 [다음 문제] 버튼을 눌러 게임을 마음껏 즐겨보세요</p>
           <div class="d-flex">
             <v-btn outlined color="indigo" @click="e1 = 3"> 이전 </v-btn>
             <v-spacer></v-spacer>
