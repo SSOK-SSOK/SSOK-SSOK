@@ -9,7 +9,7 @@
     <br />
     <br />
     <a href="https://j4a201.p.ssafy.io"><strong>쏙쏙 체험하기</strong></a> |
-  	<a href="#"><strong>쏙쏙 UCC</strong></a> | <a href="#"><strong>쏙쏙 Swagger</strong></a> 
+  	<a href="https://www.youtube.com/watch?v=JT6PqCYbu50"><strong>쏙쏙 UCC</strong></a> | <a href="https://j4a201.p.ssafy.io/card-api/swagger-ui.html"><strong>쏙쏙 Swagger</strong></a> 
 </p>
 
 <br />
