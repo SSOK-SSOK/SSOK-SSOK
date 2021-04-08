@@ -31,7 +31,7 @@ const SmartCameraStore = {
         state.category = info;
       }
       state.is_done = true;
-      console.log(state.is_done)
+      // console.log(state.is_done)
     },
     INITIALIZE_INFO: function (state) {
       state.score= 0;

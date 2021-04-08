@@ -31,7 +31,6 @@ const CardGameStore = {
       const lan = data[1];
       axios.get(`https://j4a201.p.ssafy.io/card-api/card/${idx}/${lan}`)
         .then((res) => {
-          console.log(res);
           commit("SET_CARDS", res.data.object)
         })
         .catch((err) => {

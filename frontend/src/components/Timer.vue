@@ -92,11 +92,12 @@ export default {
     // 카드가 바뀔 때마다 타이머를 시작합니다.
     quizIdx(newValue) {
       if (newValue < 15) {
-        console.log(newValue + 1 + "번째 카드");
+        // console.log(newValue + 1 + "번째 카드");
         this.start();
-      } else {
-        console.log("끝!");
-      }
+      } 
+      // else {
+        // console.log("끝!");
+      // }
     },
     // 시간이 15초가 지나면 타이머를 초기화하고 문제를 못 품 (false)을 상위 컴포넌트에 전달한다.
     timePassed(newValue) {
@@ -113,7 +114,7 @@ export default {
   },
   mounted() {
     if (this.quizIdx === 0) {
-      console.log("첫번째 카드");
+      // console.log("첫번째 카드");
       this.start();
     }
   },

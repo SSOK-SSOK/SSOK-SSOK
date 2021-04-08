@@ -45,7 +45,6 @@ export default {
   },
   watch: {
     isRecorded: function (val) {
-      console.log(val);
       if (val === true) {
         this.load();
         setTimeout(() => {
@@ -175,12 +174,14 @@ export default {
           headers
         )
         .then((res) => {
-          const translatedWord = res.data.object;
+          let translatedWord = res.data.object;
+          if (this.language === "en-US") {
+            translatedWord = translatedWord.toLowerCase();
+          }
           const cards = this.playingCards;
           const idx = this.quizIdx;
 
           if (translatedWord === cards[idx].word) {
-            console.log("정답!");
             this.$store.dispatch(
               "CardGameStore/fetchAlertMessage",
               "정답입니다!"
