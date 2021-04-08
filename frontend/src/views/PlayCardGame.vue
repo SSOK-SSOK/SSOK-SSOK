@@ -43,12 +43,12 @@
             </div>
             <button
               v-else-if="ended"
-              class="auth-button mx-auto"
+              class="gold-button mx-auto"
               @click="openModal = true"
             >
               결과 보기
             </button>
-            <button v-else class="auth-button mx-auto" @click="getStart">
+            <button v-else class="gold-button mx-auto" @click="getStart">
               게임 시작
             </button>
             <ScoreModal
@@ -161,7 +161,6 @@ export default {
     },
     is_flipped(newValue) {
       this.resetTime = true;
-      this.flipped = true;
     },
     nextCard(newValue) {
       if (newValue === true) {
@@ -196,7 +195,7 @@ export default {
 @import "@/style/star.sass";
 @import "@/style/light-button.scss";
 @import "@/style/auth-button.scss";
-
+@import "@/style/gold-button.scss";
 .container {
   padding: 1%;
   .background {
@@ -207,7 +206,6 @@ export default {
   }
   .contents {
     position: absolute;
-    z-index: 10;
     width: 100%;
     height: 100%;
     left: 0;

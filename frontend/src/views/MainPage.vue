@@ -107,13 +107,15 @@ export default {
     // navbar
     nav {
       display: flex;
+      justify-content: space-between;
       align-items: center;
       width: 100%;
       height: 5%;
-      padding: 2.5% 1.5%;
-      margin-top: 2vh;
-      margin-bottom: 1.5%;
+      padding: 2.5% 0.9%;
+      margin-bottom: 2%;
       background: none;
+      color: white;
+      font-size: 1rem;
     }
     .planets {
       overflow: visible !important;
