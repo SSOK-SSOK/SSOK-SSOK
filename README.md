@@ -98,7 +98,10 @@ $ pip install -r requirements.txt
 $ python manage.py runserver
 ```
 
-로컬에서 서버 실행시키는 법
+AUTH SERVER (LOCAL)
+1. 실행
+
+CARD SERVER (LOCAL)
 1. C드라이브 밑에 ssafy 폴더 생성
 2. STTService 클래스에서 LOCAL_PATH 설정
 3. 구글 STT를 위한 환경변수 등록 (https://codedragon.tistory.com/9406)
