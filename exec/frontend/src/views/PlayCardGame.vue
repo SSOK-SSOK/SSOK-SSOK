@@ -19,7 +19,9 @@
           <span>카드게임 다시 고르기!</span>
         </v-tooltip>
       </nav>
-      <p v-if="started">녹음버튼을 눌러 정답을 말해보세요</p>
+      <p v-if="started">
+        녹음버튼을 눌러 정답을 말해보세요
+      </p>
       <div class="game-contents">
         <!--타이머-->
         <div class="countdown-timer">
