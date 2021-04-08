@@ -48,7 +48,7 @@
 
 #### 📷 스마트카메라
 
-![스마트카메라 게임](images/스마트카메라.gif)
+![스마트카메라](images/스마트카메라.gif)
 
 #### 🔗 구글로그인
 
@@ -103,28 +103,38 @@ $ pip install -r requirements.txt
 $ python manage.py runserver
 ```
 
-#### 백엔드 서버 실행 방법
+<br />
 
-**AUTH SERVER (LOCAL)**
+#### Back-End Server 실행 방법
+> AUTH 서버와 CARD 서버로 분리됩니다.
+> 
+> LOCAL과 UBUNTU 에서 접속 방법을 설명해드립니다.
+
+**LOCAL에서 실행**
+
+AUTH SERVER
 
 - 프로젝트 open 후 Build
 
-**CARD SERVER (LOCAL)**
+CARD SERVER
 
-1. C드라이브 밑에 ssafy 폴더 생성
+1. C 드라이브 밑에 ssafy 폴더 생성
 2. STTService 클래스에서 LOCAL_PATH 설정
-3. 구글 STT를 위한 환경변수 등록 (https://codedragon.tistory.com/9406)
+3. 구글 STT를 위한 환경변수 등록 (https://codedragon.tistory.com/9406 참고)
 4. 실행
 
-**AUTH SERVER (UBUNTU)**
+**UBUNTU에서 실행**
+
+AUTH SERVER
 
 ```bash
 $ java -jar spring-social-0.0.1-SNAPSHOT.jar --server.servlet.context-path=/api
 ```
 
-**CARD SERVER (UBUNTU)**
+CARD SERVER
 
 ```bash
+$ cd s04p23a201/exec/backend
 $ export GOOGLE_APPLICATION_CREDENTIALS="/home/ubuntu/s04p23a201/exec/backend/ssokssok-bd6c9dfa56f1.json"
 $ java -jar ssokcard-0.0.1-SNAPSHOT.jar --server.servlet.context-path=/card-api --server.port=8081
 ```
