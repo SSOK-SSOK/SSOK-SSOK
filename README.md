@@ -94,25 +94,9 @@ $ pip install -r requirements.txt
 
 6. run AI server
 
-<<<<<<< HEAD
-------------------------------------------
-
-### 🎀 0326 Update
-
-> [시연 영상]
->
-> AI https://drive.google.com/file/d/19ztCuFpTg2vm2ExBn5hJbbfeHST9K3jR/view?usp=sharing
->
-> Google Login https://drive.google.com/file/d/1YfCTC95dKExwJTu3XA5ixrBm-j4SmXrE/view?usp=sharing
->
-> Smart Camera https://drive.google.com/file/d/1C31vIa_x3wapMiQrOHls4S41nxP2u4sH/view?usp=sharing
-
-#### 배포 완료 & 디자인 적용
-=======
 ```bash
 $ python manage.py runserver
 ```
->>>>>>> develop
 
 AUTH SERVER (LOCAL)
 1. 실행
@@ -165,23 +149,6 @@ $ java -jar ssokcard-0.0.1-SNAPSHOT.jar --server.servlet.context-path=/card-api 
 
 <br/>
 
-<<<<<<< HEAD
-
-
-#### 스마트 카메라 게임을 위한 웹캠 연결 
-
-![image-20210325213737430](images/image-20210325213737430.png)
-
-
-
-#### Google 로그인 구현
-
-![image-20210326104550478](images/image-20210326104550478.png)
-
-### 🚗향후 계획
-
-![image-20210326105357378](images/image-20210326105357378.png)
-=======
 ## 👬 SSOK SSOK 개발진
 
 | NAME           | Role                    | Github                        |
@@ -191,4 +158,3 @@ $ java -jar ssokcard-0.0.1-SNAPSHOT.jar --server.servlet.context-path=/card-api 
 | 👧 김효진       | Frontend                | https://github.com/devhyojin  |
 | 👧 이승아       | Frontend & AI           | https://github.com/salee1023  |
 | 👧 이유진       | Backend                 | https://github.com/leejjin    |
->>>>>>> develop
