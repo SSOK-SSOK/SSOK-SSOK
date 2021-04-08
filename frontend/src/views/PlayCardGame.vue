@@ -43,17 +43,17 @@
             </div>
             <button
               v-else-if="ended"
-              class="gold-button mx-auto"
+              class="auth-button mx-auto"
               @click="openModal = true"
             >
               결과 보기
             </button>
-            <button v-else class="gold-button mx-auto" @click="getStart">
+            <button v-else class="auth-button mx-auto" @click="getStart">
               게임 시작
             </button>
             <ScoreModal
               v-if="openModal"
-              @close="moveSelectCardGame"
+              @close="openModal = false"
               :score="score"
             />
           </div>
@@ -67,14 +67,12 @@
               :size="80"
             ></v-progress-circular>
           </div>
-          <div v-else>
-            <Audio
-              :quizIdx="quizIdx"
-              @audioResult="onAudioResult"
-              @is_flipped="is_flipped"
-              @is_loading="is_loading"
-            />
-          </div>
+          <Audio
+            :quizIdx="quizIdx"
+            @audioResult="onAudioResult"
+            @is_flipped="is_flipped"
+            @is_loading="is_loading"
+          />
         </div>
       </div>
       <div id="alert" v-if="alertDialog">
@@ -196,7 +194,7 @@ export default {
 <style lang="scss" scoped>
 @import "@/style/star.sass";
 @import "@/style/light-button.scss";
-@import "@/style/gold-button.scss";
+@import "@/style/auth-button.scss";
 
 .container {
   padding: 1%;
@@ -227,7 +225,7 @@ export default {
     }
     p {
       text-align: center;
-      font-size: 2vw;
+      font-size: 2.2em;
     }
     .game-contents {
       display: flex;
