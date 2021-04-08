@@ -60,7 +60,6 @@ export default {
     },
   },
   mounted() {
-    console.log("마운티드");
     this.getToken();
   },
   methods: {
@@ -87,7 +86,6 @@ export default {
     },
     getToken() {
       const token = this.getUrlParameter("token");
-      console.log(token);
       if (token) {
         localStorage.setItem(ACCESS_TOKEN, token);
       }
@@ -152,7 +150,6 @@ export default {
       .loginZone {
         height: 100%;
         padding: 0;
-        // position: relative;
         display: flex;
         align-items: center;
         justify-content: center;

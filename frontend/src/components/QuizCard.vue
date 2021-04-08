@@ -62,7 +62,6 @@ export default {
     },
     // 다음 카드로 이동
     goNext() {
-      console.log("다음 카드");
       this.flipCard();
       this.$emit("nextCard", true);
     },
@@ -76,12 +75,12 @@ export default {
   background-color: transparent;
   width: 40vw;
   height: 25vw;
-  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  perspective: 1000px; //3d 효과용
   transition: 0.5s ease;
   backface-visibility: hidden;
 }
 
-/* This container is needed to position the front and back side */
+
 .flip-card-inner {
   position: relative;
   width: 100%;
@@ -91,12 +90,12 @@ export default {
   transform-style: preserve-3d;
 }
 
-/* Do an horizontal flip when you move the mouse over the flip box container */
+// 회전 정도
 .active .flip-card-inner {
   transform: rotateY(180deg);
 }
 
-/* Position the front and back side */
+
 .flip-card-front,
 .flip-card-back {
   position: absolute;
@@ -106,7 +105,7 @@ export default {
   backface-visibility: hidden;
 }
 
-/* Style the back side */
+
 .flip-card-back {
   z-index: 100;
   display: flex;
