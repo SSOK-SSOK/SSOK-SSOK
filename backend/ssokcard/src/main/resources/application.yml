@@ -1,0 +1,43 @@
+spring:
+  datasource:
+    url: jdbc:mysql://j4a201.p.ssafy.io:3306/ssokcard?serverTimezone=Asia/Seoul&useUniCode=yes&characterEncoding=UTF-8
+    username: ssokauth
+    password: 's#s%o#k%1q2w3e4r%s#s%o#k'
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
+
+server:
+  port: 8081
+
+AIHub:
+  STT:
+    accessKey: 0d52fa25-2ce8-4c0f-b453-615126f29c56
+    openApiURL: http://aiopen.etri.re.kr:8000/WiseASR/Recognition
+
+file:
+  localPath: C:/ssafy
+  serverPath: /home/ubuntu/s04p23a201/backend/cardgamevoice
+
+google:
+  cloud:
+    projectId: 943641916006
+    translate:
+      key: AIzaSyDLxS2dvYbjDW8Zz8Ew0NOyts6dunE4khA
+
+    storage:
+      projectId: ssokssok
+      bucketName: ssokssok

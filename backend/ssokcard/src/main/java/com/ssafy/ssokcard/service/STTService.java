@@ -17,9 +17,9 @@ import java.util.*;
 @RequiredArgsConstructor
 public class STTService {
     @Value("${file.localPath}")
-    private String LOCAL_PATH;
+    private String LOCAL_PATH;  // 로컬 빌드 시 사용
     @Value("${file.serverPath}")
-    private String SERVER_PATH;
+    private String SERVER_PATH; // 서버 빌드 시 사용
 
     @Value("${google.cloud.storage.projectId}")
     private String projectId;
