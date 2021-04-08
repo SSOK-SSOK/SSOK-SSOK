@@ -63,9 +63,9 @@ export default {
       width: 100%;
       height: 5%;
       padding: 2.5% 1.5%;
-      margin: 2vh 0 1% 2vw;
-      color: white;
+      margin-bottom: 2%;
       background: none;
+      color: white;
       font-size: 1rem;
     }
   }
