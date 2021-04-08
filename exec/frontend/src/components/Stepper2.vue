@@ -93,6 +93,7 @@ export default {
 .stepper {
   margin-top: 2%;
   width: 40%;
+  height: 100%;
   .howToPlay {
     z-index: 100;
     width: 70%;
@@ -113,5 +114,10 @@ export default {
     width: 100%;
     height: 100%;
   }
+}
+
+.v-btn{
+  width: 13%;
+  font-size: 0.9vw;
 }
 </style>
