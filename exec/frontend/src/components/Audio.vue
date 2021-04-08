@@ -84,12 +84,20 @@ export default {
 
     // 4. 파일을 서버로 전송
     store: function () {
-      // console.log(soundFile);
-      this.$emit("is_loading", true);
-      const view = this.convertToWav(soundFile.buffer);
-      setTimeout(() => {
-        this.writeFile([view], "record", "wav");
-      }, 200);
+      if (soundFile.buffer == null) {
+        this.$store.dispatch(
+          "CardGameStore/fetchAlertMessage",
+          "소리를 잘 못들었어요ㅠㅠ"
+        );
+        this.$emit("is_loading", false);
+        this.$emit("is_flipped", true);
+      } else {
+        this.$emit("is_loading", true);
+        const view = this.convertToWav(soundFile.buffer);
+        setTimeout(() => {
+          this.writeFile([view], "record", "wav");
+        }, 200);
+      }
     },
 
     // 4-1. 녹음한 데이터를 Wav 파일형식의 buffer로 저장. chunk로 조각내어서 array를 반환
@@ -174,28 +182,37 @@ export default {
           headers
         )
         .then((res) => {
-          let translatedWord = res.data.object;
-          if (this.language === "en-US") {
-            translatedWord = translatedWord.toLowerCase();
-          }
           const cards = this.playingCards;
           const idx = this.quizIdx;
+          let translatedWord = res.data.object;
 
-          if (translatedWord === cards[idx].word) {
+          if (translatedWord == null) {
             this.$store.dispatch(
               "CardGameStore/fetchAlertMessage",
-              "정답입니다!"
+              "소리를 잘 못들었어요ㅠㅠ"
             );
-            this.$emit("audioResult", true);
             this.$emit("is_loading", false);
             this.$emit("is_flipped", true);
           } else {
-            this.$store.dispatch(
-              "CardGameStore/fetchAlertMessage",
-              "틀렸어요ㅠㅠ"
-            );
-            this.$emit("is_loading", false);
-            this.$emit("is_flipped", true);
+            if (this.language === "en-US" || this.language === "vi-VN" || this.language === "fr-FR" || this.language === "es-ES") {
+              translatedWord = translatedWord.toLowerCase();
+            }
+            if (translatedWord === cards[idx].word) {
+              this.$store.dispatch(
+                "CardGameStore/fetchAlertMessage",
+                "정답입니다!"
+              );
+              this.$emit("audioResult", true);
+              this.$emit("is_loading", false);
+              this.$emit("is_flipped", true);
+            } else {
+              this.$store.dispatch(
+                "CardGameStore/fetchAlertMessage",
+                "틀렸어요ㅠㅠ"
+              );
+              this.$emit("is_loading", false);
+              this.$emit("is_flipped", true);
+            }
           }
         })
         .catch((err) => console.log(err));

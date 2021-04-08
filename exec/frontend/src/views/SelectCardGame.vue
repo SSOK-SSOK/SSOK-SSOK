@@ -26,12 +26,10 @@
 
 <script>
 import CardCategory from "@/components/CardCategory.vue";
-import Stepper2 from "@/components/Stepper2.vue";
 export default {
   name: "SelectCardGame",
   components: {
     CardCategory,
-    Stepper2
   },
   methods: {
     moveMainPage() {
