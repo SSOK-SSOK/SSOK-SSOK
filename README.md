@@ -1,4 +1,4 @@
-![썸네일](images/SSOKSSOK 썸네일.jpg)
+![썸네일](images/SSOKSSOK 썸네일 .jpg)
 
 
 
