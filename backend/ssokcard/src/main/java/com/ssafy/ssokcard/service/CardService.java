@@ -36,10 +36,18 @@ public class CardService {
         }
 
         Collections.shuffle(cardList);
+        // ------- 카드 5장 보내는 경우 ------------
+        ArrayList<Card> list = new ArrayList<>();
+
+        for (int i = 0; i < 5; i++) {
+             list.add(cardList.get(i));
+        }
+        //--------------------------------------
 
         result.status = true;
         result.data = "카드 조회 성공";
-        result.object = cardList;
+//        result.object = cardList; // 카드 15장 보내는 경우
+        result.object = list; // 카드 5장 보내는 경우
 
         return result;
     }
