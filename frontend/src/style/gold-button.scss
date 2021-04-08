@@ -37,3 +37,8 @@
 .gold-button:hover::before {
   left: 100%;
 }
+
+*:focus {
+  outline: none;
+  border: none;
+}
