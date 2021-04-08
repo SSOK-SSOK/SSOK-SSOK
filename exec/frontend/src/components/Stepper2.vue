@@ -21,6 +21,7 @@
           </v-card>
           <p>🌍 원하는 언어와 카드를 선택해주세요</p>
           <div class="d-flex">
+            <v-btn color="warning" @click="playGame"> 게임하기 </v-btn>
             <v-spacer></v-spacer>
             <v-btn outlined color="indigo" class="text--white" @click="e1 = 2">
               다음
@@ -91,12 +92,13 @@ export default {
 
 <style lang="scss" scoped>
 .stepper {
-  margin-top: 2%;
+  // margin-top: 2%;
   width: 40%;
+  height: 100%;
   .howToPlay {
     z-index: 100;
     width: 70%;
-    margin: 3% auto;
+    margin: 0 auto 3%;
     background: rgba(22, 18, 0, 0.5);
     color: white;
     text-align: center;
@@ -113,5 +115,10 @@ export default {
     width: 100%;
     height: 100%;
   }
+}
+
+.v-btn {
+  width: 13%;
+  font-size: 0.9vw;
 }
 </style>
