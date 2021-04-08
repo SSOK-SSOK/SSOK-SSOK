@@ -98,21 +98,25 @@ $ pip install -r requirements.txt
 $ python manage.py runserver
 ```
 
-AUTH SERVER (LOCAL)
+**AUTH SERVER (LOCAL)**
+
 1. 실행
 
-CARD SERVER (LOCAL)
+**CARD SERVER (LOCAL)**
+
 1. C드라이브 밑에 ssafy 폴더 생성
 2. STTService 클래스에서 LOCAL_PATH 설정
 3. 구글 STT를 위한 환경변수 등록 (https://codedragon.tistory.com/9406)
 4. 실행
 
-AUTH SERVER (UBUNTU)
+**AUTH SERVER (UBUNTU)**
+
 ```bash
 $ java -jar spring-social-0.0.1-SNAPSHOT.jar --server.servlet.context-path=/api
 ```
 
-CARD SERVER (UBUNTU)
+**CARD SERVER (UBUNTU)**
+
 ```bash
 $ export GOOGLE_APPLICATION_CREDENTIALS="/home/ubuntu/s04p23a201/backend/ssokssok-bd6c9dfa56f1.json"
 $ java -jar ssokcard-0.0.1-SNAPSHOT.jar --server.servlet.context-path=/card-api --server.port=8081
