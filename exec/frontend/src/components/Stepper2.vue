@@ -21,6 +21,7 @@
           </v-card>
           <p>🌍 원하는 언어와 카드를 선택해주세요</p>
           <div class="d-flex">
+            <v-btn color="warning" @click="playGame"> 게임하기 </v-btn>
             <v-spacer></v-spacer>
             <v-btn outlined color="indigo" class="text--white" @click="e1 = 2">
               다음
@@ -116,7 +117,7 @@ export default {
   }
 }
 
-.v-btn{
+.v-btn {
   width: 13%;
   font-size: 0.9vw;
 }
