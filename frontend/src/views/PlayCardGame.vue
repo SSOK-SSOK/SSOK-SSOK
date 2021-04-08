@@ -161,6 +161,7 @@ export default {
     },
     is_flipped(newValue) {
       this.resetTime = true;
+      this.flipped = true;
     },
     nextCard(newValue) {
       if (newValue === true) {
