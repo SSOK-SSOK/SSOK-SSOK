@@ -164,8 +164,10 @@ export default {
       is_start: false,
       game_started: false,
       languageModal: false,
-      selected_language: undefined,
+      selected_language: 0,
       stepper: false,
+      question: "",
+      answer: "",
     };
   },
   computed: {
@@ -184,17 +186,17 @@ export default {
     ...mapGetters(SmartCameraStore, {
       is_done: "getIsDone",
     }),
-    randInt: function () {
-      var randNum = Math.random() * 3;
-      var randNumInt = parseInt(randNum);
-      return randNumInt;
-    },
-    question: function () {
-      return this.questions[this.selected_language][this.randInt];
-    },
-    answer: function () {
-      return this.questions[1][this.randInt];
-    },
+    // randInt: function () {
+    //   var randNum = Math.random() * 3;
+    //   var randNumInt = parseInt(randNum);
+    //   return randNumInt;
+    // },
+    // question: function () {
+    //   return this.questions[this.selected_language][this.randInt];
+    // },
+    // answer: function () {
+    //   return this.questions[1][this.randInt];
+    // },
   },
   watch: {
     camera: function (id) {
@@ -247,6 +249,11 @@ export default {
     initialize() {
       this.$store.dispatch("SmartCameraStore/initializeInfo");
       this.is_start = true;
+      // 랜덤 문제
+      var randNum = Math.random() * 3;
+      var randInt = parseInt(randNum);
+      this.question = this.questions[this.selected_language][randInt];
+      this.answer = this.questions[1][randInt];
     },
     moveMainPage() {
       this.$router.push({ name: "MainPage" });
