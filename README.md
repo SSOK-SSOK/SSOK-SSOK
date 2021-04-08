@@ -42,12 +42,17 @@
 - 학원을 가지 않아도 정확한 발음을 연습할 수 있다. 
 - 흥미를 유발하여 색다른 경험을 할 수 있다.
   
+#### 🃏 카드게임
 
 ![카드게임](images/카드게임.gif)
 
-![스마트카메라 게임](images/스마트카메라게임.gif)
+#### 📷 스마트카메라
 
+![스마트카메라 게임](images/스마트카메라.gif)
 
+#### 🔗 구글로그인
+
+![구글로그인](images/구글로그인.gif)
 
 <br/>
 
@@ -98,9 +103,11 @@ $ pip install -r requirements.txt
 $ python manage.py runserver
 ```
 
+#### 백엔드 서버 실행 방법
+
 **AUTH SERVER (LOCAL)**
 
-1. 실행
+- 프로젝트 open 후 Build
 
 **CARD SERVER (LOCAL)**
 
@@ -118,7 +125,7 @@ $ java -jar spring-social-0.0.1-SNAPSHOT.jar --server.servlet.context-path=/api
 **CARD SERVER (UBUNTU)**
 
 ```bash
-$ export GOOGLE_APPLICATION_CREDENTIALS="/home/ubuntu/s04p23a201/backend/ssokssok-bd6c9dfa56f1.json"
+$ export GOOGLE_APPLICATION_CREDENTIALS="/home/ubuntu/s04p23a201/exec/backend/ssokssok-bd6c9dfa56f1.json"
 $ java -jar ssokcard-0.0.1-SNAPSHOT.jar --server.servlet.context-path=/card-api --server.port=8081
 ```
 
