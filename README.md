@@ -105,11 +105,15 @@ $ python manage.py runserver
 4. 실행
 
 AUTH SERVER
+```bash
 $ java -jar spring-social-0.0.1-SNAPSHOT.jar --server.servlet.context-path=/api
+```
 
 CARD SERVER
+```bash
 $ export GOOGLE_APPLICATION_CREDENTIALS="/home/ubuntu/s04p23a201/backend/ssokssok-bd6c9dfa56f1.json"
 $ java -jar ssokcard-0.0.1-SNAPSHOT.jar --server.servlet.context-path=/card-api --server.port=8081
+```
 
 <br />
 
