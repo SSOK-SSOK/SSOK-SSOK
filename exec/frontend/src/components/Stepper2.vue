@@ -92,13 +92,13 @@ export default {
 
 <style lang="scss" scoped>
 .stepper {
-  margin-top: 2%;
+  // margin-top: 2%;
   width: 40%;
   height: 100%;
   .howToPlay {
     z-index: 100;
     width: 70%;
-    margin: 3% auto;
+    margin: 0 auto 3%;
     background: rgba(22, 18, 0, 0.5);
     color: white;
     text-align: center;
