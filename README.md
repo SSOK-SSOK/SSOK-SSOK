@@ -34,7 +34,14 @@
 
 #### 💛 프로젝트 소개
 
-쏙쏙은 유치원생, 초등학생을 대상으로하는 어휘 학습 게임입니다. 학생들이 집에서도 편하게, 또 즐겁게 언어를 학습할 수 있게 하자는 취지에서 기획했습니다. 높은 정확도의 실시간 음성 인식을 통해 발음을 연습하고, 단어를 학습할 수 있습니다. 쏙쏙의 기대효과는 다음과 같습니다. - 다양한 언어를 즐겁게 학습한다. - 학원을 가지 않아도 정확한 발음을 연습할 수 있다. - 흥미를 유발하여 색다른 경험을 할 수 있다.
+쏙쏙은 유치원생, 초등학생을 대상으로하는 어휘 학습 게임입니다. 학생들이 집에서도 편하게, 또 즐겁게 언어를 학습할 수 있게 하자는 취지에서 기획했습니다. 높은 정확도의 실시간 음성 인식을 통해 발음을 연습하고, 단어를 학습할 수 있습니다. 
+
+쏙쏙의 기대효과는 다음과 같습니다. 
+
+- 다양한 언어를 즐겁게 학습한다. 
+- 학원을 가지 않아도 정확한 발음을 연습할 수 있다. 
+- 흥미를 유발하여 색다른 경험을 할 수 있다.
+  
 
 gif로 단어학습, 스마트카드게임 실행 영상 보여주기
 
@@ -122,10 +129,10 @@ $ python manage.py runserver
 
 ## 👬 SSOK SSOK 개발진
 
-| NAME           | Role                    | Github                       |
-| :------------- | ----------------------- | ---------------------------- |
-| :crown: 강채원 | Captain & Frontend & AI |                              |
-| 👦 김성진       | Backend                 |                              |
-| 👧 김효진       | Frontend                | https://github.com/devhyojin |
-| 👧 이승아       | Frontend & AI           | https://github.com/salee1023 |
-| 👧 이유진       | Backend                 |                              |
+| NAME           | Role                    | Github                        |
+| :------------- | ----------------------- | ----------------------------- |
+| :crown: 강채원 | Captain & Frontend & AI | https://github.com/chaewon-k  |
+| 👦 김성진       | Backend                 | https://github.com/tjdwls3469 |
+| 👧 김효진       | Frontend                | https://github.com/devhyojin  |
+| 👧 이승아       | Frontend & AI           | https://github.com/salee1023  |
+| 👧 이유진       | Backend                 | https://github.com/leejjin    |
