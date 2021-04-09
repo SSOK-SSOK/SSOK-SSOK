@@ -42,12 +42,28 @@
 - 학원을 가지 않아도 정확한 발음을 연습할 수 있다. 
 - 흥미를 유발하여 색다른 경험을 할 수 있다.
   
+#### 🃏 카드게임
 
 ![카드게임](images/카드게임.gif)
+- 게임 안내를 통해 게임 방법을 익힐 수 있습니다.
+- 단어를 말 할 시간이 15초 주어집니다.
+- 마이크 버튼을 눌러 음성을 녹음하고, 다시 버튼을 눌러 음성 데이터를 전송합니다.
+- 틀린 단어를 말했을 땐 '틀렸어요ㅠㅠ' 문구가 표시됩니다.
+- 카드를 더블클릭하여 정답을 확인할 수 있습니다.
+- 빈 음성 데이터(null)가 넘어가는 경우 '소리를 잘 못 들었어요ㅠㅠ' 문구가 표시됩니다.
+- 게임을 마치면 게임 결과를 표시합니다.
+<br />
 
-![스마트카메라 게임](images/스마트카메라게임.gif)
+#### 📷 스마트카메라
 
+![스마트카메라](images/스마트카메라.gif)
+- 게임 안내를 통해 게임 방법을 익힐 수 있습니다.
+- 문제의 단어에 해당하는 물체를 보여주면 AI가 정답을 판별합니다.
+<br />
 
+#### 🔗 구글로그인
+
+![구글로그인](images/구글로그인.gif)
 
 <br/>
 
@@ -98,23 +114,39 @@ $ pip install -r requirements.txt
 $ python manage.py runserver
 ```
 
-AUTH SERVER (LOCAL)
-1. 실행
+<br />
 
-CARD SERVER (LOCAL)
-1. C드라이브 밑에 ssafy 폴더 생성
+#### Back-End Server 실행 방법
+> AUTH 서버와 CARD 서버로 분리됩니다.
+> 
+> LOCAL과 UBUNTU 에서 접속 방법을 설명해드립니다.
+
+**LOCAL에서 실행**
+
+AUTH SERVER
+
+- 프로젝트 open 후 Build
+
+CARD SERVER
+
+1. C 드라이브 밑에 ssafy 폴더 생성
 2. STTService 클래스에서 LOCAL_PATH 설정
-3. 구글 STT를 위한 환경변수 등록 (https://codedragon.tistory.com/9406)
+3. 구글 STT를 위한 환경변수 등록 (https://codedragon.tistory.com/9406 참고)
 4. 실행
 
-AUTH SERVER (UBUNTU)
+**UBUNTU에서 실행**
+
+AUTH SERVER
+
 ```bash
 $ java -jar spring-social-0.0.1-SNAPSHOT.jar --server.servlet.context-path=/api
 ```
 
-CARD SERVER (UBUNTU)
+CARD SERVER
+
 ```bash
-$ export GOOGLE_APPLICATION_CREDENTIALS="/home/ubuntu/s04p23a201/backend/ssokssok-bd6c9dfa56f1.json"
+$ cd s04p23a201/exec/backend
+$ export GOOGLE_APPLICATION_CREDENTIALS="/home/ubuntu/s04p23a201/exec/backend/ssokssok-bd6c9dfa56f1.json"
 $ java -jar ssokcard-0.0.1-SNAPSHOT.jar --server.servlet.context-path=/card-api --server.port=8081
 ```
 

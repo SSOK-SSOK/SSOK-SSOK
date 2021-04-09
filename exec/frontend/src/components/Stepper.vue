@@ -19,6 +19,7 @@
           </v-card>
           <p>🌍 원하는 언어를 선택해주세요</p>
           <div class="d-flex">
+            <v-btn color="warning" @click="playGame"> 게임 시작 </v-btn>
             <v-spacer></v-spacer>
             <v-btn outlined color="indigo" class="text--white" @click="e1 = 2">
               다음
