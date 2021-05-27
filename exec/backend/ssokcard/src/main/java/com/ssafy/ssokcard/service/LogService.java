@@ -13,10 +13,33 @@ public class LogService {
     @Autowired
     private CardGameLogRepository cardGameLogRepo;
 
+    @Autowired
+    private BadgeService badgeService;
+
+    public BasicResponse insertResult(GameResultDto gameResultDto) {
+        // 로그 저장
+        BasicResponse logResult = new BasicResponse();
+        logResult = insertLog(gameResultDto);
+
+        if (logResult.status == false) {
+            return logResult;
+        }
+
+        // 뱃지 생성 여부 판단 및 생성
+        BasicResponse badgeResult = new BasicResponse();
+        badgeResult = badgeService.insertBadge(gameResultDto);
+
+        if (badgeResult.status == false) {
+            return badgeResult;
+        }
+
+        return badgeResult;
+    }
+
     public BasicResponse insertLog(GameResultDto gameResultDto) {
         BasicResponse result = new BasicResponse();
 
-        if(gameResultDto == null){
+        if (gameResultDto == null) {
             result.status = false;
             result.data = "로그 저장 실패";
             result.object = null;

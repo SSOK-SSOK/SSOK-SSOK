@@ -26,6 +26,35 @@ public class STTService {
     @Value("${google.cloud.storage.bucketName}")
     private String bucketName;
 
+    public Object convertVoiceToText(MultipartFile inputFile, String languageCode) {
+        BasicResponse answer = new BasicResponse();
+        if (inputFile == null || languageCode == null) {
+            answer.status = false;
+            answer.data = "변환 실패";
+            answer.object = null;
+            return answer;
+        }
+
+        File file = saveFile(inputFile, inputFile.getOriginalFilename());
+        if ("IOException".equals(file.getName())) {
+            answer.status = false;
+            answer.data = "변환 실패";
+            answer.object = null;
+            return answer;
+        }
+
+        String gcsUri = saveBucket(file.getName(), file.getPath());
+        if ("IOException".equals(gcsUri)) {
+            answer.status = false;
+            answer.data = "변환 실패";
+            answer.object = null;
+            return answer;
+        }
+
+        // ko-KR(대한민국), en-US(미국), zh(중국), ja-JP(일본), vi-VN(베트남), fr-FR(프랑스), es-ES(스페인)
+        return googleConvertVoiceToText(languageCode, gcsUri);
+    }
+
     public File saveFile(MultipartFile inputFile, String fileName) {
         UUID uuid = UUID.randomUUID();
         String newFileName = uuid.toString() + fileName;
@@ -59,7 +88,7 @@ public class STTService {
 
     public Object googleConvertVoiceToText(String languageCode, String audioFilePath) {
         BasicResponse answer = new BasicResponse();
-        if(!("ko-KR".equals(languageCode) || "en-US".equals(languageCode) || "zh".equals(languageCode) || "ja-JP".equals(languageCode) || "vi-VN".equals(languageCode) || "fr-FR".equals(languageCode) || "es-ES".equals(languageCode))) {
+        if (!("ko-KR".equals(languageCode) || "en-US".equals(languageCode) || "zh".equals(languageCode) || "ja-JP".equals(languageCode) || "vi-VN".equals(languageCode) || "fr-FR".equals(languageCode) || "es-ES".equals(languageCode))) {
             answer.status = false;
             answer.data = "변환 실패";
             answer.object = null;
@@ -84,7 +113,7 @@ public class STTService {
             RecognizeResponse response = speechClient.recognize(config, audio);
             List<SpeechRecognitionResult> results = response.getResultsList();
 
-            if(results == null || results.size() == 0) {
+            if (results == null || results.size() == 0) {
                 answer.status = false;
                 answer.data = "변환 실패";
                 answer.object = null;
