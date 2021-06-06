@@ -1,6 +1,6 @@
-const API_BASE_URL = "https://j4a201.p.ssafy.io/api";
+const API_BASE_URL = "https://ssokssok.site/api";
 const ACCESS_TOKEN = "accessToken";
-const OAUTH2_REDIRECT_URI = "https://j4a201.p.ssafy.io";
+const OAUTH2_REDIRECT_URI = "https://ssokssok.site";
 const GOOGLE_AUTH_URL =
   API_BASE_URL + "/oauth2/authorize/google?redirect_uri=" + OAUTH2_REDIRECT_URI;
 

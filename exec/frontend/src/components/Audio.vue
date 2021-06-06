@@ -177,7 +177,7 @@ export default {
 
       axios
         .post(
-          "https://j4a201.p.ssafy.io/card-api/stt/convert",
+          "https://ssokssok.site/card-api/stt/convert",
           formData,
           headers
         )
